@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:insight_med/main_app.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Counter increments smoke test', (final tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const InsightMed());
 

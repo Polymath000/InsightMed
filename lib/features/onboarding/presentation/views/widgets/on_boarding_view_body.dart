@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:insight_med/features/onboarding/presentation/views/widgets/next_button.dart';
-import 'package:insight_med/features/onboarding/presentation/views/widgets/on_boarding_page_view.dart';
+import 'next_button.dart';
+import 'on_boarding_page_view.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
@@ -10,14 +10,14 @@ class OnBoardingViewBody extends StatefulWidget {
 }
 
 class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
-    late PageController pageController;
-  var currentPage = 0;
+  late PageController _pageController;
+  int _currentPage = 0;
   @override
   void initState() {
-    pageController = PageController();
-    pageController.addListener(() {
+    _pageController = PageController();
+    _pageController.addListener(() {
       setState(() {
-        currentPage = pageController.page!.round();
+        _currentPage = _pageController.page!.round();
       });
     });
 
@@ -26,38 +26,31 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
 
   @override
   void dispose() {
-    pageController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: OnBoardingPageView(
-            pageController: pageController,
-          )
+  Widget build(final BuildContext context) => Column(
+    children: [
+      Expanded(child: OnBoardingPageView(pageController: _pageController)),
+      const SizedBox(height: 20),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          3,
+          (final index) => Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            width: _currentPage == index ? 20 : 10,
+            height: 10,
+            decoration: BoxDecoration(
+              color: _currentPage == index ? Colors.blue : Colors.grey,
+              borderRadius: BorderRadius.circular(5),
+            ),
           ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(3, (index) {
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5),
-              width: currentPage == index ? 20 : 10,
-              height: 10,
-              decoration: BoxDecoration(
-                color: currentPage == index ? Colors.blue : Colors.grey,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            );
-          }),
         ),
-        NextButton(
-          pageController: pageController,
-        ),
-      ],
-    );
-  }
+      ),
+      NextButton(pageController: _pageController),
+    ],
+  );
 }

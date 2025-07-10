@@ -1,10 +1,7 @@
 class CustomException implements Exception {
+  const CustomException({required this.message});
   final String message;
 
-  CustomException({required this.message});
-
   @override
-  String toString() {
-    return 'CustomException: $message';
-  }
+  String toString() => 'CustomException: $message';
 }
