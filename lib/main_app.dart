@@ -15,7 +15,7 @@ class InsightMed extends StatelessWidget {
     designSize: const Size(360, 800),
     minTextAdapt: true,
     splitScreenMode: true,
-    builder: (final context, final child) => MaterialApp(
+    child: MaterialApp(
       initialRoute: OnboardingView.routeName,
       onGenerateRoute: onGenerateRoute,
       theme: const ThemeConfig().light,
@@ -28,5 +28,6 @@ class InsightMed extends StatelessWidget {
         return child!;
       },
     ),
+    builder: (final context, final child) => child!,
   );
 }
