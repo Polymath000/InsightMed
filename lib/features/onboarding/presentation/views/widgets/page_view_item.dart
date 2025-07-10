@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import 'onboarding_avatar_image.dart';
 
@@ -22,7 +23,7 @@ class PageViewItem extends StatelessWidget {
             onPressed: () {
               // TODO(Anyone): Navigate to the Login page
             },
-            child: const Text(
+            child: const IText(
               'Skip',
               style: TextStyle(fontSize: 16, color: AppColors.lightGrey),
             ),
@@ -44,7 +45,7 @@ class PageViewItem extends StatelessWidget {
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 60),
-          child: Text(
+          child: IText(
             title,
             textAlign: TextAlign.center,
             style: const TextStyle(
@@ -57,7 +58,7 @@ class PageViewItem extends StatelessWidget {
         const SizedBox(height: 10),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
-          child: Text(
+          child: IText(
             description,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 16, color: AppColors.lightGrey),

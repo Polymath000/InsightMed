@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
+import '../utls/i_text.dart';
 
 Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
     switch (settings.name) {
@@ -9,6 +10,6 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
 
       _ => MaterialPageRoute(
         builder: (_) =>
-            const Scaffold(body: Center(child: Text('Page not found'))),
+            const Scaffold(body: Center(child: IText('Page not found'))),
       ),
     };
