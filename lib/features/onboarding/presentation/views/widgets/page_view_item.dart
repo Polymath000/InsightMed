@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utls/app_color.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
 import 'onboarding_avatar_image.dart';
 
 class PageViewItem extends StatelessWidget {
@@ -24,7 +24,7 @@ class PageViewItem extends StatelessWidget {
             },
             child: const Text(
               'Skip',
-              style: TextStyle(fontSize: 16, color: Color(AppColors.lightGray)),
+              style: TextStyle(fontSize: 16, color: AppColors.lightGrey),
             ),
           ),
         ),
@@ -49,7 +49,7 @@ class PageViewItem extends StatelessWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 30,
-              color: Color(AppColors.black),
+              color: AppColors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -60,10 +60,7 @@ class PageViewItem extends StatelessWidget {
           child: Text(
             description,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color(AppColors.lightGray),
-            ),
+            style: const TextStyle(fontSize: 16, color: AppColors.lightGrey),
           ),
         ),
       ],
