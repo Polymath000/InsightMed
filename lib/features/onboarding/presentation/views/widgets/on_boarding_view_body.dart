@@ -32,6 +32,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
 
   @override
   Widget build(final BuildContext context) => Column(
+    spacing: 8,
     children: [
       Expanded(child: OnBoardingPageView(pageController: _pageController)),
       const SizedBox(height: 20),

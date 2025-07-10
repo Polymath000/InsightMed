@@ -14,7 +14,7 @@ class InsightMed extends StatelessWidget {
     initialRoute: OnboardingView.routeName,
     onGenerateRoute: onGenerateRoute,
     theme: const ThemeConfig().light,
-    darkTheme: const ThemeConfig().dark,
+    // darkTheme: const ThemeConfig().dark,
     debugShowCheckedModeBanner: false,
     builder: (final context, final child) {
       AppColors.init(context);

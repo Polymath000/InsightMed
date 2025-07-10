@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/constants/borders.dart';
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
-import 'onboarding_avatar_image.dart';
 
 class PageViewItem extends StatelessWidget {
   const PageViewItem({
@@ -14,57 +14,42 @@ class PageViewItem extends StatelessWidget {
   final String description;
   final String image;
   @override
-  Widget build(final BuildContext context) => Align(
-    child: Column(
-      children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: TextButton(
-            onPressed: () {
-              // TODO(Anyone): Navigate to the Login page
-            },
-            child: const IText(
-              'Skip',
-              style: TextStyle(fontSize: 16, color: AppColors.lightGrey),
-            ),
+  Widget build(final BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    spacing: 12,
+    children: [
+      const SizedBox(height: 24),
+      DecoratedBox(
+        decoration: const ShapeDecoration(
+          gradient: LinearGradient(
+            begin: Alignment(0, 0.50),
+            end: Alignment(1, 0.50),
+            colors: [Color(0xFFCFFAFE), Color(0xFFDBEAFE)],
+          ),
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Color(0xFFE5E7EB)),
+            borderRadius: AppBorders.circular,
           ),
         ),
-        Stack(
-          children: [
-            const OnboardingAvatarImage(),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: CircleAvatar(
-                radius: 150,
-                backgroundImage: AssetImage(image),
-              ),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: CircleAvatar(radius: 150, backgroundImage: AssetImage(image)),
         ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 60),
-          child: IText(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 30,
-              color: AppColors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+      ),
+      const SizedBox(height: 12),
+      IText(
+        title,
+        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: IText(
+          description,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 16, color: AppColors.darkGrey),
+          softWrap: true,
         ),
-        const SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 45),
-          child: IText(
-            description,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, color: AppColors.lightGrey),
-          ),
-        ),
-      ],
-    ),
+      ),
+    ],
   );
 }

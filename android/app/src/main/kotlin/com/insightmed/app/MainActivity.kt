@@ -1,4 +1,4 @@
-package com.example.insight_med
+package com.insightmed.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -13,5 +13,5 @@ sealed class AppBorders {
   static const BorderRadius l = BorderRadius.all(Radius.circular(_main + 16));
   static const BorderRadius xl = BorderRadius.all(Radius.circular(_main + 20));
   static const BorderRadius xxl = BorderRadius.all(Radius.circular(_main + 24));
-  static const BorderRadius circular = BorderRadius.all(Radius.circular(100));
+  static const BorderRadius circular = BorderRadius.all(Radius.circular(1000));
 }
