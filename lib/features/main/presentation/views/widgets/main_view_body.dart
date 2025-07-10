@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../appointments/presentation/views/appointments_view.dart'
+    show AppointmentsView;
 import '../../../../home/presentation/views/home_view.dart';
 
 class MainViewBody extends StatelessWidget {
@@ -7,5 +9,5 @@ class MainViewBody extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) =>
-      const [HomeView(), HomeView(), HomeView()][selectedIndex];
+      const [HomeView(), AppointmentsView(), HomeView()][selectedIndex];
 }

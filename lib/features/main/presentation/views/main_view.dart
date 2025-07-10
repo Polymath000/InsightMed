@@ -21,5 +21,11 @@ class _MainViewState extends State<MainView> {
       onDestinationSelected: (final index) =>
           setState(() => _selectedIndex = index),
     ),
+    floatingActionButton: _selectedIndex == 0
+        ? FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.add_rounded),
+          )
+        : null,
   );
 }

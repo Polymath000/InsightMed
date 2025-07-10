@@ -13,12 +13,22 @@ class MainNavigationBar extends StatelessWidget {
     selectedIndex: selectedIndex,
     onDestinationSelected: onDestinationSelected,
     destinations: const [
-      NavigationDestination(icon: Icon(Icons.home_rounded), label: 'Home'),
       NavigationDestination(
-        icon: Icon(Icons.calendar_month_rounded),
-        label: 'Appointments',
+        icon: Icon(Icons.home_outlined),
+        label: 'Home',
+        selectedIcon: Icon(Icons.home_rounded),
       ),
-      NavigationDestination(icon: Icon(Icons.person_rounded), label: 'Profile'),
+      NavigationDestination(
+        icon: Icon(Icons.calendar_month_outlined),
+        label: 'Appointments',
+        selectedIcon: Icon(Icons.calendar_month_rounded),
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.person_outline_rounded),
+        label: 'Profile',
+        selectedIcon: Icon(Icons.person_rounded),
+        enabled: false,
+      ),
     ],
   );
 }
