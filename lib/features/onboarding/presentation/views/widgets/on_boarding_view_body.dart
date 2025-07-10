@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'next_button.dart';
 import 'on_boarding_page_view.dart';
 
@@ -32,17 +33,15 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
 
   @override
   Widget build(final BuildContext context) => Column(
-    spacing: 8,
     children: [
       Expanded(child: OnBoardingPageView(pageController: _pageController)),
-      const SizedBox(height: 20),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           3,
           (final index) => Container(
             margin: const EdgeInsets.symmetric(horizontal: 5),
-            width: _currentPage == index ? 20 : 10,
+            width: _currentPage == index ? 20.sp : 10.sp,
             height: 10,
             decoration: BoxDecoration(
               color: _currentPage == index ? Colors.blue : Colors.grey,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/helpers/app_media_query.dart';
 import 'core/helpers/on_generate_routes.dart';
 import 'core/utls/themes/app_colors.dart';
@@ -10,17 +11,22 @@ class InsightMed extends StatelessWidget {
   const InsightMed({super.key});
 
   @override
-  Widget build(final BuildContext context) => MaterialApp(
-    initialRoute: OnboardingView.routeName,
-    onGenerateRoute: onGenerateRoute,
-    theme: const ThemeConfig().light,
-    // darkTheme: const ThemeConfig().dark,
-    debugShowCheckedModeBanner: false,
-    builder: (final context, final child) {
-      AppColors.init(context);
-      AppTextStyles.init(context);
-      AppMediaQuery.init(context);
-      return child!;
-    },
+  Widget build(final BuildContext context) => ScreenUtilInit(
+    designSize: const Size(360, 800),
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (final context, final child) => MaterialApp(
+      initialRoute: OnboardingView.routeName,
+      onGenerateRoute: onGenerateRoute,
+      theme: const ThemeConfig().light,
+      // darkTheme: const ThemeConfig().dark,
+      debugShowCheckedModeBanner: false,
+      builder: (final context, final child) {
+        AppColors.init(context);
+        AppTextStyles.init(context);
+        AppMediaQuery.init(context);
+        return child!;
+      },
+    ),
   );
 }

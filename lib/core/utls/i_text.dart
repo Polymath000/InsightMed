@@ -19,7 +19,7 @@ final class IText extends StatelessWidget {
     this.style,
     this.textAlign,
     this.textDirection,
-    this.softWrap = false,
+    this.softWrap = true,
     super.key,
   });
   final String data;

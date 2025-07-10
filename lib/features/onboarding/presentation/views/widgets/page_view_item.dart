@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/borders.dart';
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
@@ -31,22 +32,22 @@ class PageViewItem extends StatelessWidget {
             borderRadius: AppBorders.circular,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: CircleAvatar(radius: 150, backgroundImage: AssetImage(image)),
-        ),
-      ),
-      const SizedBox(height: 12),
-      IText(
-        title,
-        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        child: CircleAvatar(radius: 150, backgroundImage: AssetImage(image)),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding:  EdgeInsets.symmetric(horizontal: 90.sp),
+        child: IText(
+          title,
+          textAlign: TextAlign.center,
+          style:  TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 24.sp),
         child: IText(
           description,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16, color: AppColors.darkGrey),
+          style:  TextStyle(fontSize: 16.sp, color: AppColors.darkGrey),
           softWrap: true,
         ),
       ),

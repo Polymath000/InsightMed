@@ -28,7 +28,7 @@ class OnBoardingPageView extends StatelessWidget {
         description:
             ' Focuses on the cutting-edge AI functionality, '
             'specifically for medical imaging and its benefits for both doctors'
-            ' (summaries, notes) and patients (interpreted results).',
+            ' (summaries, notes) and patients.',
         image: Assets.assetsImagesOnboarding3,
       ),
     ],

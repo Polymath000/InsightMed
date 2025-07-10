@@ -17,6 +17,6 @@ class OnboardingView extends StatelessWidget {
         const SizedBox(width: 12),
       ],
     ),
-    body: const SafeArea(child: OnBoardingViewBody()),
+    body: const OnBoardingViewBody(),
   );
 }
