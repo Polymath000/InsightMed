@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utls/i_text.dart';
-
 class NextButton extends StatelessWidget {
   const NextButton({required this.pageController, super.key});
   final PageController pageController;
@@ -73,7 +71,7 @@ class NextButton extends StatelessWidget {
                 width: 42,
                 height: 28,
                 child: Align(
-                  child: IText(
+                  child: Text(
                     pageController.page == 2 ? "Let's Go" : 'Next',
                     style: const TextStyle(
                       color: Colors.white,

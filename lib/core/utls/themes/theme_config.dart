@@ -49,8 +49,9 @@ final class ThemeConfig {
             surfaceTintColor: AppColors.transparent,
             scrolledUnderElevation: .1,
             toolbarHeight: 44,
+            actionsPadding: EdgeInsets.only(left: 8),
           )
-        : null;
+        : const AppBarTheme(actionsPadding: EdgeInsets.only(right: 8));
 
     final textTheme = isAppleDevice
         ? AppThemeData.text.copyWith(
@@ -88,6 +89,7 @@ final class ThemeConfig {
       filledButtonTheme: AppThemeData.filledButton,
       floatingActionButtonTheme: AppThemeData.floatingActionButton,
       iconButtonTheme: AppThemeData.iconButton,
+      navigationBarTheme: AppThemeData.navigationBar,
       outlinedButtonTheme: AppThemeData.outlinedButton,
       progressIndicatorTheme: AppThemeData.progressIndicator,
       searchBarTheme: AppThemeData.searchBar,

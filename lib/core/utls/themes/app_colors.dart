@@ -80,11 +80,15 @@ sealed class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color blue = Color(0xFF2196F3);
   static const Color cyan = Color(0xFF14B8A6);
+  static const Color darkBlue = Color(0xFF1E88E5);
   static const Color darkGrey = Color(0xFF4B5563); // 0xff334155
   static const Color grey = Color(0xFF9E9E9E);
   static const Color green = Color(0xFF3B9A1E);
   static const Color lightGrey = Color(0xFFE0E0E0);
+  static const Color pickledBluewood = Color(0xFF334155);
+  static const Color topaz = Color(0xFF14B8A6);
   static const Color transparent = Color(0x00000000);
+  static const Color waterBlue = Color(0xFF0284C7);
   static const Color white = Color(0xFFFFFFFF);
 
   // Custom colors

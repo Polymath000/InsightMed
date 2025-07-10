@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../main/presentation/views/main_view.dart';
 import 'widgets/on_boarding_view_body.dart';
 
 class OnboardingView extends StatelessWidget {
@@ -9,7 +10,10 @@ class OnboardingView extends StatelessWidget {
     appBar: AppBar(
       actions: [
         TextButton(
-          onPressed: () {
+          onPressed: () async {
+            await Navigator.of(
+              context,
+            ).pushReplacementNamed(MainView.routeName);
             // TODO(Anyone): Navigate to the Login page
           },
           child: const Text('Skip'),

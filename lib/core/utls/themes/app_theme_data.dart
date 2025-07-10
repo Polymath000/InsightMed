@@ -15,6 +15,8 @@ import 'package:flutter/material.dart'
         IconButtonThemeData,
         InputDecorationTheme,
         MenuStyle,
+        NavigationBarThemeData,
+        NavigationDestinationLabelBehavior,
         OutlineInputBorder,
         OutlinedButton,
         OutlinedButtonThemeData,
@@ -114,6 +116,7 @@ sealed class AppThemeData {
 
   static const FloatingActionButtonThemeData floatingActionButton =
       FloatingActionButtonThemeData(
+        elevation: 0,
         shape: RoundedSuperellipseBorder(borderRadius: AppBorders.s),
       );
 
@@ -122,6 +125,13 @@ sealed class AppThemeData {
       shape: const RoundedSuperellipseBorder(borderRadius: AppBorders.xxs),
     ),
   );
+
+  static const NavigationBarThemeData navigationBar = NavigationBarThemeData(
+    elevation: 0,
+    indicatorShape: RoundedSuperellipseBorder(borderRadius: AppBorders.xxxs),
+    labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+  );
+
   static final OutlinedButtonThemeData outlinedButton = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 16),
