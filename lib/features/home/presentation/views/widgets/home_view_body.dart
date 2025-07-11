@@ -1,15 +1,33 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Card,
+        Column,
+        CrossAxisAlignment,
+        CustomScrollView,
+        FontWeight,
+        Icon,
+        Icons,
+        ListTile,
+        MainAxisAlignment,
+        MainAxisSize,
+        PlaceholderAlignment,
+        SizedBox,
+        StatelessWidget,
+        TextSpan,
+        TextStyle,
+        WidgetSpan;
 
-import '../../../../../core/constants/borders.dart';
 import '../../../../../core/utls/i_text.dart' show IRichText, IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
+import 'decorated_icon.dart';
 import 'home_app_bar.dart' show HomeAppBar;
+import 'home_sticker.dart';
 
-class HomeViewBody extends StatelessWidget {
+final class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 
   @override
-  Widget build(_) => CustomScrollView(
+  CustomScrollView build(_) => CustomScrollView(
     slivers: [
       const HomeAppBar(),
       HomeSticker(
@@ -100,95 +118,5 @@ class HomeViewBody extends StatelessWidget {
         ),
       ),
     ],
-  );
-}
-
-class HomeSticker extends StatelessWidget {
-  const HomeSticker({
-    required this.headerIcon,
-    required this.headerTitle,
-    required this.headerColor,
-    required this.bodyLeading,
-    required this.bodyTitle,
-    required this.bodySubTitle,
-    this.bodyTrailing,
-    this.bodyOnTap,
-    this.paragraph,
-    this.footerOnPressed,
-    this.footerTitle,
-    super.key,
-  });
-  final IconData headerIcon;
-  final String headerTitle;
-  final Color headerColor;
-  final Widget bodyLeading;
-  final String bodyTitle;
-  final Widget bodySubTitle;
-  final Widget? bodyTrailing;
-  final VoidCallback? bodyOnTap;
-  final Widget? paragraph;
-  final VoidCallback? footerOnPressed;
-  final String? footerTitle;
-
-  @override
-  Widget build(_) => SliverPadding(
-    padding: const EdgeInsets.all(16),
-    sliver: SliverToBoxAdapter(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: const RoundedSuperellipseBorder(borderRadius: AppBorders.xxs),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              leading: Icon(headerIcon, color: AppColors.white),
-              title: IText(headerTitle),
-              tileColor: headerColor,
-              textColor: AppColors.white,
-            ),
-            ListTile(
-              leading: bodyLeading,
-              title: IText(bodyTitle),
-              subtitle: bodySubTitle,
-              trailing: bodyTrailing,
-              onTap: bodyOnTap,
-              contentPadding: const EdgeInsets.only(left: 24, right: 32),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: paragraph,
-            ),
-            if (footerTitle != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: TextButton.icon(
-                  onPressed: footerOnPressed,
-                  icon: const Icon(Icons.arrow_forward_ios_rounded),
-                  label: Text(footerTitle!),
-                  iconAlignment: IconAlignment.end,
-                  style: TextButton.styleFrom(foregroundColor: headerColor),
-                ),
-              ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-class DecoratedIcon extends StatelessWidget {
-  const DecoratedIcon({required this.color, required this.icon, super.key});
-
-  final Color color;
-  final IconData icon;
-
-  @override
-  Widget build(_) => DecoratedBox(
-    decoration: ShapeDecoration(
-      color: color.withAlpha(50),
-      shape: const RoundedRectangleBorder(borderRadius: AppBorders.xxl),
-    ),
-    child: SizedBox(width: 32, height: 40, child: Icon(icon, color: color)),
   );
 }

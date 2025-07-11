@@ -1,6 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        Icon,
+        Icons,
+        NavigationBar,
+        NavigationDestination,
+        StatelessWidget,
+        ValueChanged;
 
-class MainNavigationBar extends StatelessWidget {
+final class MainNavigationBar extends StatelessWidget {
   const MainNavigationBar({
     this.selectedIndex = 0,
     this.onDestinationSelected,
@@ -9,7 +16,7 @@ class MainNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int>? onDestinationSelected;
   @override
-  Widget build(final BuildContext context) => NavigationBar(
+  NavigationBar build(_) => NavigationBar(
     selectedIndex: selectedIndex,
     onDestinationSelected: onDestinationSelected,
     destinations: const [

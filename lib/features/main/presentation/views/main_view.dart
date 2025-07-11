@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show FloatingActionButton, Icon, Icons, Scaffold, State, StatefulWidget;
 
-import 'widgets/main_navigation_bar.dart';
-import 'widgets/main_view_body.dart';
+import 'widgets/main_navigation_bar.dart' show MainNavigationBar;
+import 'widgets/main_view_body.dart' show MainViewBody;
 
-class MainView extends StatefulWidget {
+final class MainView extends StatefulWidget {
   const MainView({super.key});
   static const String routeName = 'main';
 
@@ -11,10 +12,10 @@ class MainView extends StatefulWidget {
   State<MainView> createState() => _MainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+final class _MainViewState extends State<MainView> {
   int _selectedIndex = 0;
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Scaffold build(_) => Scaffold(
     body: MainViewBody(selectedIndex: _selectedIndex),
     bottomNavigationBar: MainNavigationBar(
       selectedIndex: _selectedIndex,

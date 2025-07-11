@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart' show StatelessWidget;
 
-import 'widgets/home_view_body.dart';
+import 'widgets/home_view_body.dart' show HomeViewBody;
 
-class HomeView extends StatelessWidget {
+final class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(final BuildContext context) => const HomeViewBody();
+  HomeViewBody build(_) => const HomeViewBody();
 }
