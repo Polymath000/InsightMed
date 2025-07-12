@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
@@ -9,7 +10,9 @@ class UploadWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
-      onTap: ()  {
+      onTap: () async {
+        FilePickerResult? result = await FilePicker.platform.pickFiles();
+
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 28),

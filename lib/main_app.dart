@@ -5,7 +5,7 @@ import 'core/helpers/on_generate_routes.dart';
 import 'core/utls/themes/app_colors.dart';
 import 'core/utls/themes/app_text_style.dart';
 import 'core/utls/themes/theme_config.dart';
-import 'features/main/presentation/views/main_view.dart';
+import 'features/onboarding/presentation/views/onboarding_view.dart';
 
 class InsightMed extends StatelessWidget {
   const InsightMed({super.key});
@@ -16,10 +16,10 @@ class InsightMed extends StatelessWidget {
     minTextAdapt: true,
     splitScreenMode: true,
     child: MaterialApp(
-      initialRoute: MainView.routeName,
+      initialRoute: OnboardingView.routeName,
       onGenerateRoute: onGenerateRoute,
       theme: const ThemeConfig().light,
-      darkTheme: const ThemeConfig().dark,
+      // darkTheme: const ThemeConfig().dark,
       debugShowCheckedModeBanner: false,
       builder: (final context, final child) {
         AppColors.init(context);
