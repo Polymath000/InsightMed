@@ -1,5 +1,9 @@
 class Assets {
-  const Assets();
+  Assets._();
+  
+  /// Assets for assetsImagesCheckMark
+  /// assets/images/CheckMark.svg
+  static const String assetsImagesCheckMark = 'assets/images/CheckMark.svg';
 
   /// Assets for assetsImagesOnboarding1
   /// assets/images/onboarding1.png

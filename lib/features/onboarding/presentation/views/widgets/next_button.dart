@@ -6,24 +6,6 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) =>
-      // Padding(
-      //   padding: const EdgeInsets.all(16),
-      //   child: FilledButton(
-      //     onPressed: () async {
-      //       if (pageController.hasClients &&
-      //           pageController.page != null &&
-      //           pageController.page! < 2) {
-      //         await pageController.nextPage(
-      //           duration: const Duration(milliseconds: 300),
-      //           curve: Curves.easeInOut,
-      //         );
-      //       } else if (pageController.hasClients && pageController.page == 2) {
-      //         // TODO(Anyone): Navigate to the Login page
-      //       }
-      //     },
-      //     child: IText(pageController.page == 2 ? "Let's Go" : 'Next'),
-      //   ),
-      // );
       GestureDetector(
         onTap: () async {
           if (pageController.hasClients &&
