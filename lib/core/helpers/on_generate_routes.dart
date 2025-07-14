@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../features/auth/presentation/views/login_view.dart';
+import '../../features/auth/presentation/views/patient_info_screen.dart';
+import '../../features/auth/presentation/views/signup_Screen.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
@@ -14,6 +17,15 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
       ),
       HomeView.routeName => MaterialPageRoute(
         builder: (_) => const HomeView(),
+      ),
+            LoginScreen.routeName => MaterialPageRoute(
+        builder: (_) =>  LoginScreen(),
+      ),
+                  SignUpScreen.routeName => MaterialPageRoute(
+        builder: (_) => const SignUpScreen(),
+      ),
+      PatientInformation.routeName => MaterialPageRoute(
+        builder: (_) => const PatientInformation(),
       ),
             UploadMedicalRayView.routeName => MaterialPageRoute(
         builder: (_) => const UploadMedicalRayView(),

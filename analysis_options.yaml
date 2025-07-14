@@ -259,6 +259,7 @@ linter:
 analyzer:
   errors:
     diagnostic_describe_all_properties: ignore
+    prefer_final_locals: ignore
     public_member_api_docs: ignore
     unsafe_variance: ignore
   exclude:

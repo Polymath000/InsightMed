@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../auth/presentation/views/login_view.dart';
+
 class NextButton extends StatelessWidget {
   const NextButton({required this.pageController, super.key});
   final PageController pageController;
@@ -16,7 +18,7 @@ class NextButton extends StatelessWidget {
               curve: Curves.easeInOut,
             );
           } else if (pageController.hasClients && pageController.page == 2) {
-            // TODO(Anyone): Navigate to the Login page
+            await Navigator.pushNamed(context, LoginScreen.routeName);
           }
         },
         child: Align(
