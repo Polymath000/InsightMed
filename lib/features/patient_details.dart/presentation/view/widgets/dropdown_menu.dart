@@ -1,0 +1,57 @@
+import 'package:drop_down_list/drop_down_list.dart';
+import 'package:drop_down_list/model/selected_list_item.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../core/utls/themes/app_colors.dart';
+
+class CustomDropdownMenu extends StatefulWidget {
+  const CustomDropdownMenu({super.key});
+
+  @override
+  State<CustomDropdownMenu> createState() => _CustomDropdownMenuState();
+}
+
+class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
+
+  late String _selectedItem;
+  
+  final Map<String, Color> itemColors = {
+    'New': Colors.green,
+    'Follow-up': Colors.orange,
+    'Critical': Colors.red,
+    'Regular': Colors.blue,
+  };
+@override
+  void initState() {
+    _selectedItem = 'New';
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) => ElevatedButton(
+    onPressed: () {
+      DropDownState<String>(
+        dropDown: DropDown<String>(
+          data: <SelectedListItem<String>>[
+            SelectedListItem<String>(data: 'New'),
+            SelectedListItem<String>(data: 'Follow-up'),
+            SelectedListItem<String>(data: 'Critical'),
+            SelectedListItem<String>(data: 'Regular'),
+          ],
+          
+          onSelected: (final selectedItems) {
+            List<String> list = [];
+            for (var item in selectedItems) {
+              list.add(item.data);
+            }
+            setState(() {
+              String temp = list.toString().substring(1);
+              _selectedItem = temp.substring(0, temp.length-1);
+            });
+          },
+        ),
+      ).showModal(context);
+    },
+    child: Text(_selectedItem),
+  );
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../patient_details.dart/presentation/view/patient_details_view.dart';
 import 'widgets/donnot_have_an_account.dart';
 import 'widgets/container.dart';
 import 'widgets/login_form.dart';
@@ -26,6 +27,9 @@ class LoginScreen extends StatelessWidget {
             const SocialAuth(),
             SizedBox(height: MediaQuery.of(context).size.height / 50),
              DonnotHaveAnAccount(),
+             TextButton(onPressed: (){
+              Navigator.pushNamed(context, PatientDetailsView.routeName);
+             }, child: Text('Go To Patient View')),  
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import '../../features/auth/presentation/views/signup_Screen.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
+import '../../features/patient_details.dart/presentation/view/patient_details_view.dart';
 import '../../features/patient_rays_ubmission/presentation/views/upload_medical_ray_view.dart';
 import '../utls/i_text.dart';
 
@@ -29,6 +30,9 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
       ),
             UploadMedicalRayView.routeName => MaterialPageRoute(
         builder: (_) => const UploadMedicalRayView(),
+      ),
+      PatientDetailsView.routeName => MaterialPageRoute(
+        builder: (_) => const PatientDetailsView(),
       ),
       
       _ => MaterialPageRoute(
