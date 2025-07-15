@@ -4,5 +4,5 @@ class NotesView extends StatelessWidget {
   const NotesView({super.key});
 
   @override
-  Widget build(final BuildContext context) => Center(child: Text('Notes'));
+  Widget build(final BuildContext context) => const Center(child: Text('Notes'));
 }

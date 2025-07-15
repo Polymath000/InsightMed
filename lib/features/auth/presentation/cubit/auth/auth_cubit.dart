@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:dio/dio.dart' as dio_package;
+import 'package:meta/meta.dart';
 
 import '../../../../../core/services/dio/auth_dio.dart';
 

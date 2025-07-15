@@ -21,7 +21,7 @@ class _RadioBtnState extends State<RadioBtn> {
             Radio<SingingCharacter>(
               value: SingingCharacter.male,
               groupValue: _character,
-              onChanged: (SingingCharacter? value) {
+              onChanged: (value) {
                 setState(() {
                   _character = value;
                 });
@@ -35,7 +35,7 @@ class _RadioBtnState extends State<RadioBtn> {
             Radio<SingingCharacter>(
               value: SingingCharacter.female,
               groupValue: _character,
-              onChanged: (SingingCharacter? value) {
+              onChanged: (value) {
                 setState(() {
                   _character = value;
                 });

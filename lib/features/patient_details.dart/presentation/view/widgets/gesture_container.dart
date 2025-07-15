@@ -28,7 +28,7 @@ class _GestureContainerState extends State<GestureContainer> {
     },
     child: Row(
       children: [
-        Container(
+        SizedBox(
           width: 20,
           height: 20,
           child: SvgPicture.asset(

@@ -12,7 +12,7 @@ class PatientDetailsViewBody extends StatelessWidget {
 
     child: Column(
       children: [
-        Container(
+        ColoredBox(
               color: AppColors.white,
 
           child: const Column(

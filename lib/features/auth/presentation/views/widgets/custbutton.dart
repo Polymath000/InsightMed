@@ -20,7 +20,7 @@ class CButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: colorbackground,
-          border: Border.all(color: Color(0xffD1D5DB)),
+          border: Border.all(color: const Color(0xffD1D5DB)),
           borderRadius: BorderRadius.circular(8),
         ),
         width: double.infinity,

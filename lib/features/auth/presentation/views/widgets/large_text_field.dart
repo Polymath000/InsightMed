@@ -13,7 +13,7 @@ class CLargeTextField extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1,
       height: MediaQuery.of(context).size.width / 3,
       child: TextFormField(
-        validator: (value) {
+        validator: (final value) {
           if (value == null) {
             return 'this field is required';
           } else {
@@ -30,13 +30,13 @@ class CLargeTextField extends StatelessWidget {
           hintStyle: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 14.sp,
-            color: Color(0xffADAEBC),
+            color: const Color(0xffADAEBC),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Color(0xffD1D5DB)),
             borderRadius: BorderRadius.circular(8),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: kMainColor),
           ),
         ),

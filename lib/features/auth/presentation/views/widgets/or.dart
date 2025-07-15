@@ -8,7 +8,7 @@ class OR extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Text(
-      "OR",
+      'OR',
       style: TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 14.sp,

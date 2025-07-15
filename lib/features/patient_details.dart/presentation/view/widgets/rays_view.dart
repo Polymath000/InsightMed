@@ -4,5 +4,5 @@ class RaysView extends StatelessWidget {
   const RaysView({super.key});
 
   @override
-  Widget build(final BuildContext context) => Center(child: Text('Rays'));
+  Widget build(final BuildContext context) => const Center(child: Text('Rays'));
 }

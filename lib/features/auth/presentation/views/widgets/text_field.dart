@@ -27,7 +27,7 @@ class CTextField extends StatelessWidget {
         hintStyle: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 14.sp,
-          color: Color(0xffADAEBC),
+          color: const Color(0xffADAEBC),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Color(0xffD1D5DB)),

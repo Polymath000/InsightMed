@@ -25,7 +25,7 @@ class _PatientTabsViewState extends State<PatientTabsView> {
               bIndex: 0,
               image: Assets.assetsImagesNoteIcon,
               title: 'Notes',
-              onSelected: (final int value) {
+              onSelected: (final value) {
                 setState(() {
                   index = value;
                 });
@@ -36,7 +36,7 @@ class _PatientTabsViewState extends State<PatientTabsView> {
               bIndex: 1,
               image: Assets.assetsImagesXRaysChestIcon,
               title: 'Rays',
-              onSelected: (final int value) {
+              onSelected: (final value) {
                 setState(() {
                   index = value;
                 });
@@ -47,7 +47,7 @@ class _PatientTabsViewState extends State<PatientTabsView> {
               bIndex: 2,
               image: Assets.assetsImagesAppts,
               title: 'Appts',
-              onSelected: (final int value) {
+              onSelected: (final value) {
                 setState(() {
                   index = value;
                 });
@@ -56,7 +56,7 @@ class _PatientTabsViewState extends State<PatientTabsView> {
           ],
         ),
       ),
-      Divider(),
+      const Divider(),
 
       PatientTabsViewBody(index: index),
     ],
