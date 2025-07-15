@@ -13,7 +13,7 @@ class TopLoginView extends StatelessWidget {
         const Image(image: AssetImage(Assets.assetsImagesLogo)),
         SizedBox(height: MediaQuery.of(context).size.height / 30),
         Text(
-          "Welcome",
+          'Welcome',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 24.sp,
@@ -21,7 +21,7 @@ class TopLoginView extends StatelessWidget {
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 85),
         Text(
-          "Sign in to continue",
+          'Sign in to continue',
           style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,

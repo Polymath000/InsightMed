@@ -1,10 +1,6 @@
 import 'user_model.dart';
 
 class PatientModel extends UserModel{
-  final String medicalHistory;
-  final String gender;
-  final String phoneNumber;
-  final int age;
 
   PatientModel({
     required this.medicalHistory,
@@ -29,9 +25,14 @@ class PatientModel extends UserModel{
       isDoctor: json['isDoctor'],
 
       );
+  final String medicalHistory;
+  final String gender;
+  final String phoneNumber;
+  final int age;
 
 
-        Map<String, dynamic> toJson() => {
+        @override
+  Map<String, dynamic> toJson() => {
       'name': name,
       'email': email,
       'password': password,

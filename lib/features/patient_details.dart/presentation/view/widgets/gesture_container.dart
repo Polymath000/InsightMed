@@ -5,12 +5,7 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 
 class GestureContainer extends StatefulWidget {
   GestureContainer({
-    super.key,
-    required this.index,
-    required this.bIndex,
-    required this.image,
-    required this.title,
-    required this.onSelected
+    required this.index, required this.bIndex, required this.image, required this.title, required this.onSelected, super.key
   });
   int index;
   int bIndex;
@@ -23,7 +18,7 @@ class GestureContainer extends StatefulWidget {
 
 class _GestureContainerState extends State<GestureContainer> {
   @override
-  Widget build(BuildContext context) => GestureDetector(
+  Widget build(final BuildContext context) => GestureDetector(
     
     onTap: () {
       setState(() {

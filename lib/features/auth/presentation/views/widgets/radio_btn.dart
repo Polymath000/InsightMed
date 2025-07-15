@@ -13,8 +13,7 @@ class _RadioBtnState extends State<RadioBtn> {
   SingingCharacter? _character = SingingCharacter.male;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
+  Widget build(final BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Row(
@@ -47,5 +46,4 @@ class _RadioBtnState extends State<RadioBtn> {
         ),
       ],
     );
-  }
 }

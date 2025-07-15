@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/patient_info_screen.dart';
-import '../../features/auth/presentation/views/signup_Screen.dart';
+import '../../features/auth/presentation/views/signup_screen.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';

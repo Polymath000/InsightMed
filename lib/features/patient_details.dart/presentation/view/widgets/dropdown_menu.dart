@@ -28,7 +28,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
   }
   
   @override
-  Widget build(BuildContext context) => ElevatedButton(
+  Widget build(final BuildContext context) => ElevatedButton(
     onPressed: () {
       DropDownState<String>(
         dropDown: DropDown<String>(
@@ -40,12 +40,12 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
           ],
           
           onSelected: (final selectedItems) {
-            List<String> list = [];
-            for (var item in selectedItems) {
+            var list = <String>[];
+            for (final item in selectedItems) {
               list.add(item.data);
             }
             setState(() {
-              String temp = list.toString().substring(1);
+              var temp = list.toString().substring(1);
               _selectedItem = temp.substring(0, temp.length-1);
             });
           },

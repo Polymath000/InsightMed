@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../signup_Screen.dart';
+import '../signup_screen.dart';
 import 'constans.dart';
 
 class DonnotHaveAnAccount extends StatelessWidget {
@@ -9,7 +9,7 @@ class DonnotHaveAnAccount extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Row(
+  Widget build(final BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(

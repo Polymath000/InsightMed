@@ -7,8 +7,7 @@ class OR extends StatelessWidget {
   const OR({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Text(
+  Widget build(final BuildContext context) => Text(
       "OR",
       style: TextStyle(
         fontWeight: FontWeight.w500,
@@ -16,5 +15,4 @@ class OR extends StatelessWidget {
         color: kOR,
       ),
     );
-  }
 }

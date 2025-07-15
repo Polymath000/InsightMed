@@ -11,10 +11,10 @@ class AuthCubit extends Cubit<AuthState> {
   bool isAuthenticated = false;
   
   // ...existing code...
-  void login({required final Map credintials}) async {
+  Future<void> login({required final Map credintials}) async {
     emit(AuthLoading());
     try {
-      dio_package.Response response = await dio().post(
+      var response = await dio().post(
         '/sanctum/token',
         data: credintials,
       );

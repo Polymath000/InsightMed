@@ -24,10 +24,10 @@ class _SignupFormState extends State<SignupForm> {
     child: Column(
       children: [
          CTextField(
-          hinto: "Email",
+          hinto: 'Email',
           choose: false,
           type: TextInputType.emailAddress,
-          onChanged: (p0) {
+          onChanged: (final p0) {
             email = p0;
           },
         ),
@@ -35,14 +35,14 @@ class _SignupFormState extends State<SignupForm> {
         CTextField(
           hinto: 'Password', 
         choose: true,
-        onChanged: (p0) {
+        onChanged: (final p0) {
           password = p0;
         },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),
          CTextField(hinto: 'Confirm Password', 
          choose: true,
-          onChanged: (p0) {
+          onChanged: (final p0) {
             confirmPassword = p0;
           }
         ),
@@ -69,7 +69,7 @@ class _SignupFormState extends State<SignupForm> {
           },
         
           colorbackground: kMainColor,
-          btnText: "Create Account",
+          btnText: 'Create Account',
           colorText: kBasicColor,
         ),
       ],

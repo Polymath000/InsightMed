@@ -9,8 +9,7 @@ class CLargeTextField extends StatelessWidget {
   final bool? choose;
   final TextInputType? type;
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(final BuildContext context) => SizedBox(
       width: MediaQuery.of(context).size.width / 1,
       height: MediaQuery.of(context).size.width / 3,
       child: TextFormField(
@@ -43,5 +42,4 @@ class CLargeTextField extends StatelessWidget {
         ),
       ),
     );
-  }
 }

@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             const SocialAuth(),
             SizedBox(height: MediaQuery.of(context).size.height / 50),
-             DonnotHaveAnAccount(),
+             const DonnotHaveAnAccount(),
              TextButton(onPressed: (){
               Navigator.pushNamed(context, PatientDetailsView.routeName);
              }, child: Text('Go To Patient View')),  
