@@ -8,7 +8,7 @@ class AleardyHaveAnAccount extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Row(
+  Widget build(final BuildContext context) => Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
@@ -24,7 +24,7 @@ class AleardyHaveAnAccount extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Text(
-            "Sign in",
+            'Sign in',
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16.sp,

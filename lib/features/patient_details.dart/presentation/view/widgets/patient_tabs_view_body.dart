@@ -5,7 +5,7 @@ import 'notes_view.dart';
 import 'rays_view.dart';
 
 class PatientTabsViewBody extends StatelessWidget {
-  const PatientTabsViewBody({super.key, required this.index});
+  const PatientTabsViewBody({required this.index, super.key});
   final int index;
   @override
   Widget build(final BuildContext context) => Container(

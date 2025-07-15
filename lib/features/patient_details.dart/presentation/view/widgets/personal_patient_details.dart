@@ -9,9 +9,8 @@ class PersonalPatientDetails extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Padding(
-      padding: EdgeInsets.only(top: 25, left: 32, right: 32, bottom: 20),
+      padding: const EdgeInsets.only(top: 25, left: 32, right: 32, bottom: 20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Align(
             alignment: Alignment.centerLeft,

@@ -11,7 +11,7 @@ class UploadWidget extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => GestureDetector(
       onTap: () async {
-        FilePickerResult? result = await FilePicker.platform.pickFiles();
+        var result = await FilePicker.platform.pickFiles();
 
       },
       child: Container(

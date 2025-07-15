@@ -2,7 +2,6 @@ import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utls/themes/app_colors.dart';
 
 class CustomDropdownMenu extends StatefulWidget {
   const CustomDropdownMenu({super.key});
@@ -28,7 +27,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
   }
   
   @override
-  Widget build(BuildContext context) => ElevatedButton(
+  Widget build(final BuildContext context) => ElevatedButton(
     onPressed: () {
       DropDownState<String>(
         dropDown: DropDown<String>(
@@ -40,12 +39,12 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
           ],
           
           onSelected: (final selectedItems) {
-            List<String> list = [];
-            for (var item in selectedItems) {
+            var list = <String>[];
+            for (final item in selectedItems) {
               list.add(item.data);
             }
             setState(() {
-              String temp = list.toString().substring(1);
+              var temp = list.toString().substring(1);
               _selectedItem = temp.substring(0, temp.length-1);
             });
           },

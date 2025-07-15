@@ -1,9 +1,6 @@
 import 'user_model.dart';
 
 class DoctorModel extends UserModel {
-  
-  final String Specialization;
-  final String avatar;
 
   DoctorModel({
     required this.Specialization,
@@ -22,7 +19,11 @@ class DoctorModel extends UserModel {
       email: json['email'], 
       isDoctor: json['isDoctor'],
     );
+  
+  final String Specialization;
+  final String avatar;
 
+  @override
   Map<String, dynamic> toJson() => {
       'name': name,
       'email': email,

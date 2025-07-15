@@ -7,7 +7,9 @@ import 'widgets/or.dart';
 import 'widgets/social_auth.dart';
 import 'widgets/top_login_view.dart';
 
-class LoginScreen extends StatelessWidget {  
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+  
   static const String routeName = 'loginview';
   @override
   Widget build(final BuildContext context) => Scaffold(
@@ -26,10 +28,10 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             const SocialAuth(),
             SizedBox(height: MediaQuery.of(context).size.height / 50),
-             DonnotHaveAnAccount(),
+             const DonnotHaveAnAccount(),
              TextButton(onPressed: (){
               Navigator.pushNamed(context, PatientDetailsView.routeName);
-             }, child: Text('Go To Patient View')),  
+             }, child: const Text('Go To Patient View')),  
           ],
         ),
       ),

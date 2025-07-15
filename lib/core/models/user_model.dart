@@ -1,6 +1,13 @@
  
  class UserModel {
 
+  UserModel({
+    required this.password, 
+    required this.name,
+    required this.email,
+    required this.isDoctor,
+  });
+
   factory UserModel.fromJson(final Map<String, dynamic> json) => UserModel(
       name: json['name'],
       email: json['email'],
@@ -12,13 +19,6 @@
   final String email;
   final String? password;
   final bool isDoctor ;
-
-  UserModel({
-    required this.password, 
-    required this.name,
-    required this.email,
-    required this.isDoctor,
-  });
 
   Map<String, dynamic> toJson() => {
       'name': name,

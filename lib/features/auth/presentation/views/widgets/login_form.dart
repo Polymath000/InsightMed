@@ -44,14 +44,14 @@ class _LoginFormState extends State<LoginForm> {
           ],
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 87),
-        const CTextField(hinto: "Enter your password", choose: true),
+        const CTextField(hinto: 'Enter your password', choose: true),
         SizedBox(height: MediaQuery.of(context).size.height / 50),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              "Forget Password?",
+              'Forget Password?',
               style: TextStyle(
                 color: kMainColor,
                 fontWeight: FontWeight.w500,

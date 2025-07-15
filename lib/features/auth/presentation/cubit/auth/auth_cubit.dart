@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:dio/dio.dart' as dio_package;
+import 'package:meta/meta.dart';
 
 import '../../../../../core/services/dio/auth_dio.dart';
 
@@ -11,10 +11,10 @@ class AuthCubit extends Cubit<AuthState> {
   bool isAuthenticated = false;
   
   // ...existing code...
-  void login({required final Map credintials}) async {
+  Future<void> login({required final Map credintials}) async {
     emit(AuthLoading());
     try {
-      dio_package.Response response = await dio().post(
+      var response = await dio().post(
         '/sanctum/token',
         data: credintials,
       );

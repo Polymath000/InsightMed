@@ -23,7 +23,7 @@ class GestureContainer extends StatefulWidget {
 
 class _GestureContainerState extends State<GestureContainer> {
   @override
-  Widget build(BuildContext context) => GestureDetector(
+  Widget build(final BuildContext context) => GestureDetector(
     
     onTap: () {
       setState(() {
