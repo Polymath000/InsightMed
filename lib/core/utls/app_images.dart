@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_single_quotes
 class Assets {
   Assets._();
-  
+
   /// Assets for assetsImagesAppts
   /// assets/images/appts.svg
   static const String assetsImagesAppts = "assets/images/appts.svg";
@@ -12,7 +12,8 @@ class Assets {
 
   /// Assets for assetsImagesFacebookLogo
   /// assets/images/FacebookLogo.svg
-  static const String assetsImagesFacebookLogo = "assets/images/FacebookLogo.svg";
+  static const String assetsImagesFacebookLogo =
+      "assets/images/FacebookLogo.svg";
 
   /// Assets for assetsImagesGoogleLogo
   /// assets/images/GoogleLogo.svg
@@ -38,8 +39,19 @@ class Assets {
   /// assets/images/onboarding3.png
   static const String assetsImagesOnboarding3 = "assets/images/onboarding3.png";
 
+  /// Assets for assetsImagesRay1
+  /// assets/images/ray1.svg
+  /// TODO: it is just to test remove after link back with flutter
+  static const String assetsImagesRay1 = "assets/images/ray1.svg";
+
+  /// Assets for assetsImagesRay2
+  /// assets/images/ray2.svg
+  static const String assetsImagesRay2 = "assets/images/ray2.svg";
+
   /// Assets for assetsImagesXRaysChestIcon
   /// assets/images/X-rays_chest_icon.svg
-  static const String assetsImagesXRaysChestIcon = "assets/images/X-rays_chest_icon.svg";
-}
+  /// TODO: it is just to test remove after link back with flutter
 
+  static const String assetsImagesXRaysChestIcon =
+      "assets/images/X-rays_chest_icon.svg";
+}

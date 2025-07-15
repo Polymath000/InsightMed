@@ -5,12 +5,12 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 
 class GestureContainer extends StatefulWidget {
   GestureContainer({
-    super.key,
-    required this.index,
-    required this.bIndex,
-    required this.image,
-    required this.title,
-    required this.onSelected
+    required this.index, 
+    required this.bIndex, 
+    required this.image, 
+    required this.title, 
+    required this.onSelected, 
+    super.key
   });
   int index;
   int bIndex;
@@ -31,27 +31,35 @@ class _GestureContainerState extends State<GestureContainer> {
       });
       widget.onSelected(widget.bIndex);
     },
-    child: Row(
+    child: Column(
       children: [
-        Container(
-          width: 20,
-          height: 20,
-          child: SvgPicture.asset(
-            widget.image,
-            color: widget.index == widget.bIndex
-                ? AppColors.info
-                : AppColors.black,
-          ),
+        Row(
+          children: [
+            SizedBox(
+              width: 20,
+              height: 20,
+              child: SvgPicture.asset(
+                widget.image,
+                color: widget.index == widget.bIndex
+                    ? AppColors.info
+                    : AppColors.black,
+              ),
+            ),
+            const SizedBox(width: 5),
+            Text(
+              widget.title,
+              style: AppTextStyles.titleMedium!.copyWith(
+                color: widget.index == widget.bIndex
+                    ? AppColors.info
+                    : AppColors.black,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 5),
-        Text(
-          widget.title,
-          style: AppTextStyles.titleMedium!.copyWith(
-            color: widget.index == widget.bIndex
-                ? AppColors.info
-                : AppColors.black,
-          ),
-        ),
+        const SizedBox(height: 10,),
+        SizedBox(
+          width: widget.index == widget.bIndex? MediaQuery.of(context).size.width / 5.2 : 0,
+          child: const Divider(color: AppColors.darkBlue,height: 0,)),
       ],
     ),
   );

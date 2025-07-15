@@ -14,18 +14,14 @@ class PatientDetailsViewBody extends StatelessWidget {
       children: [
         Container(
               color: AppColors.white,
-
           child: const Column(
             children: [
               PersonalPatientDetails(),
-              Divider(),
+              Divider(height: 0,),
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          child: PatientTabsView(),
-        ),
+        PatientTabsView(),
       ],
     ),
   );
