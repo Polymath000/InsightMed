@@ -25,9 +25,9 @@ class InsightMed extends StatelessWidget {
         AppColors.init(context);
         AppTextStyles.init(context);
         AppMediaQuery.init(context);
-        return child;
+        return child!;
       },
     ),
-    builder: (final context, final child) => child,
+    builder: (final context, final child) => child!,
   );
 }

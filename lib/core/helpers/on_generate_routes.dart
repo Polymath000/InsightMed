@@ -20,7 +20,7 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
         builder: (_) => const HomeView(),
       ),
             LoginScreen.routeName => MaterialPageRoute(
-        builder: (_) =>  LoginScreen(),
+        builder: (_) =>  const LoginScreen(),
       ),
                   SignUpScreen.routeName => MaterialPageRoute(
         builder: (_) => const SignUpScreen(),

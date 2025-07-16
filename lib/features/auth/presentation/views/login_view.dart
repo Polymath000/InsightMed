@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../patient_details.dart/presentation/view/patient_details_view.dart';
-import 'widgets/donnot_have_an_account.dart';
 import 'widgets/container.dart';
+import 'widgets/donnot_have_an_account.dart';
 import 'widgets/login_form.dart';
 import 'widgets/or.dart';
 import 'widgets/social_auth.dart';

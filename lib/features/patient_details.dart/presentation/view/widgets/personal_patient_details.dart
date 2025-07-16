@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
-import 'dropdown_menu.dart';
+import '../../../../notes/presentation/view/widget/dropdown_menu.dart';
 
 class PersonalPatientDetails extends StatelessWidget {
   const PersonalPatientDetails({
@@ -9,7 +9,7 @@ class PersonalPatientDetails extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Padding(
-      padding: const EdgeInsets.only(top: 25, left: 32, right: 32, bottom: 20),
+      padding: const EdgeInsets.only(top: 25, left: 32, right: 32),
       child: Column(
         children: [
           Align(
