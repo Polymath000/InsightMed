@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/utls/app_images.dart';
-import '../../../../core/utls/themes/app_colors.dart';
 import '../../../../core/utls/themes/app_text_style.dart';
 import 'widget/add_note_button.dart';
 import 'widget/note_card.dart';
