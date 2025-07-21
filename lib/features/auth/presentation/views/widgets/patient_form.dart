@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../main/presentation/views/main_view.dart';
 import 'constans.dart';
-import 'custbutton.dart';
+import '../../../../../core/widgets/custbutton.dart';
 import 'large_text_field.dart';
 import 'patient_text_of_textfield.dart';
 import 'radio_btn.dart';
-import 'text_field.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
 
 class PatientForm extends StatefulWidget {
   const PatientForm({super.key});
@@ -33,7 +33,7 @@ class _PatientFormState extends State<PatientForm> {
         SizedBox(height: MediaQuery.of(context).size.height / 110),
         CTextField(
           choose: false,
-          hinto: 'Enter your full name',
+          hint: 'Enter your full name',
           onChanged: (final p0) {
             fullName = p0;
           },
@@ -43,7 +43,7 @@ class _PatientFormState extends State<PatientForm> {
         SizedBox(height: MediaQuery.of(context).size.height / 110),
         CTextField(
           choose: false,
-          hinto: 'Enter your age',
+          hint: 'Enter your age',
           type: TextInputType.number,
           onChanged: (final p0) {
             age = p0;
@@ -57,7 +57,7 @@ class _PatientFormState extends State<PatientForm> {
         SizedBox(height: MediaQuery.of(context).size.height / 110),
         CTextField(
           choose: false,
-          hinto: 'Enter your phone number',
+          hint: 'Enter your phone number',
           type: TextInputType.phone,
           onChanged: (final p0) {
             phoneNumber = p0;

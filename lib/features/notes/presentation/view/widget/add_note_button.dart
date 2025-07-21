@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import 'note_form.dart';
 
 class AddNoteButton extends StatelessWidget {
   const AddNoteButton({super.key});
@@ -26,16 +29,16 @@ class AddNoteButton extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => GestureDetector(
     onTap: () async {
-      await showAdaptiveDialog<String>(
-            context: context,
-            builder:
-            // TODO: Not work 
-                (BuildContext context) => const Column(
-                  children: [
-                    const Text('data')
-                  ],
-                ),
-          );
+      await showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Add Note'),
+          content: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: SingleChildScrollView(child: NoteForm()),
+          ),
+        ),
+      );
     },
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
