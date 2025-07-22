@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utls/themes/app_colors.dart';
-import '__tab_header_delegate.dart';
+import 'tab_header_delegate.dart';
 import 'gesture_container.dart';
 import 'patient_details_app_bar.dart';
 import 'patient_tabs_view_body.dart';
@@ -39,7 +39,7 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
           const SizedBox(height: 50),
           const Divider(height: 1),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical:  16),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

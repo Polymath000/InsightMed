@@ -4,8 +4,8 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 
-class NoteForm extends StatelessWidget {
-  NoteForm.AddNoteForm({super.key});
+class EditNoteForm extends StatelessWidget {
+  EditNoteForm.EditNoteForm({super.key});
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
@@ -45,7 +45,7 @@ class NoteForm extends StatelessWidget {
         const SizedBox(height: 16),
 
         CButton(
-          btnText: 'Add Note',
+          btnText: 'Edit Note',
           colorbackground: AppColors.primary,
           onTap: () {
             if (formKey.currentState!.validate()) {

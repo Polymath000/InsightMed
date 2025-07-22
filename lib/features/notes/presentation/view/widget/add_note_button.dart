@@ -1,30 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
 import 'note_form.dart';
 
 class AddNoteButton extends StatelessWidget {
   const AddNoteButton({super.key});
-  Widget adaptiveAction({
-    required BuildContext context,
-    required VoidCallback onPressed,
-    required Widget child,
-  }) {
-    final ThemeData theme = Theme.of(context);
-    switch (theme.platform) {
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        return TextButton(onPressed: onPressed, child: child);
-      case TargetPlatform.iOS:
-      case TargetPlatform.macOS:
-        return CupertinoDialogAction(onPressed: onPressed, child: child);
-    }
-  }
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
@@ -32,10 +12,10 @@ class AddNoteButton extends StatelessWidget {
       await showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: const Text('Add Note'),
+          title: const Text('Add Note Form'),
           content: SizedBox(
             width: MediaQuery.sizeOf(context).width,
-            child: SingleChildScrollView(child: NoteForm()),
+            child: SingleChildScrollView(child: NoteForm.AddNoteForm()),
           ),
         ),
       );

@@ -2,7 +2,8 @@ import 'package:flutter/widgets.dart' show StatelessWidget, Widget;
 
 import '../../../../appointments/presentation/views/appointments_view.dart'
     show AppointmentsView;
-import '../../../../home/presentation/views/home_view.dart' show HomeView;
+import '../../../../home_patient_view/presentation/views/home_view.dart'
+    show HomeView;
 
 final class MainViewBody extends StatelessWidget {
   const MainViewBody({this.selectedIndex = 0, super.key});
