@@ -1,26 +1,61 @@
 import 'package:flutter/material.dart';
 
 import '../../../../auth/presentation/views/login_view.dart';
+import 'nextbutton_shape_decoration.dart';
 
-class NextButton extends StatelessWidget {
+class NextButton extends StatefulWidget {
   const NextButton({required this.pageController, super.key});
   final PageController pageController;
 
   @override
-  Widget build(final BuildContext context) =>
-      GestureDetector(
-        onTap: () async {
-          if (pageController.hasClients &&
-              pageController.page != null &&
-              pageController.page! < 2) {
-            await pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          } else if (pageController.hasClients && pageController.page == 2) {
-            await Navigator.pushNamed(context, LoginScreen.routeName);
-          }
-        },
+  State<NextButton> createState() => _NextButtonState();
+}
+
+class _NextButtonState extends State<NextButton> {
+  double _scale = 1.0;
+
+  void _onTapDown(TapDownDetails details) {
+    setState(() {
+      _scale = 0.90;
+    });
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    setState(() {
+      _scale = 1.0;
+    });
+  }
+
+  void _onTapCancel() {
+    setState(() {
+      _scale = 1.0;
+    });
+  }
+
+  @override
+  Widget build(final BuildContext context) {
+    final double currentPage = widget.pageController.hasClients
+        ? (widget.pageController.page ?? 0)
+        : 0;
+    final bool isLastPage = currentPage == 2;
+
+    return GestureDetector(
+      onTap: () async {
+        if (widget.pageController.hasClients && currentPage < 2) {
+          await widget.pageController.nextPage(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+        } else if (isLastPage) {
+          await Navigator.pushNamed(context, LoginScreen.routeName);
+        }
+      },
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: AnimatedScale(
+        scale: _scale,
+        duration: const Duration(milliseconds: 100),
         child: Align(
           alignment: Alignment.bottomRight,
           child: Padding(
@@ -28,35 +63,13 @@ class NextButton extends StatelessWidget {
             child: Container(
               width: 105.05,
               height: 60,
-              decoration: ShapeDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment(0, 0.50),
-                  end: Alignment(1, 0.50),
-                  colors: [Color(0xFF0891B2), Color(0xFF2563EB)],
-                ),
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Color(0xFFE5E7EB)),
-                  borderRadius: BorderRadius.circular(9999),
-                ),
-                shadows: const [
-                  BoxShadow(
-                    color: Color(0x19000000),
-                    blurRadius: 15,
-                    offset: Offset(0, 10),
-                  ),
-                  BoxShadow(
-                    color: Color(0x19000000),
-                    blurRadius: 6,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
+              decoration: nextbuttonShapeDecoration,
               child: SizedBox(
                 width: 42,
                 height: 28,
                 child: Align(
                   child: Text(
-                    pageController.page == 2 ? "Let's Go" : 'Next',
+                    isLastPage ? "Let's Go" : 'Next',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -68,5 +81,7 @@ class NextButton extends StatelessWidget {
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }

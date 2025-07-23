@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../../core/utls/app_images.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
 import 'constans.dart';
 import '../../../../../core/widgets/custbutton.dart';
 
@@ -9,20 +12,80 @@ class SocialAuth extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Column(
     children: [
-      CButton(
-        image: Assets.assetsImagesGoogleLogo,
-        onTap: null,
-        colorbackground: kBasicColor,
-        btnText: 'Login with gmail',
-        colorText: kSmain,
+      DecoratedBox(
+        decoration: BoxDecoration(
+          color: kBasicColor,
+          border: Border.all(color: const Color(0xffD1D5DB)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8),
+            onTap: () {},
+            splashColor: Colors.blueGrey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: SvgPicture.asset(Assets.assetsImagesGoogleLogo),
+                  ),
+                  Text(
+                    'Login with gmail',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.sp,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
+
       SizedBox(height: MediaQuery.of(context).size.height / 91),
-      CButton(
-        onTap: null,
-        image: Assets.assetsImagesFacebookLogo,
-        colorbackground: kBasicColor,
-        btnText: 'Login with facebook',
-        colorText: kSmain,
+      DecoratedBox(
+        decoration: BoxDecoration(
+          color: kBasicColor,
+          border: Border.all(color: const Color(0xffD1D5DB)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8),
+            onTap: () {},
+            splashColor: Colors.blueGrey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: SvgPicture.asset(Assets.assetsImagesFacebookLogo),
+                    ),
+                    Text(
+                      'Login with facebook',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     ],
   );
