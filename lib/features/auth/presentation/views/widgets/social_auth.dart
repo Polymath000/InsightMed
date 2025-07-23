@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/utls/app_images.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import 'constans.dart';
-import '../../../../../core/widgets/custbutton.dart';
 
 class SocialAuth extends StatelessWidget {
   const SocialAuth({super.key});

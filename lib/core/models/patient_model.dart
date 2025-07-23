@@ -1,45 +1,38 @@
 import 'user_model.dart';
 
-class PatientModel extends UserModel{
-
+class PatientModel extends UserModel {
   PatientModel({
-    required this.medicalHistory,
     required this.age,
     required this.gender,
     required this.phoneNumber,
     required super.password,
     required super.name,
     required super.email,
-    required super.isDoctor,
-    }
-    );
+    this.role = "default: patient",
+  });
 
-    factory PatientModel.fromJson(final Map<String, dynamic> json) => PatientModel(
-      medicalHistory: json['medicalHistory'],
-      age: json['age'],
-      email: json['email'],
-      gender: json['gender'],
-      phoneNumber: json['phoneNumber'],
-      password: json['password'],
-      name: json['name'],
-      isDoctor: json['isDoctor'],
-
+  factory PatientModel.fromJson(final Map<String, dynamic> json) =>
+      PatientModel(
+        age: json['age'],
+        email: json['email'],
+        gender: json['gender'],
+        phoneNumber: json['phone_number'],
+        password: json['password'],
+        name: json['name'],
+        role: json['role'],
       );
-  final String medicalHistory;
-  final String gender;
-  final String phoneNumber;
-  final int age;
-
-
-        @override
+  String gender;
+  String phoneNumber;
+  String age;
+  String role;
+  @override
   Map<String, dynamic> toJson() => {
-      'name': name,
-      'email': email,
-      'password': password,
-      'isDoctor': isDoctor,
-      'medicalHistory': medicalHistory,
-      'age' : age,
-      'phoneNumber': phoneNumber,
-      'gender' : gender,
-    };
-  }
+    'name': name,
+    'email': email,
+    'password': password,
+    'age': age,
+    'phoneNumber': phoneNumber,
+    'gender': gender,
+    'role': 'default: patient',
+  };
+}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/helpers/patient_info_screen_arguments.dart';
+import '../../../../../core/models/patient_model.dart' show PatientModel;
 import '../patient_info_screen.dart';
 import 'constans.dart';
 import '../../../../../core/widgets/custbutton.dart';
@@ -13,8 +15,15 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
+
+  PatientModel patient = PatientModel(
+    age: '',
+    gender: '',
+    phoneNumber: '',
+    password: null,
+    name: '',
+    email: '',
+  );
   String? confirmPassword;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
@@ -28,7 +37,9 @@ class _SignupFormState extends State<SignupForm> {
           choose: false,
           type: TextInputType.emailAddress,
           onChanged: (final p0) {
-            email = p0;
+            setState(() {
+              patient.email = p0!;
+            });
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),
@@ -36,7 +47,9 @@ class _SignupFormState extends State<SignupForm> {
           hint: 'Password',
           choose: true,
           onChanged: (final p0) {
-            password = p0;
+            setState(() {
+              patient.password = p0;
+            });
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),
@@ -44,20 +57,27 @@ class _SignupFormState extends State<SignupForm> {
           hint: 'Confirm Password',
           choose: true,
           onChanged: (final p0) {
-            confirmPassword = p0;
+            setState(() {
+              confirmPassword = p0;
+            });
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 50),
         CButton(
           onTap: () {
             if (_formKey.currentState!.validate() &&
-                password == confirmPassword) {
+                patient.password == confirmPassword) {
               _formKey.currentState!.save();
+
+              Navigator.pushReplacementNamed(
+                context,
+                PatientInformation.routeName,
+                arguments: PatientInfoScreenArguments(patient: patient),
+              );
               ScaffoldMessenger.of(
                 context,
-              ).showSnackBar(const SnackBar(content: Text('Login pressed')));
-              Navigator.pushNamed(context, PatientInformation.routeName);
-            } else if (password != confirmPassword) {
+              ).showSnackBar(const SnackBar(content: Text('SignUp pressed')));
+            } else if (patient.password != confirmPassword) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Passwords do not match')),
               );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CButton extends StatefulWidget {
   CButton({
@@ -22,15 +21,15 @@ class CButton extends StatefulWidget {
 }
 
 class _CButtonState extends State<CButton> {
-  double _scale = 1.0;
+  double _scale = 1;
 
-  void _onTapDown(TapDownDetails details) {
+  void _onTapDown(final TapDownDetails details) {
     setState(() {
       _scale = 0.90;
     });
   }
 
-  void _onTapUp(TapUpDetails details) {
+  void _onTapUp(final TapUpDetails details) {
     setState(() {
       _scale = 1.0;
     });

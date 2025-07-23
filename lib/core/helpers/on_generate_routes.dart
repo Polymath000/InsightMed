@@ -25,6 +25,7 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
       ),
       PatientInformation.routeName => MaterialPageRoute(
         builder: (_) => const PatientInformation(),
+        settings: settings,
       ),
       UploadMedicalRayView.routeName => MaterialPageRoute(
         builder: (_) => const UploadMedicalRayView(),
