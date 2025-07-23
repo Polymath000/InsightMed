@@ -3,9 +3,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CustomLinearPercentIndicator extends StatelessWidget {
   const CustomLinearPercentIndicator({
-    super.key,
-    required this.percent,
-    required this.color,
+    required this.percent, required this.color, super.key,
   });
   final double percent;
   final Color color;

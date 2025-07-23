@@ -8,11 +8,7 @@ import 'edit_note_button.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.createdDate,
-    required this.images,
+    required this.title, required this.description, required this.createdDate, required this.images, super.key,
   });
   final String title;
   final String description;
