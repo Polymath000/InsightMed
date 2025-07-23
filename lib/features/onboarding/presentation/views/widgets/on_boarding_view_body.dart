@@ -50,9 +50,8 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
         ),
       ),
-      NextButton(
-        pageController: _pageController
-        ),
+
+      NextButton(pageController: _pageController),
     ],
   );
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'constans.dart';
-import 'custbutton.dart';
-import 'text_field.dart';
+import '../../../../../core/widgets/custbutton.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -30,7 +30,7 @@ class _LoginFormState extends State<LoginForm> {
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 87),
         const CTextField(
-          hinto: 'Enter your email',
+          hint: 'Enter your email',
           choose: false,
           type: TextInputType.emailAddress,
         ),
@@ -44,7 +44,7 @@ class _LoginFormState extends State<LoginForm> {
           ],
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 87),
-        const CTextField(hinto: 'Enter your password', choose: true),
+        const CTextField(hint: 'Enter your password', choose: true),
         SizedBox(height: MediaQuery.of(context).size.height / 50),
 
         Row(

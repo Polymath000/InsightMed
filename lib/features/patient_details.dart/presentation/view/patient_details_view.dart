@@ -6,8 +6,6 @@ class PatientDetailsView extends StatelessWidget {
   const PatientDetailsView({super.key});
   static const String routeName = 'patientDetails';
   @override
-  Widget build(final BuildContext context) =>  const Scaffold(
-
-    body: PatientDetailsViewBody(),
-  );
+  Widget build(final BuildContext context) =>
+      const Scaffold(body: PatientDetailsViewBody());
 }

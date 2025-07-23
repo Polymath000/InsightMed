@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/helpers/shape_decoration.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
+import 'delete_note_button.dart';
+import 'edit_note_button.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({
@@ -31,7 +33,7 @@ class NoteCard extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              createdDate.toString(),
+              createdDate.toString().substring(0, 10),
               style: AppTextStyles.bodyMedium!.copyWith(
                 color: AppColors.darkGrey,
               ),
@@ -39,22 +41,14 @@ class NoteCard extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        Text(
-          description,
-          style: AppTextStyles.bodyLarge,
-        ),
+        Text(description, style: AppTextStyles.bodyLarge),
         const SizedBox(height: 10),
 
         const Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Icon(Icons.edit_note_outlined, color: AppColors.darkGrey, size: 30),
-            Icon(Icons.delete, color: AppColors.darkGrey, size: 30),
-          ],
+          children: [DeleteNoteButton(), EditNoteButton()],
         ),
-        Row(
-          children: images,
-        ),
+        Row(children: images),
       ],
     ),
   );

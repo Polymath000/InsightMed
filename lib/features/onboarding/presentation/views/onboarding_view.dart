@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import '../../../auth/presentation/views/login_view.dart';
 import 'widgets/on_boarding_view_body.dart';
@@ -9,14 +10,19 @@ class OnboardingView extends StatelessWidget {
   Widget build(final BuildContext context) => Scaffold(
     appBar: AppBar(
       actions: [
-        TextButton(
-          onPressed: () async {
+        AnimatedTextKit(
+          onTap: () async {
             await Navigator.of(
               context,
             ).pushReplacementNamed(LoginScreen.routeName);
-            // TODO(Anyone): Navigate to the Login page
           },
-          child: const Text('Skip'),
+          displayFullTextOnTap: true,
+          repeatForever: true,
+          pause: const Duration(microseconds: 1000),
+          animatedTexts: [
+            FlickerAnimatedText('Skip'),
+            FlickerAnimatedText('Skip'),
+          ],
         ),
         const SizedBox(width: 12),
       ],

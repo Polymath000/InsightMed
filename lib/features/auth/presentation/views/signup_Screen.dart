@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'widgets/constans.dart';
+import 'widgets/aleardy_have_an_account.dart';
+import 'widgets/animated_text_sign_up.dart';
 import 'widgets/container.dart';
 import 'widgets/or.dart';
 import 'widgets/signup_form.dart';
@@ -29,10 +30,7 @@ class SignUpScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24.sp),
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 85),
-          Text(
-            'Sign up to get started with our service',
-            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.sp),
-          ),
+          const AnimatedTextSignUp(),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
 
           const SignupForm(),
@@ -50,37 +48,5 @@ class SignUpScreen extends StatelessWidget {
         ],
       ),
     ),
-  );
-}
-
-class AleardyHaveAnAccount extends StatelessWidget {
-  const AleardyHaveAnAccount({super.key});
-
-  @override
-  Widget build(final BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(
-        'Aleardy have an account? ',
-        style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 16.sp,
-          color: kAccount,
-        ),
-      ),
-      GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Text(
-          'Sign in',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16.sp,
-            color: kMainColor,
-          ),
-        ),
-      ),
-    ],
   );
 }
