@@ -8,6 +8,6 @@ class PatientDetailsView extends StatelessWidget {
   @override
   Widget build(final BuildContext context) =>  const Scaffold(
 
-    body: const PatientDetailsViewBody(),
+    body: PatientDetailsViewBody(),
   );
 }

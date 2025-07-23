@@ -6,11 +6,11 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 class AddNoteButton extends StatelessWidget {
   const AddNoteButton({super.key});
   Widget adaptiveAction({
-    required BuildContext context,
-    required VoidCallback onPressed,
-    required Widget child,
+    required final BuildContext context,
+    required final VoidCallback onPressed,
+    required final Widget child,
   }) {
-    final ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
     switch (theme.platform) {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
@@ -30,9 +30,9 @@ class AddNoteButton extends StatelessWidget {
             context: context,
             builder:
             // TODO: Not work 
-                (BuildContext context) => const Column(
+                (context) => const Column(
                   children: [
-                    const Text('data')
+                    Text('data')
                   ],
                 ),
           );

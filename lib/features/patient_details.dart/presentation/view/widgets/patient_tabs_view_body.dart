@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/utls/themes/app_colors.dart';
-import 'appts_view.dart';
 import '../../../../notes/presentation/view/notes_view.dart';
 import '../../../../rays/presentation/view/rays_view.dart';
+import 'appts_view.dart';
 
 class PatientTabsViewBody extends StatelessWidget {
   const PatientTabsViewBody({required this.index, super.key});

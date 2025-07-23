@@ -6,11 +6,7 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 
 class NoteCard extends StatelessWidget {
   const NoteCard({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.createdDate,
-    required this.images,
+    required this.title, required this.description, required this.createdDate, required this.images, super.key,
   });
   final String title;
   final String description;

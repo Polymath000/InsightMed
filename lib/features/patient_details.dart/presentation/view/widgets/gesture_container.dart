@@ -4,11 +4,7 @@ import '../../../../../core/utls/themes/app_colors.dart';
 class GestureContainer extends StatefulWidget {
 
    GestureContainer({
-    super.key,
-    required this.index,
-    required this.bIndex,
-    required this.title,
-    required this.onSelected,
+    required this.index, required this.bIndex, required this.title, required this.onSelected, super.key,
   });
   int index;
   final int bIndex;
