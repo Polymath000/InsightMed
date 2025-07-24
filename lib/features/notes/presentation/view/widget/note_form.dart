@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
@@ -58,7 +59,7 @@ class _NoteFormState extends State<NoteForm> {
           onTap: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              Navigator.pop(context);
+              AppRoutes.pop(context);
             } else {
               _autovalidateMode = AutovalidateMode.always;
               setState(() {});

@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import '../../../auth/presentation/views/login_view.dart';
+
+import '../../../../core/helpers/on_generate_routes.dart';
 import 'widgets/on_boarding_view_body.dart';
 
 class OnboardingView extends StatelessWidget {
@@ -11,11 +12,7 @@ class OnboardingView extends StatelessWidget {
     appBar: AppBar(
       actions: [
         AnimatedTextKit(
-          onTap: () async {
-            await Navigator.of(
-              context,
-            ).pushReplacementNamed(LoginScreen.routeName);
-          },
+          onTap: () => AppRoutes.login(context),
           displayFullTextOnTap: true,
           repeatForever: true,
           pause: const Duration(microseconds: 1000),

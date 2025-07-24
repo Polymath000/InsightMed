@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../auth/presentation/views/login_view.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import 'nextbutton_shape_decoration.dart';
 
 class NextButton extends StatefulWidget {
@@ -47,7 +47,7 @@ class _NextButtonState extends State<NextButton> {
             curve: Curves.easeInOut,
           );
         } else if (isLastPage) {
-          await Navigator.pushNamed(context, LoginScreen.routeName);
+          await AppRoutes.login(context);
         }
       },
       onTapDown: _onTapDown,

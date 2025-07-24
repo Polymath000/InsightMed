@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/helpers/patient_info_screen_arguments.dart';
 import '../../../../../core/models/patient_model.dart' show PatientModel;
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
-import '../patient_info_screen.dart';
 import 'constans.dart';
 
 class SignupForm extends StatefulWidget {
@@ -70,10 +70,9 @@ class _SignupFormState extends State<SignupForm> {
                 patient.password == confirmPassword) {
               _formKey.currentState!.save();
 
-              await Navigator.pushReplacementNamed(
+              await AppRoutes.patientInformation(
                 context,
-                PatientInformation.routeName,
-                arguments: PatientInfoScreenArguments(patient: patient),
+                patientInfo: PatientInfoScreenArguments(patient: patient),
               );
               if (context.mounted) {
                 ScaffoldMessenger.of(

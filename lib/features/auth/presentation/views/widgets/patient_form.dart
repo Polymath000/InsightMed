@@ -90,7 +90,7 @@ class _PatientFormState extends State<PatientForm> {
                       context,
                     ).showSnackBar(const SnackBar(content: Text('Perfect')));
                   }
-                  // await Navigator.pushNamed(context, MainView.routeName);
+                  // await AppRoutes.main(context);
                 }
               },
               btnText: 'Continue ->',

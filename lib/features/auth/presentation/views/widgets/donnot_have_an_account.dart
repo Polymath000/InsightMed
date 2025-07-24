@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../signup_screen.dart';
+
+import '../../../../../core/helpers/on_generate_routes.dart';
 import 'constans.dart';
 
 class DonnotHaveAnAccount extends StatelessWidget {
@@ -19,9 +20,7 @@ class DonnotHaveAnAccount extends StatelessWidget {
         ),
       ),
       GestureDetector(
-        onTap: () async {
-          await Navigator.pushNamed(context, SignUpScreen.routeName);
-        },
+        onTap: () => AppRoutes.signUp(context),
         child: Text(
           'Sign up',
           style: TextStyle(

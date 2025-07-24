@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import 'constans.dart';
 
 class AleardyHaveAnAccount extends StatelessWidget {
-  const AleardyHaveAnAccount({
-    super.key,
-  });
+  const AleardyHaveAnAccount({super.key});
 
   @override
   Widget build(final BuildContext context) => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Aleardy have an account? ',
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(
+        'Aleardy have an account? ',
+        style: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16.sp,
+          color: kAccount,
+        ),
+      ),
+      GestureDetector(
+        onTap: () {
+          AppRoutes.pop(context);
+        },
+        child: Text(
+          'Sign in',
           style: TextStyle(
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
             fontSize: 16.sp,
-            color: kAccount,
+            color: kMainColor,
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Text(
-            'Sign in',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16.sp,
-              color: kMainColor,
-            ),
-          ),
-        ),
-      ],
-    );
+      ),
+    ],
+  );
 }
