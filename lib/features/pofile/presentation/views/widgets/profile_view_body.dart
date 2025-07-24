@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../../core/widgets/custbutton.dart';
-import '../../../../../auth/presentation/views/widgets/constans.dart';
-import 'widgets/contact_info_container.dart';
-import 'widgets/heading_text_profil.dart';
-import 'widgets/main_container_decoration.dart';
-import 'widgets/personal_info.dart';
-import 'widgets/security_container.dart';
-import 'widgets/shadow_container.dart';
+import '../../../../../core/widgets/custbutton.dart';
+import '../../../../auth/presentation/views/widgets/constans.dart';
+import 'contact_info_container.dart';
+import 'heading_text_profil.dart';
+import 'main_container_decoration.dart';
+import 'personal_info.dart';
+import 'security_container.dart';
+import 'shadow_container.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
