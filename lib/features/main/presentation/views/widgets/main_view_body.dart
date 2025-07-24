@@ -4,7 +4,7 @@ import '../../../../appointments/presentation/views/appointments_view.dart'
     show AppointmentsView;
 import '../../../../home_patient_view/presentation/views/home_view.dart'
     show HomeView;
-import '../../../../pofile_view/profile_view.dart';
+import '../../../../pofile/presentation/views/profile_view.dart';
 
 final class MainViewBody extends StatelessWidget {
   const MainViewBody({this.selectedIndex = 0, super.key});

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/helpers/on_generate_routes.dart';
+
 Future<void> showDialogForDeleteNote({required final BuildContext context}) =>
     showDialog(
       context: context,
@@ -23,8 +25,8 @@ Future<void> showDialogForDeleteNote({required final BuildContext context}) =>
                   icon: const Icon(Icons.delete_outline),
                   label: const Text('Delete'),
                   onPressed: () {
-                    // TODO: Delete logic
-                    Navigator.pop(context);
+                    // TODO(Anyone): Delete logic
+                    AppRoutes.pop(context);
                   },
                 ),
               ),
@@ -43,7 +45,7 @@ Future<void> showDialogForDeleteNote({required final BuildContext context}) =>
                   icon: const Icon(Icons.close),
                   label: const Text('Cancel'),
                   onPressed: () {
-                    Navigator.pop(context);
+                    AppRoutes.pop(context);
                   },
                 ),
               ),

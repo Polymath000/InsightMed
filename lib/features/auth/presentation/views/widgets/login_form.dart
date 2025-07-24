@@ -19,12 +19,13 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? email, password;
+  String? email;
+  String? password;
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (context) => AuthCubit(),
+    create: (final context) => AuthCubit(),
     child: Builder(
-      builder: (context) => Form(
+      builder: (final context) => Form(
         key: _formKey,
         autovalidateMode: autovalidateMode,
         child: Column(
@@ -45,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
               hint: 'Enter your email',
               choose: false,
               type: TextInputType.emailAddress,
-              onChanged: (p0) {
+              onChanged: (final p0) {
                 email = p0;
               },
             ),
@@ -65,7 +66,7 @@ class _LoginFormState extends State<LoginForm> {
             CTextField(
               hint: 'Enter your password',
               choose: true,
-              onChanged: (p0) {
+              onChanged: (final p0) {
                 password = p0;
               },
             ),
@@ -89,13 +90,14 @@ class _LoginFormState extends State<LoginForm> {
               onTap: () async {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-                  // await BlocProvider.of<AuthCubit>(
-                  //   context,
-                  // ).login(credintials: {'email': email, 'password': password});
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Login pressed')),
-                  );
-                  await Navigator.pushNamed(context, MainView.routeName);
+                  await BlocProvider.of<AuthCubit>(
+                    context,
+                  ).login(credintials: {'email': email, 'password': password});
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Login pressed')),
+                    );
+                  }
                 } else {
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;

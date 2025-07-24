@@ -9,7 +9,7 @@ class PatientTabsViewBody extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final List<Widget> pages = [
+    final pages = <Widget>[
       const NotesView(),
       const RaysView(),
       const ApptsView(),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utls/themes/app_colors.dart';
-import 'tab_header_delegate.dart';
 import 'gesture_container.dart';
 import 'patient_details_app_bar.dart';
 import 'patient_tabs_view_body.dart';
 import 'personal_patient_details.dart';
+import 'tab_header_delegate.dart';
 
 class PatientDetailsViewBody extends StatefulWidget {
   const PatientDetailsViewBody({super.key});

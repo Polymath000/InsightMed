@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../patient_details.dart/presentation/view/patient_details_view.dart';
+import '../../../../core/helpers/on_generate_routes.dart';
 import 'widgets/container.dart';
 import 'widgets/donnot_have_an_account.dart';
 import 'widgets/login_form.dart';
@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 22, 14, 15),
       child: ListView(
         children: [
-          TopLoginView(),
+          const TopLoginView(),
           SizedBox(height: MediaQuery.of(context).size.height / 37),
           const LoginForm(),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
@@ -31,9 +31,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).size.height / 50),
           const DonnotHaveAnAccount(),
           TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, PatientDetailsView.routeName);
-            },
+            onPressed: () => AppRoutes.patientDetails(context),
             child: const Text('Go To Patient View'),
           ),
         ],

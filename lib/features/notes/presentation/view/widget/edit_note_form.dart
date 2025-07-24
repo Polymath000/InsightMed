@@ -1,17 +1,25 @@
 import 'package:flutter/cupertino.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 
-class EditNoteForm extends StatelessWidget {
-  EditNoteForm.EditNoteForm({super.key});
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class EditNoteForm extends StatefulWidget {
+  const EditNoteForm({super.key});
+
+  @override
+  State<EditNoteForm> createState() => _EditNoteFormState();
+}
+
+class _EditNoteFormState extends State<EditNoteForm> {
+  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(final BuildContext context) => Form(
-    key: formKey,
-    autovalidateMode: autovalidateMode,
+    key: _formKey,
+    autovalidateMode: _autovalidateMode,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,7 +31,7 @@ class EditNoteForm extends StatelessWidget {
           softWrap: true,
         ),
         const SizedBox(height: 8),
-        CTextField(choose: false, hint: 'Note Title', onChanged: (p0) {}),
+        CTextField(choose: false, hint: 'Note Title', onChanged: (final p0) {}),
         const SizedBox(height: 16),
         Text(
           'Content',
@@ -37,7 +45,7 @@ class EditNoteForm extends StatelessWidget {
         CTextField(
           choose: false,
           hint: 'Note Title',
-          onChanged: (p0) {},
+          onChanged: (final p0) {},
           maxLines: 15,
           minLines: 15,
         ),
@@ -48,11 +56,12 @@ class EditNoteForm extends StatelessWidget {
           btnText: 'Edit Note',
           colorbackground: AppColors.primary,
           onTap: () {
-            if (formKey.currentState!.validate()) {
-              formKey.currentState!.save();
-              Navigator.pop(context);
+            if (_formKey.currentState!.validate()) {
+              _formKey.currentState!.save();
+              AppRoutes.pop(context);
             } else {
-              autovalidateMode = AutovalidateMode.always;
+              _autovalidateMode = AutovalidateMode.always;
+              setState(() {});
             }
           },
         ),

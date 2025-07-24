@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CButton extends StatefulWidget {
-  CButton({
+  const CButton({
     required this.btnText,
     required this.onTap,
     super.key,
@@ -14,7 +14,7 @@ class CButton extends StatefulWidget {
   final String? btnText;
   final Color? colorText;
   final void Function()? onTap;
-  String? image;
+  final String? image;
 
   @override
   State<CButton> createState() => _CButtonState();

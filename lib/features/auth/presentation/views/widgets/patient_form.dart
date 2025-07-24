@@ -5,15 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/models/patient_model.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
-import '../../../../main/presentation/views/main_view.dart';
 import '../../cubit/auth/auth_cubit.dart';
 import 'constans.dart';
 import 'patient_text_of_textfield.dart';
 import 'radio_btn.dart';
 
 class PatientForm extends StatefulWidget {
-  PatientForm({super.key, required this.patient});
-  PatientModel patient;
+  const PatientForm({required this.patient, super.key});
+  final PatientModel patient;
   @override
   State<PatientForm> createState() => _PatientFormState();
 }
@@ -61,7 +60,7 @@ class _PatientFormState extends State<PatientForm> {
             SizedBox(height: MediaQuery.of(context).size.height / 100),
             const PatientTextOfTextField(text: 'Gender *'),
             RadioBtn(
-              onChanged: (p0) {
+              onChanged: (final p0) {
                 widget.patient.gender = p0!;
               },
             ),
@@ -86,10 +85,12 @@ class _PatientFormState extends State<PatientForm> {
                   await BlocProvider.of<AuthCubit>(
                     context,
                   ).register(patient: widget.patient);
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text('Perfect')));
-                  // await Navigator.pushNamed(context, MainView.routeName);
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(const SnackBar(content: Text('Perfect')));
+                  }
+                  // await AppRoutes.main(context);
                 }
               },
               btnText: 'Continue ->',

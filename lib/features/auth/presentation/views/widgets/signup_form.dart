@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/helpers/patient_info_screen_arguments.dart';
 import '../../../../../core/models/patient_model.dart' show PatientModel;
-import '../patient_info_screen.dart';
-import 'constans.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
+import 'constans.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -64,19 +65,20 @@ class _SignupFormState extends State<SignupForm> {
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 50),
         CButton(
-          onTap: () {
+          onTap: () async {
             if (_formKey.currentState!.validate() &&
                 patient.password == confirmPassword) {
               _formKey.currentState!.save();
 
-              Navigator.pushReplacementNamed(
+              await AppRoutes.patientInformation(
                 context,
-                PatientInformation.routeName,
-                arguments: PatientInfoScreenArguments(patient: patient),
+                patientInfo: PatientInfoScreenArguments(patient: patient),
               );
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(const SnackBar(content: Text('SignUp pressed')));
+              if (context.mounted) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text('SignUp pressed')));
+              }
             } else if (patient.password != confirmPassword) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Passwords do not match')),

@@ -7,5 +7,6 @@ class Ccontainer extends StatelessWidget {
   const Ccontainer({super.key});
 
   @override
-  Widget build(final BuildContext context) => Container(width: 145.09.w, height: 1.h, color: kOffWhite);
+  Widget build(final BuildContext context) =>
+      Container(width: 145.09.w, height: 1.h, color: kOffWhite);
 }

@@ -14,8 +14,7 @@ class TabHeaderDelegate extends SliverPersistentHeaderDelegate {
     final BuildContext context,
     final double shrinkOffset,
     final bool overlapsContent,
-  ) =>
-      child;
+  ) => child;
 
   @override
   bool shouldRebuild(final TabHeaderDelegate oldDelegate) => true;
