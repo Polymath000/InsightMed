@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/helpers/shape_decoration.dart';
 import '../../../core/widgets/custom_text_field.dart';
 import '../../auth/presentation/views/widgets/radio_btn.dart';
 import 'icon_label.dart';
@@ -39,7 +38,7 @@ class PersonalContainer extends StatelessWidget {
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(choose: false, hint: 'Enter your full name'),
+          CTextField(choose: false, hint: 'Enter your full name'),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
           const Row(
             children: [
@@ -48,7 +47,7 @@ class PersonalContainer extends StatelessWidget {
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(
+          CTextField(
             choose: false,
             hint: 'Enter your age',
             type: TextInputType.number,

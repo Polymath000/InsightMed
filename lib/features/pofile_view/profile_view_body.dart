@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../core/utls/themes/app_colors.dart';
-import '../../core/utls/themes/app_text_style.dart';
 import '../../core/widgets/custbutton.dart';
 import '../auth/presentation/views/widgets/constans.dart';
 import 'widgets/contact_info_container.dart';

@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
-import '../../../../main/presentation/views/main_view.dart';
-import '../../../../pofile_view/profile_view.dart';
 import '../../cubit/auth/auth_cubit.dart';
 import 'constans.dart';
 

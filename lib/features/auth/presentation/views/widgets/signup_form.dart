@@ -8,15 +8,15 @@ import '../../../../../core/widgets/custom_text_field.dart';
 import 'constans.dart';
 
 class SignupForm extends StatefulWidget {
-  const SignupForm({super.key});
-
+  final void Function(bool)? onLoadingChanged;
+  const SignupForm({super.key, this.onLoadingChanged});
   @override
   State<SignupForm> createState() => _SignupFormState();
 }
 
 class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
-
+  bool isLoading = false;
   PatientModel patient = PatientModel(
     age: '',
     gender: '',
@@ -52,6 +52,13 @@ class _SignupFormState extends State<SignupForm> {
               patient.password = p0;
             });
           },
+          validator: (value) {
+            if (value!.length < 6) {
+              return 'Password Length less than 6 letters';
+            } else {
+              return null;
+            }
+          },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),
         CTextField(
@@ -66,24 +73,34 @@ class _SignupFormState extends State<SignupForm> {
         SizedBox(height: MediaQuery.of(context).size.height / 50),
         CButton(
           onTap: () async {
+            setState(() {
+              isLoading = true;
+              widget.onLoadingChanged!(isLoading);
+            });
             if (_formKey.currentState!.validate() &&
                 patient.password == confirmPassword) {
               _formKey.currentState!.save();
-
+              setState(() {
+                isLoading = false;
+                widget.onLoadingChanged!(isLoading);
+              });
               await AppRoutes.patientInformation(
                 context,
                 patientInfo: PatientInfoScreenArguments(patient: patient),
               );
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('SignUp pressed')));
-              }
             } else if (patient.password != confirmPassword) {
+              setState(() {
+                isLoading = false;
+                widget.onLoadingChanged!(isLoading);
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Passwords do not match')),
               );
             } else {
+              setState(() {
+                isLoading = false;
+                widget.onLoadingChanged!(isLoading);
+              });
               setState(() {
                 autovalidateMode = AutovalidateMode.always;
               });

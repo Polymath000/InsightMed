@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../features/auth/presentation/views/widgets/constans.dart';
 
 class CTextField extends StatelessWidget {
-  const CTextField({
+  CTextField({
     required this.choose,
     super.key,
     this.hint,
@@ -12,12 +12,14 @@ class CTextField extends StatelessWidget {
     this.onChanged,
     this.maxLines = 1,
     this.minLines = 1,
+    this.validator = null,
   });
   final int? minLines;
   final int? maxLines;
   final String? hint;
   final bool? choose;
   final TextInputType? type;
+  String? Function(String?)? validator;
   final void Function(String?)? onChanged;
   @override
   Widget build(final BuildContext context) => TextFormField(
@@ -26,7 +28,7 @@ class CTextField extends StatelessWidget {
       if (value == null || value.isEmpty) {
         return 'this field is required';
       } else {
-        return null;
+        validator;
       }
     },
     autovalidateMode: AutovalidateMode.disabled,

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/helpers/shape_decoration.dart';
 import '../../../core/widgets/custom_text_field.dart';
-import 'form_decoration.dart';
 import 'icon_label.dart';
 import 'label_text.dart';
 
@@ -40,7 +37,7 @@ class ContactInfoContainer extends StatelessWidget {
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(
+          CTextField(
             choose: false,
             hint: 'Enter your phone number',
             type: TextInputType.number,
@@ -54,7 +51,7 @@ class ContactInfoContainer extends StatelessWidget {
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(
+          CTextField(
             choose: false,
             hint: 'Enter your email',
             type: TextInputType.emailAddress,
