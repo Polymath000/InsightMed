@@ -47,7 +47,9 @@ class _NextButtonState extends State<NextButton> {
             curve: Curves.easeInOut,
           );
         } else if (isLastPage) {
-          await AppRoutes.login(context);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            AppRoutes.login(context);
+          });
         }
       },
       onTapDown: _onTapDown,

@@ -7,6 +7,7 @@ class DoctorModel extends UserModel {
     required super.password,
     required super.name,
     required super.email,
+    super.role = 'Doctor',
   });
 
   factory DoctorModel.fromJson(final Map<String, dynamic> json) => DoctorModel(
@@ -15,18 +16,19 @@ class DoctorModel extends UserModel {
     password: json['password'],
     name: json['name'],
     email: json['email'],
+    role: json['role'],
   );
 
-  final String specialization;
-  final String avatar;
+  final String? specialization;
+  final String? avatar;
 
   @override
   Map<String, dynamic> toJson() => {
     'name': name,
     'email': email,
     'password': password,
-
     'Specialization': specialization,
     'avatar': avatar,
+    'role': role,
   };
 }

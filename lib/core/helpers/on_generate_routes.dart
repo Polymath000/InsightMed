@@ -35,14 +35,11 @@ sealed class AppRoutes {
   );
 
   // Routes with arguments
-  static Future<PatientInfoScreenArguments?> patientInformation(
+  static Future<Object?> patientInformation(
     final BuildContext context, {
     final PatientInfoScreenArguments? patientInfo,
-  }) => _pushNamed<PatientInfoScreenArguments?>(
-    context,
-    PatientInformation.routeName,
-    arguments: patientInfo,
-  );
+  }) =>
+      _pushNamed(context, PatientInformation.routeName, arguments: patientInfo);
 
   // Routes without arguments
 
@@ -65,7 +62,7 @@ sealed class AppRoutes {
 Map<String, Widget Function(BuildContext, Object?)> _routes = {
   MainView.routeName: (_, _) => const MainView(),
   OnboardingView.routeName: (_, _) => const OnboardingView(),
-  LoginScreen.routeName: (_, _) => const LoginScreen(),
+  LoginScreen.routeName: (_, _) => LoginScreen(),
   SignUpScreen.routeName: (_, _) => const SignUpScreen(),
   PatientInformation.routeName: (_, final args) =>
       PatientInformation(patientInfo: args! as PatientInfoScreenArguments),

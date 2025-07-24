@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/widgets/custbutton.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
 import '../../cubit/auth/auth_cubit.dart';
-import 'constans.dart';
+import 'login_form_body.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+  const LoginForm({required this.onLoadingChanged, super.key});
+  final void Function(bool)? onLoadingChanged;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -16,99 +17,46 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? email;
-  String? password;
+
   @override
   Widget build(final BuildContext context) => BlocProvider(
     create: (final context) => AuthCubit(),
-    child: Builder(
-      builder: (final context) => Form(
-        key: _formKey,
-        autovalidateMode: autovalidateMode,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Email',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+    child: BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthLoading) {
+          widget.onLoadingChanged?.call(true);
+        } else if (state is AuthSuccess) {
+          widget.onLoadingChanged?.call(false);
+          if (BlocProvider.of<AuthCubit>(context).isDoctor()) {
+            AppRoutes.main(context);
+          } else {
+            // TODO : Go to doctor dashboard
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Scaffold(
+                  body: Center(child: Text('Doctor Dashboard')),
                 ),
-              ],
+              ),
+            );
+          }
+        } else if (state is AuthFailure) {
+          widget.onLoadingChanged?.call(false);
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message.toString())));
+        } else {
+          widget.onLoadingChanged?.call(false);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('There was an error , please try again later'),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 87),
-            CTextField(
-              hint: 'Enter your email',
-              choose: false,
-              type: TextInputType.emailAddress,
-              onChanged: (final p0) {
-                email = p0;
-              },
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height / 89),
-            Row(
-              children: [
-                Text(
-                  'Password',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height / 87),
-            CTextField(
-              hint: 'Enter your password',
-              choose: true,
-              onChanged: (final p0) {
-                password = p0;
-              },
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'Forget Password?',
-                  style: TextStyle(
-                    color: kMainColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-            CButton(
-              onTap: () async {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  await BlocProvider.of<AuthCubit>(
-                    context,
-                  ).login(credintials: {'email': email, 'password': password});
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login pressed')),
-                    );
-                  }
-                } else {
-                  setState(() {
-                    autovalidateMode = AutovalidateMode.always;
-                  });
-                }
-              },
-              colorbackground: kMainColor,
-              btnText: 'Login with Email',
-              colorText: kBasicColor,
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+      },
+      child: const LoginFormBody(),
     ),
   );
 }

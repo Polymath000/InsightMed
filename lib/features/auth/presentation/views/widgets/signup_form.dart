@@ -24,6 +24,7 @@ class _SignupFormState extends State<SignupForm> {
     password: null,
     name: '',
     email: '',
+    passwordConfirmation: '',
   );
   String? confirmPassword;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
@@ -67,6 +68,7 @@ class _SignupFormState extends State<SignupForm> {
           onChanged: (final p0) {
             setState(() {
               confirmPassword = p0;
+              patient.passwordConfirmation = p0;
             });
           },
         ),

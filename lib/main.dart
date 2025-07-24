@@ -4,7 +4,7 @@ import 'core/services/get_it_service.dart';
 import 'main_app.dart';
 
 void main() {
-  setupGetIt();
+  // setupGetIt();
   const AppBlocObserver().init();
 
   return runApp(const InsightMed());

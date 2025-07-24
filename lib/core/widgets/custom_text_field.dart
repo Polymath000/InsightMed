@@ -27,9 +27,10 @@ class CTextField extends StatelessWidget {
     validator: (final value) {
       if (value == null || value.isEmpty) {
         return 'this field is required';
-      } else {
-        validator;
+      } else if (validator != null) {
+        return validator!(value);
       }
+      return null;
     },
     autovalidateMode: AutovalidateMode.disabled,
     keyboardType: type,

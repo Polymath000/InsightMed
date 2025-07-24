@@ -8,7 +8,8 @@ class PatientModel extends UserModel {
     required super.password,
     required super.name,
     required super.email,
-    this.role = 'default: patient',
+    required this.passwordConfirmation,
+    super.role = 'patient',
   });
 
   factory PatientModel.fromJson(final Map<String, dynamic> json) =>
@@ -17,15 +18,15 @@ class PatientModel extends UserModel {
         email: json['email'],
         gender: json['gender'],
         phoneNumber: json['phone_number'],
+        passwordConfirmation: json['password_confirmation'],
         password: json['password'],
         name: json['name'],
         role: json['role'],
       );
-  String gender;
-  String phoneNumber;
-  String age;
+  String? gender;
+  String? phoneNumber;
+  String? age;
   String? passwordConfirmation;
-  String role;
   @override
   Map<String, dynamic> toJson() => {
     'name': name,
@@ -35,5 +36,6 @@ class PatientModel extends UserModel {
     'age': age,
     'phone_number': phoneNumber,
     'gender': gender,
+    'role': role,
   };
 }

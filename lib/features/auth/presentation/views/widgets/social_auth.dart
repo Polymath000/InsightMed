@@ -49,45 +49,6 @@ class SocialAuth extends StatelessWidget {
           ),
         ),
       ),
-
-      SizedBox(height: MediaQuery.of(context).size.height / 91),
-      DecoratedBox(
-        decoration: BoxDecoration(
-          color: kBasicColor,
-          border: Border.all(color: const Color(0xffD1D5DB)),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(8),
-            onTap: () {},
-            splashColor: Colors.blueGrey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16),
-                      child: SvgPicture.asset(Assets.assetsImagesFacebookLogo),
-                    ),
-                    Text(
-                      'Login with facebook',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16.sp,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
     ],
   );
 }

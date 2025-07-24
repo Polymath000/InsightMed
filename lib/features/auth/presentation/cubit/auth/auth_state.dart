@@ -9,9 +9,7 @@ final class AuthInitial extends AuthState {
   const AuthInitial();
 }
 
-final class AuthSuccess extends AuthState {
-  const AuthSuccess();
-}
+final class AuthSuccess extends AuthState {}
 
 final class AuthFailure extends AuthState {
   const AuthFailure(this.message);
