@@ -34,7 +34,6 @@ final class MainNavigationBar extends StatelessWidget {
         icon: Icon(Icons.person_outline_rounded),
         label: 'Profile',
         selectedIcon: Icon(Icons.person_rounded),
-        enabled: false,
       ),
     ],
   );

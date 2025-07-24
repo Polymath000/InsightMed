@@ -26,6 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> register({required final PatientModel patient}) async {
     emit(AuthLoading());
     try {
+      print(patient.toJson());
       var response = await dio().post(
         '/register',
         data: patient.toJson(),
@@ -37,6 +38,9 @@ class AuthCubit extends Cubit<AuthState> {
       checkCodeStatus(response: response);
     } catch (e) {
       isAuthenticated = false;
+      if (e is dio_package.DioException && e.response != null) {
+        print('Backend error -------> ${e.response?.data}');
+      }
       print('E ----->  ${e.toString()}');
       emit(AuthFailure(e.toString()));
     }

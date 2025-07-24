@@ -27,7 +27,6 @@ final class _MainViewState extends State<MainView> {
     floatingActionButton: _selectedIndex == 0
         ? FloatingActionButton(
             tooltip: 'Upload Medical Ray',
-
             onPressed: () async {
               await Navigator.pushNamed(
                 context,

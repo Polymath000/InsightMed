@@ -7,6 +7,7 @@ import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/patient_details.dart/presentation/view/patient_details_view.dart';
 import '../../features/patient_rays_ubmission/presentation/views/upload_medical_ray_view.dart';
+import '../../features/pofile_view/profile_view.dart';
 import '../utls/i_text.dart';
 
 Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
@@ -33,7 +34,9 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
       PatientDetailsView.routeName => MaterialPageRoute(
         builder: (_) => const PatientDetailsView(),
       ),
-
+      ProfileView.routeName => MaterialPageRoute(
+        builder: (_) => const ProfileView(),
+      ),
       _ => MaterialPageRoute(
         builder: (_) =>
             const Scaffold(body: Center(child: IText('Page not found'))),

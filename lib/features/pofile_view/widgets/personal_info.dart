@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../auth/presentation/views/widgets/radio_btn.dart';
-import '../../../../../../auth/presentation/views/widgets/text_field.dart';
+import '../../../core/helpers/shape_decoration.dart';
+import '../../../core/widgets/custom_text_field.dart';
+import '../../auth/presentation/views/widgets/radio_btn.dart';
 import 'icon_label.dart';
 import 'label_text.dart';
 
@@ -11,37 +11,46 @@ class PersonalContainer extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Container(
-    width: 358.w,
-    height: 242.h,
-    decoration: const BoxDecoration(
+    decoration: const ShapeDecoration(
       color: Colors.white,
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Color(0xFFE5E7EB)),
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(16),
+          bottomLeft: Radius.circular(16),
+        ),
+      ),
+      shadows: [
+        BoxShadow(
+          color: Color(0x0C000000),
+          blurRadius: 2,
+          offset: Offset(0, 1),
+        ),
+      ],
     ),
     child: Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           const Row(
             children: [
               IconsLabel(icon: Icons.person_2_outlined),
-
               LabelText(labelText: ' Full Name'),
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(choose: false, hinto: 'Enter your full name'),
+          const CTextField(choose: false, hint: 'Enter your full name'),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
           const Row(
             children: [
               IconsLabel(icon: Icons.calendar_month_outlined),
-
               LabelText(labelText: ' Age'),
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
           const CTextField(
             choose: false,
-            hinto: 'Enter your age',
+            hint: 'Enter your age',
             type: TextInputType.number,
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
@@ -53,7 +62,7 @@ class PersonalContainer extends StatelessWidget {
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const RadioBtn(),
+          RadioBtn(onChanged: (String) {}),
         ],
       ),
     ),

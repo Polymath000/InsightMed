@@ -27,11 +27,6 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
           child: PersonalPatientDetails(),
         ),
       ),
-      // SliverMainAxisGroup(
-      //   slivers: [
-
-      //   ],
-      // ),
       SliverPersistentHeader(pinned: true, delegate: middleAppBar()),
       SliverToBoxAdapter(child: PatientTabsViewBody(index: index)),
     ],
