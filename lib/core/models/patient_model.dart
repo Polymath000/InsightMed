@@ -8,7 +8,7 @@ class PatientModel extends UserModel {
     required super.password,
     required super.name,
     required super.email,
-    this.role = "default: patient",
+    this.role = 'default: patient',
   });
 
   factory PatientModel.fromJson(final Map<String, dynamic> json) =>

@@ -7,5 +7,6 @@ class IconsLabel extends StatelessWidget {
   const IconsLabel({super.key, this.icon});
   final IconData? icon;
   @override
-  Widget build(final BuildContext context) => Icon(icon, color: kMainColor, size: 20.sp);
+  Widget build(final BuildContext context) =>
+      Icon(icon, color: kMainColor, size: 20.sp);
 }

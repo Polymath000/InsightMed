@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../../auth/presentation/views/widgets/radio_btn.dart';
-import '../../../../../../auth/presentation/views/widgets/text_field.dart';
 import 'icon_label.dart';
 import 'label_text.dart';
 
@@ -24,36 +24,33 @@ class PersonalContainer extends StatelessWidget {
           const Row(
             children: [
               IconsLabel(icon: Icons.person_2_outlined),
-
               LabelText(labelText: ' Full Name'),
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(choose: false, hinto: 'Enter your full name'),
+          const CTextField(choose: false, hint: 'Enter your full name'),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
           const Row(
             children: [
               IconsLabel(icon: Icons.calendar_month_outlined),
-
               LabelText(labelText: ' Age'),
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
           const CTextField(
             choose: false,
-            hinto: 'Enter your age',
+            hint: 'Enter your age',
             type: TextInputType.number,
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
           const Row(
             children: [
               IconsLabel(icon: Icons.male_outlined),
-
               LabelText(labelText: ' Gender'),
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const RadioBtn(),
+          RadioBtn(onChanged: (_) {}),
         ],
       ),
     ),

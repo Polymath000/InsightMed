@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 
 class GestureContainer extends StatefulWidget {
-
-   GestureContainer({
-    required this.index, required this.bIndex, required this.title, required this.onSelected, super.key,
+  const GestureContainer({
+    required this.index,
+    required this.bIndex,
+    required this.title,
+    required this.onSelected,
+    super.key,
   });
-  int index;
+  final int index;
   final int bIndex;
   final String title;
   final ValueChanged<int> onSelected;
@@ -18,17 +21,18 @@ class GestureContainer extends StatefulWidget {
 class _GestureContainerState extends State<GestureContainer> {
   @override
   Widget build(final BuildContext context) {
-    final isSelected = widget.index == widget.bIndex;
+    var index = widget.index;
+    final isSelected = index == widget.bIndex;
     return GestureDetector(
       onTap: () {
         setState(() {
-          widget.index = widget.bIndex;
+          index = widget.bIndex;
           widget.onSelected(widget.bIndex);
         });
       },
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.cyan : AppColors.white, 
+          color: isSelected ? AppColors.cyan : AppColors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected ? AppColors.cyan : AppColors.grey,

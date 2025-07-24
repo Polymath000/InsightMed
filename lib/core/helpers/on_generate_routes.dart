@@ -33,7 +33,6 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) =>
       PatientDetailsView.routeName => MaterialPageRoute(
         builder: (_) => const PatientDetailsView(),
       ),
-
       _ => MaterialPageRoute(
         builder: (_) =>
             const Scaffold(body: Center(child: IText('Page not found'))),

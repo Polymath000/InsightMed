@@ -15,7 +15,7 @@ class AddNoteButton extends StatelessWidget {
           title: const Text('Add Note Form'),
           content: SizedBox(
             width: MediaQuery.sizeOf(context).width,
-            child: SingleChildScrollView(child: NoteForm.AddNoteForm()),
+            child: const SingleChildScrollView(child: NoteForm()),
           ),
         ),
       );
@@ -27,7 +27,7 @@ class AddNoteButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.blueAccent.withOpacity(0.2),
+            color: Colors.blueAccent.withAlpha(50),
             blurRadius: 8,
             offset: const Offset(0, 3),
           ),

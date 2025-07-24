@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 22, 14, 15),
       child: ListView(
         children: [
-          TopLoginView(),
+          const TopLoginView(),
           SizedBox(height: MediaQuery.of(context).size.height / 37),
           const LoginForm(),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
@@ -31,9 +31,8 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).size.height / 50),
           const DonnotHaveAnAccount(),
           TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, PatientDetailsView.routeName);
-            },
+            onPressed: () =>
+                Navigator.pushNamed(context, PatientDetailsView.routeName),
             child: const Text('Go To Patient View'),
           ),
         ],

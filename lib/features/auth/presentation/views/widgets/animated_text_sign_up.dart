@@ -7,7 +7,7 @@ class AnimatedTextSignUp extends StatelessWidget {
   const AnimatedTextSignUp({super.key});
 
   @override
-  Widget build(BuildContext context) => AnimatedTextKit(
+  Widget build(final BuildContext context) => AnimatedTextKit(
     pause: Duration.zero,
     repeatForever: true,
     animatedTexts: [

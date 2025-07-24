@@ -2,7 +2,7 @@ import 'user_model.dart';
 
 class DoctorModel extends UserModel {
   DoctorModel({
-    required this.Specialization,
+    required this.specialization,
     required this.avatar,
     required super.password,
     required super.name,
@@ -10,14 +10,14 @@ class DoctorModel extends UserModel {
   });
 
   factory DoctorModel.fromJson(final Map<String, dynamic> json) => DoctorModel(
-    Specialization: json['Specialization'],
+    specialization: json['Specialization'],
     avatar: json['avatar'],
     password: json['password'],
     name: json['name'],
     email: json['email'],
   );
 
-  final String Specialization;
+  final String specialization;
   final String avatar;
 
   @override
@@ -26,7 +26,7 @@ class DoctorModel extends UserModel {
     'email': email,
     'password': password,
 
-    'Specialization': Specialization,
+    'Specialization': specialization,
     'avatar': avatar,
   };
 }

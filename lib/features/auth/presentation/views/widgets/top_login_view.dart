@@ -5,7 +5,7 @@ import '../../../../../core/constants/constants.dart';
 import '../../../../../core/utls/app_images.dart';
 
 class TopLoginView extends StatelessWidget {
-  TopLoginView({super.key});
+  const TopLoginView({super.key});
   @override
   Widget build(final BuildContext context) => Column(
     children: [

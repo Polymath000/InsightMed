@@ -28,7 +28,7 @@ class ApptsView extends StatelessWidget {
             ),
             child: Column(
               children: [
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 const Text('Jul'),
                 Text(
                   '05',

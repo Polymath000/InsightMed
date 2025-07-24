@@ -23,7 +23,7 @@ Future<void> showDialogForDeleteNote({required final BuildContext context}) =>
                   icon: const Icon(Icons.delete_outline),
                   label: const Text('Delete'),
                   onPressed: () {
-                    // TODO: Delete logic
+                    // TODO(Anyone): Delete logic
                     Navigator.pop(context);
                   },
                 ),

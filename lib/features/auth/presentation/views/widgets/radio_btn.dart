@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum SingingCharacter { male, female, other }
 
 class RadioBtn extends StatefulWidget {
-  const RadioBtn({super.key, required this.onChanged});
+  const RadioBtn({required this.onChanged, super.key});
   final void Function(String?)? onChanged;
   @override
   State<RadioBtn> createState() => _RadioBtnState();

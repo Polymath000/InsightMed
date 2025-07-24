@@ -5,7 +5,6 @@ import 'profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
-  final String id = 'profileView';
   @override
   Widget build(final BuildContext context) => Scaffold(
     appBar: AppBar(

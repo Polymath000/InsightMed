@@ -12,7 +12,7 @@ class SecurityContainer extends StatelessWidget {
   Widget build(final BuildContext context) => Container(
     width: 358.w,
     height: 47.h,
-    decoration: FormDecoration(),
+    decoration: formDecoration(),
     child: const Padding(
       padding: EdgeInsets.all(15),
       child: Column(

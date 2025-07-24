@@ -19,7 +19,7 @@ class DeleteNoteButton extends StatelessWidget {
           title: const Text('Edit Note Form'),
           content: SizedBox(
             width: MediaQuery.sizeOf(context).width,
-            child: SingleChildScrollView(child: EditNoteForm.EditNoteForm()),
+            child: const SingleChildScrollView(child: EditNoteForm()),
           ),
         ),
       );

@@ -12,15 +12,15 @@ class NextButton extends StatefulWidget {
 }
 
 class _NextButtonState extends State<NextButton> {
-  double _scale = 1.0;
+  double _scale = 1;
 
-  void _onTapDown(TapDownDetails details) {
+  void _onTapDown(final TapDownDetails details) {
     setState(() {
       _scale = 0.90;
     });
   }
 
-  void _onTapUp(TapUpDetails details) {
+  void _onTapUp(final TapUpDetails details) {
     setState(() {
       _scale = 1.0;
     });
@@ -34,10 +34,10 @@ class _NextButtonState extends State<NextButton> {
 
   @override
   Widget build(final BuildContext context) {
-    final double currentPage = widget.pageController.hasClients
+    final currentPage = widget.pageController.hasClients
         ? (widget.pageController.page ?? 0)
         : 0;
-    final bool isLastPage = currentPage == 2;
+    final isLastPage = currentPage == 2;
 
     return GestureDetector(
       onTap: () async {

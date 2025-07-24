@@ -6,14 +6,14 @@ class HeadingTextProfileEdit extends StatelessWidget {
   final String? head;
   @override
   Widget build(final BuildContext context) => Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: Text(
-            head!,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
-          ),
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: Text(
+          head!,
+          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
         ),
-      ],
-    );
+      ),
+    ],
+  );
 }

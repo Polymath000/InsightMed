@@ -24,7 +24,7 @@ class SocialAuth extends StatelessWidget {
             onTap: () {},
             splashColor: Colors.blueGrey,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
 
@@ -62,7 +62,7 @@ class SocialAuth extends StatelessWidget {
             onTap: () {},
             splashColor: Colors.blueGrey,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
