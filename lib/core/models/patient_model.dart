@@ -25,6 +25,7 @@ class PatientModel extends UserModel {
   String phoneNumber;
   String age;
   String? passwordConfirmation;
+  String role;
   @override
   Map<String, dynamic> toJson() => {
     'name': name,
