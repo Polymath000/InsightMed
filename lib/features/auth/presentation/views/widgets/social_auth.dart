@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/utls/app_images.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
+import '../../../../main/presentation/views/main_view.dart';
 import 'constans.dart';
 
 class SocialAuth extends StatelessWidget {
@@ -21,7 +22,8 @@ class SocialAuth extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: BorderRadius.circular(8),
-            onTap: () {},
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, MainView.routeName),
             splashColor: Colors.blueGrey,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),

@@ -21,12 +21,7 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
   Widget build(final BuildContext context) => CustomScrollView(
     slivers: [
       const PatientDetailsAppBar(),
-      const SliverToBoxAdapter(
-        child: ColoredBox(
-          color: AppColors.white,
-          child: PersonalPatientDetails(),
-        ),
-      ),
+      const SliverToBoxAdapter(child: PersonalPatientDetails()),
       // SliverMainAxisGroup(
       //   slivers: [
 

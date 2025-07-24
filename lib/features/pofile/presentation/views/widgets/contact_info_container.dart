@@ -1,51 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/widgets/custom_text_field.dart';
-import 'form_decoration.dart';
-import 'icon_label.dart';
-import 'label_text.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 
 class ContactInfoContainer extends StatelessWidget {
   const ContactInfoContainer({super.key});
 
   @override
-  Widget build(final BuildContext context) => Container(
-    width: 358.w,
-    height: 173.h,
-    decoration: formDecoration(),
-    child: Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        children: [
-          const Row(
-            children: [
-              IconsLabel(icon: Icons.phone_outlined),
-              LabelText(labelText: ' Phone Number'),
-            ],
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(
-            choose: false,
-            hint: 'Enter your phone number',
-            type: TextInputType.number,
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const Row(
-            children: [
-              IconsLabel(icon: Icons.mail_outlined),
-
-              LabelText(labelText: ' Email Address'),
-            ],
-          ),
-          SizedBox(height: MediaQuery.of(context).size.height / 105),
-          const CTextField(
-            choose: false,
-            hint: 'Enter your email',
-            type: TextInputType.emailAddress,
-          ),
-        ],
-      ),
+  Widget build(final BuildContext context) => const Padding(
+    padding: EdgeInsets.symmetric(horizontal: 8),
+    child: Column(
+      children: [
+        AppTextField(
+          labelText: 'Phone Number',
+          hintText: 'Enter your phone number',
+          prefixIcon: Icon(Icons.phone_outlined),
+          keyboardType: TextInputType.number,
+        ),
+        AppTextField(
+          labelText: 'Email Address',
+          hintText: 'Enter your email',
+          prefixIcon: Icon(Icons.email_outlined),
+          keyboardType: TextInputType.emailAddress,
+        ),
+      ],
     ),
   );
 }

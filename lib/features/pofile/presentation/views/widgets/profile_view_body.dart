@@ -1,77 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/widgets/custbutton.dart';
-import '../../../../auth/presentation/views/widgets/constans.dart';
+
+import '../../../../../core/utls/i_text.dart';
 import 'contact_info_container.dart';
-import 'heading_text_profil.dart';
-import 'main_container_decoration.dart';
 import 'personal_info.dart';
 import 'security_container.dart';
-import 'shadow_container.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
 
   @override
-  Widget build(final BuildContext context) => Column(
-    children: [
-      DecoratedBox(
-        decoration: BoxDecoration(boxShadow: [shadowContainer()]),
-        child: Column(
-          children: [
-            Container(
-              // margin: EdgeInsets.all(10),
-              width: 358.w,
-              height: 49.h,
-              decoration: mainCountainerDecoration(),
-              child: const HeadingTextProfileEdit(head: 'Personal Information'),
+  Widget build(final BuildContext context) => SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        spacing: 16,
+        children: [
+          const Card.filled(
+            child: Column(
+              children: [
+                ListTile(
+                  title: IText(
+                    'Personal Information',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                PersonalContainer(),
+              ],
             ),
-            const PersonalContainer(),
-          ],
-        ),
-      ),
-      SizedBox(height: MediaQuery.of(context).size.height / 50),
-      DecoratedBox(
-        decoration: BoxDecoration(boxShadow: [shadowContainer()]),
-        child: Column(
-          children: [
-            Container(
-              // margin: EdgeInsets.all(10),
-              width: 358.w,
-              height: 49.h,
-              decoration: mainCountainerDecoration(),
-              child: const HeadingTextProfileEdit(head: 'Contact Information'),
+          ),
+          const Card.filled(
+            child: Column(
+              children: [
+                ListTile(
+                  title: IText(
+                    'Contact Information',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                ContactInfoContainer(),
+              ],
             ),
-            const ContactInfoContainer(),
-          ],
-        ),
-      ),
-      SizedBox(height: MediaQuery.of(context).size.height / 50),
-
-      DecoratedBox(
-        decoration: BoxDecoration(boxShadow: [shadowContainer()]),
-        child: Column(
-          children: [
-            Container(
-              width: 358.w,
-              height: 49.h,
-              decoration: mainCountainerDecoration(),
-              child: const HeadingTextProfileEdit(head: 'Security'),
+          ),
+          const Card.filled(
+            child: Column(
+              children: [
+                ListTile(
+                  title: IText('Security', style: TextStyle(fontSize: 20)),
+                ),
+                SecurityContainer(),
+              ],
             ),
-            // Container(height: 1, color: Colors.grey),
-          ],
-        ),
+          ),
+          FilledButton(child: const IText('Save Change'), onPressed: () {}),
+        ],
       ),
-      const SecurityContainer(),
-      SizedBox(height: MediaQuery.of(context).size.height / 50),
-      CButton(
-        colorText: Colors.white,
-        colorbackground: kMainColor,
-        btnText: 'Save Change',
-        onTap: () {
-          // Navigator.pushNamed(context, _);
-        },
-      ),
-    ],
+    ),
   );
 }
