@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/entities/user_entity.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/services/dio/auth_dio.dart';
@@ -38,7 +39,6 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
   _setHeaders() => {
     'Content-type': 'application/json',
     'Accept': 'application/json',
-    'Authorization':
-        'Bearer 60|sLqtGTxdRFZaZT1PA457GE4FignO2FHNgWiCAsKD79e30675',
+    'Authorization': 'Bearer $mainToken',
   };
 }
