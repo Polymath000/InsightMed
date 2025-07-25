@@ -31,7 +31,6 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
       return userEntity;
     } catch (e) {
       emit(ProfileOfPatientFailure(message: e.toString()));
-
       return UserEntity();
     }
   }
