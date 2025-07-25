@@ -39,7 +39,7 @@ sealed class AppRoutes {
   static Future<T?> patientInformation<T extends PatientInfoScreenArguments?>(
     final BuildContext context, {
     final UserEntity? user,
-  }) => _pushNamed(context, PatientInformation.routeName, arguments: user);
+  }) => _pushNamed<T>(context, PatientInformation.routeName, arguments: user);
 
   // Routes without arguments
 
