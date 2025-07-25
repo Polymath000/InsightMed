@@ -6,11 +6,9 @@ class CButton extends StatefulWidget {
     required this.btnText,
     required this.onTap,
     super.key,
-    this.colorbackground,
     this.colorText,
     this.image,
   });
-  final Color? colorbackground;
   final String? btnText;
   final Color? colorText;
   final void Function()? onTap;
@@ -50,26 +48,13 @@ class _CButtonState extends State<CButton> {
     child: AnimatedScale(
       scale: _scale,
       duration: const Duration(milliseconds: 100),
-
-      child: Container(
-        decoration: BoxDecoration(
-          color: widget.colorbackground,
-          border: Border.all(color: const Color(0xffD1D5DB)),
-          borderRadius: BorderRadius.circular(8),
+      child: FilledButton(
+        onPressed: widget.onTap,
+        style: FilledButton.styleFrom(
+          textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 16.sp),
+          elevation: 0,
         ),
-
-        width: double.infinity,
-        height: 43.sp,
-        child: Center(
-          child: Text(
-            widget.btnText!,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16.sp,
-              color: widget.colorText,
-            ),
-          ),
-        ),
+        child: Text(widget.btnText ?? ''),
       ),
     ),
   );

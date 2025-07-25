@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/enums/gender_enum.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 
 class RadioBtn extends StatefulWidget {
-  const RadioBtn({required this.onChanged, super.key});
+  RadioBtn({
+    required this.onChanged,
+    super.key,
+    this.character = GenderEnum.male,
+  });
   final void Function(String?)? onChanged;
+  GenderEnum? character;
+
   @override
   State<RadioBtn> createState() => _RadioBtnState();
 }
 
 class _RadioBtnState extends State<RadioBtn> {
-  GenderEnum? _character = GenderEnum.male;
-
   @override
   Widget build(final BuildContext context) => Row(
     children: GenderEnum.values
@@ -20,9 +25,9 @@ class _RadioBtnState extends State<RadioBtn> {
           (final e) => Flexible(
             child: RadioListTile(
               value: e,
-              groupValue: _character,
+              groupValue: widget.character,
               onChanged: (final value) {
-                setState(() => _character = value);
+                setState(() => widget.character = value);
                 widget.onChanged?.call(value?.toString());
               },
               title: IText(e.toString()),

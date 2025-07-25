@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/utls/i_text.dart';
+import '../../../../../core/widgets/custbutton.dart';
 
 class UploadMedicalRayButton extends StatelessWidget {
   const UploadMedicalRayButton({super.key});
 
   @override
   Widget build(final BuildContext context) =>
-      FilledButton(onPressed: () {}, child: const IText('Upload Medical Ray'));
+      CButton(onTap: () {}, btnText: 'Upload Medical Ray');
 }

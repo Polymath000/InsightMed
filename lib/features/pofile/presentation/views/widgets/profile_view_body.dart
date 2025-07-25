@@ -1,13 +1,20 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/utls/i_text.dart';
+import '../../../../../core/widgets/custbutton.dart';
+import '../../../cubit/profile_of_patient_/profile_of_patient_cubit.dart';
 import 'contact_info_container.dart';
 import 'personal_info.dart';
 import 'security_container.dart';
 
 class ProfileViewBody extends StatelessWidget {
-  const ProfileViewBody({super.key});
+  ProfileViewBody({super.key, required this.user});
 
+  final UserEntity user;
   @override
   Widget build(final BuildContext context) => CustomScrollView(
     slivers: [
@@ -20,17 +27,17 @@ class ProfileViewBody extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: PersonalContainer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: PersonalContainer(user: user),
           ),
           const Divider(),
           const ListTile(
             title: IText('Contact Information', style: TextStyle(fontSize: 20)),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: ContactInfoContainer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ContactInfoContainer(user: user),
           ),
           const Divider(),
           const ListTile(
@@ -40,9 +47,11 @@ class ProfileViewBody extends StatelessWidget {
           const Divider(),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: FilledButton(
-              child: const IText('Save Change'),
-              onPressed: () {},
+            child: CButton(
+              onTap: () async {
+                // log();
+              },
+              btnText: 'Save Change',
             ),
           ),
         ],

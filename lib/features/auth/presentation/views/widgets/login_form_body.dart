@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/models/user_model.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../cubit/auth/auth_cubit.dart';
@@ -94,7 +93,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
               });
             }
           },
-          colorbackground: kMainColor,
           btnText: 'Login with Email',
           colorText: kBasicColor,
         ),

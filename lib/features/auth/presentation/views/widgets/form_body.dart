@@ -74,7 +74,6 @@ class FormBody extends StatelessWidget {
               }
             },
             btnText: 'Continue ->',
-            colorbackground: kMainColor,
             colorText: kBasicColor,
           ),
         ],

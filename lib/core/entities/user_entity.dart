@@ -11,7 +11,6 @@ class UserEntity {
     this.gender,
   });
   final String? specialty;
-
   final String? name;
   final String? email;
   final String? password;
@@ -20,6 +19,17 @@ class UserEntity {
   final String? phoneNumber;
   final String? age;
   final String? passwordConfirmation;
+
+  String? get getSpecialty => specialty;
+  String? get getName => name;
+  String? get getEmail => email;
+  String? get getPassword => password;
+  String? get getRole => role;
+  String? get getGender => gender;
+  String? get getPhoneNumber => phoneNumber;
+  String? get getAge => age;
+  String? get getPasswordConfirmation => passwordConfirmation;
+
   bool isDoctor() => role == 'patient';
 
   UserEntity copyWith({

@@ -24,7 +24,7 @@ class _SocialAuthState extends State<SocialAuth> {
       decoration: BoxDecoration(
         color: kBasicColor,
         border: Border.all(color: const Color(0xffD1D5DB)),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Material(
         color: Colors.transparent,
@@ -36,7 +36,6 @@ class _SocialAuthState extends State<SocialAuth> {
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 16),

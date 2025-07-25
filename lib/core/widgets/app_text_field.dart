@@ -44,8 +44,9 @@ final class AppTextField extends StatelessWidget {
     this.prefixIcon,
     this.prefixText,
     this.suffixIcon,
+    this.intialVlue,
   });
-
+  final String? intialVlue;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
@@ -70,6 +71,7 @@ final class AppTextField extends StatelessWidget {
 
   @override
   TextFormField build(_) => TextFormField(
+    initialValue: intialVlue,
     controller: controller,
     keyboardType: keyboardType,
     textInputAction: textInputAction,

@@ -108,7 +108,6 @@ class _SignupFormState extends State<SignupForm> {
             }
           },
 
-          colorbackground: kMainColor,
           btnText: 'Create Account',
           colorText: kBasicColor,
         ),

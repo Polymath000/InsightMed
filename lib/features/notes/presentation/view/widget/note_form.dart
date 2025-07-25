@@ -55,7 +55,6 @@ class _NoteFormState extends State<NoteForm> {
 
         CButton(
           btnText: 'Add Note',
-          colorbackground: AppColors.primary,
           onTap: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();

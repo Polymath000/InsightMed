@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../features/auth/presentation/views/widgets/constans.dart';
-
 class CTextField extends StatelessWidget {
-  CTextField({
+  const CTextField({
     required this.choose,
     super.key,
     this.hint,
@@ -12,14 +10,14 @@ class CTextField extends StatelessWidget {
     this.onChanged,
     this.maxLines = 1,
     this.minLines = 1,
-    this.validator = null,
+    this.validator,
   });
   final int? minLines;
   final int? maxLines;
   final String? hint;
   final bool? choose;
   final TextInputType? type;
-  String? Function(String?)? validator;
+  final String? Function(String?)? validator;
   final void Function(String?)? onChanged;
   @override
   Widget build(final BuildContext context) => TextFormField(
@@ -43,13 +41,6 @@ class CTextField extends StatelessWidget {
         fontWeight: FontWeight.w400,
         fontSize: 14.sp,
         color: const Color.fromARGB(255, 113, 114, 121),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xffD1D5DB)),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: kMainColor),
       ),
     ),
   );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart'
     show EdgeInsets, FilledButton, Padding, SliverToBoxAdapter, StatelessWidget;
 
-import '../../../../../core/utls/i_text.dart' show IText;
+import '../../../../../core/widgets/custbutton.dart';
 
 final class BookAppointmentButton extends StatelessWidget {
   const BookAppointmentButton({super.key});
@@ -10,10 +10,7 @@ final class BookAppointmentButton extends StatelessWidget {
   SliverToBoxAdapter build(_) => SliverToBoxAdapter(
     child: Padding(
       padding: const EdgeInsets.all(16),
-      child: FilledButton(
-        onPressed: () {},
-        child: const IText('Book Appointment'),
-      ),
+      child: CButton(onTap: () {}, btnText: 'Book Appointment'),
     ),
   );
 }
