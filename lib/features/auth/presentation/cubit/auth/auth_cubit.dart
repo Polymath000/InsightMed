@@ -3,11 +3,11 @@ import 'dart:developer' show log;
 import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter/material.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
+import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
 import '../../../../../core/helpers/get_auth_message.dart';
-import '../../../../../core/models/doctor_model.dart';
-import '../../../../../core/models/patient_model.dart';
 import '../../../../../core/models/user_model.dart';
 import '../../../../../core/services/dio/auth_dio.dart';
 
@@ -16,22 +16,11 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(const AuthInitial());
   bool isAuthenticated = false;
-  PatientModel? patientModel;
-  DoctorModel? doctorModel;
   UserModel? user;
   String _token = '';
   final Map<String, String> _messages = getAuthMessages;
-  void chooseDoctorOrPatient({required final dataRespnse}) {
-    if (!isDoctor()) {
-      patientModel = PatientModel.fromJson(dataRespnse);
-    } else {
-      doctorModel = DoctorModel.fromJson(dataRespnse);
-    }
-  }
 
-  bool isDoctor() => user!.role == 'patient';
-
-  void tryToken({required String token}) async {
+  Future<void> tryToken({required final String token}) async {
     try {
       var response;
       final dioInstance = dio();
@@ -49,13 +38,6 @@ class AuthCubit extends Cubit<AuthState> {
           ? response.data['patient_data']
           : response.data['doctor_data'];
       user = UserModel.fromJson(userData);
-      log(user!.email ?? 'No Email Found');
-      chooseDoctorOrPatient(dataRespnse: userData);
-      log('isDoctor-----> ${isDoctor()}');
-
-      log(
-        'Response data: ${isDoctor() ? doctorModel!.email : patientModel!.email}',
-      );
       _token = token;
       emit(AuthSuccess());
     } on Exception catch (e) {
@@ -64,46 +46,33 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> register({required final PatientModel patient}) async {
+  Future<void> register({required final UserEntity user}) async {
     emit(const AuthLoading());
     try {
       final dioInstance = dio();
       var response = await dioInstance.post(
         '/register',
-        data: patient.toJson(),
+        data: UserModel.fromEntity(user).toJson(),
         options: dio_package.Options(
           contentType: dio_package.Headers.jsonContentType,
         ),
       );
-
-      String token = response.data.toString();
-      tryToken(token: token);
-
-      if (response != null) {
-        checkCodeStatus(response: response);
-      } else {
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgUnknown']!));
-        log('Null response received');
-      }
+      var token = response.data.toString();
+      await tryToken(token: token);
+      checkCodeStatus(response: response);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
       final userMessage = mapDioErrorToMessage(e);
       emit(AuthFailure(userMessage));
-      log('DioException: \n');
-      log(e.toString());
     } on Exception catch (e) {
       isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
-      log('Exception: \n');
-      log(e.toString());
     }
   }
 
   Future<void> login({required final Map<String, dynamic> creds}) async {
     emit(const AuthLoading());
     try {
-      log('I am in login');
       final dioInstance = dio();
       var response = await dioInstance.post(
         '/login',
@@ -114,27 +83,15 @@ class AuthCubit extends Cubit<AuthState> {
           responseType: dio_package.ResponseType.json,
         ),
       );
-      if (response.statusCode == 200) {
-        String token = response.data['token'];
-        tryToken(token: token);
-        log('token ----> $token');
-      } else {
-        isAuthenticated = false;
-        String errorMessage = response.data['message'] ?? 'Login Failed';
-        emit(AuthFailure(errorMessage));
-        log('Login failed with status ${response.statusCode}: $errorMessage');
-      }
+      String token = response.data['token'];
+      tryToken(token: token);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
       final userMessage = mapDioErrorToMessage(e);
       emit(AuthFailure(userMessage));
-      log('DioException: \n');
-      log(e.toString());
     } on Exception catch (e) {
       isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
-      log('Exception: \n');
-      log(e.toString());
     }
   }
 
@@ -153,7 +110,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void cleanUp() {
-    patientModel = null;
+    user = null;
     isAuthenticated = false;
     _token = '';
     // TODO

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
-import '../../../../../core/helpers/patient_info_screen_arguments.dart';
-import '../../../../../core/models/patient_model.dart' show PatientModel;
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import 'constans.dart';
@@ -17,7 +16,8 @@ class SignupForm extends StatefulWidget {
 class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
-  PatientModel patient = PatientModel(
+
+  UserEntity user = UserEntity(
     age: '',
     gender: '',
     phoneNumber: '',
@@ -25,7 +25,9 @@ class _SignupFormState extends State<SignupForm> {
     name: '',
     email: '',
     passwordConfirmation: '',
+    role: '',
   );
+
   String? confirmPassword;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
@@ -40,7 +42,7 @@ class _SignupFormState extends State<SignupForm> {
           type: TextInputType.emailAddress,
           onChanged: (final p0) {
             setState(() {
-              patient.email = p0!;
+              user = user.copyWith(email: p0);
             });
           },
         ),
@@ -50,7 +52,7 @@ class _SignupFormState extends State<SignupForm> {
           choose: true,
           onChanged: (final p0) {
             setState(() {
-              patient.password = p0;
+              user = user.copyWith(password: p0);
             });
           },
           validator: (value) {
@@ -68,7 +70,7 @@ class _SignupFormState extends State<SignupForm> {
           onChanged: (final p0) {
             setState(() {
               confirmPassword = p0;
-              patient.passwordConfirmation = p0;
+              user = user.copyWith(passwordConfirmation: p0);
             });
           },
         ),
@@ -80,17 +82,14 @@ class _SignupFormState extends State<SignupForm> {
               widget.onLoadingChanged!(isLoading);
             });
             if (_formKey.currentState!.validate() &&
-                patient.password == confirmPassword) {
+                user.password == confirmPassword) {
               _formKey.currentState!.save();
               setState(() {
                 isLoading = false;
                 widget.onLoadingChanged!(isLoading);
               });
-              await AppRoutes.patientInformation(
-                context,
-                patientInfo: PatientInfoScreenArguments(patient: patient),
-              );
-            } else if (patient.password != confirmPassword) {
+              await AppRoutes.patientInformation(context, user: user);
+            } else if (user.password != confirmPassword) {
               setState(() {
                 isLoading = false;
                 widget.onLoadingChanged!(isLoading);

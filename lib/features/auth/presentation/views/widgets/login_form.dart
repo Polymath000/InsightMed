@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/helpers/on_generate_routes.dart';
-import '../../../../../core/widgets/custbutton.dart';
 import '../../cubit/auth/auth_cubit.dart';
 import 'login_form_body.dart';
 
@@ -29,19 +27,21 @@ class _LoginFormState extends State<LoginForm> {
           widget.onLoadingChanged?.call(true);
         } else if (state is AuthSuccess) {
           widget.onLoadingChanged?.call(false);
-          if (BlocProvider.of<AuthCubit>(context).isDoctor()) {
-            AppRoutes.main(context);
-          } else {
-            // TODO : Go to doctor dashboard
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Scaffold(
-                  body: Center(child: Text('Doctor Dashboard')),
-                ),
-              ),
-            );
-          }
+          AppRoutes.main(context);
+          // TODO : Handle Navigator
+          // if (BlocProvider.of<AuthCubit>(context).isDoctor()) {
+          //   AppRoutes.main(context);
+          // } else {
+          //   // TODO : Go to doctor dashboard
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => const Scaffold(
+          //         body: Center(child: Text('Doctor Dashboard')),
+          //       ),
+          //     ),
+          //   );
+          // }
         } else if (state is AuthFailure) {
           widget.onLoadingChanged?.call(false);
           ScaffoldMessenger.of(

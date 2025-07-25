@@ -7,6 +7,7 @@ import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/patient_details.dart/presentation/view/patient_details_view.dart';
 import '../../features/patient_rays_ubmission/presentation/views/upload_medical_ray_view.dart';
+import '../entities/user_entity.dart';
 import '../utls/i_text.dart';
 import 'patient_info_screen_arguments.dart';
 
@@ -37,9 +38,8 @@ sealed class AppRoutes {
   // Routes with arguments
   static Future<Object?> patientInformation(
     final BuildContext context, {
-    final PatientInfoScreenArguments? patientInfo,
-  }) =>
-      _pushNamed(context, PatientInformation.routeName, arguments: patientInfo);
+    final UserEntity? user,
+  }) => _pushNamed(context, PatientInformation.routeName, arguments: user);
 
   // Routes without arguments
 
@@ -65,7 +65,7 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   LoginScreen.routeName: (_, _) => LoginScreen(),
   SignUpScreen.routeName: (_, _) => const SignUpScreen(),
   PatientInformation.routeName: (_, final args) =>
-      PatientInformation(patientInfo: args! as PatientInfoScreenArguments),
+      PatientInformation(user: args! as UserEntity),
   UploadMedicalRayView.routeName: (_, _) => const UploadMedicalRayView(),
   PatientDetailsView.routeName: (_, _) => const PatientDetailsView(),
 };
