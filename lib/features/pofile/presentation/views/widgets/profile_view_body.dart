@@ -9,51 +9,44 @@ class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
 
   @override
-  Widget build(final BuildContext context) => SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        spacing: 16,
+  Widget build(final BuildContext context) => CustomScrollView(
+    slivers: [
+      const SliverAppBar(title: IText('My Profile'), centerTitle: true),
+      SliverList.list(
         children: [
-          const Card.filled(
-            child: Column(
-              children: [
-                ListTile(
-                  title: IText(
-                    'Personal Information',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                PersonalContainer(),
-              ],
+          const ListTile(
+            title: IText(
+              'Personal Information',
+              style: TextStyle(fontSize: 20),
             ),
           ),
-          const Card.filled(
-            child: Column(
-              children: [
-                ListTile(
-                  title: IText(
-                    'Contact Information',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                ContactInfoContainer(),
-              ],
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: PersonalContainer(),
+          ),
+          const Divider(),
+          const ListTile(
+            title: IText('Contact Information', style: TextStyle(fontSize: 20)),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: ContactInfoContainer(),
+          ),
+          const Divider(),
+          const ListTile(
+            title: IText('Security', style: TextStyle(fontSize: 20)),
+          ),
+          const SecurityContainer(),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: FilledButton(
+              child: const IText('Save Change'),
+              onPressed: () {},
             ),
           ),
-          const Card.filled(
-            child: Column(
-              children: [
-                ListTile(
-                  title: IText('Security', style: TextStyle(fontSize: 20)),
-                ),
-                SecurityContainer(),
-              ],
-            ),
-          ),
-          FilledButton(child: const IText('Save Change'), onPressed: () {}),
         ],
       ),
-    ),
+    ],
   );
 }

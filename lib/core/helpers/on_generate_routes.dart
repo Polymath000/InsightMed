@@ -15,19 +15,19 @@ sealed class AppRoutes {
   static void pop<T extends Object?>(
     final BuildContext context, [
     final T? result,
-  ]) => Navigator.pop(context);
+  ]) => Navigator.pop<T?>(context);
 
   static Future<T?> _pushNamed<T extends Object?>(
     final BuildContext context,
     final String routeName, {
     final Object? arguments,
-  }) => Navigator.pushNamed(context, routeName, arguments: arguments);
+  }) => Navigator.pushNamed<T>(context, routeName, arguments: arguments);
 
   static Future<T?> _pushNamedAndRemoveAll<T extends Object?>(
     final BuildContext context,
     final String newRouteName, {
     final Object? arguments,
-  }) => Navigator.pushNamedAndRemoveUntil(
+  }) => Navigator.pushNamedAndRemoveUntil<T>(
     context,
     newRouteName,
     (_) => false,
@@ -35,11 +35,14 @@ sealed class AppRoutes {
   );
 
   // Routes with arguments
-  static Future<Object?> patientInformation(
+  static Future<T?> patientInformation<T extends PatientInfoScreenArguments?>(
     final BuildContext context, {
     final PatientInfoScreenArguments? patientInfo,
-  }) =>
-      _pushNamed(context, PatientInformation.routeName, arguments: patientInfo);
+  }) => _pushNamed<T>(
+    context,
+    PatientInformation.routeName,
+    arguments: patientInfo,
+  );
 
   // Routes without arguments
 
