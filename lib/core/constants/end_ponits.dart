@@ -1,5 +1,5 @@
 sealed class EndPoint {
-  static const String baseUrl = 'https://fast-recharge.online/public/api';
+  static const String baseUrl = 'https://fast-recharge.online/public';
   static const String signIn = 'user/signin';
   static const String signUp = 'user/signup';
   static String getUserDataEndPoint(final String id) => 'user/get-user/$id';

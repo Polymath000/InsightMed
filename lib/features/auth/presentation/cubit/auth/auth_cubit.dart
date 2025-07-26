@@ -3,7 +3,6 @@ import 'dart:developer' show log;
 import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter/material.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../../core/constants/constants.dart';
 import '../../../../../core/entities/user_entity.dart';

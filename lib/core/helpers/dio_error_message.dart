@@ -11,8 +11,8 @@ String mapDioErrorToMessage(final DioException e) {
       return 'Oops! The connection took too long. '
           'Please check your internet and try again.';
     case DioExceptionType.badResponse:
-      return 'Sorry, we had trouble processing your '
-          'request. Please try again in a moment.';
+      return 'Sorry, we had trouble processing your request. '
+          'Please try again in a moment.';
     case DioExceptionType.cancel:
       return 'No worries, your request was cancelled.';
     case DioExceptionType.unknown:
