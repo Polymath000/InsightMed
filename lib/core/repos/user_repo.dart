@@ -18,11 +18,13 @@ sealed class UserRepo {
 
   Future<void> update(final UserEntity user);
 
-  Future<UserEntity> getUserFromApi(final String id);
+  Future<UserEntity> getUserFromApi();
 
   UserEntity? getUserFromLocal();
 
-  Future<List<UserEntity>> getPatientsFromApi(final List<String> ids);
+  Future<List<UserEntity>> getPatientsFromApi();
+
+  Future<List<UserEntity>> getDoctors();
 
   Future<void> deleteFromLocal();
 }
@@ -57,8 +59,8 @@ final class UserRepoImpl implements UserRepo {
       updateApi(user).then((_) => updateLocal(user));
 
   @override
-  Future<UserEntity> getUserFromApi(final String id) => _database
-      .getDocument(path: EndPoint.getUser, documentId: id)
+  Future<UserEntity> getUserFromApi() => _database
+      .getDocument(path: EndPoint.getUser, documentId: '')
       .then((final json) => UserModel.fromJson(json['data']).toEntity());
 
   @override
@@ -73,14 +75,22 @@ final class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<List<UserEntity>> getPatientsFromApi(final List<String> ids) =>
-      _database
-          .getDocuments(path: EndPoint.getPatients, documentIds: ids)
-          .then(
-            (final jsons) => jsons
-                .map((final json) => UserModel.fromJson(json).toEntity())
-                .toList(),
-          );
+  Future<List<UserEntity>> getPatientsFromApi() => _database
+      .getDocument(path: EndPoint.getPatients, documentId: '')
+      .then(
+        (final json) => (json['data'] as List<dynamic>)
+            .map((final e) => UserModel.fromJson(e).toEntity())
+            .toList(),
+      );
+
+  @override
+  Future<List<UserEntity>> getDoctors() => _database
+      .getDocument(path: EndPoint.getDoctors, documentId: '')
+      .then(
+        (final json) => (json['data'] as List<dynamic>)
+            .map((final e) => UserModel.fromJson(e).toEntity())
+            .toList(),
+      );
 
   @override
   Future<void> deleteFromLocal() =>

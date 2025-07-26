@@ -11,15 +11,15 @@ class PersonalContainer extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    UserEntity user = getUser ?? const UserEntity();
+    var user = getUser ?? const UserEntity();
     return Column(
       children: [
         AppTextField(
           labelText: 'Full Name',
           hintText: 'Enter your full name',
           prefixIcon: const Icon(Icons.person_2_outlined),
-          intialVlue: user?.name,
-          onChanged: (value) {
+          intialVlue: user.name,
+          onChanged: (final value) {
             user = user.copyWith(name: value);
             onChanged!(user);
           },
@@ -29,14 +29,14 @@ class PersonalContainer extends StatelessWidget {
           hintText: 'Enter your age',
           prefixIcon: const Icon(Icons.calendar_month_outlined),
           keyboardType: TextInputType.number,
-          intialVlue: user?.age,
-          onChanged: (value) {
+          intialVlue: user.age,
+          onChanged: (final value) {
             user = user.copyWith(age: value);
             onChanged!(user);
           },
         ),
         RadioBtn(
-          onChanged: (value) {
+          onChanged: (final value) {
             user = user.copyWith(gender: value);
             onChanged!(user);
           },

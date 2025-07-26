@@ -1,5 +1,6 @@
 class UserEntity {
   const UserEntity({
+    this.id,
     this.token,
     this.name,
     this.email,
@@ -11,7 +12,7 @@ class UserEntity {
     this.role,
     this.specialty,
   });
-
+  final int? id;
   final String? token;
   final String? name;
   final String? email;
@@ -24,6 +25,7 @@ class UserEntity {
   final String? specialty;
 
   UserEntity copyWith({
+    final int? id,
     final String? token,
     final String? name,
     final String? email,
@@ -35,6 +37,7 @@ class UserEntity {
     final String? role,
     final String? specialty,
   }) => UserEntity(
+    id: id ?? this.id,
     token: token ?? this.token,
     name: name ?? this.name,
     email: email ?? this.email,
@@ -47,5 +50,5 @@ class UserEntity {
     specialty: specialty ?? this.specialty,
   );
 
-  bool isDoctor() => role == 'patient';
+  bool isDoctor() => role == 'doctor';
 }

@@ -1,7 +1,9 @@
 import '../constants/end_ponits.dart';
 import '../entities/user_entity.dart';
 import '../models/user_model.dart';
+import '../repos/user_repo.dart';
 import 'api_client.dart';
+import 'get_it_service.dart';
 
 abstract class AuthService {
   Future<UserEntity> register(final UserEntity user);
@@ -39,5 +41,6 @@ class AuthServiceImpl implements AuthService {
   Future<void> logout() async {
     await client.post(path: EndPoint.addLogout);
     await client.storage.delete(key: 'access_token');
+    await getIt<UserRepo>().deleteFromLocal();
   }
 }

@@ -75,6 +75,7 @@ sealed class AppThemeData {
   static const CardThemeData card = CardThemeData(
     elevation: 0,
     margin: EdgeInsets.zero,
+    shape: RoundedSuperellipseBorder(borderRadius: AppBorders.xxxs),
   );
 
   static const chip = ChipThemeData(
@@ -147,7 +148,6 @@ sealed class AppThemeData {
     shape: WidgetStatePropertyAll<RoundedSuperellipseBorder>(
       RoundedSuperellipseBorder(borderRadius: AppBorders.xs),
     ),
-    constraints: BoxConstraints(),
     elevation: WidgetStatePropertyAll<double?>(0),
     padding: WidgetStatePropertyAll<EdgeInsets?>(EdgeInsets.zero),
   );

@@ -4,7 +4,7 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 
 class NumericVitals extends StatefulWidget {
-  NumericVitals({
+  const NumericVitals({
     super.key,
     this.onChangTemperature,
     this.onChangSystolic,
@@ -54,7 +54,7 @@ class _NumericVitalsState extends State<NumericVitals> {
               CTextField(
                 choose: false,
                 hint: 'Write ${numericVitals[index]}',
-                onChanged: (p0) {
+                onChanged: (final p0) {
                   if (index == 0) {
                     setState(() {
                       widget.onChangTemperature!(p0);
@@ -69,7 +69,7 @@ class _NumericVitalsState extends State<NumericVitals> {
                     });
                   } else {
                     setState(() {
-                      widget..onChangHeartRate!(p0);
+                      widget.onChangHeartRate!(p0);
                     });
                   }
                 },

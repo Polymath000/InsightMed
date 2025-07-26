@@ -28,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required final String email,
     required final String password,
   }) => _authService.login(email, password).then((final token) async {
-    final user = await _userRepo.getUserFromApi(token);
+    final user = await _userRepo.getUserFromApi();
     await _userRepo.addToLocal(user.copyWith(token: token));
     return token;
   });

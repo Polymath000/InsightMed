@@ -31,11 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
             const TopLoginView(),
             SizedBox(height: MediaQuery.of(context).size.height / 37),
             LoginForm(
-              onLoadingChanged: (final load) {
+              onLoadingChanged: ({final isLoading = false}) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (mounted) {
                     setState(() {
-                      isLoading = load;
+                      this.isLoading = isLoading;
                     });
                   }
                 });

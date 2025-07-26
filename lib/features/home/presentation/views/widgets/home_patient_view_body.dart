@@ -23,8 +23,8 @@ import 'decorated_icon.dart';
 import 'home_app_bar.dart' show HomeAppBar;
 import 'home_sticker.dart';
 
-final class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key});
+final class HomePatientViewBody extends StatelessWidget {
+  const HomePatientViewBody({super.key});
 
   @override
   CustomScrollView build(_) => CustomScrollView(

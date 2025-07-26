@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 
@@ -17,10 +16,10 @@ class _UploadWidgetState extends State<UploadWidget> {
   @override
   Widget build(final BuildContext context) => GestureDetector(
     onTap: () async {
-      final _image = await FilePicker.platform.pickFiles();
-      if (_image != null) {
-        PlatformFile file = _image.files.first;
-        String? imagePath = file.path;
+      final image = await FilePicker.platform.pickFiles();
+      if (image != null) {
+        final file = image.files.first;
+        final imagePath = file.path;
         setState(() {
           widget.onChangImagePath!(imagePath);
         });

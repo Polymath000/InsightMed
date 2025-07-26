@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../../../../../core/entities/user_entity.dart';
@@ -12,7 +10,7 @@ class ContactInfoContainer extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    UserEntity user = getUser ?? const UserEntity();
+    var user = getUser ?? const UserEntity();
     return Column(
       children: [
         AppTextField(
@@ -21,7 +19,7 @@ class ContactInfoContainer extends StatelessWidget {
           prefixIcon: const Icon(Icons.phone_outlined),
           keyboardType: TextInputType.number,
           intialVlue: user.phoneNumber,
-          onChanged: (value) {
+          onChanged: (final value) {
             user = user.copyWith(phoneNumber: value);
             onChanged!(user);
           },
@@ -32,7 +30,7 @@ class ContactInfoContainer extends StatelessWidget {
           prefixIcon: const Icon(Icons.email_outlined),
           keyboardType: TextInputType.emailAddress,
           intialVlue: user.email,
-          onChanged: (value) {
+          onChanged: (final value) {
             user = user.copyWith(email: value);
             onChanged!(user);
           },

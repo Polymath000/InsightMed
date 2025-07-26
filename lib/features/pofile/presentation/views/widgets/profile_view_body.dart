@@ -11,9 +11,16 @@ import 'contact_info_container.dart';
 import 'personal_info.dart';
 import 'security_container.dart';
 
-class ProfileViewBody extends StatelessWidget {
-  ProfileViewBody({super.key});
-  UserEntity user = getUser ?? const UserEntity();
+class ProfileViewBody extends StatefulWidget {
+  const ProfileViewBody({super.key});
+
+  @override
+  State<ProfileViewBody> createState() => _ProfileViewBodyState();
+}
+
+class _ProfileViewBodyState extends State<ProfileViewBody> {
+  UserEntity _user = getUser ?? const UserEntity();
+
   @override
   Widget build(final BuildContext context) => CustomScrollView(
     slivers: [
@@ -29,10 +36,10 @@ class ProfileViewBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: PersonalContainer(
-              onChanged: (value) {
-                user = user.copyWith(name: value!.name);
-                user = user.copyWith(age: value.age);
-                user = user.copyWith(gender: value.gender);
+              onChanged: (final value) {
+                _user = _user.copyWith(name: value!.name);
+                _user = _user.copyWith(age: value.age);
+                _user = _user.copyWith(gender: value.gender);
               },
             ),
           ),
@@ -43,9 +50,9 @@ class ProfileViewBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ContactInfoContainer(
-              onChanged: (value) {
-                user = user.copyWith(phoneNumber: value!.phoneNumber);
-                user = user.copyWith(email: value.email);
+              onChanged: (final value) {
+                _user = _user.copyWith(phoneNumber: value!.phoneNumber);
+                _user = _user.copyWith(email: value.email);
               },
             ),
           ),
@@ -59,7 +66,7 @@ class ProfileViewBody extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: CButton(
               onTap: () async {
-                await showDialogForEditPatientProfile(context, user: user);
+                await showDialogForEditPatientProfile(context, user: _user);
               },
               btnText: 'Save Change',
             ),
@@ -68,62 +75,63 @@ class ProfileViewBody extends StatelessWidget {
       ),
     ],
   );
-
-
 }
-  Future<dynamic> showDialogForEditPatientProfile(final BuildContext context, {required UserEntity user}) =>
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text('Are you sure?'),
-          content: BlocProvider(
-            create: (context) => ProfileOfPatientCubit(),
-            child: Builder(
-              builder: (context) {
-                return SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.redAccent,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                          ),
-                          label: const Text('Yes'),
-                          onPressed: () {
-                            BlocProvider.of<ProfileOfPatientCubit>(context).updatePatientDetails(user: user);
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: OutlinedButton.icon(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.blueAccent,
-                            side: const BorderSide(color: Colors.blueAccent),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            elevation: 0,
-                          ),
-                          icon: const Icon(Icons.close),
-                          label: const Text('Cancel'),
-                          onPressed: () {
-                            AppRoutes.pop(context);
-                          },
-                        ),
-                      ),
-                    ],
+
+Future<dynamic> showDialogForEditPatientProfile(
+  final BuildContext context, {
+  required final UserEntity user,
+}) => showDialog(
+  context: context,
+  builder: (_) => AlertDialog(
+    title: const Text('Are you sure?'),
+    content: BlocProvider(
+      create: (final context) => ProfileOfPatientCubit(),
+      child: Builder(
+        builder: (final context) => SizedBox(
+          width: MediaQuery.sizeOf(context).width,
+          child: Row(
+            children: [
+              Expanded(
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
-                );
-              },
-            ),
+                  label: const Text('Yes'),
+                  onPressed: () async {
+                    await BlocProvider.of<ProfileOfPatientCubit>(
+                      context,
+                    ).updatePatientDetails(user: user);
+                  },
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.blueAccent,
+                    side: const BorderSide(color: Colors.blueAccent),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    elevation: 0,
+                  ),
+                  icon: const Icon(Icons.close),
+                  label: const Text('Cancel'),
+                  onPressed: () {
+                    AppRoutes.pop(context);
+                  },
+                ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    ),
+  ),
+);

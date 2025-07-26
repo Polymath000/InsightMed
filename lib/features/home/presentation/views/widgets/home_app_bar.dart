@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'
     show
+        BuildContext,
         CircleAvatar,
         Column,
         CrossAxisAlignment,
@@ -10,6 +11,9 @@ import 'package:flutter/material.dart'
         TextStyle;
 
 import '../../../../../core/helpers/get_user.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/repos/auth_repo.dart';
+import '../../../../../core/services/get_it_service.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
 
@@ -17,7 +21,7 @@ final class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
   @override
-  SliverAppBar build(_) => SliverAppBar(
+  SliverAppBar build(final BuildContext context) => SliverAppBar(
     title: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -29,13 +33,20 @@ final class HomeAppBar extends StatelessWidget {
             color: AppColors.onSurface.withAlpha(180),
           ),
         ),
-        IText(getUser?.name ?? 'Anonymous'),
+        if (getUser?.isDoctor() ?? false)
+          IText('Dr. ${getUser?.name ?? 'Anonymous'}')
+        else
+          IText(getUser?.name ?? 'Anonymous'),
       ],
     ),
     actions: [
       IconButton(
         icon: const CircleAvatar(),
-        onPressed: () {},
+        onPressed: () => getIt<AuthRepository>().logout().then((_) async {
+          if (context.mounted) {
+            await AppRoutes.login(context);
+          }
+        }),
         color: AppColors.grey,
       ),
     ],

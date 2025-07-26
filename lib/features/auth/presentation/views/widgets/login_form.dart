@@ -7,7 +7,7 @@ import 'login_form_body.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({required this.onLoadingChanged, super.key});
-  final void Function(bool)? onLoadingChanged;
+  final void Function({bool isLoading})? onLoadingChanged;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -23,9 +23,9 @@ class _LoginFormState extends State<LoginForm> {
     child: BlocListener<AuthCubit, AuthState>(
       listener: (final context, final state) async {
         if (state is AuthLoading) {
-          widget.onLoadingChanged?.call(true);
+          widget.onLoadingChanged?.call(isLoading: true);
         } else if (state is AuthSuccess) {
-          widget.onLoadingChanged?.call(false);
+          widget.onLoadingChanged?.call(isLoading: false);
           await AppRoutes.main(context);
           // TODO : Handle Navigator
           // if (BlocProvider.of<AuthCubit>(context).isDoctor()) {
@@ -42,12 +42,12 @@ class _LoginFormState extends State<LoginForm> {
           //   );
           // }
         } else if (state is AuthFailure) {
-          widget.onLoadingChanged?.call(false);
+          widget.onLoadingChanged?.call(isLoading: false);
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
         } else {
-          widget.onLoadingChanged?.call(false);
+          widget.onLoadingChanged?.call(isLoading: false);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('There was an error , please try again later'),

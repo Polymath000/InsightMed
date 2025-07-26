@@ -79,13 +79,16 @@ sealed class AppColors {
   // Normal colors
   static const Color black = Color(0xFF000000);
   static const Color blue = Color(0xFF2196F3);
+  static const Color brown = Color(0xFF795548);
   static const Color cyan = Color(0xFF14B8A6);
   static const Color darkBlue = Color(0xFF1E88E5);
   static const Color darkGrey = Color(0xFF4B5563); // 0xff334155
   static const Color grey = Color(0xFF9E9E9E);
   static const Color green = Color(0xFF3B9A1E);
   static const Color lightGrey = Color(0xFFE0E0E0);
+  static const Color mediumBrown = Color(0xFF7F5112);
   static const Color pickledBluewood = Color(0xFF334155);
+  static const Color red = Color(0xFFB00020);
   static const Color topaz = Color(0xFF14B8A6);
   static const Color transparent = Color(0x00000000);
   static const Color waterBlue = Color(0xFF0284C7);
@@ -96,6 +99,5 @@ sealed class AppColors {
   static const Color warning = Color(0xFFFFB300);
   static const Color info = Color(0xFF1E88E5);
   static const Color facebook = Color(0xFF0864ff);
-    static const Color lightRed = Color.fromARGB(255, 231, 106, 106);
-
+  static const Color lightRed = Color.fromARGB(255, 231, 106, 106);
 }

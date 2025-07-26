@@ -8,7 +8,7 @@ import 'symptoms.dart';
 import 'upload_ray_image.dart';
 
 class UploadMedicalRayViewBody extends StatefulWidget {
-  UploadMedicalRayViewBody({super.key, this.onChanged});
+  const UploadMedicalRayViewBody({super.key, this.onChanged});
   final void Function(bool)? onChanged;
 
   @override
@@ -58,7 +58,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
               slivers: [
                 SliverToBoxAdapter(
                   child: UploadRayImage(
-                    onChangedImagePath: (p0) {
+                    onChangedImagePath: (final p0) {
                       setState(() {
                         ray = ray.copyWith(image: p0);
                       });
@@ -68,22 +68,22 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
                 SliverToBoxAdapter(
                   child: NumericVitals(
-                    onChangTemperature: (p0) {
+                    onChangTemperature: (final p0) {
                       setState(() {
                         _temperature = p0;
                       });
                     },
-                    onChangDiastolic: (p0) {
+                    onChangDiastolic: (final p0) {
                       setState(() {
                         _diastolicBP = p0;
                       });
                     },
-                    onChangHeartRate: (p0) {
+                    onChangHeartRate: (final p0) {
                       setState(() {
                         _heartRate = p0;
                       });
                     },
-                    onChangSystolic: (p0) {
+                    onChangSystolic: (final p0) {
                       setState(() {
                         _systolicBP = p0;
                       });
@@ -93,17 +93,17 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
                 SliverToBoxAdapter(
                   child: Symptoms(
-                    onChangCanSmell: (p0) {
+                    onChangCanSmell: (final p0) {
                       setState(() {
                         _canSmellTasteFood = p0;
                       });
                     },
-                    onChangHasCough: (p0) {
+                    onChangHasCough: (final p0) {
                       setState(() {
                         _hasCough = p0;
                       });
                     },
-                    onChangHasHeadache: (p0) {
+                    onChangHasHeadache: (final p0) {
                       setState(() {
                         _hasHeadache = p0;
                       });
@@ -119,12 +119,12 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
             left: 0,
             right: 0,
             child: CButton(
-              onTap: () {
+              onTap: () async {
                 widget.onChanged!(true);
                 if (_formKey.currentState!.validate() &&
                     !(ray.image == null || ray.image!.isEmpty)) {
                   _formKey.currentState!.save();
-                  final RayEntity composedRay = ray.copyWith(
+                  final composedRay = ray.copyWith(
                     temperature: _temperature,
                     systolicBP: _systolicBP,
                     diastolicBP: _diastolicBP,
@@ -133,7 +133,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                     hasCough: _hasCough,
                     hasHeadache: _hasHeadache,
                   );
-                  BlocProvider.of<UploadRayCubit>(
+                  await BlocProvider.of<UploadRayCubit>(
                     context,
                   ).uploadRay(rayEntity: composedRay);
                 } else if (ray.image == null || ray.image!.isEmpty) {

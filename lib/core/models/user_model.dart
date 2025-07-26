@@ -2,6 +2,7 @@ import '../entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel({
+    super.id,
     super.token,
     super.name,
     super.email,
@@ -15,6 +16,7 @@ class UserModel extends UserEntity {
   });
 
   factory UserModel.fromEntity(final UserEntity entity) => UserModel(
+    id: entity.id,
     token: entity.token,
     name: entity.name,
     email: entity.email,
@@ -28,6 +30,7 @@ class UserModel extends UserEntity {
   );
 
   factory UserModel.fromJson(final Map<String, dynamic> json) => UserModel(
+    id: json['id'],
     token: json['token'],
     name: json['name'],
     email: json['email'],
@@ -41,6 +44,7 @@ class UserModel extends UserEntity {
   );
 
   UserEntity toEntity() => UserEntity(
+    id: id,
     token: token,
     name: name,
     email: email,
@@ -54,6 +58,7 @@ class UserModel extends UserEntity {
   );
 
   Map<String, dynamic> toJson() => {
+    'id': id,
     'token': token,
     'name': name,
     'email': email,
