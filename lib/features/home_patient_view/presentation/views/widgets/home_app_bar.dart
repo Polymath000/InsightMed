@@ -9,6 +9,7 @@ import 'package:flutter/material.dart'
         StatelessWidget,
         TextStyle;
 
+import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
 
@@ -28,7 +29,7 @@ final class HomeAppBar extends StatelessWidget {
             color: AppColors.onSurface.withAlpha(180),
           ),
         ),
-        const IText('John Doe'),
+        IText(getUser?.name ?? 'Anonymous'),
       ],
     ),
     actions: [

@@ -68,18 +68,6 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientDetailsView.routeName: (_, _) => const PatientDetailsView(),
 };
 
-// MaterialPageRoute<T?> onGenerateRoute<T extends Object?>(
-//   final RouteSettings settings,
-// ) {
-//   final builder =
-//       _routes[settings.name] ??
-//       (_, _) => const Scaffold(body: Center(child: IText('Page not found')));
-//   return MaterialPageRoute<T?>(
-//     builder: (final context) => builder(context, settings.arguments),
-//     settings: settings,
-//   );
-// }
-
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (final settings) {
   final builder =
       _routes[settings.name] ??

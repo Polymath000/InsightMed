@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/helpers/app_media_query.dart';
+import 'core/helpers/get_user.dart' show getUser;
 import 'core/helpers/on_generate_routes.dart';
 import 'core/utls/themes/app_colors.dart';
 import 'core/utls/themes/app_text_style.dart';
 import 'core/utls/themes/theme_config.dart';
+import 'features/main/presentation/views/main_view.dart' show MainView;
 import 'features/onboarding/presentation/views/onboarding_view.dart';
 
 class InsightMed extends StatelessWidget {
@@ -16,7 +18,9 @@ class InsightMed extends StatelessWidget {
     minTextAdapt: true,
     splitScreenMode: true,
     child: MaterialApp(
-      initialRoute: OnboardingView.routeName,
+      initialRoute: (getUser?.token?.isNotEmpty ?? false)
+          ? MainView.routeName
+          : OnboardingView.routeName,
       onGenerateRoute: onGenerateRoute,
       theme: const ThemeConfig().light,
       // darkTheme: const ThemeConfig().dark,
