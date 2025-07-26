@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: MediaQuery.of(context).size.height / 50),
 
             SignupForm(
-              onLoadingChanged: (isLoading) {
+              onLoadingChanged: (final isLoading) {
                 setState(() {
                   isLoad = isLoading;
                 });

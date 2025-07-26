@@ -1,56 +1,88 @@
+import 'dart:convert';
+
+import '../constants/end_ponits.dart' show EndPoint;
+import '../constants/local_keys.dart';
 import '../entities/user_entity.dart' show UserEntity;
 import '../models/user_model.dart';
 import '../services/database_service.dart';
-import '../services/get_it_service.dart';
+import '../services/shared_preferences_singleton.dart';
 
 sealed class UserRepo {
   const UserRepo();
 
-  Future<void> add(final UserEntity user);
+  Future<bool> addToLocal(final UserEntity user);
+
+  Future<void> updateApi(final UserEntity user);
+
+  Future<void> updateLocal(final UserEntity user);
 
   Future<void> update(final UserEntity user);
 
-  Future<UserEntity> getUser(final String id);
+  Future<UserEntity> getUserFromApi(final String id);
 
-  Future<List<UserEntity>> getUsers(final List<String> ids);
+  UserEntity? getUserFromLocal();
 
-  Future<void> delete(final String id);
+  Future<List<UserEntity>> getPatientsFromApi(final List<String> ids);
+
+  Future<void> deleteFromLocal();
 }
 
 final class UserRepoImpl implements UserRepo {
-  const UserRepoImpl();
-  static final DatabaseService _database = getIt<DatabaseService>();
-  static const String _path = 'users';
+  const UserRepoImpl(this._database);
+  final DatabaseService _database;
 
   @override
-  Future<void> add(final UserEntity user) => _database.addDocument(
-    path: _path,
-    data: UserModel.fromEntity(user).toJson(),
-    documentId: user.token,
-  );
+  Future<bool> addToLocal(final UserEntity user) =>
+      SharedPreferencesSingleton.setString(
+        LocalKeys.user,
+        jsonEncode(UserModel.fromEntity(user).toJson()),
+      );
 
   @override
-  Future<void> update(final UserEntity user) => _database.updateDocument(
-    path: _path,
+  Future<void> updateApi(final UserEntity user) => _database.updateDocument(
+    path: EndPoint.updateUser,
     data: UserModel.fromEntity(user).toJson(),
     documentId: user.token!,
   );
 
   @override
-  Future<UserEntity> getUser(final String id) => _database
-      .getDocument(path: _path, documentId: id)
-      .then((final json) => UserModel.fromJson(json).toEntity());
-
-  @override
-  Future<List<UserEntity>> getUsers(final List<String> ids) => _database
-      .getDocuments(path: _path, documentIds: ids)
-      .then(
-        (final jsons) => jsons
-            .map((final json) => UserModel.fromJson(json).toEntity())
-            .toList(),
+  Future<void> updateLocal(final UserEntity user) =>
+      SharedPreferencesSingleton.setString(
+        LocalKeys.user,
+        jsonEncode(UserModel.fromEntity(user).toJson()),
       );
 
   @override
-  Future<void> delete(final String id) =>
-      _database.deleteDocument(path: _path, documentId: id);
+  Future<void> update(final UserEntity user) =>
+      updateApi(user).then((_) => updateLocal(user));
+
+  @override
+  Future<UserEntity> getUserFromApi(final String id) => _database
+      .getDocument(path: EndPoint.getUser, documentId: id)
+      .then((final json) => UserModel.fromJson(json['data']).toEntity());
+
+  @override
+  UserEntity? getUserFromLocal() {
+    final encodedJson = SharedPreferencesSingleton.getString(LocalKeys.user);
+    if (encodedJson?.isNotEmpty ?? false) {
+      final json = jsonDecode(encodedJson!);
+      return UserModel.fromJson(json).toEntity();
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  Future<List<UserEntity>> getPatientsFromApi(final List<String> ids) =>
+      _database
+          .getDocuments(path: EndPoint.getPatients, documentIds: ids)
+          .then(
+            (final jsons) => jsons
+                .map((final json) => UserModel.fromJson(json).toEntity())
+                .toList(),
+          );
+
+  @override
+  Future<void> deleteFromLocal() =>
+      SharedPreferencesSingleton.remove(LocalKeys.user);
 }

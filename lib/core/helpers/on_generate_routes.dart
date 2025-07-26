@@ -60,25 +60,13 @@ sealed class AppRoutes {
 Map<String, Widget Function(BuildContext, Object?)> _routes = {
   MainView.routeName: (_, _) => const MainView(),
   OnboardingView.routeName: (_, _) => const OnboardingView(),
-  LoginScreen.routeName: (_, _) => LoginScreen(),
+  LoginScreen.routeName: (_, _) => const LoginScreen(),
   SignUpScreen.routeName: (_, _) => const SignUpScreen(),
   PatientInformation.routeName: (_, final args) =>
       PatientInformation(user: args! as UserEntity),
   UploadMedicalRayView.routeName: (_, _) => const UploadMedicalRayView(),
   PatientDetailsView.routeName: (_, _) => const PatientDetailsView(),
 };
-
-// MaterialPageRoute<T?> onGenerateRoute<T extends Object?>(
-//   final RouteSettings settings,
-// ) {
-//   final builder =
-//       _routes[settings.name] ??
-//       (_, _) => const Scaffold(body: Center(child: IText('Page not found')));
-//   return MaterialPageRoute<T?>(
-//     builder: (final context) => builder(context, settings.arguments),
-//     settings: settings,
-//   );
-// }
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (final settings) {
   final builder =

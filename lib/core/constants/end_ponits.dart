@@ -1,8 +1,35 @@
 sealed class EndPoint {
-  static const String baseUrl = 'https://fast-recharge.online/public';
-  static const String signIn = 'user/signin';
-  static const String signUp = 'user/signup';
-  static String getUserDataEndPoint(final String id) => 'user/get-user/$id';
+  const EndPoint();
+  static const String baseUrl = 'https://fast-recharge.online/public/api';
+
+  static const String addRegister = '/register';
+  static const String addLogin = '/login';
+  static const String addLogout = '/logout';
+  static const String addForgotPassword = '/forgot-password';
+  static const String addVerifyResetCode = '/verify-reset-code';
+  static const String addResetPassword = '/reset-password';
+
+  static const String getDashboard = '/dashboard';
+
+  static const String addRays = '/rays';
+  static const String getRays = '/rays';
+
+  static const String addAppointments = '/appointments';
+  static const String getAppointments = '/appointments/available';
+  static const String getUserAppointments = '/appointments/my';
+
+  static const String updateUser = '/me';
+  static const String getUser = '/me';
+
+  static const String getDoctors = '/doctors';
+  static const String getPatients = '/doctor/patients';
+  static const String getPatientsStatus = '/doctor/patients/status';
+
+  static const String addNotes = '/doctor/notes';
+  static String updateNotes(final String id) => '/doctor/notes/$id';
+  static String deleteNotes(final String id) => '/doctor/notes/$id';
+
+  static String getAIRays(final String id) => '/doctor/rays/$id/ai';
 }
 
 sealed class ApiKey {
