@@ -23,7 +23,7 @@ class _RadioBtnState extends State<RadioBtn> {
               groupValue: character,
               onChanged: (final value) {
                 setState(() => character = value!);
-                widget.onChanged?.call(value?.toString());
+                widget.onChanged?.call(value == GenderEnum.male? 'male': 'female');
               },
               title: IText(e.toString()),
               contentPadding: EdgeInsets.zero,

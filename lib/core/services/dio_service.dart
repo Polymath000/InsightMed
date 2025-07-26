@@ -1,6 +1,8 @@
 import '../entities/query_entity.dart';
+import '../models/user_model.dart';
 import 'api_client.dart';
 import 'database_service.dart';
+import 'dio/auth_dio.dart';
 
 class DatabaseServiceImpl implements DatabaseService {
   const DatabaseServiceImpl(this._client);
@@ -209,8 +211,9 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final Map<String, dynamic> data,
     required final String documentId,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    final dioInstance = dio();
+    final response = await dioInstance.put(path, data: data, );
   }
 
   @override
