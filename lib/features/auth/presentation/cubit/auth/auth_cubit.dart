@@ -25,7 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final dioInstance = dio();
       log('I am in tryToken');
-      var response = await dioInstance.get(
+      var response = await dioInstance.get<Map<String, dynamic>>(
         '/dashboard',
         options: dio_package.Options(
           headers: {'Authorization': 'Bearer $token'},
@@ -34,9 +34,9 @@ class AuthCubit extends Cubit<AuthState> {
       log('Token : $token');
       log('Dashboard Response Data: ${response.data}');
 
-      final userData = response.data['role'] == 'patient'
-          ? response.data['patient_data']
-          : response.data['doctor_data'];
+      final userData = response.data?['role'] == 'patient'
+          ? (response.data?['patient_data'])
+          : response.data?['doctor_data'];
       user = UserModel.fromJson(userData);
       mainToken = token;
       emit(AuthSuccess());
@@ -109,15 +109,15 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void logout() async {
+  Future<void> logout() async {
     try {
-      final dioInstance = dio();
-      var response = await dioInstance.get(
-        '/logout',
-        options: dio_package.Options(
-          headers: {'Authorization': 'Bearer $mainToken'},
-        ),
-      );
+      // final dioInstance = dio();
+      // var response = await dioInstance.get(
+      //   '/logout',
+      //   options: dio_package.Options(
+      //     headers: {'Authorization': 'Bearer $mainToken'},
+      //   ),
+      // );
 
       cleanUp();
     } on Exception catch (e) {
@@ -139,52 +139,42 @@ class AuthCubit extends Cubit<AuthState> {
         isAuthenticated = true;
         emit(AuthSuccess());
         log(_messages['msgOk']!);
-        break;
       case 201:
         isAuthenticated = true;
         emit(AuthSuccess());
         log(_messages['msgCreated']!);
-        break;
       case 400:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgBadRequest']!));
         log(_messages['msgBadRequest']!);
-        break;
       case 401:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgUnauthorized']!));
         log(_messages['msgUnauthorized']!);
-        break;
       case 403:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgForbidden']!));
         log(_messages['msgForbidden']!);
-        break;
       case 404:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgNotFound']!));
         log(_messages['msgNotFound']!);
-        break;
       case 409:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgConflict']!));
         log(_messages['msgConflict']!);
-        break;
       case 422:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgUnprocessable']!));
         log(_messages['msgUnprocessable']!);
-        break;
       case 500:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgInternal']!));
         log(_messages['msgInternal']!);
-        break;
       case 503:
         isAuthenticated = false;
         emit(AuthFailure(_messages['msgUnavailable']!));
         log(_messages['msgUnavailable']!);
-        break;
       default:
         isAuthenticated = false;
         emit(AuthFailure('Error: ${response.statusCode}'));

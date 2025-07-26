@@ -60,7 +60,7 @@ sealed class AppRoutes {
 Map<String, Widget Function(BuildContext, Object?)> _routes = {
   MainView.routeName: (_, _) => const MainView(),
   OnboardingView.routeName: (_, _) => const OnboardingView(),
-  LoginScreen.routeName: (_, _) => LoginScreen(),
+  LoginScreen.routeName: (_, _) => const LoginScreen(),
   SignUpScreen.routeName: (_, _) => const SignUpScreen(),
   PatientInformation.routeName: (_, final args) =>
       PatientInformation(user: args! as UserEntity),

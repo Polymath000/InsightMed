@@ -42,7 +42,7 @@ class ProfileViewBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: CButton(
-              onTap: () async {
+              onTap: () {
                 // log();
               },
               btnText: 'Save Change',

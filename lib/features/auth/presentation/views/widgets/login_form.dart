@@ -21,9 +21,9 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(final BuildContext context) => BlocProvider(
     create: (final context) => AuthCubit(),
     child: BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) async {
+      listener: (final context, final state) async {
         if (state is AuthLoading) {
-          widget.onLoadingChanged?.call( true);
+          widget.onLoadingChanged?.call(true);
         } else if (state is AuthSuccess) {
           widget.onLoadingChanged?.call(false);
           await AppRoutes.main(context);

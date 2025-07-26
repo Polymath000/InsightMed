@@ -34,7 +34,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String key,
     required final List<Object?> data,
   }) {
-    // TODO: implement addValue
     throw UnimplementedError();
   }
 
@@ -45,13 +44,11 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String key,
     required final List<Object?> data,
   }) {
-    // TODO: implement addValue
     throw UnimplementedError();
   }
 
   @override
   Future<void> deleteCollection({required final String path}) {
-    // TODO: implement deleteCollection
     throw UnimplementedError();
   }
 
@@ -60,7 +57,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final String documentId,
   }) {
-    // TODO: implement deleteDocument
     throw UnimplementedError();
   }
 
@@ -69,7 +65,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final List<String> documentIds,
   }) {
-    // TODO: implement deleteDocuments
     throw UnimplementedError();
   }
 
@@ -77,7 +72,6 @@ class DatabaseServiceImpl implements DatabaseService {
   Future<List<Map<String, dynamic>>> getCollection({
     required final String path,
   }) {
-    // TODO: implement deleteDocuments
     throw UnimplementedError();
   }
 
@@ -86,7 +80,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final QueryEntity query,
   }) {
-    // TODO: implement deleteDocuments
     throw UnimplementedError();
   }
 
@@ -125,7 +118,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String documentId,
     required final String subCollectionPath,
   }) {
-    // TODO: implement getSubCollection
     throw UnimplementedError();
   }
 
@@ -136,7 +128,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String subCollectionPath,
     required final QueryEntity query,
   }) {
-    // TODO: implement getSubCollectionWithQuery
     throw UnimplementedError();
   }
 
@@ -150,7 +141,6 @@ class DatabaseServiceImpl implements DatabaseService {
   Stream<List<Map<String, dynamic>>> streamCollection({
     required final String path,
   }) {
-    // TODO: implement streamCollection
     throw UnimplementedError();
   }
 
@@ -159,7 +149,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final QueryEntity query,
   }) {
-    // TODO: implement streamCollectionWithQuery
     throw UnimplementedError();
   }
 
@@ -168,7 +157,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final String documentId,
   }) {
-    // TODO: implement streamDocument
     throw UnimplementedError();
   }
 
@@ -177,7 +165,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final List<String> documentIds,
   }) {
-    // TODO: implement streamDocuments
     throw UnimplementedError();
   }
 
@@ -187,7 +174,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final List<String> documentIds,
     required final QueryEntity query,
   }) {
-    // TODO: implement streamDocumentsWithQuery
     throw UnimplementedError();
   }
 
@@ -197,7 +183,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String documentId,
     required final String subCollectionPath,
   }) {
-    // TODO: implement streamSubCollection
     throw UnimplementedError();
   }
 
@@ -208,7 +193,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String subCollectionPath,
     required final QueryEntity query,
   }) {
-    // TODO: implement streamSupCollectionWithQuery
     throw UnimplementedError();
   }
 
@@ -217,7 +201,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final Map<String, dynamic> data,
   }) {
-    // TODO: implement updateCollection
     throw UnimplementedError();
   }
 
@@ -227,7 +210,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final Map<String, dynamic> data,
     required final String documentId,
   }) {
-    // TODO: implement updateDocument
     throw UnimplementedError();
   }
 
@@ -237,7 +219,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final Map<String, dynamic> data,
     required final List<String> documentIds,
   }) {
-    // TODO: implement updateDocuments
     throw UnimplementedError();
   }
 
@@ -247,7 +228,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String oldKey,
     required final String newKey,
   }) {
-    // TODO: implement updateKey
     throw UnimplementedError();
   }
 
@@ -259,7 +239,6 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String subDocumentId,
     required final Map<String, dynamic> data,
   }) {
-    // TODO: implement updateSubDocument
     throw UnimplementedError();
   }
 }

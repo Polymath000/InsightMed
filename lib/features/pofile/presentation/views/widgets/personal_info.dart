@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/enums/gender_enum.dart';
 import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/widgets/app_text_field.dart' show AppTextField;
 import '../../../../auth/presentation/views/widgets/radio_btn.dart';
@@ -25,12 +24,7 @@ class PersonalContainer extends StatelessWidget {
           keyboardType: TextInputType.number,
           intialVlue: user?.age,
         ),
-        RadioBtn(
-          character: user?.gender == 'male'
-              ? GenderEnum.male
-              : GenderEnum.female,
-          onChanged: (_) {},
-        ),
+        RadioBtn(onChanged: (_) {}),
       ],
     );
   }
