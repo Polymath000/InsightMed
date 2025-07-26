@@ -1,3 +1,4 @@
+import '../constants/end_ponits.dart';
 import '../entities/user_entity.dart';
 import '../models/user_model.dart';
 import 'api_client.dart';
@@ -17,7 +18,7 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<UserEntity> register(final UserEntity user) async {
     await client.post(
-      path: '/api/register',
+      path: EndPoint.addRegister,
       data: UserModel.fromEntity(user).toJson(),
     );
     return user;
@@ -26,18 +27,17 @@ class AuthServiceImpl implements AuthService {
   @override
   Future<String> login(final String email, final String password) async {
     final data = await client.post(
-      path: '/api/login',
+      path: EndPoint.addLogin,
       data: {'email': email, 'password': password},
     );
     final token = data['token'] as String;
-    // store token
     await ApiClient.storage.write(key: 'access_token', value: token);
     return token;
   }
 
   @override
   Future<void> logout() async {
-    await client.post(path: '/api/logout');
+    await client.post(path: EndPoint.addLogout);
     await ApiClient.storage.delete(key: 'access_token');
   }
 }

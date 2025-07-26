@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import '../repos/auth_repo.dart';
+import '../repos/user_repo.dart';
 import 'api_client.dart';
 import 'auth_service.dart';
 import 'database_service.dart';
@@ -13,5 +14,8 @@ GetIt setupGetIt() => getIt
     () => const DatabaseServiceImplementation(),
   )
   ..registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(getIt<AuthService>()),
+    () => AuthRepositoryImpl(getIt<AuthService>(), getIt<UserRepo>()),
+  )
+  ..registerLazySingleton<UserRepo>(
+    () => UserRepoImpl(getIt<DatabaseService>()),
   );

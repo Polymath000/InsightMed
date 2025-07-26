@@ -9,7 +9,9 @@ import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
 import '../../../../../core/helpers/get_auth_message.dart';
 import '../../../../../core/models/user_model.dart';
+import '../../../../../core/repos/auth_repo.dart';
 import '../../../../../core/services/dio/auth_dio.dart';
+import '../../../../../core/services/get_it_service.dart';
 
 part 'auth_state.dart';
 
@@ -47,17 +49,19 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> register({required final UserEntity user}) async {
     emit(const AuthLoading());
     try {
-      final dioInstance = dio();
-      var response = await dioInstance.post(
-        '/register',
-        data: UserModel.fromEntity(user).toJson(),
-        options: dio_package.Options(
-          contentType: dio_package.Headers.jsonContentType,
-        ),
-      );
-      var token = response.data.toString();
-      await tryToken(token: token);
-      checkCodeStatus(response: response);
+      await getIt<AuthRepository>().register(user: user);
+      emit(AuthSuccess());
+      // final dioInstance = dio();
+      // var response = await dioInstance.post(
+      //   '/register',
+      //   data: UserModel.fromEntity(user).toJson(),
+      //   options: dio_package.Options(
+      //     contentType: dio_package.Headers.jsonContentType,
+      //   ),
+      // );
+      // var token = response.data.toString();
+      // await tryToken(token: token);
+      // checkCodeStatus(response: response);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
       final userMessage = mapDioErrorToMessage(e);
@@ -89,7 +93,7 @@ class AuthCubit extends Cubit<AuthState> {
       final userMessage = mapDioErrorToMessage(e);
       emit(AuthFailure(userMessage));
     } on Exception catch (e) {
-            log(e.toString());
+      log(e.toString());
 
       isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
@@ -107,9 +111,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       cleanUp();
-    } on Exception catch  (e) {
-            log(e.toString());
-
+    } on Exception catch (e) {
+      log(e.toString());
     }
   }
 

@@ -22,6 +22,7 @@ class _FormBodyState extends State<FormBody> {
   final AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(final BuildContext context) {
+    // TODO(Anyone): Replace this to use textEditingController
     var user = widget.user;
     return Form(
       key: _formKey,
@@ -48,7 +49,7 @@ class _FormBodyState extends State<FormBody> {
             hintText: 'Enter your phone number',
             keyboardType: TextInputType.phone,
             onChanged: (final p0) {
-              user = user.copyWith(password: p0);
+              user = user.copyWith(phoneNumber: p0);
             },
           ),
           const PatientTextOfTextField(text: 'Gender *'),

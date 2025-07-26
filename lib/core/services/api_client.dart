@@ -14,8 +14,8 @@ class ApiClient {
     return ApiClient._internal(dio);
   }
 
-  ApiClient._internal(this.dio) {
-    dio.interceptors.add(
+  ApiClient._internal(this._dio) {
+    _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (final options, final handler) async {
           final token = await storage.read(key: 'access_token');
@@ -29,24 +29,24 @@ class ApiClient {
   }
 
   static const storage = FlutterSecureStorage();
-  final Dio dio;
+  final Dio _dio;
 
   Future<Map<String, dynamic>> post({
     required final String path,
     final Map<String, dynamic>? data,
-  }) => dio
+  }) => _dio
       .post<Map<String, dynamic>>(path, data: data)
       .then((final response) => response.data!);
 
   Future<Map<String, dynamic>> get(
     final String path, {
     final Map<String, dynamic>? queryParameters,
-  }) => dio
+  }) => _dio
       .get<Map<String, dynamic>>(path, queryParameters: queryParameters)
       .then((final response) => response.data!);
 
   Future<Response> put(final String path, final Map<String, dynamic> data) =>
-      dio.put(path, data: data);
+      _dio.put(path, data: data);
 
-  Future<Response> delete(final String path) => dio.delete(path);
+  Future<Response> delete(final String path) => _dio.delete(path);
 }

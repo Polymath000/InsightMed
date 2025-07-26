@@ -1,9 +1,10 @@
 import '../entities/user_entity.dart';
 import '../services/auth_service.dart';
+import 'user_repo.dart';
 
 abstract class AuthRepository {
   const AuthRepository();
-  Future<UserEntity> register({required final UserEntity user});
+  Future<void> register({required final UserEntity user});
 
   Future<String> login({
     required final String email,
@@ -14,19 +15,20 @@ abstract class AuthRepository {
 }
 
 class AuthRepositoryImpl implements AuthRepository {
-  const AuthRepositoryImpl(this.auth);
-  final AuthService auth;
+  const AuthRepositoryImpl(this._authService, this._userRepo);
+  final AuthService _authService;
+  final UserRepo _userRepo;
 
   @override
-  Future<UserEntity> register({required final UserEntity user}) =>
-      auth.register(user);
+  Future<void> register({required final UserEntity user}) =>
+      _authService.register(user).then(_userRepo.addToLocal);
 
   @override
   Future<String> login({
     required final String email,
     required final String password,
-  }) => auth.login(email, password);
+  }) => _authService.login(email, password);
 
   @override
-  Future<void> logout() => auth.logout();
+  Future<void> logout() => _authService.logout();
 }
