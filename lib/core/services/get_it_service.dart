@@ -5,13 +5,16 @@ import '../repos/user_repo.dart';
 import 'api_client.dart';
 import 'auth_service.dart';
 import 'database_service.dart';
-import 'database_service_implementation.dart';
+import 'dio_service.dart';
 
 final GetIt getIt = GetIt.instance;
 GetIt setupGetIt() => getIt
-  ..registerLazySingleton<AuthService>(() => AuthServiceImpl(ApiClient()))
+  ..registerLazySingleton<ApiClient>(DioClient.new)
+  ..registerLazySingleton<AuthService>(
+    () => AuthServiceImpl(getIt<ApiClient>()),
+  )
   ..registerLazySingleton<DatabaseService>(
-    () => const DatabaseServiceImplementation(),
+    () => DatabaseServiceImpl(getIt<ApiClient>()),
   )
   ..registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(getIt<AuthService>(), getIt<UserRepo>()),

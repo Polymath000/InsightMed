@@ -27,7 +27,11 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<String> login({
     required final String email,
     required final String password,
-  }) => _authService.login(email, password);
+  }) => _authService.login(email, password).then((final token) async {
+    final user = await _userRepo.getUserFromApi(token);
+    await _userRepo.addToLocal(user.copyWith(token: token));
+    return token;
+  });
 
   @override
   Future<void> logout() => _authService.logout();

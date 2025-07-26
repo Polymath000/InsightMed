@@ -59,7 +59,7 @@ final class UserRepoImpl implements UserRepo {
   @override
   Future<UserEntity> getUserFromApi(final String id) => _database
       .getDocument(path: EndPoint.getUser, documentId: id)
-      .then((final json) => UserModel.fromJson(json).toEntity());
+      .then((final json) => UserModel.fromJson(json['data']).toEntity());
 
   @override
   UserEntity? getUserFromLocal() {

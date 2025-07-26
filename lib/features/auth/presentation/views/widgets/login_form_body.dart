@@ -84,7 +84,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
               }
               await BlocProvider.of<AuthCubit>(
                 context,
-              ).login(creds: {'email': email, 'password': password});
+              ).login(email: email!, password: password!);
               if (context.mounted) {
                 ScaffoldMessenger.of(
                   context,

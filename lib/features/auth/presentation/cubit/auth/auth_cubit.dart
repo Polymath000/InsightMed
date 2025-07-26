@@ -73,20 +73,29 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> login({required final Map<String, dynamic> creds}) async {
+  Future<void> login({
+    required final String email,
+    required final String password,
+  }) async {
     emit(const AuthLoading());
     try {
-      final dioInstance = dio();
-      var response = await dioInstance.post(
-        '/login',
-        data: creds,
-        options: dio_package.Options(
-          validateStatus: (_) => true,
-          contentType: dio_package.Headers.jsonContentType,
-          responseType: dio_package.ResponseType.json,
-        ),
+      final token = await getIt<AuthRepository>().login(
+        email: email,
+        password: password,
       );
-      String token = response.data['token'];
+
+      // final dioInstance = dio();
+      // var response = await dioInstance.post(
+      //   '/login',
+      //   data: {'email': email, 'password': password},
+      //   options: dio_package.Options(
+      //     validateStatus: (_) => true,
+      //     contentType: dio_package.Headers.jsonContentType,
+      //     responseType: dio_package.ResponseType.json,
+      //   ),
+      // );
+      // String token = response.data['token'];
+
       await tryToken(token: token);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;

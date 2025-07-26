@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/profile_of_patient_/profile_of_patient_cubit.dart';
+import '../cubit/profile_of_patient_/profile_of_patient_cubit.dart';
 import 'widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {

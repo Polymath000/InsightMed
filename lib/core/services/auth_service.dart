@@ -31,13 +31,13 @@ class AuthServiceImpl implements AuthService {
       data: {'email': email, 'password': password},
     );
     final token = data['token'] as String;
-    await ApiClient.storage.write(key: 'access_token', value: token);
+    await client.storage.write(key: 'access_token', value: token);
     return token;
   }
 
   @override
   Future<void> logout() async {
     await client.post(path: EndPoint.addLogout);
-    await ApiClient.storage.delete(key: 'access_token');
+    await client.storage.delete(key: 'access_token');
   }
 }

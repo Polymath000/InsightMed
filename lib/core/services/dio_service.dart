@@ -1,28 +1,17 @@
-import 'package:dio/dio.dart';
-
-import '../constants/end_ponits.dart';
 import '../entities/query_entity.dart';
+import 'api_client.dart';
 import 'database_service.dart';
 
-class DioService implements DatabaseService {
-  const DioService();
-
-  static final Dio _dio = Dio(
-    BaseOptions(
-      baseUrl: EndPoint.baseUrl,
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    ),
-  );
+class DatabaseServiceImpl implements DatabaseService {
+  const DatabaseServiceImpl(this._client);
+  final ApiClient _client;
 
   @override
   Future<void> addDocument({
     required final String path,
     required final Map<String, dynamic> data,
     final String? documentId,
-  }) => _dio.post('$path/$documentId', data: data);
+  }) => _client.post(path: '$path/$documentId', data: data);
 
   @override
   Future<void> addSubDocument({
@@ -31,8 +20,8 @@ class DioService implements DatabaseService {
     required final String subCollectionPath,
     required final String subDocumentId,
     required final Map<String, dynamic> data,
-  }) => _dio.post(
-    '$collectionPath/$documentId/$subCollectionPath/$subDocumentId',
+  }) => _client.post(
+    path: '$collectionPath/$documentId/$subCollectionPath/$subDocumentId',
     data: data,
   );
 
@@ -44,10 +33,10 @@ class DioService implements DatabaseService {
     required final String subDocumentId,
     required final String key,
     required final List<Object?> data,
-  }) => _dio.post(
-    '$collectionPath/$documentId/$subCollectionPath/$subDocumentId/$key',
-    data: data,
-  );
+  }) {
+    // TODO: implement addValue
+    throw UnimplementedError();
+  }
 
   @override
   Future<void> addValue({
@@ -87,28 +76,25 @@ class DioService implements DatabaseService {
   @override
   Future<List<Map<String, dynamic>>> getCollection({
     required final String path,
-  }) => _dio
-      .get<List<Map<String, dynamic>>>(path)
-      .then((final response) => response.data!);
+  }) {
+    // TODO: implement deleteDocuments
+    throw UnimplementedError();
+  }
 
   @override
   Future<List<Map<String, dynamic>>> getCollectionWithQuery({
     required final String path,
     required final QueryEntity query,
-  }) => _dio
-      .get<List<Map<String, dynamic>>>(
-        path,
-        queryParameters: {'orderBy': query.orderBy, 'limit': query.limit},
-      )
-      .then((final response) => response.data!);
+  }) {
+    // TODO: implement deleteDocuments
+    throw UnimplementedError();
+  }
 
   @override
   Future<Map<String, dynamic>> getDocument({
     required final String path,
     required final String documentId,
-  }) => _dio
-      .get<Map<String, dynamic>>('$path/$documentId')
-      .then((final response) => response.data!);
+  }) => _client.get(path);
 
   @override
   Future<List<Map<String, dynamic>>> getDocuments({
@@ -158,9 +144,7 @@ class DioService implements DatabaseService {
   Future<bool> isDocumentExists({
     required final String path,
     required final String documentId,
-  }) => _dio
-      .get('$path/$documentId')
-      .then((final response) => response.statusCode == 200);
+  }) => _client.get(path).then((final data) => data.isNotEmpty);
 
   @override
   Stream<List<Map<String, dynamic>>> streamCollection({

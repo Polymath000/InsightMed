@@ -1,13 +1,11 @@
-
-// ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/constants/constants.dart';
-import '../../../../core/entities/user_entity.dart';
-import '../../../../core/models/user_model.dart';
-import '../../../../core/services/dio/auth_dio.dart';
+import '../../../../../core/constants/constants.dart';
+import '../../../../../core/entities/user_entity.dart';
+import '../../../../../core/models/user_model.dart';
+import '../../../../../core/services/dio/auth_dio.dart';
 
 part 'profile_of_patient_state.dart';
 
@@ -29,7 +27,7 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
       var userEntity = user.toEntity();
       emit(ProfileOfPatientSuccess(user: user));
       return userEntity;
-    }on Exception catch (e) {
+    } on Exception catch (e) {
       emit(ProfileOfPatientFailure(message: e.toString()));
       return const UserEntity();
     }
