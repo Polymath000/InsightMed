@@ -26,14 +26,14 @@ final class UserRepoImpl implements UserRepo {
   Future<void> add(final UserEntity user) => _database.addDocument(
     path: _path,
     data: UserModel.fromEntity(user).toJson(),
-    documentId: user.id,
+    documentId: user.token,
   );
 
   @override
   Future<void> update(final UserEntity user) => _database.updateDocument(
     path: _path,
     data: UserModel.fromEntity(user).toJson(),
-    documentId: user.id!,
+    documentId: user.token!,
   );
 
   @override
