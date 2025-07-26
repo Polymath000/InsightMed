@@ -6,7 +6,7 @@ import '../../../../../core/widgets/app_text_field.dart' show AppTextField;
 import '../../../../auth/presentation/views/widgets/radio_btn.dart';
 
 class PersonalContainer extends StatelessWidget {
-  const PersonalContainer({super.key, required this.user});
+  const PersonalContainer({required this.user, super.key});
   final UserEntity user;
   @override
   Widget build(final BuildContext context) => Column(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/entities/user_entity.dart';
 import '../../cubit/profile_of_patient_/profile_of_patient_cubit.dart';
 import 'widgets/profile_view_body.dart';
 
@@ -10,11 +9,11 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Scaffold(
     body: BlocProvider(
-      create: (context) => ProfileOfPatientCubit()..getPatientDetails(),
+      create: (final context) => ProfileOfPatientCubit()..getPatientDetails(),
       child: BlocConsumer<ProfileOfPatientCubit, ProfileOfPatientState>(
-        listenWhen: (previous, current) =>
+        listenWhen: (final previous, final current) =>
             previous.runtimeType != current.runtimeType,
-        listener: (context, state) {
+        listener: (final context, final state) {
           if (state is ProfileOfPatientFailure) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -25,7 +24,7 @@ class ProfileView extends StatelessWidget {
             });
           }
         },
-        builder: (context, state) {
+        builder: (final context, final state) {
           if (state is ProfileOfPatientLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProfileOfPatientFailure) {
@@ -35,7 +34,7 @@ class ProfileView extends StatelessWidget {
               ),
             );
           } else if (state is ProfileOfPatientSuccess) {
-            UserEntity user = state.user;
+            var user = state.user;
             return ProfileViewBody(user: user);
           } else {
             return const Center(child: CircularProgressIndicator());

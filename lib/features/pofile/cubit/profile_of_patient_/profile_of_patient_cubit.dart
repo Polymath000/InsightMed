@@ -1,5 +1,5 @@
-import 'dart:developer';
 
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
@@ -26,16 +26,16 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
       UserModel user;
       final userData = jsonData['data'];
       user = UserModel.fromJson(userData);
-      UserEntity userEntity = user.toEntity();
+      var userEntity = user.toEntity();
       emit(ProfileOfPatientSuccess(user: user));
       return userEntity;
-    } catch (e) {
+    }on Exception catch (e) {
       emit(ProfileOfPatientFailure(message: e.toString()));
-      return UserEntity();
+      return const UserEntity();
     }
   }
 
-  _setHeaders() => {
+  Map<String, String> _setHeaders() => {
     'Content-type': 'application/json',
     'Accept': 'application/json',
     'Authorization': 'Bearer $mainToken',

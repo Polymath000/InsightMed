@@ -1,12 +1,9 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/widgets/custbutton.dart';
-import '../../../cubit/profile_of_patient_/profile_of_patient_cubit.dart';
 import 'contact_info_container.dart';
 import 'personal_info.dart';
 import 'security_container.dart';

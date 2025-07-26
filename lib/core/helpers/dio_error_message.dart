@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'get_auth_message.dart';
-
 String mapDioErrorToMessage(final DioException e) {
-  final messages = getAuthMessages;
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
     case DioExceptionType.sendTimeout:

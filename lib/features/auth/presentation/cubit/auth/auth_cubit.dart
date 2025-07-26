@@ -21,10 +21,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> tryToken({required final String token}) async {
     try {
-      var response;
       final dioInstance = dio();
       log('I am in tryToken');
-      response = await dioInstance.get(
+      var response = await dioInstance.get(
         '/dashboard',
         options: dio_package.Options(
           headers: {'Authorization': 'Bearer $token'},
@@ -64,6 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
       final userMessage = mapDioErrorToMessage(e);
       emit(AuthFailure(userMessage));
     } on Exception catch (e) {
+      log(e.toString());
       isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
     }
@@ -83,12 +83,14 @@ class AuthCubit extends Cubit<AuthState> {
         ),
       );
       String token = response.data['token'];
-      tryToken(token: token);
+      await tryToken(token: token);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
       final userMessage = mapDioErrorToMessage(e);
       emit(AuthFailure(userMessage));
     } on Exception catch (e) {
+            log(e.toString());
+
       isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
     }
@@ -105,7 +107,10 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       cleanUp();
-    } catch (e) {}
+    } on Exception catch  (e) {
+            log(e.toString());
+
+    }
   }
 
   void cleanUp() {

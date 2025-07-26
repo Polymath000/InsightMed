@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/enums/gender_enum.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 

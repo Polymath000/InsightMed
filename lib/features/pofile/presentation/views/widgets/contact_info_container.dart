@@ -4,7 +4,7 @@ import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 
 class ContactInfoContainer extends StatelessWidget {
-  const ContactInfoContainer({super.key, required this.user});
+  const ContactInfoContainer({required this.user, super.key});
   final UserEntity user;
   @override
   Widget build(final BuildContext context) => Column(
@@ -12,14 +12,14 @@ class ContactInfoContainer extends StatelessWidget {
       AppTextField(
         labelText: 'Phone Number',
         hintText: 'Enter your phone number',
-        prefixIcon: Icon(Icons.phone_outlined),
+        prefixIcon: const Icon(Icons.phone_outlined),
         keyboardType: TextInputType.number,
         intialVlue: user.phoneNumber,
       ),
       AppTextField(
         labelText: 'Email Address',
         hintText: 'Enter your email',
-        prefixIcon: Icon(Icons.email_outlined),
+        prefixIcon: const Icon(Icons.email_outlined),
         keyboardType: TextInputType.emailAddress,
         intialVlue: user.email,
       ),

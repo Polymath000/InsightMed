@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
   String? email;
   String? password;
   @override
-  Widget build(BuildContext context) => Form(
+  Widget build(final BuildContext context) => Form(
     key: _formKey,
     autovalidateMode: autovalidateMode,
     child: Column(
@@ -78,7 +79,9 @@ class _LoginFormBodyState extends State<LoginFormBody> {
           onTap: () async {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              print('Email: $email, Password: $password');
+              if (kDebugMode) {
+                print('Email: $email, Password: $password');
+              }
               await BlocProvider.of<AuthCubit>(
                 context,
               ).login(creds: {'email': email, 'password': password});

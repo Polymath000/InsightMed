@@ -19,7 +19,7 @@ class _SocialAuthState extends State<SocialAuth> {
   bool isLoading = false;
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (context) => AuthCubit(),
+    create: (final context) => AuthCubit(),
     child: DecoratedBox(
       decoration: BoxDecoration(
         color: kBasicColor,

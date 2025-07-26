@@ -7,8 +7,8 @@ import '../../../../../core/widgets/custom_text_field.dart';
 import 'constans.dart';
 
 class SignupForm extends StatefulWidget {
-  final void Function(bool)? onLoadingChanged;
   const SignupForm({super.key, this.onLoadingChanged});
+  final void Function(bool)? onLoadingChanged;
   @override
   State<SignupForm> createState() => _SignupFormState();
 }
@@ -17,11 +17,10 @@ class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
-  UserEntity user = UserEntity(
+  UserEntity user = const UserEntity(
     age: '',
     gender: '',
     phoneNumber: '',
-    password: null,
     name: '',
     email: '',
     passwordConfirmation: '',
@@ -55,7 +54,7 @@ class _SignupFormState extends State<SignupForm> {
               user = user.copyWith(password: p0);
             });
           },
-          validator: (value) {
+          validator: (final value) {
             if (value!.length < 6) {
               return 'Password Length less than 6 letters';
             } else {

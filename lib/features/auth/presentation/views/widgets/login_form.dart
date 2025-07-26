@@ -14,7 +14,6 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
@@ -22,12 +21,12 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(final BuildContext context) => BlocProvider(
     create: (final context) => AuthCubit(),
     child: BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is AuthLoading) {
-          widget.onLoadingChanged?.call(true);
+          widget.onLoadingChanged?.call( true);
         } else if (state is AuthSuccess) {
           widget.onLoadingChanged?.call(false);
-          AppRoutes.main(context);
+          await AppRoutes.main(context);
           // TODO : Handle Navigator
           // if (BlocProvider.of<AuthCubit>(context).isDoctor()) {
           //   AppRoutes.main(context);
@@ -46,7 +45,7 @@ class _LoginFormState extends State<LoginForm> {
           widget.onLoadingChanged?.call(false);
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.message.toString())));
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         } else {
           widget.onLoadingChanged?.call(false);
           ScaffoldMessenger.of(context).showSnackBar(

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
-import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
