@@ -9,14 +9,13 @@ import '../../features/patient_details.dart/presentation/view/patient_details_vi
 import '../../features/patient_rays_ubmission/presentation/views/upload_medical_ray_view.dart';
 import '../entities/user_entity.dart';
 import '../utls/i_text.dart';
-import 'patient_info_screen_arguments.dart';
 
 sealed class AppRoutes {
   const AppRoutes();
   static void pop<T extends Object?>(
     final BuildContext context, [
     final T? result,
-  ]) => Navigator.pop<T?>(context);
+  ]) => Navigator.pop<T>(context);
 
   static Future<T?> _pushNamed<T extends Object?>(
     final BuildContext context,
@@ -36,13 +35,12 @@ sealed class AppRoutes {
   );
 
   // Routes with arguments
-  static Future<T?> patientInformation<T extends PatientInfoScreenArguments?>(
+  static Future<T?> patientInformation<T extends Object?>(
     final BuildContext context, {
-    final UserEntity? user,
+    required final UserEntity user,
   }) => _pushNamed<T>(context, PatientInformation.routeName, arguments: user);
 
   // Routes without arguments
-
   static Future<Object?> main(final BuildContext context) =>
       _pushNamedAndRemoveAll(context, MainView.routeName);
 
@@ -70,7 +68,19 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientDetailsView.routeName: (_, _) => const PatientDetailsView(),
 };
 
-Route<dynamic> onGenerateRoute(final RouteSettings settings) {
+// MaterialPageRoute<T?> onGenerateRoute<T extends Object?>(
+//   final RouteSettings settings,
+// ) {
+//   final builder =
+//       _routes[settings.name] ??
+//       (_, _) => const Scaffold(body: Center(child: IText('Page not found')));
+//   return MaterialPageRoute<T?>(
+//     builder: (final context) => builder(context, settings.arguments),
+//     settings: settings,
+//   );
+// }
+
+Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (final settings) {
   final builder =
       _routes[settings.name] ??
       (_, _) => const Scaffold(body: Center(child: IText('Page not found')));
@@ -78,4 +88,4 @@ Route<dynamic> onGenerateRoute(final RouteSettings settings) {
     builder: (final context) => builder(context, settings.arguments),
     settings: settings,
   );
-}
+};

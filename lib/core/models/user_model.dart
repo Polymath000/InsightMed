@@ -2,64 +2,67 @@ import '../entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel({
-    super.password,
+    super.id,
     super.name,
     super.email,
+    super.password,
+    super.passwordConfirmation,
+    super.gender,
+    super.age,
+    super.phoneNumber,
     super.role,
     super.specialty,
-    super.age,
-    super.gender,
-    super.passwordConfirmation,
-    super.phoneNumber,
   });
 
-  factory UserModel.fromJson(final Map<String, dynamic> json) => UserModel(
-    name: json['name'],
-    email: json['email'],
-    password: json['password'],
-    role: json['role'],
-    specialty: json['specialty'],
-    age: json['age'],
-    gender: json['gender'],
-    passwordConfirmation: json['password_confirmation'],
-    phoneNumber: json['phone_number'],
-  );
-
-  @override
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'email': email,
-    'password': password,
-    'role': role,
-    'specialty': specialty,
-    'age': age,
-    'gender': gender,
-    'password_confirmation': passwordConfirmation,
-    'phone_number': phoneNumber,
-  };
-
   factory UserModel.fromEntity(final UserEntity entity) => UserModel(
+    id: entity.id,
     name: entity.name,
     email: entity.email,
     password: entity.password,
+    passwordConfirmation: entity.passwordConfirmation,
+    gender: entity.gender,
+    age: entity.age,
+    phoneNumber: entity.phoneNumber,
     role: entity.role,
     specialty: entity.specialty,
-    age: entity.age,
-    gender: entity.gender,
-    passwordConfirmation: entity.passwordConfirmation,
-    phoneNumber: entity.phoneNumber,
   );
 
-  @override
+  factory UserModel.fromJson(final Map<String, dynamic> json) => UserModel(
+    id: json['id'],
+    name: json['name'],
+    email: json['email'],
+    password: json['password'],
+    passwordConfirmation: json['password_confirmation'],
+    gender: json['gender'],
+    age: json['age'],
+    phoneNumber: json['phone_number'],
+    role: json['role'],
+    specialty: json['specialty'],
+  );
+
   UserEntity toEntity() => UserEntity(
+    id: id,
     name: name,
     email: email,
     password: password,
+    passwordConfirmation: passwordConfirmation,
+    gender: gender,
+    age: age,
+    phoneNumber: phoneNumber,
     role: role,
     specialty: specialty,
-    age: age,
-    gender: gender,
-    passwordConfirmation: passwordConfirmation,
-    phoneNumber: phoneNumber,
   );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'email': email,
+    'password': password,
+    'password_confirmation': passwordConfirmation,
+    'gender': gender,
+    'age': age,
+    'phone_number': phoneNumber,
+    'role': role,
+    'specialty': specialty,
+  };
 }

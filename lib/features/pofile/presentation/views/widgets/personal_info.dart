@@ -14,13 +14,13 @@ class PersonalContainer extends StatelessWidget {
       AppTextField(
         labelText: 'Full Name',
         hintText: 'Enter your full name',
-        prefixIcon: Icon(Icons.person_2_outlined),
-        intialVlue: user.getName,
+        prefixIcon: const Icon(Icons.person_2_outlined),
+        intialVlue: user.name,
       ),
       AppTextField(
         labelText: 'Age',
         hintText: 'Enter your age',
-        prefixIcon: Icon(Icons.calendar_month_outlined),
+        prefixIcon: const Icon(Icons.calendar_month_outlined),
         keyboardType: TextInputType.number,
         intialVlue: user.age,
       ),

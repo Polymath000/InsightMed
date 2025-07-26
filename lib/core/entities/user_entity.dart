@@ -1,56 +1,51 @@
 class UserEntity {
   const UserEntity({
-    this.phoneNumber,
-    this.passwordConfirmation,
-    this.password,
+    this.id,
     this.name,
     this.email,
+    this.password,
+    this.passwordConfirmation,
+    this.gender,
+    this.age,
+    this.phoneNumber,
     this.role,
     this.specialty,
-    this.age,
-    this.gender,
   });
-  final String? specialty;
+
+  final String? id;
   final String? name;
   final String? email;
   final String? password;
-  final String? role;
-  final String? gender;
-  final String? phoneNumber;
-  final String? age;
   final String? passwordConfirmation;
-
-  String? get getSpecialty => specialty;
-  String? get getName => name;
-  String? get getEmail => email;
-  String? get getPassword => password;
-  String? get getRole => role;
-  String? get getGender => gender;
-  String? get getPhoneNumber => phoneNumber;
-  String? get getAge => age;
-  String? get getPasswordConfirmation => passwordConfirmation;
-
-  bool isDoctor() => role == 'patient';
+  final String? gender;
+  final String? age;
+  final String? phoneNumber;
+  final String? role;
+  final String? specialty;
 
   UserEntity copyWith({
-    String? name,
-    String? email,
-    String? password,
-    String? role,
-    String? gender,
-    String? phoneNumber,
-    String? age,
-    String? passwordConfirmation,
-    String? specialty,
+    final String? id,
+    final String? name,
+    final String? email,
+    final String? password,
+    final String? passwordConfirmation,
+    final String? gender,
+    final String? age,
+    final String? phoneNumber,
+    final String? role,
+    final String? specialty,
   }) => UserEntity(
+    id: id ?? this.id,
     name: name ?? this.name,
     email: email ?? this.email,
     password: password ?? this.password,
-    role: role ?? this.role,
-    gender: gender ?? this.gender,
-    phoneNumber: phoneNumber ?? this.phoneNumber,
-    age: age ?? this.age,
     passwordConfirmation: passwordConfirmation ?? this.passwordConfirmation,
+    gender: gender ?? this.gender,
+    age: age ?? this.age,
+    phoneNumber: phoneNumber ?? this.phoneNumber,
+    role: role ?? this.role,
     specialty: specialty ?? this.specialty,
   );
+
+  bool isDoctor() => role == 'patient';
 }

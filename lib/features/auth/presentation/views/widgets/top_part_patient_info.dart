@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'constans.dart';
+
+import '../../../../../core/constants/borders.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
 
 class TopPartPatientInfo extends StatelessWidget {
   const TopPartPatientInfo({super.key});
@@ -11,42 +12,23 @@ class TopPartPatientInfo extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Step 1/1',
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14.sp,
-              color: kStep,
-            ),
-          ),
-          Text(
+          Text('Step 1/1', style: TextStyle(color: AppColors.primary)),
+          const Text(
             'Initial Information',
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14.sp,
-              color: kOR,
-            ),
+            style: TextStyle(color: AppColors.grey),
           ),
         ],
       ),
-      SizedBox(height: MediaQuery.of(context).size.height / 300),
-      Container(
-        width: double.infinity,
-        height: 7.h,
-        decoration: BoxDecoration(
-          color: kMainColor,
-          borderRadius: BorderRadius.all(Radius.circular(10.r)),
-        ),
+      const LinearProgressIndicator(
+        value: 1,
+        borderRadius: AppBorders.xxs,
+        minHeight: 8,
       ),
-      SizedBox(height: MediaQuery.of(context).size.height / 100),
-      Text(
+      const SizedBox(height: 12),
+      const Text(
         'Please provide your basic information to get started. '
         'Field marked with * are required',
-        style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 16.sp,
-          color: kSmain,
-        ),
+        style: TextStyle(fontSize: 16),
       ),
     ],
   );

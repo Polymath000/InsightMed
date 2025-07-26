@@ -9,11 +9,11 @@ import 'form_body.dart';
 class PatientForm extends StatefulWidget {
   const PatientForm({
     required this.user,
-    super.key,
     required this.onLoadingChanged,
+    super.key,
   });
   final UserEntity user;
-  final void Function(bool)? onLoadingChanged;
+  final void Function({bool isLoading})? onLoadingChanged;
   @override
   State<PatientForm> createState() => _PatientFormState();
 }
@@ -23,19 +23,19 @@ class _PatientFormState extends State<PatientForm> {
   Widget build(final BuildContext context) => BlocProvider(
     create: (final context) => AuthCubit(),
     child: BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) {
+      listener: (final context, final state) async {
         if (state is AuthLoading) {
-          widget.onLoadingChanged?.call(true);
+          widget.onLoadingChanged?.call(isLoading: true);
         } else if (state is AuthSuccess) {
-          widget.onLoadingChanged?.call(false);
-          AppRoutes.main(context);
+          widget.onLoadingChanged?.call(isLoading: false);
+          await AppRoutes.main(context);
         } else if (state is AuthFailure) {
-          widget.onLoadingChanged?.call(false);
+          widget.onLoadingChanged?.call(isLoading: false);
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.message.toString())));
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         } else {
-          widget.onLoadingChanged?.call(false);
+          widget.onLoadingChanged?.call(isLoading: false);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('There was an error , please try again later'),
@@ -43,7 +43,7 @@ class _PatientFormState extends State<PatientForm> {
           );
         }
       },
-      child: FormBody(widget: widget),
+      child: FormBody(user: widget.user),
     ),
   );
 }
