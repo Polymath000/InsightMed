@@ -58,46 +58,46 @@ class _NumericVitalsState extends State<NumericVitals> {
 
   @override
   Widget build(BuildContext context) => decorationWidget(
-      children: [
-        Text(
-          'Numeric Vitals',
-          style: AppTextStyles.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: const Color(0xFF1F2937),
-          ),
+    children: [
+      Text(
+        'Numeric Vitals',
+        style: AppTextStyles.titleLarge?.copyWith(
+          fontWeight: FontWeight.w600,
+          color: const Color(0xFF1F2937),
         ),
-        const SizedBox(height: 8),
-        ...fields.map(
-          (field) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                field.label,
-                style: AppTextStyles.bodyLarge?.copyWith(
-                  color: const Color(0xFF6B7280),
-                ),
+      ),
+      const SizedBox(height: 8),
+      ...fields.map(
+        (field) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              field.label,
+              style: AppTextStyles.bodyLarge?.copyWith(
+                color: const Color(0xFF6B7280),
               ),
-              const SizedBox(height: 5),
-              CTextField(
-                choose: false,
-                hint: 'Write ${field.label}',
-                type: TextInputType.number,
-                validator: (value) {
-                  final val = value?.toInt();
-                  if (val == null) return 'Enter a valid number';
-                  if (val < field.min || val > field.max) {
-                    return 'must be between ${field.min} and ${field.max}';
-                  }
-                  return null;
-                },
-                onChanged: (value) => field.onChanged?.call(value),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
+            ),
+            const SizedBox(height: 5),
+            CustomTextField(
+              choose: false,
+              hint: 'Write ${field.label}',
+              type: TextInputType.number,
+              validator: (value) {
+                final val = value?.toInt();
+                if (val == null) return 'Enter a valid number';
+                if (val < field.min || val > field.max) {
+                  return 'must be between ${field.min} and ${field.max}';
+                }
+                return null;
+              },
+              onChanged: (value) => field.onChanged?.call(value),
+            ),
+            const SizedBox(height: 16),
+          ],
         ),
-      ],
-    );
+      ),
+    ],
+  );
 }
 
 class _VitalFieldData {

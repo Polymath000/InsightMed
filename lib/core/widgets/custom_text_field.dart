@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CTextField extends StatelessWidget {
-  const CTextField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     required this.choose,
     super.key,
     this.hint,

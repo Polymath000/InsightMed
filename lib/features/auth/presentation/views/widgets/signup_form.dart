@@ -35,7 +35,7 @@ class _SignupFormState extends State<SignupForm> {
     autovalidateMode: autovalidateMode,
     child: Column(
       children: [
-        CTextField(
+        CustomTextField(
           hint: 'Email',
           choose: false,
           type: TextInputType.emailAddress,
@@ -46,7 +46,7 @@ class _SignupFormState extends State<SignupForm> {
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),
-        CTextField(
+        CustomTextField(
           hint: 'Password',
           choose: true,
           onChanged: (final p0) {
@@ -70,7 +70,7 @@ class _SignupFormState extends State<SignupForm> {
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),
-        CTextField(
+        CustomTextField(
           hint: 'Confirm Password',
           choose: true,
           onChanged: (final p0) {
@@ -81,7 +81,7 @@ class _SignupFormState extends State<SignupForm> {
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 50),
-        CButton(
+        CustomButton(
           onTap: () async {
             setState(() {
               isLoading = true;
