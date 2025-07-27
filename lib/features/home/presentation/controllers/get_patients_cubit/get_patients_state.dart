@@ -13,10 +13,7 @@ final class GetPatientsLoading extends GetPatientsState {
   const GetPatientsLoading();
 }
 
-final class GetPatientsSuccess extends GetPatientsState {
-  const GetPatientsSuccess(this.patients);
-  final List<UserEntity> patients;
-}
+final class GetPatientsSuccess extends GetPatientsState {}
 
 final class GetPatientsFailure extends GetPatientsState {
   const GetPatientsFailure(this.message);

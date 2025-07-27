@@ -5,7 +5,7 @@ import '../../features/auth/presentation/views/patient_info_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
 import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
-import '../../features/patient_details.dart/presentation/view/patient_details_view.dart';
+import '../../features/patient_details/presentation/view/patient_details_view.dart';
 import '../../features/patient_rays_ubmission/presentation/views/upload_medical_ray_view.dart';
 import '../entities/user_entity.dart';
 import '../utls/i_text.dart';
@@ -40,6 +40,12 @@ sealed class AppRoutes {
     required final UserEntity user,
   }) => _pushNamed<T>(context, PatientInformation.routeName, arguments: user);
 
+  static Future<T?> patientDetails<T extends Object?>(
+    final BuildContext context, {
+    required final UserEntity patient,
+  }) =>
+      _pushNamed<T>(context, PatientDetailsView.routeName, arguments: patient);
+
   // Routes without arguments
   static Future<Object?> main(final BuildContext context) =>
       _pushNamedAndRemoveAll(context, MainView.routeName);
@@ -52,9 +58,6 @@ sealed class AppRoutes {
 
   static Future<Object?> uploadMedicalRay(final BuildContext context) =>
       _pushNamed(context, UploadMedicalRayView.routeName);
-
-  static Future<Object?> patientDetails(final BuildContext context) =>
-      _pushNamed(context, PatientDetailsView.routeName);
 }
 
 Map<String, Widget Function(BuildContext, Object?)> _routes = {
@@ -65,7 +68,8 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientInformation.routeName: (_, final args) =>
       PatientInformation(user: args! as UserEntity),
   UploadMedicalRayView.routeName: (_, _) => const UploadMedicalRayView(),
-  PatientDetailsView.routeName: (_, _) => const PatientDetailsView(),
+  PatientDetailsView.routeName: (_, final args) =>
+      PatientDetailsView(patient: args! as UserEntity),
 };
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (final settings) {

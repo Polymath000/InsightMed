@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart'
     show FloatingActionButton, Icon, Icons, Scaffold, State, StatefulWidget;
 
+import '../../../../core/helpers/get_user.dart';
 import '../../../../core/helpers/on_generate_routes.dart';
 import 'widgets/main_navigation_bar.dart' show MainNavigationBar;
 import 'widgets/main_view_body.dart' show MainViewBody;
@@ -23,12 +24,12 @@ final class _MainViewState extends State<MainView> {
       onDestinationSelected: (final index) =>
           setState(() => _selectedIndex = index),
     ),
-    floatingActionButton: _selectedIndex == 0
-        ? FloatingActionButton(
+    floatingActionButton: _selectedIndex != 0 || (getUser?.isDoctor() ?? false)
+        ? null
+        : FloatingActionButton(
             tooltip: 'Upload Medical Ray',
             onPressed: () => AppRoutes.uploadMedicalRay(context),
             child: const Icon(Icons.add_rounded),
-          )
-        : null,
+          ),
   );
 }

@@ -1,6 +1,6 @@
 sealed class EndPoint {
   const EndPoint();
-  static const String baseUrl = 'https://fast-recharge.online/public/api';
+  static const String baseUrl = 'https://fast-recharge.online/api';
 
   static const String addRegister = '/register';
   static const String addLogin = '/login';

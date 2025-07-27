@@ -5,7 +5,7 @@ class PatientDetailsAppBar extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) =>
-      const SliverAppBar.large(title: Text('Patient Details'));
+      const SliverAppBar(title: Text('Patient Details'));
 
   // SliverAppBar(
   //     expandedHeight: 130,

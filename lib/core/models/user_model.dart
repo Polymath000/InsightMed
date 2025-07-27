@@ -13,6 +13,8 @@ class UserModel extends UserEntity {
     super.phoneNumber,
     super.role,
     super.specialty,
+    super.lastVisit,
+    super.status,
   });
 
   factory UserModel.fromEntity(final UserEntity entity) => UserModel(
@@ -27,6 +29,8 @@ class UserModel extends UserEntity {
     phoneNumber: entity.phoneNumber,
     role: entity.role,
     specialty: entity.specialty,
+    lastVisit: entity.lastVisit,
+    status: entity.status,
   );
 
   factory UserModel.fromJson(final Map<String, dynamic> json) => UserModel(
@@ -41,6 +45,8 @@ class UserModel extends UserEntity {
     phoneNumber: json['phone_number'],
     role: json['role'],
     specialty: json['specialty'],
+    lastVisit: json['last_visit'],
+    status: json['status'],
   );
 
   UserEntity toEntity() => UserEntity(
@@ -55,6 +61,8 @@ class UserModel extends UserEntity {
     phoneNumber: phoneNumber,
     role: role,
     specialty: specialty,
+    lastVisit: lastVisit,
+    status: status,
   );
 
   Map<String, dynamic> toJson() => {
@@ -69,5 +77,7 @@ class UserModel extends UserEntity {
     'phone_number': phoneNumber,
     'role': role,
     'specialty': specialty,
+    'last_visit': lastVisit,
+    'status': status,
   };
 }

@@ -2,53 +2,42 @@ import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/entities/user_entity.dart';
+import '../../../../../core/enums/patient_enum.dart';
+import '../../../../home/presentation/views/widgets/patiend_status_text.dart';
+
 class CustomDropdownMenu extends StatefulWidget {
-  const CustomDropdownMenu({super.key});
+  const CustomDropdownMenu({required this.patient, super.key});
+  final UserEntity patient;
 
   @override
   State<CustomDropdownMenu> createState() => _CustomDropdownMenuState();
 }
 
 class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
-  late String _selectedItem;
-
-  final Map<String, Color> _itemColors = {
-    'New': Colors.green,
-    'Follow-up': Colors.orange,
-    'Critical': Colors.red,
-    'Regular': Colors.blue,
-  };
+  late PatientStatusEnum? _selectedItem;
 
   @override
   void initState() {
-    _selectedItem = 'New';
+    _selectedItem = widget.patient.status;
     super.initState();
   }
 
   @override
   Widget build(final BuildContext context) => TextButton(
-    style: TextButton.styleFrom(foregroundColor: _itemColors[_selectedItem]),
-    onPressed: () {
-      DropDownState<String>(
-        dropDown: DropDown<String>(
-          data: <SelectedListItem<String>>[
-            ..._itemColors.keys.map(
-              (final key) => SelectedListItem<String>(data: key),
-            ),
-          ],
-          onSelected: (final selectedItems) {
-            final list = <String>[];
-            for (final item in selectedItems) {
-              list.add(item.data);
-            }
-            setState(() {
-              var temp = list.toString().substring(1);
-              _selectedItem = temp.substring(0, temp.length - 1);
-            });
-          },
-        ),
-      ).showModal(context);
-    },
-    child: Text(_selectedItem),
+    style: TextButton.styleFrom(foregroundColor: _selectedItem?.color),
+    onPressed: () => DropDownState<PatientStatusEnum>(
+      dropDown: DropDown<PatientStatusEnum>(
+        data: PatientStatusEnum.values
+            .map((final e) => SelectedListItem<PatientStatusEnum>(data: e))
+            .toList(),
+        onSelected: (final selectedItems) {
+          if (selectedItems.isNotEmpty) {
+            setState(() => _selectedItem = selectedItems.first.data);
+          }
+        },
+      ),
+    ).showModal(context),
+    child: PatiendStatusText(status: _selectedItem!),
   );
 }
