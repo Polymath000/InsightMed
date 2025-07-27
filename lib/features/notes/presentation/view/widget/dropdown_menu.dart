@@ -19,7 +19,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
 
   @override
   void initState() {
-    _selectedItem = widget.patient.status;
+    _selectedItem = widget.patient.statuses;
     super.initState();
   }
 
@@ -38,6 +38,8 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
         },
       ),
     ).showModal(context),
-    child: PatiendStatusText(status: _selectedItem!),
+    child: PatiendStatusText(
+      status: _selectedItem ?? PatientStatusEnum.critical,
+    ),
   );
 }

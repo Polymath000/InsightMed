@@ -15,9 +15,9 @@ class RayEntity {
   final String? systolicBP;
   final String? diastolicBP;
   final String? heartRate;
-  final String? hasCough;
-  final String? canSmellTasteFood;
-  final String? hasHeadache;
+  final bool? hasCough;
+  final bool? canSmellTasteFood;
+  final bool? hasHeadache;
 
   RayEntity copyWith({
     final String? image,
@@ -25,9 +25,9 @@ class RayEntity {
     final String? systolicBP,
     final String? diastolicBP,
     final String? heartRate,
-    final String? hasCough,
-    final String? canSmellTasteFood,
-    final String? hasHeadache,
+    final bool? hasCough,
+    final bool? canSmellTasteFood,
+    final bool? hasHeadache,
   }) => RayEntity(
     image: image ?? this.image,
     temperature: temperature ?? this.temperature,

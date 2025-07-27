@@ -1,4 +1,9 @@
+import '../entities/ray_entity.dart';
 import '../entities/user_entity.dart';
+import '../enums/patient_enum.dart' show PatientStatusEnum;
+import '../extensions/string_extension.dart';
+import '../helpers/list_handler.dart';
+import 'ray_model.dart';
 
 class UserModel extends UserEntity {
   const UserModel({
@@ -12,9 +17,12 @@ class UserModel extends UserEntity {
     super.age,
     super.phoneNumber,
     super.role,
+    super.medicalCondition,
     super.specialty,
-    super.lastVisit,
-    super.status,
+    super.createdAt,
+    super.updatedAt,
+    super.statuses,
+    super.rays,
   });
 
   factory UserModel.fromEntity(final UserEntity entity) => UserModel(
@@ -28,9 +36,12 @@ class UserModel extends UserEntity {
     age: entity.age,
     phoneNumber: entity.phoneNumber,
     role: entity.role,
+    medicalCondition: entity.medicalCondition,
     specialty: entity.specialty,
-    lastVisit: entity.lastVisit,
-    status: entity.status,
+    createdAt: entity.createdAt,
+    updatedAt: entity.updatedAt,
+    statuses: entity.statuses,
+    rays: entity.rays,
   );
 
   factory UserModel.fromJson(final Map<String, dynamic> json) => UserModel(
@@ -44,9 +55,14 @@ class UserModel extends UserEntity {
     age: json['age'],
     phoneNumber: json['phone_number'],
     role: json['role'],
+    medicalCondition: json['medical_condition'],
     specialty: json['specialty'],
-    lastVisit: json['last_visit'],
-    status: json['status'],
+    createdAt: (json['created_at'] as String?)?.toDateTime(),
+    updatedAt: (json['updated_at'] as String?)?.toDateTime(),
+    statuses: (json['status'] as String?)?.toEnum<PatientStatusEnum>(
+      PatientStatusEnum.values,
+    ),
+    rays: ListHandler.parseComplex<RayEntity>(json['rays'], RayModel.fromJson),
   );
 
   UserEntity toEntity() => UserEntity(
@@ -60,9 +76,12 @@ class UserModel extends UserEntity {
     age: age,
     phoneNumber: phoneNumber,
     role: role,
+    medicalCondition: medicalCondition,
     specialty: specialty,
-    lastVisit: lastVisit,
-    status: status,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+    statuses: statuses,
+    rays: rays,
   );
 
   Map<String, dynamic> toJson() => {
@@ -76,8 +95,14 @@ class UserModel extends UserEntity {
     'age': age,
     'phone_number': phoneNumber,
     'role': role,
+    'medical_condition': medicalCondition,
     'specialty': specialty,
-    'last_visit': lastVisit,
-    'status': status,
+    'created_at': createdAt?.toIso8601String(),
+    'updated_at': updatedAt?.toIso8601String(),
+    'statuses': statuses?.name,
+    'rays': ListHandler.encodeComplex<RayEntity>(
+      rays,
+      (final ray) => RayModel.fromEntity(ray).toJson(),
+    ),
   };
 }
