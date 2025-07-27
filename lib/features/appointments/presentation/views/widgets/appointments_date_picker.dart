@@ -16,7 +16,10 @@ final class AppointmentsDatePicker extends StatelessWidget {
       ),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
-      onDateChanged: (_) {},
+      onDateChanged: (date) {
+        selectedDate = date;
+        print(selectedDate);
+      },
       selectableDayPredicate: (final day) {
         if (day.weekday == 5 || day.weekday == 6) {
           return false;
@@ -26,3 +29,4 @@ final class AppointmentsDatePicker extends StatelessWidget {
     ),
   );
 }
+DateTime selectedDate = DateTime.now();
