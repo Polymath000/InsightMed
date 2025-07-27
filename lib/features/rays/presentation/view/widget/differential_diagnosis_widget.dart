@@ -9,10 +9,13 @@ class DifferentialDiagnosisWidget extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Column(
     children: [
-      Align(
+      const Align(
         alignment: Alignment.topLeft,
 
-        child: Text('Differential Diagnosis', style: AppTextStyles.titleLarge),
+        child: Text(
+          'Differential Diagnosis',
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+        ),
       ),
       const SizedBox(height: 16),
       Align(

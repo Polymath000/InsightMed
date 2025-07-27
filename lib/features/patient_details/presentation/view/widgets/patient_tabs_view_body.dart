@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/entities/user_entity.dart';
 import '../../../../appts/presentation/view/appts_view.dart';
 import '../../../../notes/presentation/view/notes_view.dart';
 import '../../../../rays/presentation/view/rays_view.dart';
 
 class PatientTabsViewBody extends StatelessWidget {
-  const PatientTabsViewBody({required this.index, super.key});
+  const PatientTabsViewBody({
+    required this.patient,
+    required this.index,
+    super.key,
+  });
   final int index;
+  final UserEntity patient;
 
   @override
   Widget build(final BuildContext context) {
     final pages = <Widget>[
       const NotesView(),
-      const RaysView(),
+      RaysView(patient: patient),
       const ApptsView(),
     ];
 
