@@ -5,7 +5,11 @@ extension StringExtension on String {
   /// Reverses the string
   String get reversed => split('').reversed.join();
 
-  int toInt() => int.parse(this);
+  int? toInt() => int.tryParse(this);
+
+  double? toDouble() => double.tryParse(this);
+
+  num? toNum() => num.tryParse(this);
 
   DateTime toDateTime() => DateTime.parse(this);
 
@@ -13,7 +17,10 @@ extension StringExtension on String {
     final List<T?>? values, [
     final Map<T, dynamic>? map,
   ]) => values?.firstWhere(
-    (final e) => e?.name == this || e?.toString() == this || map?[e] == this,
+    (final e) =>
+        e?.name.toLowerCase() == toLowerCase() ||
+        e?.toString().toLowerCase() == toLowerCase() ||
+        map?[e].toString().toLowerCase() == toLowerCase(),
     orElse: () => throw ArgumentError(
       'No enum value found for $this in '
       '${values.map((final e) => e?.name).join(', ')}',

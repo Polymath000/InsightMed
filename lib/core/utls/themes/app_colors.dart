@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'
-    show BuildContext, Color, ColorScheme, Theme, ThemeData, immutable;
+    show BuildContext, Color, ColorScheme, Colors, Theme, ThemeData, immutable;
 
 @immutable
 sealed class AppColors {
@@ -77,22 +77,29 @@ sealed class AppColors {
   static Color get shadow => _scheme.shadow;
 
   // Normal colors
-  static const Color black = Color(0xFF000000);
-  static const Color blue = Color(0xFF2196F3);
-  static const Color brown = Color(0xFF795548);
-  static const Color cyan = Color(0xFF14B8A6);
+  static const Color amber = Colors.amber;
+  static const Color black = Colors.black;
+  static const Color blue = Colors.blue;
+  static const Color brown = Colors.brown;
+  static const Color cyan = Colors.cyan;
   static const Color darkBlue = Color(0xFF1E88E5);
   static const Color darkGrey = Color(0xFF4B5563); // 0xff334155
-  static const Color grey = Color(0xFF9E9E9E);
-  static const Color green = Color(0xFF3B9A1E);
+  static const Color grey = Colors.grey;
+  static const Color green = Colors.green;
+  static const Color indigo = Colors.indigo;
+  static const Color lightBlue = Color(0xFF0284C7);
   static const Color lightGrey = Color(0xFFE0E0E0);
   static const Color mediumBrown = Color(0xFF7F5112);
+  static const Color navyBlue = Color(0xFF1E88E5);
+  static const Color orange = Colors.orange;
   static const Color pickledBluewood = Color(0xFF334155);
-  static const Color red = Color(0xFFB00020);
+  static const Color pink = Colors.pink;
+  static const Color purple = Colors.purple;
+  static const Color red = Colors.red;
   static const Color topaz = Color(0xFF14B8A6);
-  static const Color transparent = Color(0x00000000);
+  static const Color transparent = Colors.transparent;
   static const Color waterBlue = Color(0xFF0284C7);
-  static const Color white = Color(0xFFFFFFFF);
+  static const Color white = Colors.white;
 
   // Custom colors
   static const Color success = Color(0xFF3B9A1E);

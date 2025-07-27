@@ -47,7 +47,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                   child: UploadRayImage(
                     onChangedImagePath: (final p0) {
                       setState(() {
-                        ray = ray.copyWith(image: p0);
+                        ray = ray.copyWith(imagePath: p0);
                       });
                     },
                   ),
@@ -109,7 +109,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
               onTap: () async {
                 widget.onChanged!(true);
                 if (_formKey.currentState!.validate() &&
-                    !(ray.image == null || ray.image!.isEmpty)) {
+                    !(ray.imagePath == null || ray.imagePath!.isEmpty)) {
                   _formKey.currentState!.save();
                   final composedRay = ray.copyWith(
                     temperature: _temperature,
@@ -124,7 +124,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                     context,
                   ).uploadRay(rayEntity: composedRay);
                   widget.onChanged!(false);
-                } else if (ray.image == null || ray.image!.isEmpty) {
+                } else if (ray.imagePath == null || ray.imagePath!.isEmpty) {
                   widget.onChanged!(false);
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;

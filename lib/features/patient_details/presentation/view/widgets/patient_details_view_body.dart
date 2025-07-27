@@ -18,7 +18,7 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
 
   @override
   Widget build(final BuildContext context) {
-    const labels = ['Notes', 'Rays', 'Appts'];
+    const labels = ['Notes', 'Rays', 'Appointments'];
     final middleAppBar = Column(
       children: [
         const Divider(),
@@ -59,7 +59,9 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
           child: PersonalPatientDetails(patient: widget.patient),
         ),
         SliverToBoxAdapter(child: middleAppBar),
-        SliverToBoxAdapter(child: PatientTabsViewBody(index: _index)),
+        SliverToBoxAdapter(
+          child: PatientTabsViewBody(index: _index, patient: widget.patient),
+        ),
       ],
     );
   }
