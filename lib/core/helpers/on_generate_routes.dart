@@ -6,7 +6,7 @@ import '../../features/auth/presentation/views/signup_screen.dart';
 import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/patient_details/presentation/view/patient_details_view.dart';
-import '../../features/patient_rays_ubmission/presentation/views/upload_medical_ray_view.dart';
+import '../../features/patient_rays_submission/presentation/views/upload_medical_ray_view.dart';
 import '../entities/user_entity.dart';
 import '../utls/i_text.dart';
 

@@ -8,12 +8,13 @@ class CButton extends StatefulWidget {
     super.key,
     this.colorText,
     this.image,
+    this.backgroundColor
   });
   final String? btnText;
   final Color? colorText;
   final void Function()? onTap;
   final String? image;
-
+  final Color? backgroundColor;
   @override
   State<CButton> createState() => _CButtonState();
 }
@@ -41,6 +42,7 @@ class _CButtonState extends State<CButton> {
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
+    
     onTap: widget.onTap,
     onTapDown: _onTapDown,
     onTapUp: _onTapUp,
@@ -50,7 +52,10 @@ class _CButtonState extends State<CButton> {
       duration: const Duration(milliseconds: 100),
       child: FilledButton(
         onPressed: widget.onTap,
+
         style: FilledButton.styleFrom(
+
+          backgroundColor: widget.backgroundColor,
           textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 16.sp),
           elevation: 0,
         ),
