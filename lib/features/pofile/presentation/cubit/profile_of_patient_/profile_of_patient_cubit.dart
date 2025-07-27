@@ -5,10 +5,10 @@ import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../core/constants/constants.dart';
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
 import '../../../../../core/helpers/get_auth_message.dart';
+import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/models/user_model.dart';
 import '../../../../../core/repos/user_repo.dart';
 import '../../../../../core/services/dio/auth_dio.dart';
@@ -42,20 +42,24 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
   }
 
   Map<String, String> _setHeaders() => {
-    'Content-type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $mainToken',
-  };
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${getUser!.token}',
+      };
 
   Future<void> updatePatientDetails({required final UserEntity user}) async {
     emit(ProfileOfPatientLoading());
     try {
-      log('token ${user.token}');
-      // final dioInstance = dio();
-      // UserModel userModel = UserModel.fromEntity(user);
-      // final jsonData = userModel.toJson();
-      // final response = await dioInstance.put('/me', data: jsonData);
-      await getIt<UserRepo>().update(user);
+      log('token ${getUser!.token}');
+      final dioInstance = dio();
+      UserModel userModel = UserModel.fromEntity(user);
+      final jsonData = userModel.toJson();
+      final response = await dioInstance.put(
+        '/me',
+        data: jsonData,
+        options: Options(headers: _setHeaders()),
+      );
+      await getIt<UserRepo>().updateLocal(user);
       emit(ProfileOfPatientSuccess(user: user));
     } on dio_package.DioException catch (e) {
       final userMessage = mapDioErrorToMessage(e);

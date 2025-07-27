@@ -27,7 +27,7 @@ class RayModel extends RayEntity {
     image: json['image'],
     temperature: json['temperature'],
     systolicBP: json['systolic_bp'],
-    diastolicBP: json['diastolicBP'],
+    diastolicBP: json['diastolic_bp'],
     heartRate: json['heart_rate'],
     hasCough: json['has_cough'],
     canSmellTasteFood: json['can_smell_taste'],
@@ -49,8 +49,7 @@ class RayModel extends RayEntity {
     'image': image,
     'temperature': temperature,
     'systolic_bp': systolicBP,
-    // TODO: will change from backend
-    'diastolicBP': diastolicBP,
+    'diastolic_bp': diastolicBP,
     'heart_rate': heartRate,
     'has_cough': hasCough,
     'can_smell_taste': canSmellTasteFood,

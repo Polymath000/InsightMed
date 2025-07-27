@@ -137,6 +137,9 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                     context,
                   ).uploadRay(rayEntity: composedRay);
                 } else if (ray.image == null || ray.image!.isEmpty) {
+                  setState(() {
+                    autovalidateMode = AutovalidateMode.always;
+                  });
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Please Upload the ray')),
                   );

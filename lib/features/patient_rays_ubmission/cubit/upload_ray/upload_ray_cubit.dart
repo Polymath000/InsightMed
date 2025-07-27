@@ -3,9 +3,9 @@ import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/constants/constants.dart';
 import '../../../../core/entities/ray_entity.dart';
 import '../../../../core/helpers/dio_error_message.dart';
+import '../../../../core/helpers/get_user.dart';
 import '../../../../core/models/ray_model.dart';
 import '../../../../core/services/dio/auth_dio.dart';
 
@@ -20,10 +20,14 @@ class UploadRayCubit extends Cubit<UploadRayState> {
       RayModel rayModel;
       rayModel = RayModel.fromEntity(rayEntity);
       final data = rayModel.toJson();
+       if (data['image'] != null && data['image'].isNotEmpty) {                 
+      data['image'] = await dio_package.MultipartFile.fromFile(data['image']);  
+     }                                                              
+    final formData = dio_package.FormData.fromMap(data); 
       final dioInstance = dio();
       var response = await dioInstance.post(
         '/rays',
-        data: data,
+        data: formData,
         options: Options(headers: _setHeaders()),
       );
       emit(UploadRaySuccess());
@@ -36,8 +40,7 @@ class UploadRayCubit extends Cubit<UploadRayState> {
   }
 
   Map<String, String> _setHeaders() => {
-    'Content-type': 'application/json',
     'Accept': 'application/json',
-    'Authorization': 'Bearer $mainToken',
+    'Authorization': 'Bearer ${getUser!.token}',
   };
 }
