@@ -42,11 +42,7 @@ final class HomeAppBar extends StatelessWidget {
     actions: [
       IconButton(
         icon: const CircleAvatar(),
-        onPressed: () => getIt<AuthRepository>().logout().then((_) async {
-          if (context.mounted) {
-            await AppRoutes.login(context);
-          }
-        }),
+        onPressed: () {},
         color: AppColors.grey,
       ),
     ],

@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/repos/auth_repo.dart';
+import '../../../../../core/services/get_it_service.dart';
+
 class SecurityContainer extends StatelessWidget {
   const SecurityContainer({super.key});
 
   @override
-  Widget build(final BuildContext context) => ListTile(
-    leading: const Icon(Icons.lock_outlined),
-    title: const Text('Change Password'),
-    trailing: const Icon(Icons.arrow_right_outlined),
-    onTap: () {},
+  Widget build(final BuildContext context) => Column(
+    children: [
+      ListTile(
+        leading: const Icon(Icons.lock_outlined),
+        title: const Text('Change Password'),
+        trailing: const Icon(Icons.arrow_right_outlined),
+        onTap: () {},
+      ),
+      ListTile(
+        leading: const Icon(Icons.logout_outlined),
+        title: const Text('LogOut'),
+        trailing: const Icon(Icons.arrow_right_outlined),
+        onTap: () {
+          getIt<AuthRepository>().logout().then((_) async {
+          if (context.mounted) {
+            await AppRoutes.login(context);
+          }
+        });
+        },
+      ),
+    ],
   );
 }

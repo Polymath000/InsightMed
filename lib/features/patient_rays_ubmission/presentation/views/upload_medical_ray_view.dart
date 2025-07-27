@@ -19,7 +19,7 @@ class _UploadMedicalRayViewState extends State<UploadMedicalRayView> {
   bool isLoading = false;
   @override
   Widget build(final BuildContext context) => ModalProgressHUD(
-    inAsyncCall: false,
+    inAsyncCall: isLoading,
 
     child: Scaffold(
       appBar: AppBar(

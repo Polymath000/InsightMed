@@ -27,22 +27,9 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
   String? _systolicBP;
   String? _diastolicBP;
   String? _heartRate;
-  String? _canSmellTasteFood = 'false';
-  String? _hasCough = 'false';
-  String? _hasHeadache = 'false';
-
-  @override
-  void initState() {
-    ray = const RayEntity(
-      canSmellTasteFood: 'false',
-      hasCough: 'false',
-      hasHeadache: 'false',
-    );
-    _canSmellTasteFood = 'false';
-    _hasCough = 'false';
-    _hasHeadache = 'false';
-    super.initState();
-  }
+  String? _canSmellTasteFood ;
+  String? _hasCough ;
+  String? _hasHeadache ;
 
   @override
   Widget build(final BuildContext context) => Padding(
@@ -136,19 +123,23 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                   await BlocProvider.of<UploadRayCubit>(
                     context,
                   ).uploadRay(rayEntity: composedRay);
+                                  widget.onChanged!(false);
+
                 } else if (ray.image == null || ray.image!.isEmpty) {
+                                  widget.onChanged!(false);
+
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Please Upload the ray')),
                   );
-                } else {
+                } else {                widget.onChanged!(false);
+
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
                   });
                 }
-                widget.onChanged!(true);
               },
               btnText: 'Upload Medical Ray',
             ),

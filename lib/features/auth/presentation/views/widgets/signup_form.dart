@@ -55,11 +55,18 @@ class _SignupFormState extends State<SignupForm> {
             });
           },
           validator: (final value) {
-            if (value!.length < 6) {
-              return 'Password Length less than 6 letters';
-            } else {
-              return null;
-            }
+            final isValid =
+                value != null &&
+                value.length >= 6 &&
+                RegExp(r'[A-Z]').hasMatch(value) &&
+                RegExp(r'[a-z]').hasMatch(value) &&
+                RegExp(r'[0-9]').hasMatch(value) &&
+                RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
+
+            return isValid
+                ? null
+                : 'Password must be 6+ chars and include '
+                      'uppercase, lowercase, number, and special character';
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 89),

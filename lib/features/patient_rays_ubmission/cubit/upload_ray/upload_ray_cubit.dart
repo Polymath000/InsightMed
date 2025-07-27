@@ -17,21 +17,41 @@ class UploadRayCubit extends Cubit<UploadRayState> {
   Future<void> uploadRay({required final RayEntity rayEntity}) async {
     emit(UploadRayLoading());
     try {
-      RayModel rayModel;
-      rayModel = RayModel.fromEntity(rayEntity);
-      final data = rayModel.toJson();
-       if (data['image'] != null && data['image'].isNotEmpty) {                 
-      data['image'] = await dio_package.MultipartFile.fromFile(data['image']);  
-     }                                                              
-    final formData = dio_package.FormData.fromMap(data); 
-      final dioInstance = dio();
-      var response = await dioInstance.post(
-        '/rays',
-        data: formData,
-        options: Options(headers: _setHeaders()),
-      );
-      emit(UploadRaySuccess());
-    } on dio_package.DioException catch (e) {
+      // final formData = dio_package.FormData();
+      // if (rayEntity.image != null && rayEntity.image!.isNotEmpty) {
+      //   formData.files.add(
+      //     MapEntry(
+      //       'image',
+      //       await dio_package.MultipartFile.fromFile(rayEntity.image!),
+      //     ),
+      //   );
+
+
+        print('can smell  ---------------------------> ${rayEntity.canSmellTasteFood}');
+        RayModel rayModel;
+        rayModel = RayModel.fromEntity(rayEntity);
+        final data = rayModel.toJson();
+        if (data['image'] != null && data['image'].isNotEmpty) {
+          data['image'] = await dio_package.MultipartFile.fromFile(data['image']);
+        }
+        final formData = dio_package.FormData.fromMap(data);        
+        // TODO: Solve problem "pass these variables not work" 
+        // formData.fields.addAll([
+        //   MapEntry('"has_cough"',data['"has_cough"']),
+        //   MapEntry('"can_smell_taste"', data['"can_smell_taste"']),
+        //   MapEntry('"has_headaches"', data['"has_headaches"']),
+        // ]);
+        final dioInstance = dio();
+
+        var response = await dioInstance.post(
+          '/rays',
+          data: formData,
+          options: Options(headers: _setHeaders()),
+        );
+        print('id ---------> ${response.data}');
+        emit(UploadRaySuccess());
+      }
+    on dio_package.DioException catch (e) {
       final userMessage = mapDioErrorToMessage(e);
       emit(UploadRayFailure(message: userMessage));
     } catch (e) {
