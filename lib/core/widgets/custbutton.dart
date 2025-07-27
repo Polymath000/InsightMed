@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CButton extends StatefulWidget {
-  const CButton({
+class CustomButton extends StatefulWidget {
+  const CustomButton({
     required this.btnText,
     required this.onTap,
     super.key,
@@ -15,10 +15,10 @@ class CButton extends StatefulWidget {
   final String? image;
 
   @override
-  State<CButton> createState() => _CButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
-class _CButtonState extends State<CButton> {
+class _CustomButtonState extends State<CustomButton> {
   double _scale = 1;
 
   void _onTapDown(final TapDownDetails details) {

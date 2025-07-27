@@ -10,7 +10,7 @@ final class BookAppointmentButton extends StatelessWidget {
   SliverToBoxAdapter build(_) => SliverToBoxAdapter(
     child: Padding(
       padding: const EdgeInsets.all(16),
-      child: CButton(onTap: () {}, btnText: 'Book Appointment'),
+      child: CustomButton(onTap: () {}, btnText: 'Book Appointment'),
     ),
   );
 }

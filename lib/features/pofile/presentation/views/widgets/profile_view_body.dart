@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/utls/i_text.dart';
@@ -65,7 +64,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             const Divider(),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: CButton(
+              child: CustomButton(
                 onTap: () async {
                   await showDialogForEditPatientProfile(
                     context,

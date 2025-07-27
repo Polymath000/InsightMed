@@ -34,7 +34,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
           ],
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 87),
-        CTextField(
+        CustomTextField(
           hint: 'Enter your email',
           choose: false,
           type: TextInputType.emailAddress,
@@ -52,7 +52,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
           ],
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 87),
-        CTextField(
+        CustomTextField(
           hint: 'Enter your password',
           choose: true,
           onChanged: (final p0) {
@@ -75,7 +75,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
           ],
         ),
         SizedBox(height: MediaQuery.of(context).size.height / 50),
-        CButton(
+        CustomButton(
           onTap: () async {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();

@@ -105,7 +105,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
             bottom: 16,
             left: 0,
             right: 0,
-            child: CButton(
+            child: CustomButton(
               onTap: () async {
                 widget.onChanged!(true);
                 if (_formKey.currentState!.validate() &&

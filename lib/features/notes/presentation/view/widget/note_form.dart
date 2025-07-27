@@ -31,7 +31,7 @@ class _NoteFormState extends State<NoteForm> {
           softWrap: true,
         ),
         const SizedBox(height: 8),
-        CTextField(choose: false, hint: 'Note Title', onChanged: (final p0) {}),
+        CustomTextField(choose: false, hint: 'Note Title', onChanged: (final p0) {}),
         const SizedBox(height: 16),
         Text(
           'Content',
@@ -42,7 +42,7 @@ class _NoteFormState extends State<NoteForm> {
         ),
         const SizedBox(height: 8),
 
-        CTextField(
+        CustomTextField(
           choose: false,
           hint: 'Note Title',
           onChanged: (final p0) {},
@@ -52,7 +52,7 @@ class _NoteFormState extends State<NoteForm> {
 
         const SizedBox(height: 16),
 
-        CButton(
+        CustomButton(
           btnText: 'Add Note',
           onTap: () {
             if (_formKey.currentState!.validate()) {
