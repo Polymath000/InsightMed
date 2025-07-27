@@ -33,7 +33,9 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
               b.updatedAt?.compareTo(a.updatedAt ?? DateTime.now()) ?? 0,
         );
       this.allPatients.addAll(allPatients);
-      emit(GetPatientsSuccess());
+      if (!isClosed) {
+        emit(GetPatientsSuccess());
+      }
     } on Exception catch (e) {
       log(e.toString());
       emit(GetPatientsFailure(e.toString()));

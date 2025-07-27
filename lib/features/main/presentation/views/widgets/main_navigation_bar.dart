@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'
     show
         Icon,
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart'
         NavigationDestination,
         StatelessWidget,
         ValueChanged;
+
+import '../../../../../core/helpers/get_user.dart';
 
 final class MainNavigationBar extends StatelessWidget {
   const MainNavigationBar({
@@ -19,18 +22,18 @@ final class MainNavigationBar extends StatelessWidget {
   NavigationBar build(_) => NavigationBar(
     selectedIndex: selectedIndex,
     onDestinationSelected: onDestinationSelected,
-    destinations: const [
-      NavigationDestination(
+    destinations:  [
+      const NavigationDestination(
         icon: Icon(Icons.home_outlined),
         label: 'Home',
         selectedIcon: Icon(Icons.home_rounded),
       ),
-      NavigationDestination(
+      if (!getUser!.isDoctor()) const NavigationDestination(
         icon: Icon(Icons.calendar_month_outlined),
         label: 'Appointments',
         selectedIcon: Icon(Icons.calendar_month_rounded),
-      ),
-      NavigationDestination(
+      ) else const SizedBox(),
+      const NavigationDestination(
         icon: Icon(Icons.person_outline_rounded),
         label: 'Profile',
         selectedIcon: Icon(Icons.person_rounded),

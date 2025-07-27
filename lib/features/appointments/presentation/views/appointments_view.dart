@@ -8,3 +8,4 @@ final class AppointmentsView extends StatelessWidget {
   @override
   AppointmentsViewBody build(_) => const AppointmentsViewBody();
 }
+ 

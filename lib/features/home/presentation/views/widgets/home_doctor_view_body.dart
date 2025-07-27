@@ -22,7 +22,12 @@ class HomeDoctorViewBody extends StatelessWidget {
               const HomeAppBar(),
               if (state is GetPatientsLoading)
                 const SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 300,),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
                 )
               else if (state is GetPatientsSuccess) ...{
                 SliverToBoxAdapter(
