@@ -1,4 +1,5 @@
 import '../enums/patient_enum.dart';
+import 'ray_entity.dart';
 
 class UserEntity {
   const UserEntity({
@@ -12,9 +13,12 @@ class UserEntity {
     this.age,
     this.phoneNumber,
     this.role,
+    this.medicalCondition,
     this.specialty,
-    this.lastVisit,
-    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.statuses,
+    this.rays,
   });
   final int? id;
   final String? token;
@@ -26,9 +30,12 @@ class UserEntity {
   final String? age;
   final String? phoneNumber;
   final String? role;
+  final String? medicalCondition;
   final String? specialty;
-  final DateTime? lastVisit;
-  final PatientStatusEnum? status;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final PatientStatusEnum? statuses;
+  final List<RayEntity>? rays;
 
   UserEntity copyWith({
     final int? id,
@@ -41,9 +48,12 @@ class UserEntity {
     final String? age,
     final String? phoneNumber,
     final String? role,
+    final String? medicalCondition,
     final String? specialty,
-    final DateTime? lastVisit,
-    final PatientStatusEnum? status,
+    final DateTime? createdAt,
+    final DateTime? updatedAt,
+    final PatientStatusEnum? statuses,
+    final List<RayEntity>? rays,
   }) => UserEntity(
     id: id ?? this.id,
     token: token ?? this.token,
@@ -55,9 +65,12 @@ class UserEntity {
     age: age ?? this.age,
     phoneNumber: phoneNumber ?? this.phoneNumber,
     role: role ?? this.role,
+    medicalCondition: medicalCondition ?? this.medicalCondition,
     specialty: specialty ?? this.specialty,
-    lastVisit: lastVisit ?? this.lastVisit,
-    status: status ?? this.status,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+    statuses: statuses ?? this.statuses,
+    rays: rays ?? this.rays,
   );
 
   bool isDoctor() => role == 'doctor';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/borders.dart' show AppBorders;
 import '../../../../../core/entities/user_entity.dart' show UserEntity;
+import '../../../../../core/enums/patient_enum.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import 'patiend_status_text.dart';
 
@@ -25,7 +26,9 @@ class PatientCard extends StatelessWidget {
         // '${DateTime.now().difference(patient.lastVisit!).inDays} '
         // 'days ago',
       ),
-      trailing: PatiendStatusText(status: patient.status!),
+      trailing: PatiendStatusText(
+        status: patient.statuses ?? PatientStatusEnum.critical,
+      ),
     ),
   );
 }

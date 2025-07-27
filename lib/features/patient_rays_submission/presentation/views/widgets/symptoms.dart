@@ -6,19 +6,15 @@ import '../../../../../core/widgets/custom_checkbox.dart';
 
 class Symptoms extends StatelessWidget {
   const Symptoms({
+    required this.onChangHasCough,
+    required this.onChangCanSmell,
+    required this.onChangHasHeadache,
     super.key,
-    this.onChangHasCough,
-    this.onChangCanSmell,
-    this.onChangHasHeadache,
   });
-  static List<String> symptomsList = [
-    'Has cough',
-    'Can smell/taste food',
-    'Has headache',
-  ];
-  final void Function(String?)? onChangHasCough;
-  final void Function(String?)? onChangCanSmell;
-  final void Function(String?)? onChangHasHeadache;
+
+  final void Function(bool) onChangHasCough;
+  final void Function(bool) onChangCanSmell;
+  final void Function(bool) onChangHasHeadache;
 
   @override
   Widget build(final BuildContext context) => decorationWidget(
@@ -31,32 +27,49 @@ class Symptoms extends StatelessWidget {
         ),
       ),
       const SizedBox(height: 20),
-      ...List.generate(
-        3,
-        (final index) => Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Row(
-            children: [
-              CustomCheckBox(
-                onChanged: (final value) {
-                  if(index == 0){
-                    onChangHasCough!(value? '1': '0');
-                  }else if(index == 1){
-                    onChangCanSmell!(value? '1': '0');
-                  }else{
-                    onChangHasHeadache!(value? '1': '0');
-                  }
-                },
+      Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          children: [
+            CustomCheckBox(onChanged: onChangHasCough),
+            const SizedBox(width: 16),
+            Text(
+              'Has cough',
+              style: AppTextStyles.titleMedium?.copyWith(
+                color: AppColors.black,
               ),
-              const SizedBox(width: 16),
-              Text(
-                symptomsList[index],
-                style: AppTextStyles.titleMedium?.copyWith(
-                  color: AppColors.black,
-                ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          children: [
+            CustomCheckBox(onChanged: onChangCanSmell),
+            const SizedBox(width: 16),
+            Text(
+              'Can smell/taste food',
+              style: AppTextStyles.titleMedium?.copyWith(
+                color: AppColors.black,
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Row(
+          children: [
+            CustomCheckBox(onChanged: onChangHasHeadache),
+            const SizedBox(width: 16),
+            Text(
+              'Has headache',
+              style: AppTextStyles.titleMedium?.copyWith(
+                color: AppColors.black,
+              ),
+            ),
+          ],
         ),
       ),
     ],

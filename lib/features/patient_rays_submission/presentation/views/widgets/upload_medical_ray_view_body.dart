@@ -27,9 +27,9 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
   String? _systolicBP;
   String? _diastolicBP;
   String? _heartRate;
-  String? _canSmellTasteFood;
-  String? _hasCough;
-  String? _hasHeadache;
+  bool? _canSmellTasteFood;
+  bool? _hasCough;
+  bool? _hasHeadache;
 
   @override
   Widget build(final BuildContext context) => Padding(

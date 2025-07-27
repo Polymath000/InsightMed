@@ -4,7 +4,10 @@ extension StringExtension on String {
 
   /// Reverses the string
   String get reversed => split('').reversed.join();
-  toInt()=> int.parse(this);
+
+  int toInt() => int.parse(this);
+
+  DateTime toDateTime() => DateTime.parse(this);
 
   /// Converts string to enum
   T? toEnum<T extends Enum?>(
