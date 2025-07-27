@@ -124,10 +124,8 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                     context,
                   ).uploadRay(rayEntity: composedRay);
                                   widget.onChanged!(false);
-
                 } else if (ray.image == null || ray.image!.isEmpty) {
                                   widget.onChanged!(false);
-
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
                   });
@@ -135,7 +133,6 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                     const SnackBar(content: Text('Please Upload the ray')),
                   );
                 } else {                widget.onChanged!(false);
-
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
                   });

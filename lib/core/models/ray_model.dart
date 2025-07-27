@@ -51,8 +51,8 @@ class RayModel extends RayEntity {
         'systolic_bp': systolicBP,
         'diastolic_bp': diastolicBP,
         'heart_rate': heartRate,
-        '"has_cough"': hasCough,
-        '"can_smell_taste"': canSmellTasteFood,
-        '"has_headaches"': hasHeadache,
+        'has_cough': hasCough,
+        'can_smell_taste': canSmellTasteFood,
+        'has_headaches': hasHeadache,
       };
 }

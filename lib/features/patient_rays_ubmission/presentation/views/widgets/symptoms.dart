@@ -40,11 +40,11 @@ class Symptoms extends StatelessWidget {
               CustomCheckBox(
                 onChanged: (final value) {
                   if(index == 0){
-                    onChangHasCough!(value? 'true': 'false');
+                    onChangHasCough!(value? '1': '0');
                   }else if(index == 1){
-                    onChangCanSmell!(value? 'true': 'false');
+                    onChangCanSmell!(value? '1': '0');
                   }else{
-                    onChangHasHeadache!(value? 'true': 'false');
+                    onChangHasHeadache!(value? '1': '0');
                   }
                 },
               ),
