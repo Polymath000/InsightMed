@@ -15,15 +15,15 @@ final class AppointmentsViewBody extends StatelessWidget {
   const AppointmentsViewBody({super.key});
 
   @override
-  CustomScrollView build(_) => const CustomScrollView(
+  CustomScrollView build(_) => CustomScrollView(
     slivers: [
-      SliverAppBar(title: IText('Appointments')),
-      AppointmentsDatePicker(),
-      SliverToBoxAdapter(
-        child: ListTile(title: IText('Available Slots - July 11')),
+      const SliverAppBar(title: IText('Appointments')),
+      const AppointmentsDatePicker(),
+      const SliverToBoxAdapter(
+        child: ListTile(title: IText('Available Slots')),
       ),
       AppointmentsTimePicker(),
-      BookAppointmentButton(),
+      const BookAppointmentButton(),
     ],
   );
 }

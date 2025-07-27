@@ -4,7 +4,7 @@ import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custom_checkbox.dart';
 
-class Symptoms extends StatelessWidget {
+class Symptoms extends StatelessWidget { 
   const Symptoms({
     required this.onChangHasCough,
     required this.onChangCanSmell,

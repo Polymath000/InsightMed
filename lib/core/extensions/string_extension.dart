@@ -9,7 +9,6 @@ extension StringExtension on String {
 
   DateTime toDateTime() => DateTime.parse(this);
 
-  /// Converts string to enum
   T? toEnum<T extends Enum?>(
     final List<T?>? values, [
     final Map<T, dynamic>? map,

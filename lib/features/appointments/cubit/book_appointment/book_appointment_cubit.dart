@@ -10,14 +10,14 @@ part 'book_appointment_state.dart';
 class BookAppointmentCubit extends Cubit<BookAppointmentState> {
   BookAppointmentCubit() : super(BookAppointmentInitial());
   late String message;
-  Future<List<String>> getAppiontments() async {
+  Future<List<String>> getAppiontments({required String date}) async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
 
       final response = await dioInstance.get(
         '/appointments/available',
-        queryParameters: {"doctor_id": 5, "date": "2025-08-27"},
+        queryParameters: {"doctor_id": 5, "date": date},
         options: Options(headers: _setHeaders()),
       );
       final Map<String, dynamic> jsonData = response.data;
@@ -26,7 +26,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       for (int i = 0; i< data.length;i++) {
         finalData[i] = data[i].substring(11, 16);
       }
-      emit(BookAppointmentSuccess());
+      emit(BookAppointmentSuccess(finalData: finalData));
       return finalData;
     } catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
