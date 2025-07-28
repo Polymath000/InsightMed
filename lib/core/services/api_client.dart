@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:logger/logger.dart';
 
 import '../constants/end_ponits.dart';
+import 'shared_preferences_singleton.dart';
 
 sealed class ApiClient {
   FlutterSecureStorage get storage;
@@ -28,6 +30,8 @@ final class DioClient extends ApiClient {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Authorization':
+              'Bearer ${SharedPreferencesSingleton.getString('access_token')}',
         },
       ),
     );
@@ -35,14 +39,35 @@ final class DioClient extends ApiClient {
   }
 
   DioClient._internal(this._dio) {
+    final logger = Logger(printer: PrettyPrinter(methodCount: 0));
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (final options, final handler) async {
-          final token = await storage.read(key: 'access_token');
-          if (token != null) {
-            options.headers['Authorization'] = 'Bearer $token';
-          }
+        onRequest: (final options, final handler) {
+          options.headers['Authorization'] =
+              'Bearer ${SharedPreferencesSingleton.getString('access_token')}';
+          final requestPath = '${options.baseUrl}${options.path}';
+          logger.i('${options.method} request ==> $requestPath');
           return handler.next(options);
+        },
+        onError: (final error, final handler) {
+          final options = error.requestOptions;
+          final requestPath = '${options.baseUrl}${options.path}';
+          logger
+            ..e('${options.method} request ==> $requestPath')
+            ..d(
+              'Error type: ${error.error} \n '
+              'Error message: ${error.message}',
+            );
+          handler.next(error);
+        },
+        onResponse: (final response, final handler) {
+          logger.d(
+            'STATUSCODE: ${response.statusCode} \n '
+            'STATUSMESSAGE: ${response.statusMessage} \n'
+            'HEADERS: ${response.headers} \n'
+            'Data: ${response.data}',
+          );
+          handler.next(response);
         },
       ),
     );

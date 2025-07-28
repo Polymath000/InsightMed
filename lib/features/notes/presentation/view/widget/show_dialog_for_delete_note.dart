@@ -1,56 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
+import '../../../domain/entities/note_entity.dart';
+import '../../controllers/get_notes_cubit/get_notes_cubit.dart';
+import '../../controllers/set_note_cubit/set_note_cubit.dart';
 
-Future<void> showDialogForDeleteNote({required final BuildContext context}) =>
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Are you sure?'),
-        content: SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                  icon: const Icon(Icons.delete_outline),
-                  label: const Text('Delete'),
-                  onPressed: () {
-                    // TODO(Anyone): Delete logic
-                    AppRoutes.pop(context);
-                  },
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.blueAccent,
-                    side: const BorderSide(color: Colors.blueAccent),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    elevation: 0,
-                  ),
-                  icon: const Icon(Icons.close),
-                  label: const Text('Cancel'),
-                  onPressed: () {
-                    AppRoutes.pop(context);
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+Future<void> deleteNoteDialog(
+  final BuildContext context, {
+  required final NoteEntity note,
+}) => showDialog(
+  context: context,
+  builder: (_) => AlertDialog(
+    title: const Text('Delete Note'),
+    content: const Text('Are you sure you want to delete this note?'),
+    actions: [
+      TextButton(
+        onPressed: () => AppRoutes.pop(context),
+        child: const Text('Cancel'),
       ),
-    );
+      TextButton(
+        onPressed: () async {
+          await context.read<SetNoteCubit>().deleteNote(note);
+          if (context.mounted) {
+            await context.read<GetNotesCubit>().getNotes();
+          }
+          if (context.mounted) {
+            AppRoutes.pop(context);
+          }
+        },
+        style: TextButton.styleFrom(foregroundColor: AppColors.red),
+        child: const Text('Delete'),
+      ),
+    ],
+  ),
+);

@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
-import 'edit_note_form.dart';
+import '../../../domain/entities/note_entity.dart';
+import 'set_note_dialog.dart';
 import 'show_dialog_for_delete_note.dart';
 
 class NoteCard extends StatelessWidget {
-  const NoteCard({
-    required this.title,
-    required this.description,
-    required this.createdDate,
-    required this.images,
-    super.key,
-  });
-  final String title;
-  final String description;
-  final DateTime createdDate;
-  final List<SvgPicture> images;
+  const NoteCard({required this.note, super.key});
+  final NoteEntity note;
+
   @override
   Widget build(final BuildContext context) => Card.filled(
     margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -28,18 +20,13 @@ class NoteCard extends StatelessWidget {
         children: [
           ListTile(
             leading: const Icon(Icons.note_rounded),
-            title: IText(title),
-            subtitle: Text(DateFormat.yMMMd().format(createdDate)),
+            title: IText(note.title!),
+            subtitle: Text(DateFormat.yMMMd().format(note.createdAt!)),
             trailing: IconButton.filledTonal(
-              onPressed: () => showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: const Text('Edit Note Form'),
-                  content: SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                    child: const SingleChildScrollView(child: EditNoteForm()),
-                  ),
-                ),
+              onPressed: () => setNoteDialog(
+                context,
+                note: note,
+                patientId: note.patientId!,
               ),
               icon: const Icon(Icons.edit_note_rounded),
             ),
@@ -47,28 +34,14 @@ class NoteCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(description, style: const TextStyle(fontSize: 16)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: 12,
-            ),
-            child: Row(
-              spacing: 8,
-              children: images
-                  .map((final image) => Card(child: image))
-                  .toList(),
-            ),
+            child: Text(note.note!, style: const TextStyle(fontSize: 16)),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 12, bottom: 12),
             child: Align(
               alignment: Alignment.bottomRight,
               child: IconButton.filled(
-                onPressed: () => showDialogForDeleteNote(context: context),
+                onPressed: () => deleteNoteDialog(context, note: note),
                 icon: const Icon(Icons.delete_rounded),
                 style: IconButton.styleFrom(backgroundColor: AppColors.error),
               ),

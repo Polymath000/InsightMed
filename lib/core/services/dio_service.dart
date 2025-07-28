@@ -12,7 +12,7 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final Map<String, dynamic> data,
     final String? documentId,
-  }) => _client.post(path: '$path/$documentId', data: data);
+  }) => _client.post(path: path, data: data);
 
   @override
   Future<void> addSubDocument({

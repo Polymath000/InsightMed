@@ -3,6 +3,9 @@ import 'dart:convert';
 import '../constants/end_ponits.dart' show EndPoint;
 import '../constants/local_keys.dart';
 import '../entities/user_entity.dart' show UserEntity;
+import '../enums/patient_enum.dart';
+import '../extensions/string_extension.dart';
+import '../helpers/list_handler.dart';
 import '../models/user_model.dart';
 import '../services/database_service.dart';
 import '../services/shared_preferences_singleton.dart';
@@ -23,6 +26,8 @@ sealed class UserRepo {
   UserEntity? getUserFromLocal();
 
   Future<List<UserEntity>> getPatientsFromApi();
+
+  Future<void> addPatientsStatusToApi(final UserEntity patient);
 
   Future<List<UserEntity>> getDoctors();
 
@@ -78,9 +83,25 @@ final class UserRepoImpl implements UserRepo {
   Future<List<UserEntity>> getPatientsFromApi() => _database
       .getDocument(path: EndPoint.getPatients, documentId: '')
       .then(
-        (final json) => (json['data'] as List<dynamic>)
-            .map((final e) => UserModel.fromJson(e).toEntity())
-            .toList(),
+        (final json) =>
+            ListHandler.parseComplex<UserEntity>(json['data'], (final e) {
+              final statuses = e['statuses'] as List<dynamic>?;
+              final status =
+                  statuses?.cast<Map<String, dynamic>>().firstOrNull?['status']
+                      as String?;
+              final patientStatus = status?.toEnum(PatientStatusEnum.values);
+              return UserModel.fromJson(
+                e,
+              ).toEntity().copyWith(status: patientStatus);
+            })!,
+      );
+
+  @override
+  Future<void> addPatientsStatusToApi(final UserEntity patient) =>
+      _database.addDocument(
+        path: EndPoint.addPatientsStatus,
+        data: {'patient_id': patient.id, 'status': patient.status?.toString()},
+        documentId: '',
       );
 
   @override

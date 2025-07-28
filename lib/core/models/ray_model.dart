@@ -58,7 +58,7 @@ class RayModel extends RayEntity {
     return RayModel(
       id: json?['id'],
       userId: json?['user_id'],
-      imagePath: json?['image'],
+      imagePath: json?['image_path'],
       temperature: json?['temperature'],
       systolicBP: json?['systolic_bp'],
       diastolicBP: json?['diastolic_bp'],

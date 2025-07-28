@@ -20,13 +20,10 @@ class SecurityContainer extends StatelessWidget {
         leading: const Icon(Icons.logout_outlined),
         title: const Text('LogOut'),
         trailing: const Icon(Icons.arrow_right_outlined),
-        onTap: () {
-          getIt<AuthRepository>().logout().then((_) async {
-          if (context.mounted) {
-            await AppRoutes.login(context);
-          }
-        });
-        },
+        onTap: () => Future.wait([
+          getIt<AuthRepository>().logout(),
+          AppRoutes.login(context),
+        ]),
       ),
     ],
   );

@@ -27,7 +27,7 @@ class PatientCard extends StatelessWidget {
         // 'days ago',
       ),
       trailing: PatiendStatusText(
-        status: patient.statuses ?? PatientStatusEnum.critical,
+        status: patient.status ?? PatientStatusEnum.newPatient,
       ),
     ),
   );

@@ -33,6 +33,7 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
               b.updatedAt?.compareTo(a.updatedAt ?? DateTime.now()) ?? 0,
         );
       this.allPatients.addAll(allPatients);
+      filteredPatients.addAll(allPatients);
       if (!isClosed) {
         emit(GetPatientsSuccess());
       }
@@ -45,12 +46,14 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
   void filterByStatus(final PatientStatusEnum? e) {
     selectedStatus = e;
     if (selectedStatus == null) {
-      filteredPatients.clear();
+      filteredPatients
+        ..clear()
+        ..addAll(allPatients);
       return emit(GetPatientsSuccess());
     }
     filteredPatients
       ..clear()
-      ..addAll(allPatients.where((final patient) => patient.statuses == e));
+      ..addAll(allPatients.where((final patient) => patient.status == e));
     return emit(GetPatientsSuccess());
   }
 }
