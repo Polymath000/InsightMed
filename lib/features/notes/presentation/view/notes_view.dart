@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/utls/app_images.dart';
 import 'widget/note_card.dart';
 import 'widget/note_form.dart';
 

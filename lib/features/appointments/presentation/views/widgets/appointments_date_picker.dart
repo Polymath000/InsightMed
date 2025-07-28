@@ -3,8 +3,7 @@ import 'package:flutter/material.dart'
 
 final class AppointmentsDatePicker extends StatelessWidget {
    AppointmentsDatePicker({
-    super.key,
-    required this.onDateChanged,
+    required this.onDateChanged, super.key,
   });
   final void Function(DateTime) onDateChanged;
   final DateTime initialDate = DateTime.now();

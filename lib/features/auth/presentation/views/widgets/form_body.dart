@@ -20,6 +20,11 @@ class FormBody extends StatefulWidget {
 class _FormBodyState extends State<FormBody> {
   final _formKey = GlobalKey<FormState>();
   final AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
+  String name = '';
+    String age = '';
+  String phoneNumber = '';
+  String gender = 'male';
+
   @override
   Widget build(final BuildContext context) {
     // TODO(Anyone): Replace this to use textEditingController
@@ -33,7 +38,12 @@ class _FormBodyState extends State<FormBody> {
             labelText: 'Full Name *',
             hintText: 'Enter your full name',
             onChanged: (final p0) {
-              user = user.copyWith(name: p0);
+              name = p0;
+            },
+            validator: (value) {
+              if (value!.isEmpty || value == null) {
+                return 'this field is required';
+              }
             },
           ),
           AppTextField(
@@ -41,7 +51,12 @@ class _FormBodyState extends State<FormBody> {
             hintText: 'Enter your age',
             keyboardType: TextInputType.number,
             onChanged: (final p0) {
-              user = user.copyWith(age: p0);
+              age = p0;
+            },
+            validator: (value) {
+              if (value!.isEmpty || value == null) {
+                return 'this field is required';
+              }
             },
           ),
           AppTextField(
@@ -49,18 +64,30 @@ class _FormBodyState extends State<FormBody> {
             hintText: 'Enter your phone number',
             keyboardType: TextInputType.phone,
             onChanged: (final p0) {
-              user = user.copyWith(phoneNumber: p0);
+              phoneNumber = p0;
+            },
+            validator: (value) {
+              if (value!.isEmpty || value == null) {
+                return 'this field is required';
+              }
             },
           ),
           const PatientTextOfTextField(text: 'Gender *'),
           RadioBtn(
             onChanged: (final p0) {
-              user = user.copyWith(gender: p0);
+              gender = p0??'male';
             },
           ),
           const Divider(),
           FilledButton(
             onPressed: () async {
+              user = user.copyWith(
+                age: age,
+                gender: gender,
+                name: name,
+                phoneNumber: phoneNumber,
+                role: 'patient'
+              );
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 await context.read<AuthCubit>().register(user: user);

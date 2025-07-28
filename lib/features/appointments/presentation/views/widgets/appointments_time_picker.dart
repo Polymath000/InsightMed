@@ -10,9 +10,8 @@ class AppointmentsTimePicker extends StatefulWidget {
   final void Function(String selectedTime)? onTimeSelected;
 
   AppointmentsTimePicker({
-    super.key,
+    required this.selectedDateTime, super.key,
     this.onTimeSelected,
-    required this.selectedDateTime,
   });
   DateTime selectedDateTime;
   @override
@@ -24,13 +23,13 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
 
   @override
   Widget build(final BuildContext context) {
-    bool isBooked = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
-    String selectedDate = widget.selectedDateTime.toString().substring(0, 11);
+    var isBooked = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
+    var selectedDate = widget.selectedDateTime.toString().substring(0, 11);
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverToBoxAdapter(
         child: BlocConsumer<BookAppointmentCubit, BookAppointmentState>(
-          listener: (final context, state) {
+          listener: (final context,final state) {
             if (state is BookAppointmentFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -40,7 +39,7 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
               );
             }
           },
-          builder: (context, state) {
+          builder: (final context,final state) {
             if (state is BookAppointmentLoading) {
               return const Center(
                 heightFactor: 5,
@@ -58,7 +57,7 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
               return Wrap(
                 spacing: 5,
                 runSpacing: 2,
-                children: List.generate(state.finalData.length, (index) {
+                children: List.generate(state.finalData.length, (final index) {
                   final time = state.finalData[index];
                   final isSelected = selectedIndex == index;
                   return AbsorbPointer(
@@ -72,8 +71,8 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
                               widget.selectedDateTime.year,
                               widget.selectedDateTime.month,
                               widget.selectedDateTime.day,
-                              int.parse(time.split(":")[0]),
-                              int.parse(time.split(":")[1]),
+                              int.parse(time.split(':')[0]),
+                              int.parse(time.split(':')[1]),
                             ).isBefore(DateTime.now())),
                     child: SizedBox(
                       width: (AppMediaQuery.width - 56) / 4,
@@ -84,15 +83,13 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
                         labelStyle: TextStyle(
                           color: isSelected ? Colors.white : Colors.black,
                         ),
-                        onSelected: (selected) {
+                        onSelected: (final selected) {
                           if (selected) {
                             setState(() {
                               selectedIndex = index;
                             });
                             widget.onTimeSelected?.call(
-                              selectedDate.toString().substring(0, 11) +
-                                  time +
-                                  ':00',
+                              '${selectedDate.substring(0, 11)}$time:00',
                             );
                           }
                         },

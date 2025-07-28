@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
+
 import '../../../../core/helpers/get_user.dart';
 import '../../../../core/services/dio/auth_dio.dart';
 import '../../../../core/services/shared_preferences_singleton.dart';
@@ -17,7 +17,7 @@ const String isBookedKey = 'isBooked';
 class BookAppointmentCubit extends Cubit<BookAppointmentState> {
   BookAppointmentCubit() : super(BookAppointmentInitial());
   late String message;
-  Future<void> getAppiontments({required String date}) async {
+  Future<void> getAppiontments({required final String date}) async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
@@ -30,13 +30,12 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         options: Options(headers: _setHeaders()),
       );
       final Map<String, dynamic> jsonData = response.data;
-      final List<String> data = List<String>.from(jsonData['data']);
-      List<String> finalData = List<String>.filled(
+      final data = List<String>.from(jsonData['data']);
+      var finalData = List<String>.filled(
         data.length,
         '',
-        growable: false,
       );
-      for (int i = 0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         finalData[i] = data[i].substring(11, 16);
       }
       if (!isClosed) {

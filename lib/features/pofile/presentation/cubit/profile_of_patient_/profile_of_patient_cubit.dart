@@ -64,7 +64,7 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
     } on dio_package.DioException catch (e) {
       final userMessage = mapDioErrorToMessage(e);
       emit(ProfileOfPatientFailure(message: userMessage));
-    } on Exception catch (e) {
+    } on Exception {
       emit(ProfileOfPatientFailure(message: messages['msgUnknown']!));
     }
   }

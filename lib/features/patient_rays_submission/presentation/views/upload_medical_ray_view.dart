@@ -37,7 +37,7 @@ class _UploadMedicalRayViewState extends State<UploadMedicalRayView> {
         ),
       ),
       body: BlocProvider(
-        create: (context) => UploadRayCubit(),
+        create: (final context) => UploadRayCubit(),
         child: BlocConsumer<UploadRayCubit, UploadRayState>(
           listener: (final context, final state) {
             if (state is UploadRayLoading) {

@@ -30,7 +30,11 @@ class _EditNoteFormState extends State<EditNoteForm> {
           softWrap: true,
         ),
         const SizedBox(height: 8),
-        CustomTextField(choose: false, hint: 'Note Title', onChanged: (final p0) {}),
+        CustomTextField(
+          choose: false,
+          hint: 'Note Title',
+          onChanged: (final p0) {},
+        ),
         const SizedBox(height: 16),
         Text(
           'Content',

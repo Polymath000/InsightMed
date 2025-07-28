@@ -1,14 +1,11 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:ui';
-
 import 'package:flutter/material.dart'
     show
         CustomScrollView,
         ListTile,
         SliverAppBar,
-        SliverToBoxAdapter,
-        StatelessWidget;
+        SliverToBoxAdapter;
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../../../core/utls/i_text.dart' show IText;
@@ -29,10 +26,10 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
   bool isLoading = false;
   DateTime selectedDate = DateTime.now();
   @override
-  Widget build(BuildContext context) => BlocProvider(
-    create: (context) => BookAppointmentCubit(),
+  Widget build(final BuildContext context) => BlocProvider(
+    create: (final context) => BookAppointmentCubit(),
     child: Builder(
-      builder: (context) {
+      builder: (final context) {
         context.read<BookAppointmentCubit>().getAppiontments(
           date: selectedDate.toString().substring(0, 10),
         );
@@ -43,7 +40,7 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
             slivers: [
               const SliverAppBar(title: IText('Appointments')),
               AppointmentsDatePicker(
-                onDateChanged: (DateTime date) {
+                onDateChanged: (final date) {
                   setState(() {
                     selectedDate = date;
                   });
@@ -56,7 +53,7 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
                 child: ListTile(title: IText('Available Slots')),
               ),
               AppointmentsTimePicker(
-                onTimeSelected: (selectedTime) {
+                onTimeSelected: (final selectedTime) {
                   setState(() {
                     selectedAppointmentTime = selectedTime;
                   });

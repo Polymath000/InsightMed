@@ -43,7 +43,7 @@ class UploadRayCubit extends Cubit<UploadRayState> {
     } on dio_package.DioException catch (e) {
       final userMessage = mapDioErrorToMessage(e);
       emit(UploadRayFailure(message: userMessage));
-    } catch (e) {
+    } on Exception catch (e) {
       emit(UploadRayFailure(message: e.toString()));
     }
   }
