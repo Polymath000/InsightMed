@@ -49,16 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 });
               },
             ),
-
             SizedBox(height: MediaQuery.of(context).size.height / 50),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Ccontainer(), OR(), Ccontainer()],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-
-            const SocialAuth(),
-            SizedBox(height: MediaQuery.of(context).size.height / 15),
             const AleardyHaveAnAccount(),
           ],
         ),

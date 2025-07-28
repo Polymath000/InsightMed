@@ -41,12 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             SizedBox(height: MediaQuery.of(context).size.height / 50),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Ccontainer(), OR(), Ccontainer()],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-            const SocialAuth(),
+ 
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             const DonnotHaveAnAccount(),
           ],
