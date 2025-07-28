@@ -11,17 +11,19 @@ import '../../../../core/services/shared_preferences_singleton.dart';
 
 part 'book_appointment_state.dart';
 
+const String appointmentIdKey = 'appointmentId';
+const String isBookedKey = 'isBooked';
+
 class BookAppointmentCubit extends Cubit<BookAppointmentState> {
   BookAppointmentCubit() : super(BookAppointmentInitial());
   late String message;
-  Future<List<String>> getAppiontments({required String date}) async {
+  Future<void> getAppiontments({required String date}) async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
       final formattedDate = DateFormat(
         'yyyy-MM-dd',
       ).format(DateTime.parse(date));
-
       final response = await dioInstance.get(
         '/appointments/available',
         queryParameters: {'doctor_id': 5, 'date': formattedDate},
@@ -34,18 +36,15 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         '',
         growable: false,
       );
-      ;
       for (int i = 0; i < data.length; i++) {
         finalData[i] = data[i].substring(11, 16);
       }
       if (!isClosed) {
-        emit(BookAppointmentSuccess(finalData: finalData));
+        emit(GetAppointmentSuccess(finalData: finalData));
       }
-      return finalData;
     } catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
       log(e.toString());
-      return [];
     }
   }
 
@@ -65,13 +64,11 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       Map<String, dynamic> jsonData = response.data;
-      //TODO: store in SharedPreferencesSingleton
-      String id = jsonData['data']['id'];
-      await SharedPreferencesSingleton.setString('appointmentId', id);
-      List<String> finalData = [];
-      // TODO: add isBook = true to the SharedPreferencesSingleton
+      String id = jsonData['data']['id'].toString();
+      await SharedPreferencesSingleton.setString(appointmentIdKey, id);
+      await SharedPreferencesSingleton.setBool(isBookedKey, true, value: true);
       if (!isClosed) {
-        emit(BookAppointmentSuccess(finalData: finalData));
+        emit(BookAppointmentSuccess());
       }
     } catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
@@ -92,11 +89,10 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
           },
         ),
       );
-      await SharedPreferencesSingleton.remove('appointmentId');
-      List<String> finalData = [];
-      // TODO: add isBook = false to the SharedPreferencesSingleton
+      await SharedPreferencesSingleton.remove(appointmentIdKey);
+      await SharedPreferencesSingleton.setBool(isBookedKey, false, value: false);
       if (!isClosed) {
-        emit(BookAppointmentSuccess(finalData: finalData));
+        emit(DeleteAppointmentSuccess());
       }
     } catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
@@ -105,6 +101,6 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
 }
 
 Map<String, String> _setHeaders() => {
-  'Content-type': 'application/json',
-  'Accept': 'application/json',
-};
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };

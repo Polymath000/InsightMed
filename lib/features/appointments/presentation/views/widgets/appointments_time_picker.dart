@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/helpers/app_media_query.dart';
+import '../../../../../core/services/shared_preferences_singleton.dart';
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../cubit/book_appointment/book_appointment_cubit.dart';
-import 'appointments_date_picker.dart';
 
 class AppointmentsTimePicker extends StatefulWidget {
   final void Function(String selectedTime)? onTimeSelected;
 
-  const AppointmentsTimePicker({super.key, this.onTimeSelected});
-
+  AppointmentsTimePicker({
+    super.key,
+    this.onTimeSelected,
+    required this.selectedDateTime,
+  });
+  DateTime selectedDateTime;
   @override
   State<AppointmentsTimePicker> createState() => _AppointmentsTimePickerState();
 }
@@ -19,13 +23,12 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
   int? selectedIndex;
 
   @override
-  Widget build(final BuildContext context) => SliverPadding(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    sliver: SliverToBoxAdapter(
-      child: BlocProvider(
-        create: (context) =>
-            BookAppointmentCubit()
-              ..getAppiontments(date: selectedDate.toString()),
+  Widget build(final BuildContext context) {
+    bool isBooked = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
+    String selectedDate = widget.selectedDateTime.toString().substring(0, 11);
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverToBoxAdapter(
         child: BlocConsumer<BookAppointmentCubit, BookAppointmentState>(
           listener: (final context, state) {
             if (state is BookAppointmentFailure) {
@@ -45,7 +48,7 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
               );
             }
 
-            if (state is BookAppointmentSuccess) {
+            if (state is GetAppointmentSuccess) {
               if (state.finalData.isEmpty) {
                 return const Center(
                   child: IText('No available slots for this day.'),
@@ -58,27 +61,42 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
                 children: List.generate(state.finalData.length, (index) {
                   final time = state.finalData[index];
                   final isSelected = selectedIndex == index;
-                  return SizedBox(
-                    width: (AppMediaQuery.width - 56) / 4,
-                    child: ChoiceChip(
-                      label: IText(time, textAlign: TextAlign.center),
-                      selected: isSelected,
-                      selectedColor: AppColors.primary,
-                      labelStyle: TextStyle(
-                        color: isSelected ? Colors.white : Colors.black,
+                  return AbsorbPointer(
+                    absorbing:
+                        isBooked ||
+                        (widget.selectedDateTime.year == DateTime.now().year &&
+                            widget.selectedDateTime.month ==
+                                DateTime.now().month &&
+                            widget.selectedDateTime.day == DateTime.now().day &&
+                            DateTime(
+                              widget.selectedDateTime.year,
+                              widget.selectedDateTime.month,
+                              widget.selectedDateTime.day,
+                              int.parse(time.split(":")[0]),
+                              int.parse(time.split(":")[1]),
+                            ).isBefore(DateTime.now())),
+                    child: SizedBox(
+                      width: (AppMediaQuery.width - 56) / 4,
+                      child: ChoiceChip(
+                        label: IText(time, textAlign: TextAlign.center),
+                        selected: isSelected,
+                        selectedColor: AppColors.primary,
+                        labelStyle: TextStyle(
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
+                        onSelected: (selected) {
+                          if (selected) {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                            widget.onTimeSelected?.call(
+                              selectedDate.toString().substring(0, 11) +
+                                  time +
+                                  ':00',
+                            );
+                          }
+                        },
                       ),
-                      onSelected: (selected) {
-                        if (selected) {
-                          setState(() {
-                            selectedIndex = index;
-                          });
-                          widget.onTimeSelected?.call(
-                            selectedDate.toString().substring(0, 11) +
-                                time +
-                                ":00",
-                          );
-                        }
-                      },
                     ),
                   );
                 }),
@@ -88,6 +106,6 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
           },
         ),
       ),
-    ),
-  );
+    );
+  }
 }
