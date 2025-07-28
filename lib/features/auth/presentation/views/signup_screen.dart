@@ -35,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height / 45),
             Text(
-              'Welcome Back!',
+              'Welcome!',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24.sp),
             ),
             SizedBox(height: MediaQuery.of(context).size.height / 85),

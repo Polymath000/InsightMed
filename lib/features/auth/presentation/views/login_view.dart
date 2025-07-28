@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-import '../../../../core/entities/user_entity.dart';
-import '../../../../core/helpers/on_generate_routes.dart';
 import 'widgets/container.dart';
 import 'widgets/donnot_have_an_account.dart';
 import 'widgets/login_form.dart';
@@ -51,13 +49,6 @@ class _LoginScreenState extends State<LoginScreen> {
             const SocialAuth(),
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             const DonnotHaveAnAccount(),
-            TextButton(
-              onPressed: () => AppRoutes.patientDetails(
-                context,
-                patient: const UserEntity(),
-              ),
-              child: const Text('Go To Patient View'),
-            ),
           ],
         ),
       ),

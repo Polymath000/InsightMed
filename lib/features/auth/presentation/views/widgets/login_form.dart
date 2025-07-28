@@ -27,7 +27,6 @@ class _LoginFormState extends State<LoginForm> {
         } else if (state is AuthSuccess) {
           widget.onLoadingChanged?.call(isLoading: false);
           await AppRoutes.main(context);
-          // TODO : Handle Navigator
         } else if (state is AuthFailure) {
           widget.onLoadingChanged?.call(isLoading: false);
           ScaffoldMessenger.of(

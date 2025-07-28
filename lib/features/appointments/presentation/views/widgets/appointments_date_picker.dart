@@ -2,31 +2,25 @@ import 'package:flutter/material.dart'
     show CalendarDatePicker, SliverToBoxAdapter, StatelessWidget;
 
 final class AppointmentsDatePicker extends StatelessWidget {
-  const AppointmentsDatePicker({super.key});
+   AppointmentsDatePicker({
+    required this.onDateChanged, super.key,
+  });
+  final void Function(DateTime) onDateChanged;
+  final DateTime initialDate = DateTime.now();
 
   @override
   SliverToBoxAdapter build(_) => SliverToBoxAdapter(
-    child: CalendarDatePicker(
-      initialDate: DateTime.now().copyWith(
-        day: switch (DateTime.now().weekday) {
-          5 => DateTime.now().day + 2,
-          6 => DateTime.now().day + 1,
-          _ => DateTime.now().day,
-        },
-      ),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-      onDateChanged: (date) {
-        selectedDate = date;
-        print(selectedDate);
-      },
-      selectableDayPredicate: (final day) {
-        if (day.weekday == 5 || day.weekday == 6) {
-          return false;
-        }
-        return true;
-      },
-    ),
-  );
+        child: CalendarDatePicker(
+          initialDate: initialDate,
+          firstDate: DateTime.now(),
+          lastDate: DateTime.now().add(const Duration(days: 365)),
+          onDateChanged: onDateChanged,
+          selectableDayPredicate: (final day) {
+            if (day.weekday == 5 || day.weekday == 6) {
+              return false;
+            }
+            return true;
+          },
+        ),
+      );
 }
-DateTime selectedDate = DateTime.now();

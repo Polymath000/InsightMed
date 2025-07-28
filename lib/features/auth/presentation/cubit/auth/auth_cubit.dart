@@ -64,8 +64,25 @@ class AuthCubit extends Cubit<AuthState> {
       // checkCodeStatus(response: response);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
-      final userMessage = mapDioErrorToMessage(e);
-      emit(AuthFailure(userMessage));
+      log('Registration failed with status code: ${e.response?.statusCode}');
+      log('Error response: ${e.response?.data}');
+
+      var errorMessage = 'An unknown error occurred.';
+      if (e.response?.data is Map<String, dynamic>) {
+        final responseData = e.response!.data as Map<String, dynamic>;
+        if (responseData.containsKey('errors')) {
+          final errors = responseData['errors'] as Map<String, dynamic>;
+          errorMessage = errors.entries
+              .map((final entry) => '${entry.key}: ${(entry.value as List).join(', ')}')
+              .join('\n');
+        } else if (responseData.containsKey('message')) {
+          errorMessage = responseData['message'] as String;
+        }
+      } else {
+        errorMessage = mapDioErrorToMessage(e);
+      }
+
+      emit(AuthFailure(errorMessage));
     } on Exception catch (e) {
       log(e.toString());
       isAuthenticated = false;

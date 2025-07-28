@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
@@ -35,6 +36,15 @@ class _SignupFormState extends State<SignupForm> {
     autovalidateMode: autovalidateMode,
     child: Column(
       children: [
+        Row(
+          children: [
+            Text(
+              'Email',
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+                const SizedBox(height: 7),
         CustomTextField(
           hint: 'Email',
           choose: false,
@@ -45,7 +55,16 @@ class _SignupFormState extends State<SignupForm> {
             });
           },
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 89),
+                const SizedBox(height: 15),
+        Row(
+          children: [
+            Text(
+              'Password',
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+                const SizedBox(height: 7),
         CustomTextField(
           hint: 'Password',
           choose: true,
@@ -58,9 +77,9 @@ class _SignupFormState extends State<SignupForm> {
             final isValid =
                 value != null &&
                 value.length >= 6 &&
-                RegExp(r'[A-Z]').hasMatch(value) &&
-                RegExp(r'[a-z]').hasMatch(value) &&
-                RegExp(r'[0-9]').hasMatch(value) &&
+                RegExp('[A-Z]').hasMatch(value) &&
+                RegExp('[a-z]').hasMatch(value) &&
+                RegExp('[0-9]').hasMatch(value) &&
                 RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
 
             return isValid
@@ -69,7 +88,16 @@ class _SignupFormState extends State<SignupForm> {
                       'uppercase, lowercase, number, and special character';
           },
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 89),
+                const SizedBox(height: 15),
+        Row(
+          children: [
+            Text(
+              'Confirm Password',
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+                const SizedBox(height: 7),
         CustomTextField(
           hint: 'Confirm Password',
           choose: true,
@@ -80,7 +108,7 @@ class _SignupFormState extends State<SignupForm> {
             });
           },
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 50),
+                const SizedBox(height: 40),
         CustomButton(
           onTap: () async {
             setState(() {
@@ -113,7 +141,6 @@ class _SignupFormState extends State<SignupForm> {
               });
             }
           },
-
           btnText: 'Create Account',
           colorText: kBasicColor,
         ),
