@@ -6,6 +6,5 @@ final class AppointmentsView extends StatelessWidget {
   const AppointmentsView({super.key});
 
   @override
-  AppointmentsViewBody build(_) => const AppointmentsViewBody();
+  AppointmentsViewBody build(_) =>  AppointmentsViewBody();
 }
- 

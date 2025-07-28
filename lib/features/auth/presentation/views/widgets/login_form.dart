@@ -28,19 +28,6 @@ class _LoginFormState extends State<LoginForm> {
           widget.onLoadingChanged?.call(isLoading: false);
           await AppRoutes.main(context);
           // TODO : Handle Navigator
-          // if (BlocProvider.of<AuthCubit>(context).isDoctor()) {
-          //   AppRoutes.main(context);
-          // } else {
-          //   // TODO : Go to doctor dashboard
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => const Scaffold(
-          //         body: Center(child: Text('Doctor Dashboard')),
-          //       ),
-          //     ),
-          //   );
-          // }
         } else if (state is AuthFailure) {
           widget.onLoadingChanged?.call(isLoading: false);
           ScaffoldMessenger.of(
