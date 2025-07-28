@@ -12,13 +12,11 @@ class NoteCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.createdDate,
-    required this.images,
     super.key,
   });
   final String title;
   final String description;
   final DateTime createdDate;
-  final List<SvgPicture> images;
   @override
   Widget build(final BuildContext context) => Card.filled(
     margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -49,20 +47,7 @@ class NoteCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(description, style: const TextStyle(fontSize: 16)),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 16,
-              bottom: 12,
-            ),
-            child: Row(
-              spacing: 8,
-              children: images
-                  .map((final image) => Card(child: image))
-                  .toList(),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.only(right: 12, bottom: 12),
             child: Align(

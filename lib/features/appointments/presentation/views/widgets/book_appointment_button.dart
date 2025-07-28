@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +21,7 @@ class BookAppointmentButton extends StatefulWidget {
 
 class _BookAppointmentButtonState extends State<BookAppointmentButton> {
   bool isBooked = false;
-
+  String? appointmentId;
   @override
   Widget build(final BuildContext context) => SliverToBoxAdapter(
     child: BlocProvider(
@@ -28,7 +30,7 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
         builder: (context) =>
             BlocListener<BookAppointmentCubit, BookAppointmentState>(
               listener: (context, state) {
-                if (state is BookAppointmentSuccess) {
+                if (state is BookAppointmentSuccess ) {
                   setState(() {
                     isBooked = true;
                   });
@@ -75,14 +77,13 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,
                             // TODO: retrive the id form SharedPreferences
-                          ).deleteAppointment(id: 5);
+                                                    ).deleteAppointment(id: '5');
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Appointment cancelled!'),
                             ),
                           );
                         } else {
-                          // Logic for booking appointment
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,
                           ).bookAppointment(appointment: widget.selectedTime);

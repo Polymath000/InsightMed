@@ -46,10 +46,6 @@ class NotesView extends StatelessWidget {
             'readings are now within normal range (120/80). '
             'readings are now within normal range (120/80).',
         createdDate: DateTime.now(),
-        images: [
-          SvgPicture.asset(Assets.assetsImagesRay1),
-          SvgPicture.asset(Assets.assetsImagesRay2),
-        ],
       ),
       NoteCard(
         title: 'Note Title edsfe ferfedffesdf djkhf sdhf jj jfi jd',
@@ -59,17 +55,6 @@ class NotesView extends StatelessWidget {
             'readings are now within normal range (120/80). '
             'readings are now within normal range (120/80).',
         createdDate: DateTime.now(),
-        images: [
-          SvgPicture.asset(Assets.assetsImagesRay1),
-          SvgPicture.asset(Assets.assetsImagesRay2),
-          SvgPicture.asset(
-            Assets.assetsImagesXRaysChestIcon,
-            height: 64,
-            width: 64,
-          ),
-          SvgPicture.asset(Assets.assetsImagesRay2),
-          SvgPicture.asset(Assets.assetsImagesRay2),
-        ],
       ),
       NoteCard(
         title: 'Note Title edsfe ferfedffesdf djkhf sdhf jj jfi jd',
@@ -79,10 +64,6 @@ class NotesView extends StatelessWidget {
             'readings are now within normal range (120/80). '
             'readings are now within normal range (120/80).',
         createdDate: DateTime.now(),
-        images: [
-          SvgPicture.asset(Assets.assetsImagesRay1),
-          SvgPicture.asset(Assets.assetsImagesRay2),
-        ],
       ),
     ],
   );

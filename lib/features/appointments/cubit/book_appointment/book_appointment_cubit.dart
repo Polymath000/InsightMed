@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import '../../../../core/helpers/get_user.dart';
 import '../../../../core/services/dio/auth_dio.dart';
+import '../../../../core/services/shared_preferences_singleton.dart';
 
 part 'book_appointment_state.dart';
 
@@ -54,7 +55,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       final dioInstance = dio();
       var response = await dioInstance.post(
         '/appointments',
-        data: {'doctor_id': 5, 'appointment_time': appointment},
+        data: {'doctor_id': '5', 'appointment_time': appointment},
         options: Options(
           headers: {
             'Content-type': 'application/json',
@@ -66,6 +67,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       Map<String, dynamic> jsonData = response.data;
       //TODO: store in SharedPreferencesSingleton
       String id = jsonData['data']['id'];
+      await SharedPreferencesSingleton.setString('appointmentId', id);
       List<String> finalData = [];
       // TODO: add isBook = true to the SharedPreferencesSingleton
       if (!isClosed) {
@@ -76,7 +78,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     }
   }
 
-  Future<void> deleteAppointment({required final int id}) async {
+  Future<void> deleteAppointment({required final String id}) async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
@@ -90,6 +92,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
           },
         ),
       );
+      await SharedPreferencesSingleton.remove('appointmentId');
       List<String> finalData = [];
       // TODO: add isBook = false to the SharedPreferencesSingleton
       if (!isClosed) {
