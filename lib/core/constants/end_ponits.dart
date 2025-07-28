@@ -7,7 +7,7 @@ sealed class EndPoint {
   static const String addLogout = '/logout';
   static const String addForgotPassword = '/forgot-password';
   static const String addVerifyResetCode = '/verify-reset-code';
-  static const String addResetPassword = '/reset-password';
+  static const String addResetPasswordView = '/reset-password';
 
   static const String getDashboard = '/dashboard';
 

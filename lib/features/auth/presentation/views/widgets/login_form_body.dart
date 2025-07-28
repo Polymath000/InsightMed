@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../cubit/auth/auth_cubit.dart';
@@ -64,12 +65,17 @@ class _LoginFormBodyState extends State<LoginFormBody> {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text(
-              'Forget Password?',
-              style: TextStyle(
-                color: kMainColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 14.sp,
+            GestureDetector(
+              onTap: () async {
+                await AppRoutes.resetPasswordView(context);
+              },
+              child: Text(
+                'Forget Password?',
+                style: TextStyle(
+                  color: kMainColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
               ),
             ),
           ],

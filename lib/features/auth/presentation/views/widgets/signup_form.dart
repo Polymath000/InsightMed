@@ -44,7 +44,7 @@ class _SignupFormState extends State<SignupForm> {
             ),
           ],
         ),
-                const SizedBox(height: 7),
+        const SizedBox(height: 7),
         CustomTextField(
           hint: 'Email',
           choose: false,
@@ -55,7 +55,7 @@ class _SignupFormState extends State<SignupForm> {
             });
           },
         ),
-                const SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           children: [
             Text(
@@ -64,7 +64,7 @@ class _SignupFormState extends State<SignupForm> {
             ),
           ],
         ),
-                const SizedBox(height: 7),
+        const SizedBox(height: 7),
         CustomTextField(
           hint: 'Password',
           choose: true,
@@ -88,7 +88,7 @@ class _SignupFormState extends State<SignupForm> {
                       'uppercase, lowercase, number, and special character';
           },
         ),
-                const SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           children: [
             Text(
@@ -97,7 +97,7 @@ class _SignupFormState extends State<SignupForm> {
             ),
           ],
         ),
-                const SizedBox(height: 7),
+        const SizedBox(height: 7),
         CustomTextField(
           hint: 'Confirm Password',
           choose: true,
@@ -108,7 +108,7 @@ class _SignupFormState extends State<SignupForm> {
             });
           },
         ),
-                const SizedBox(height: 40),
+        const SizedBox(height: 40),
         CustomButton(
           onTap: () async {
             setState(() {
