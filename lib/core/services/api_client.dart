@@ -12,14 +12,17 @@ sealed class ApiClient {
     final Map<String, dynamic>? data,
   });
 
-  Future<Map<String, dynamic>> get(
-    final String path, {
+  Future<Map<String, dynamic>> get({
+    required final String path,
     final Map<String, dynamic>? queryParameters,
   });
 
-  Future<Response> put(final String path, final Map<String, dynamic> data);
+  Future<Response> put({
+    required final String path,
+    required final Map<String, dynamic> data,
+  });
 
-  Future<Response> delete(final String path);
+  Future<Response> delete({required final String path});
 }
 
 final class DioClient extends ApiClient {
@@ -86,17 +89,19 @@ final class DioClient extends ApiClient {
       .then((final response) => response.data!);
 
   @override
-  Future<Map<String, dynamic>> get(
-    final String path, {
+  Future<Map<String, dynamic>> get({
+    required final String path,
     final Map<String, dynamic>? queryParameters,
   }) => _dio
       .get<Map<String, dynamic>>(path, queryParameters: queryParameters)
       .then((final response) => response.data!);
 
   @override
-  Future<Response> put(final String path, final Map<String, dynamic> data) =>
-      _dio.put(path, data: data);
+  Future<Response> put({
+    required final String path,
+    required final Map<String, dynamic> data,
+  }) => _dio.put(path, data: data);
 
   @override
-  Future<Response> delete(final String path) => _dio.delete(path);
+  Future<Response> delete({required final String path}) => _dio.delete(path);
 }

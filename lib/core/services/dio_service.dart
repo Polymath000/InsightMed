@@ -1,7 +1,6 @@
 import '../entities/query_entity.dart';
 import 'api_client.dart';
 import 'database_service.dart';
-import 'dio/auth_dio.dart';
 
 class DatabaseServiceImpl implements DatabaseService {
   const DatabaseServiceImpl(this._client);
@@ -57,9 +56,7 @@ class DatabaseServiceImpl implements DatabaseService {
   Future<void> deleteDocument({
     required final String path,
     required final String documentId,
-  }) {
-    throw UnimplementedError();
-  }
+  }) => _client.delete(path: path);
 
   @override
   Future<void> deleteDocuments({
@@ -88,7 +85,7 @@ class DatabaseServiceImpl implements DatabaseService {
   Future<Map<String, dynamic>> getDocument({
     required final String path,
     required final String documentId,
-  }) => _client.get(path);
+  }) => _client.get(path: path);
 
   @override
   Future<List<Map<String, dynamic>>> getDocuments({
@@ -136,7 +133,7 @@ class DatabaseServiceImpl implements DatabaseService {
   Future<bool> isDocumentExists({
     required final String path,
     required final String documentId,
-  }) => _client.get(path).then((final data) => data.isNotEmpty);
+  }) => _client.get(path: path).then((final data) => data.isNotEmpty);
 
   @override
   Stream<List<Map<String, dynamic>>> streamCollection({
@@ -210,10 +207,7 @@ class DatabaseServiceImpl implements DatabaseService {
     required final String path,
     required final Map<String, dynamic> data,
     required final String documentId,
-  }) async {
-    final dioInstance = dio();
-    final response = await dioInstance.put(path, data: data);
-  }
+  }) => _client.put(path: path, data: data);
 
   @override
   Future<void> updateDocuments({
