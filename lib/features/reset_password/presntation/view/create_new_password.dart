@@ -5,18 +5,23 @@ import '../../../../core/helpers/on_generate_routes.dart';
 import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/create_new_password_view_body.dart';
 
+
 class CreateNewPasswordView extends StatefulWidget {
-  CreateNewPasswordView({super.key, required this.email});
+  const CreateNewPasswordView({
+    super.key,
+    required this.email,
+    required this.code,
+  });
   final String email;
   static const routeName = 'CreateNewPasswordView';
-
+  final String code;
   @override
   State<CreateNewPasswordView> createState() => _CreateNewPasswordViewState();
 }
 
 class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
   bool isLoading = false;
-
+  String password = '';
   @override
   Widget build(BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoading,
@@ -48,7 +53,12 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
               setState(() {
                 isLoading = false;
               });
-              await AppRoutes.login(context);
+
+              await AppRoutes.loadingView(
+                context,
+                email: widget.email,
+                password: password,
+              );
             } else if (state is CreateNewPasswordLoading) {
               setState(() {
                 isLoading = true;
@@ -62,9 +72,21 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
               );
             }
           },
-          child: CreateNewPasswordViewBody(email: widget.email),
+          child: CreateNewPasswordViewBody(
+            email: widget.email,
+            onPasswordChanged: (value) {
+              password = value;
+            }, code: widget.code,
+          ),
         ),
       ),
     ),
   );
+}
+
+class CreateNewPasswordViewArgs {
+  final String email;
+  final String code;
+
+  const CreateNewPasswordViewArgs({required this.email, required this.code});
 }

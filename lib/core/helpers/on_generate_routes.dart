@@ -8,6 +8,7 @@ import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/patient_details/presentation/view/patient_details_view.dart';
 import '../../features/patient_rays_submission/presentation/views/upload_medical_ray_view.dart';
 import '../../features/reset_password/presntation/view/create_new_password.dart';
+import '../../features/reset_password/presntation/view/loading_view.dart';
 import '../../features/reset_password/presntation/view/reset_password_view.dart';
 import '../../features/reset_password/presntation/view/verify_code.dart';
 import '../entities/user_entity.dart';
@@ -50,16 +51,29 @@ sealed class AppRoutes {
       _pushNamed<T>(context, PatientDetailsView.routeName, arguments: patient);
 
   static Future<Object?> vrerifyCodeView(
-    BuildContext context, {
-    required String email,
+    final BuildContext context, {
+    required final String email,
   }) => _pushNamed(context, VerifyCodeView.routeName, arguments: email);
 
+  static Future<Object?> loadingView(
+    final BuildContext context, {
+    required final String email,
+    required final String password,
+  }) => _pushNamed(
+    context,
+    LoadingView.routeName,
+    arguments: LoadingViewArgs(email: email, password: password),
+  );
+
   static Future<Object?> createNewPasswordView(
-    BuildContext context, {
-    required String email,
-  }) => _pushNamed(context, CreateNewPasswordView.routeName, arguments: email);
-
-
+    final BuildContext context, {
+    required final String email,
+    required final String code,
+  }) => _pushNamed(
+    context,
+    CreateNewPasswordView.routeName,
+    arguments: CreateNewPasswordView(email: email, code: code),
+  );
   // Routes without arguments
   static Future<Object?> main(final BuildContext context) =>
       _pushNamedAndRemoveAll(context, MainView.routeName);
@@ -88,9 +102,16 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientDetailsView.routeName: (_, final args) =>
       PatientDetailsView(patient: args! as UserEntity),
   ResetPasswordView.routeName: (_, _) => ResetPasswordView(),
-  VerifyCodeView.routeName: (_, final args) => VerifyCodeView(email: args! as String),
-    CreateNewPasswordView.routeName: (_, final args) => CreateNewPasswordView(email: args! as String),
-
+  VerifyCodeView.routeName: (_, final args) =>
+      VerifyCodeView(email: args! as String),
+  CreateNewPasswordView.routeName: (_, final args) {
+    final data = args! as CreateNewPasswordViewArgs;
+    return CreateNewPasswordView(email: data.email, code: data.code);
+  },
+  LoadingView.routeName: (_, final args) {
+    final data = args! as LoadingViewArgs;
+    return LoadingView(email: data.email, password: data.password);
+  },
 };
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (final settings) {

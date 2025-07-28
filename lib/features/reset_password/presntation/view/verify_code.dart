@@ -16,7 +16,7 @@ class VerifyCodeView extends StatefulWidget {
 
 class _VerifyCodeViewState extends State<VerifyCodeView> {
   bool isLoading = false;
-
+  String code = '';
   @override
   Widget build(BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoading,
@@ -50,6 +50,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
               await AppRoutes.createNewPasswordView(
                 context,
                 email: widget.email,
+                code: code,
               );
             } else if (state is VerifyCodeLoading) {
               setState(() {
@@ -64,7 +65,14 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
               );
             }
           },
-          child: VerifyCodeViewBody(email: widget.email),
+          child: VerifyCodeViewBody(
+            email: widget.email,
+            onCodeChanged: (final value) {
+              setState(() {
+                code = value;
+              });
+            },
+          ),
         ),
       ),
     ),

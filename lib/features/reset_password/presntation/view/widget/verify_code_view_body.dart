@@ -8,11 +8,13 @@ import '../../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'custom_animated_text_kit.dart';
 
 class VerifyCodeViewBody extends StatelessWidget {
-  VerifyCodeViewBody({super.key, required this.email});
+  VerifyCodeViewBody({super.key, required this.email, required this.onCodeChanged});
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
   final String email;
   String code = '';
+    final ValueChanged<String>? onCodeChanged;
+
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -49,6 +51,7 @@ class VerifyCodeViewBody extends StatelessWidget {
               type: TextInputType.number,
               onChanged: (final p0) {
                 code = p0!;
+                onCodeChanged!(p0);
               },
             ),
             const SizedBox(height: 30),

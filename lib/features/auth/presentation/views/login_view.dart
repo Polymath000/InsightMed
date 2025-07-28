@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-import 'widgets/container.dart';
 import 'widgets/donnot_have_an_account.dart';
 import 'widgets/login_form.dart';
-import 'widgets/or.dart';
-import 'widgets/social_auth.dart';
 import 'widgets/top_login_view.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             SizedBox(height: MediaQuery.of(context).size.height / 50),
- 
             SizedBox(height: MediaQuery.of(context).size.height / 50),
             const DonnotHaveAnAccount(),
           ],
