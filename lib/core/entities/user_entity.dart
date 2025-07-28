@@ -74,4 +74,5 @@ class UserEntity {
   );
 
   bool isDoctor() => role == 'doctor';
+  bool isPatient() => !isDoctor();
 }

@@ -39,23 +39,40 @@ class RayModel extends RayEntity {
     updatedAt: entity?.updatedAt,
   );
 
-  factory RayModel.fromJson(final Map<String, dynamic>? json) => RayModel(
-    id: json?['id'],
-    userId: json?['user_id'],
-    imagePath: json?['image'],
-    temperature: json?['temperature'],
-    systolicBP: json?['systolic_bp'],
-    diastolicBP: json?['diastolic_bp'],
-    heartRate: json?['heart_rate'],
-    hasCough: json?['has_cough'],
-    canSmellTasteFood: json?['can_smell_taste'],
-    hasHeadache: json?['has_headaches'],
-    aiStatus: (json?['ai_status'] as String?)?.toEnum(XRayStatusEnum.values),
-    aiSummary: json?['ai_summary'],
-    aiConfidence: json?['ai_confidence'],
-    createdAt: (json?['created_at'] as String?)?.toDateTime(),
-    updatedAt: (json?['updated_at'] as String?)?.toDateTime(),
-  );
+  factory RayModel.fromJson(final Map<String, dynamic>? json) {
+    final hasCough = switch (json?['has_cough']) {
+      bool? b => b,
+      String? s => s == '1',
+      _ => null,
+    };
+    final canSmellTasteFood = switch (json?['can_smell_taste']) {
+      bool? b => b,
+      String? s => s == '1',
+      _ => null,
+    };
+    final hasHeadache = switch (json?['has_headaches']) {
+      bool? b => b,
+      String? s => s == '1',
+      _ => null,
+    };
+    return RayModel(
+      id: json?['id'],
+      userId: json?['user_id'],
+      imagePath: json?['image'],
+      temperature: json?['temperature'],
+      systolicBP: json?['systolic_bp'],
+      diastolicBP: json?['diastolic_bp'],
+      heartRate: json?['heart_rate'],
+      hasCough: hasCough,
+      canSmellTasteFood: canSmellTasteFood,
+      hasHeadache: hasHeadache,
+      aiStatus: (json?['ai_status'] as String?)?.toEnum(XRayStatusEnum.values),
+      aiSummary: json?['ai_summary'],
+      aiConfidence: json?['ai_confidence'],
+      createdAt: (json?['created_at'] as String?)?.toDateTime(),
+      updatedAt: (json?['updated_at'] as String?)?.toDateTime(),
+    );
+  }
 
   RayEntity toEntity() => RayEntity(
     id: id,
@@ -83,9 +100,9 @@ class RayModel extends RayEntity {
     'systolic_bp': systolicBP,
     'diastolic_bp': diastolicBP,
     'heart_rate': heartRate,
-    'has_cough': hasCough,
-    'can_smell_taste': canSmellTasteFood,
-    'has_headaches': hasHeadache,
+    'has_cough': (hasCough ?? false) ? '1' : '0',
+    'can_smell_taste': (canSmellTasteFood ?? false) ? '1' : '0',
+    'has_headaches': (hasHeadache ?? false) ? '1' : '0',
     'ai_status': aiStatus?.name,
     'ai_summary': aiSummary,
     'ai_confidence': aiConfidence,

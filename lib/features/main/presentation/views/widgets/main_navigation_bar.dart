@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'
     show
         Icon,
@@ -22,17 +21,18 @@ final class MainNavigationBar extends StatelessWidget {
   NavigationBar build(_) => NavigationBar(
     selectedIndex: selectedIndex,
     onDestinationSelected: onDestinationSelected,
-    destinations:  [
+    destinations: [
       const NavigationDestination(
         icon: Icon(Icons.home_outlined),
         label: 'Home',
         selectedIcon: Icon(Icons.home_rounded),
       ),
-      if (!getUser!.isDoctor()) const NavigationDestination(
-        icon: Icon(Icons.calendar_month_outlined),
-        label: 'Appointments',
-        selectedIcon: Icon(Icons.calendar_month_rounded),
-      ) else const SizedBox(),
+      if (getUser?.isPatient() ?? false)
+        const NavigationDestination(
+          icon: Icon(Icons.calendar_month_outlined),
+          label: 'Appointments',
+          selectedIcon: Icon(Icons.calendar_month_rounded),
+        ),
       const NavigationDestination(
         icon: Icon(Icons.person_outline_rounded),
         label: 'Profile',

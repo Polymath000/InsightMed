@@ -11,9 +11,6 @@ import 'package:flutter/material.dart'
         TextStyle;
 
 import '../../../../../core/helpers/get_user.dart';
-import '../../../../../core/helpers/on_generate_routes.dart';
-import '../../../../../core/repos/auth_repo.dart';
-import '../../../../../core/services/get_it_service.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
 
