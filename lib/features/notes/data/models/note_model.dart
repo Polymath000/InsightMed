@@ -20,14 +20,21 @@ class NoteModel extends NoteEntity {
     createdAt: entity.createdAt,
   );
 
-  factory NoteModel.fromJson(final Map<String, dynamic> json) => NoteModel(
-    id: json['id'],
-    title: json['title'],
-    note: json['note'],
-    patientId: json['patient_id'],
-    rayId: json['ray_id'],
-    createdAt: (json['created_at'] as String?)?.toDateTime(),
-  );
+  factory NoteModel.fromJson(final Map<String, dynamic> json) {
+    final patientId = switch (json['patient_id']) {
+      String? s => s?.toInt(),
+      int? i => i,
+      _ => null,
+    };
+    return NoteModel(
+      id: json['id'],
+      title: json['title'],
+      note: json['note'],
+      patientId: patientId,
+      rayId: json['ray_id'],
+      createdAt: (json['created_at'] as String?)?.toDateTime(),
+    );
+  }
 
   NoteEntity toEntity() => NoteEntity(
     id: id,

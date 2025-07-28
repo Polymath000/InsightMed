@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart'
     show
         BuildContext,
-        CircleAvatar,
         Column,
         CrossAxisAlignment,
-        IconButton,
         MainAxisSize,
         SliverAppBar,
         StatelessWidget,
@@ -18,30 +16,29 @@ final class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
   @override
-  SliverAppBar build(final BuildContext context) => SliverAppBar(
-    title: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IText(
-          'Good morning,',
-          style: TextStyle(
-            fontSize: 14,
-            color: AppColors.onSurface.withAlpha(180),
+  SliverAppBar build(final BuildContext context) {
+    final hour = DateTime.now().hour;
+    final dayTime = hour < 12
+        ? 'Good morning,'
+        : (hour < 18 ? 'Good afternoon,' : 'Good evening,');
+    return SliverAppBar(
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IText(
+            dayTime,
+            style: TextStyle(
+              fontSize: 14,
+              color: AppColors.onSurface.withAlpha(180),
+            ),
           ),
-        ),
-        if (getUser?.isDoctor() ?? false)
-          IText('Dr. ${getUser?.name ?? 'Anonymous'}')
-        else
-          IText(getUser?.name ?? 'Anonymous'),
-      ],
-    ),
-    actions: [
-      IconButton(
-        icon: const CircleAvatar(),
-        onPressed: () {},
-        color: AppColors.grey,
+          if (getUser?.isDoctor() ?? false)
+            IText('Dr. ${getUser?.name ?? 'Anonymous'}')
+          else
+            IText(getUser?.name ?? 'Anonymous'),
+        ],
       ),
-    ],
-  );
+    );
+  }
 }

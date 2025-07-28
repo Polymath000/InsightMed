@@ -16,15 +16,16 @@ final class NoteRepoImpl implements NoteRepo {
   );
 
   @override
-  Future<void> update(final NoteEntity note) => _database.updateDocument(
+  Future<void> update(final NoteEntity note) => _database.addDocument(
     path: EndPoint.updateNotes(note.id!),
     data: NoteModel.fromEntity(note).toJson(),
     documentId: '',
   );
 
   @override
-  Future<void> delete(final NoteEntity note) => _database.deleteDocument(
+  Future<void> delete(final NoteEntity note) => _database.addDocument(
     path: EndPoint.deleteNotes(note.id!),
+    data: NoteModel.fromEntity(note).toJson(),
     documentId: '',
   );
 

@@ -17,14 +17,14 @@ class NoteEntity {
   NoteEntity copyWith({
     final int? id,
     final String? title,
-    final String? description,
+    final String? note,
     final int? patientId,
     final String? rayId,
     final DateTime? createdAt,
   }) => NoteEntity(
     id: id ?? this.id,
     title: title ?? this.title,
-    note: description ?? this.note,
+    note: note ?? this.note,
     patientId: patientId ?? this.patientId,
     rayId: rayId ?? this.rayId,
     createdAt: createdAt ?? this.createdAt,
