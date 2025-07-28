@@ -5,12 +5,11 @@ import '../../../../../core/utls/themes/app_text_style.dart';
 
 class CustomAnimatedTextKit extends StatelessWidget {
    CustomAnimatedTextKit({
-    super.key,
-    required this.title
+    required this.title, super.key
   });
   String title;
   @override
-  Widget build(BuildContext context) => AnimatedTextKit(
+  Widget build(final BuildContext context) => AnimatedTextKit(
       pause: Duration.zero,
       repeatForever: true,
       animatedTexts: [

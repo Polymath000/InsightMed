@@ -17,7 +17,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   bool isLoading = false;
   String email = '';
   @override
-  Widget build(BuildContext context) => ModalProgressHUD(
+  Widget build(final BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoading,
 
     child: Scaffold(
@@ -30,9 +30,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
         actions: const [],
       ),
       body: BlocProvider(
-        create: (context) => ResetPasswordCubit(),
+        create: (final context) => ResetPasswordCubit(),
         child: BlocListener<ResetPasswordCubit, ResetPasswordState>(
-          listener: (context, state) async {
+          listener: (final context,final state) async {
             if (state is ResetPasswordFailure) {
               setState(() {
                 isLoading = false;
@@ -62,7 +62,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
             }
           },
           child: ResetPasswordViewBody(
-            onEmailChanged: (value) {
+            onEmailChanged: (final value) {
               setState(() {
                 email = value;
               });

@@ -15,7 +15,7 @@ import 'appointments_time_picker.dart' show AppointmentsTimePicker;
 import 'book_appointment_button.dart' show BookAppointmentButton;
 
 final class AppointmentsViewBody extends StatefulWidget {
-  AppointmentsViewBody({super.key});
+  const AppointmentsViewBody({super.key});
 
   @override
   State<AppointmentsViewBody> createState() => _AppointmentsViewBodyState();
@@ -62,7 +62,7 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
               ),
               BookAppointmentButton(
                 selectedTime: selectedAppointmentTime,
-                onBook: (value) {
+                onBook: (final value) {
                   setState(() {
                     isLoading = value;
                   });

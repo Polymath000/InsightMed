@@ -3,10 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'widgets/aleardy_have_an_account.dart';
 import 'widgets/animated_text_sign_up.dart';
-import 'widgets/container.dart';
-import 'widgets/or.dart';
 import 'widgets/signup_form.dart';
-import 'widgets/social_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

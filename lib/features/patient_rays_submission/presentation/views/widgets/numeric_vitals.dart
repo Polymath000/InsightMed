@@ -57,7 +57,7 @@ class _NumericVitalsState extends State<NumericVitals> {
   }
 
   @override
-  Widget build(BuildContext context) => decorationWidget(
+  Widget build(final BuildContext context) => decorationWidget(
     children: [
       Text(
         'Numeric Vitals',
@@ -68,7 +68,7 @@ class _NumericVitalsState extends State<NumericVitals> {
       ),
       const SizedBox(height: 8),
       ...fields.map(
-        (field) => Column(
+        (final field) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -82,15 +82,17 @@ class _NumericVitalsState extends State<NumericVitals> {
               choose: false,
               hint: 'Write ${field.label}',
               type: TextInputType.number,
-              validator: (value) {
+              validator: (final value) {
                 final val = value?.toInt();
-                if (val == null) return 'Enter a valid number';
+                if (val == null) {
+                  return 'Enter a valid number';
+                }
                 if (val < field.min || val > field.max) {
                   return 'must be between ${field.min} and ${field.max}';
                 }
                 return null;
               },
-              onChanged: (value) => field.onChanged?.call(value),
+              onChanged: (final value) => field.onChanged?.call(value),
             ),
             const SizedBox(height: 16),
           ],
@@ -101,10 +103,6 @@ class _NumericVitalsState extends State<NumericVitals> {
 }
 
 class _VitalFieldData {
-  final String label;
-  final int min;
-  final int max;
-  final void Function(String?)? onChanged;
 
   _VitalFieldData({
     required this.label,
@@ -112,4 +110,8 @@ class _VitalFieldData {
     required this.max,
     required this.onChanged,
   });
+  final String label;
+  final int min;
+  final int max;
+  final void Function(String?)? onChanged;
 }

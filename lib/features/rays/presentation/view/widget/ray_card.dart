@@ -76,7 +76,8 @@ class RayCard extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               ray.aiSummary ??
-                  'Patchy opacities in right lower lobe consistent with pneumonia.'
+                  'Patchy opacities in right lower lobe consistent with '
+                      'pneumonia.'
                       ' Recommend clinical correlation.',
             ),
           ],

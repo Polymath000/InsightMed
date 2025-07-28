@@ -9,5 +9,3 @@ List<Color> animatedTextColors = [
   AppColors.green,
   AppColors.success,
 ];
-
-String mainToken = '';

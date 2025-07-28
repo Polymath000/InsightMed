@@ -4,7 +4,6 @@ import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter/material.dart' show immutable;
 import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
 
-import '../../../../../core/constants/constants.dart';
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
 import '../../../../../core/helpers/get_auth_message.dart';
@@ -38,7 +37,6 @@ class AuthCubit extends Cubit<AuthState> {
           ? (response.data?['patient_data'])
           : response.data?['doctor_data'];
       user = UserModel.fromJson(userData);
-      mainToken = token;
       emit(AuthSuccess());
     } on Exception catch (e) {
       log(e.toString());
@@ -73,7 +71,10 @@ class AuthCubit extends Cubit<AuthState> {
         if (responseData.containsKey('errors')) {
           final errors = responseData['errors'] as Map<String, dynamic>;
           errorMessage = errors.entries
-              .map((final entry) => '${entry.key}: ${(entry.value as List).join(', ')}')
+              .map(
+                (final entry) =>
+                    '${entry.key}: ${(entry.value as List).join(', ')}',
+              )
               .join('\n');
         } else if (responseData.containsKey('message')) {
           errorMessage = responseData['message'] as String;
@@ -145,9 +146,6 @@ class AuthCubit extends Cubit<AuthState> {
   void cleanUp() {
     user = null;
     isAuthenticated = false;
-    mainToken = '';
-    // TODO
-    // await storage.delete(key: 'token');
   }
 
   void checkCodeStatus({required final dio_package.Response response}) {

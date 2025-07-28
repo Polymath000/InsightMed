@@ -6,7 +6,7 @@ import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/verify_code_view_body.dart';
 
 class VerifyCodeView extends StatefulWidget {
-  VerifyCodeView({super.key, required this.email});
+  const VerifyCodeView({required this.email, super.key});
   final String email;
   static const routeName = 'VerifyCodeView';
 
@@ -18,7 +18,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
   bool isLoading = false;
   String code = '';
   @override
-  Widget build(BuildContext context) => ModalProgressHUD(
+  Widget build(final BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoading,
     child: Scaffold(
       appBar: AppBar(
@@ -27,12 +27,12 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: [],
+        actions: const [],
       ),
       body: BlocProvider(
-        create: (context) => ResetPasswordCubit(),
+        create: (final context) => ResetPasswordCubit(),
         child: BlocListener<ResetPasswordCubit, ResetPasswordState>(
-          listener: (context, state) async {
+          listener: (final context,final state) async {
             if (state is ResetPasswordFailure) {
               setState(() {
                 isLoading = false;

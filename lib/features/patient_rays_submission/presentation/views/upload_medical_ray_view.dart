@@ -64,7 +64,7 @@ class _UploadMedicalRayViewState extends State<UploadMedicalRayView> {
             }
           },
           builder: (final context, final state) => UploadMedicalRayViewBody(
-            onChanged: (p0) {
+            onChanged: (final p0) {
               setState(() {
                 isLoading = p0;
               });

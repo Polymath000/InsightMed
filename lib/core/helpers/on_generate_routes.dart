@@ -64,7 +64,6 @@ sealed class AppRoutes {
     LoadingView.routeName,
     arguments: LoadingViewArgs(email: email, password: password),
   );
-
   static Future<Object?> createNewPasswordView(
     final BuildContext context, {
     required final String email,
@@ -72,7 +71,7 @@ sealed class AppRoutes {
   }) => _pushNamed(
     context,
     CreateNewPasswordView.routeName,
-    arguments: CreateNewPasswordView(email: email, code: code),
+    arguments: CreateNewPasswordViewArgs(email: email, code: code),
   );
   // Routes without arguments
   static Future<Object?> main(final BuildContext context) =>
@@ -89,6 +88,13 @@ sealed class AppRoutes {
 
   static Future<Object?> uploadMedicalRay(final BuildContext context) =>
       _pushNamed(context, UploadMedicalRayView.routeName);
+}
+
+class CreateNewPasswordViewArgs {
+
+  const CreateNewPasswordViewArgs({required this.email, required this.code});
+  final String email;
+  final String code;
 }
 
 Map<String, Widget Function(BuildContext, Object?)> _routes = {

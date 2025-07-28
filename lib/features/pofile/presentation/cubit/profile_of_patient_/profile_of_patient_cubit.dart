@@ -42,10 +42,10 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
   }
 
   Map<String, String> _setHeaders() => {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ${getUser!.token}',
-      };
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${getUser!.token}',
+  };
 
   Future<void> updatePatientDetails({required final UserEntity user}) async {
     emit(ProfileOfPatientLoading());
@@ -54,7 +54,7 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
       final dioInstance = dio();
       UserModel userModel = UserModel.fromEntity(user);
       final jsonData = userModel.toJson();
-      final response = await dioInstance.put(
+      var response = await dioInstance.put(
         '/me',
         data: jsonData,
         options: Options(headers: _setHeaders()),

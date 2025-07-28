@@ -40,10 +40,11 @@ class _FormBodyState extends State<FormBody> {
             onChanged: (final p0) {
               name = p0;
             },
-            validator: (value) {
-              if (value!.isEmpty || value == null) {
+            validator: (final value) {
+              if (value!.isEmpty ) {
                 return 'this field is required';
               }
+              return null;
             },
           ),
           AppTextField(
@@ -53,10 +54,11 @@ class _FormBodyState extends State<FormBody> {
             onChanged: (final p0) {
               age = p0;
             },
-            validator: (value) {
-              if (value!.isEmpty || value == null) {
+            validator: (final value) {
+              if (value!.isEmpty ) {
                 return 'this field is required';
               }
+              return null;
             },
           ),
           AppTextField(
@@ -67,9 +69,10 @@ class _FormBodyState extends State<FormBody> {
               phoneNumber = p0;
             },
             validator: (value) {
-              if (value!.isEmpty || value == null) {
+              if (value!.isEmpty ) {
                 return 'this field is required';
               }
+              return null;
             },
           ),
           const PatientTextOfTextField(text: 'Gender *'),

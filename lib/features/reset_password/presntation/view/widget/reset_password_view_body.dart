@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
@@ -8,14 +7,23 @@ import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'custom_animated_text_kit.dart';
 
-class ResetPasswordViewBody extends StatelessWidget {
-  ResetPasswordViewBody({super.key, required this.onEmailChanged});
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String email = '';
-  final ValueChanged<String>? onEmailChanged;
-  final _formKey = GlobalKey<FormState>();
+class ResetPasswordViewBody extends StatefulWidget {
+  const ResetPasswordViewBody({required this.onEmailChanged, super.key});
+  final void Function(String) onEmailChanged;
+
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
+  State<ResetPasswordViewBody> createState() => _ResetPasswordViewBodyState();
+}
+
+class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  String email = '';
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(final BuildContext context) => SingleChildScrollView(
     padding: const EdgeInsets.all(16),
     child: Form(
       key: _formKey,
@@ -43,12 +51,13 @@ class ResetPasswordViewBody extends StatelessWidget {
           ),
           const SizedBox(height: 7),
           CustomTextField(
-            hint: 'Email',
-            choose: false,
             type: TextInputType.emailAddress,
+
+            choose: false,
+            hint: 'Email',
             onChanged: (final p0) {
               email = p0!;
-              onEmailChanged!(email);
+              widget.onEmailChanged(email);
             },
           ),
           const SizedBox(height: 30),

@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/services/dio/auth_dio.dart';
@@ -18,7 +18,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         options: Options(headers: _setHeaders()),
       );
       emit(ResetPasswordSuccess());
-    } catch (e) {
+    } on Exception catch (e) {
       emit(ResetPasswordFailure(message: e.toString()));
     }
   }
@@ -36,7 +36,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         options: Options(headers: _setHeaders()),
       );
       emit(VerifyCodeSuccess());
-    } catch (e) {
+    }  on Exception catch (e) {
       emit(ResetPasswordFailure(message: e.toString()));
     }
   }
@@ -62,7 +62,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
 
       );
       emit(CreateNewPasswordSuccess());
-    } catch (e) {
+    } on Exception catch (e) {
       emit(ResetPasswordFailure(message: e.toString()));
     }
   }

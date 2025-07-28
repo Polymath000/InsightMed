@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../../core/helpers/on_generate_routes.dart';
+import '../../../auth/presentation/cubit/auth/auth_cubit.dart';
 import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/create_new_password_view_body.dart';
 
-
 class CreateNewPasswordView extends StatefulWidget {
   const CreateNewPasswordView({
-    super.key,
-    required this.email,
-    required this.code,
+    required this.email, required this.code, super.key,
   });
   final String email;
   static const routeName = 'CreateNewPasswordView';
@@ -23,7 +21,7 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
   bool isLoading = false;
   String password = '';
   @override
-  Widget build(BuildContext context) => ModalProgressHUD(
+  Widget build(final BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoading,
 
     child: Scaffold(
@@ -33,12 +31,14 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: [],
       ),
-      body: BlocProvider(
-        create: (context) => ResetPasswordCubit(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (final context) => ResetPasswordCubit()),
+          BlocProvider(create: (final context) => AuthCubit()),
+        ],
         child: BlocListener<ResetPasswordCubit, ResetPasswordState>(
-          listener: (context, state) async {
+          listener: (final context,final state) async {
             if (state is ResetPasswordFailure) {
               setState(() {
                 isLoading = false;
@@ -74,19 +74,13 @@ class _CreateNewPasswordViewState extends State<CreateNewPasswordView> {
           },
           child: CreateNewPasswordViewBody(
             email: widget.email,
-            onPasswordChanged: (value) {
+            onPasswordChanged: (final value) {
               password = value;
-            }, code: widget.code,
+            },
+            code: widget.code,
           ),
         ),
       ),
     ),
   );
-}
-
-class CreateNewPasswordViewArgs {
-  final String email;
-  final String code;
-
-  const CreateNewPasswordViewArgs({required this.email, required this.code});
 }

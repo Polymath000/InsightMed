@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/helpers/on_generate_routes.dart';
+
 import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
@@ -8,22 +8,33 @@ import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'custom_animated_text_kit.dart';
 
-class CreateNewPasswordViewBody extends StatelessWidget {
-  CreateNewPasswordViewBody({
-    super.key,
+class CreateNewPasswordViewBody extends StatefulWidget {
+  const CreateNewPasswordViewBody({
     required this.email,
     required this.onPasswordChanged,
     required this.code,
+    super.key,
   });
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  final _formKey = GlobalKey<FormState>();
   final String email;
   final ValueChanged<String>? onPasswordChanged;
-  String password = '';
-  String confirmPassword = '';
   final String code;
+
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
+  State<CreateNewPasswordViewBody> createState() =>
+      _CreateNewPasswordViewBodyState();
+}
+
+class _CreateNewPasswordViewBodyState extends State<CreateNewPasswordViewBody> {
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  final _formKey = GlobalKey<FormState>();
+
+  String password = '';
+
+  String confirmPassword = '';
+
+  @override
+  Widget build(final BuildContext context) => SingleChildScrollView(
     padding: const EdgeInsets.all(16),
     child: Form(
       key: _formKey,
@@ -54,7 +65,7 @@ class CreateNewPasswordViewBody extends StatelessWidget {
             choose: true,
             onChanged: (final p0) {
               password = p0!;
-              onPasswordChanged!(p0!);
+              widget.onPasswordChanged!(p0);
             },
             validator: (final value) {
               final isValid =
@@ -91,21 +102,26 @@ class CreateNewPasswordViewBody extends StatelessWidget {
           CustomButton(
             onTap: () async {
               if (_formKey.currentState!.validate() &&
-                  password.isNotEmpty &&
-                  confirmPassword.isNotEmpty &&
                   password == confirmPassword) {
                 _formKey.currentState!.save();
                 await context.read<ResetPasswordCubit>().createNewPassword(
-                  code: code,
-                  email: email,
+                  code: widget.code,
+                  email: widget.email,
                   password: password,
                   passwordConfirmation: confirmPassword,
+                );
+              } else if (password == confirmPassword) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('The passwords not match'),
+                    backgroundColor: Colors.red,
+                  ),
                 );
               } else {
                 autovalidateMode = AutovalidateMode.always;
               }
             },
-            btnText: 'Verify Code',
+            btnText: 'Change New Password',
             colorText: AppColors.primary,
           ),
         ],
