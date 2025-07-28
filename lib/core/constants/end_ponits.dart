@@ -23,13 +23,14 @@ sealed class EndPoint {
 
   static const String getDoctors = '/doctors';
   static const String getPatients = '/doctor/patients';
-  static const String getPatientsStatus = '/doctor/patients/status';
+  static const String addPatientsStatus = '/doctor/patients/status';
 
   static const String addNotes = '/doctor/notes';
-  static String updateNotes(final String id) => '/doctor/notes/$id';
-  static String deleteNotes(final String id) => '/doctor/notes/$id';
+  static String updateNotes(final int id) => '/doctor/notes/{$id}';
+  static String deleteNotes(final int id) => '/doctor/notes/{$id}';
+  static String getNotes(final int id) => '/doctor/patients/{$id}/notes';
 
-  static String getAIRays(final String id) => '/doctor/rays/$id/ai';
+  static String getAIRays(final String id) => '/doctor/rays/{$id}/ai';
 }
 
 sealed class ApiKey {

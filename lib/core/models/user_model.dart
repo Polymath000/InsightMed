@@ -21,7 +21,7 @@ class UserModel extends UserEntity {
     super.specialty,
     super.createdAt,
     super.updatedAt,
-    super.statuses,
+    super.status,
     super.rays,
   });
 
@@ -40,7 +40,7 @@ class UserModel extends UserEntity {
     specialty: entity.specialty,
     createdAt: entity.createdAt,
     updatedAt: entity.updatedAt,
-    statuses: entity.statuses,
+    status: entity.status,
     rays: entity.rays,
   );
 
@@ -59,9 +59,11 @@ class UserModel extends UserEntity {
     specialty: json['specialty'],
     createdAt: (json['created_at'] as String?)?.toDateTime(),
     updatedAt: (json['updated_at'] as String?)?.toDateTime(),
-    statuses: (json['status'] as String?)?.toEnum<PatientStatusEnum>(
-      PatientStatusEnum.values,
-    ),
+    status:
+        (json['status'] as String?)?.toEnum<PatientStatusEnum>(
+          PatientStatusEnum.values,
+        ) ??
+        PatientStatusEnum.newPatient,
     rays: ListHandler.parseComplex<RayEntity>(json['rays'], RayModel.fromJson),
   );
 
@@ -80,7 +82,7 @@ class UserModel extends UserEntity {
     specialty: specialty,
     createdAt: createdAt,
     updatedAt: updatedAt,
-    statuses: statuses,
+    status: status,
     rays: rays,
   );
 
@@ -99,7 +101,7 @@ class UserModel extends UserEntity {
     'specialty': specialty,
     'created_at': createdAt?.toIso8601String(),
     'updated_at': updatedAt?.toIso8601String(),
-    'statuses': statuses?.name,
+    'status': status?.name,
     'rays': ListHandler.encodeComplex<RayEntity>(
       rays,
       (final ray) => RayModel.fromEntity(ray).toJson(),

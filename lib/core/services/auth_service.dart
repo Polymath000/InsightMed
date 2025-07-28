@@ -4,6 +4,7 @@ import '../models/user_model.dart';
 import '../repos/user_repo.dart';
 import 'api_client.dart';
 import 'get_it_service.dart';
+import 'shared_preferences_singleton.dart';
 
 abstract class AuthService {
   Future<UserEntity> register(final UserEntity user);
@@ -33,14 +34,14 @@ class AuthServiceImpl implements AuthService {
       data: {'email': email, 'password': password},
     );
     final token = data['token'] as String;
-    await client.storage.write(key: 'access_token', value: token);
+    await SharedPreferencesSingleton.setString('access_token', token);
     return token;
   }
 
   @override
   Future<void> logout() async {
     await client.post(path: EndPoint.addLogout);
-    await client.storage.delete(key: 'access_token');
+    await SharedPreferencesSingleton.remove('access_token');
     await getIt<UserRepo>().deleteFromLocal();
   }
 }

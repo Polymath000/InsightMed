@@ -17,7 +17,7 @@ class UserEntity {
     this.specialty,
     this.createdAt,
     this.updatedAt,
-    this.statuses,
+    this.status,
     this.rays,
   });
   final int? id;
@@ -34,7 +34,7 @@ class UserEntity {
   final String? specialty;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final PatientStatusEnum? statuses;
+  final PatientStatusEnum? status;
   final List<RayEntity>? rays;
 
   UserEntity copyWith({
@@ -52,7 +52,7 @@ class UserEntity {
     final String? specialty,
     final DateTime? createdAt,
     final DateTime? updatedAt,
-    final PatientStatusEnum? statuses,
+    final PatientStatusEnum? status,
     final List<RayEntity>? rays,
   }) => UserEntity(
     id: id ?? this.id,
@@ -69,7 +69,7 @@ class UserEntity {
     specialty: specialty ?? this.specialty,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
-    statuses: statuses ?? this.statuses,
+    status: status ?? this.status,
     rays: rays ?? this.rays,
   );
 

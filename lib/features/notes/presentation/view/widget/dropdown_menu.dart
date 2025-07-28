@@ -1,9 +1,13 @@
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/enums/patient_enum.dart';
+import '../../../../../core/repos/user_repo.dart';
+import '../../../../../core/services/get_it_service.dart';
+import '../../../../home/presentation/controllers/get_patients_cubit/get_patients_cubit.dart';
 import '../../../../home/presentation/views/widgets/patiend_status_text.dart';
 
 class CustomDropdownMenu extends StatefulWidget {
@@ -19,7 +23,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
 
   @override
   void initState() {
-    _selectedItem = widget.patient.statuses;
+    _selectedItem = widget.patient.status;
     super.initState();
   }
 
@@ -31,15 +35,21 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
         data: PatientStatusEnum.values
             .map((final e) => SelectedListItem<PatientStatusEnum>(data: e))
             .toList(),
-        onSelected: (final selectedItems) {
+        onSelected: (final selectedItems) async {
           if (selectedItems.isNotEmpty) {
             setState(() => _selectedItem = selectedItems.first.data);
+            await getIt<UserRepo>().addPatientsStatusToApi(
+              widget.patient.copyWith(status: _selectedItem),
+            );
+            if (context.mounted) {
+              await context.read<GetPatientsCubit>().getPatients();
+            }
           }
         },
       ),
     ).showModal(context),
     child: PatiendStatusText(
-      status: _selectedItem ?? PatientStatusEnum.critical,
+      status: _selectedItem ?? PatientStatusEnum.newPatient,
     ),
   );
 }
