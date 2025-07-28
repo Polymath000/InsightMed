@@ -32,7 +32,10 @@ class NotesViewBody extends StatelessWidget {
                 if (notes.isEmpty)
                   const Text('No notes found')
                 else
-                  ...notes.map((final note) => NoteCard(note: note)),
+                  ...notes.map(
+                    (final note) =>
+                        NoteCard(note: note, index: notes.indexOf(note)),
+                  ),
               ],
             );
           }

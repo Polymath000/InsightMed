@@ -17,7 +17,7 @@ Future<dynamic> setNoteDialog(
   barrierDismissible: false,
   builder: (_) {
     final formKey = GlobalKey<FormState>();
-    final titleController = TextEditingController(text: note?.title);
+    // final titleController = TextEditingController(text: note?.title);
     final contentController = TextEditingController(text: note?.note);
     return AlertDialog(
       title: Text('${note == null ? 'Add' : 'Edit'} Note'),
@@ -26,17 +26,17 @@ Future<dynamic> setNoteDialog(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppTextField(
-              controller: titleController,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              labelText: 'Title',
-              validator: (final value) => (value?.isNotEmpty ?? false)
-                  ? null
-                  : 'this field is required',
-              hintText: 'Note Title',
-              onChanged: (final p0) {},
-            ),
+            // AppTextField(
+            //   controller: titleController,
+            //   keyboardType: TextInputType.text,
+            //   textInputAction: TextInputAction.next,
+            //   labelText: 'Title',
+            //   validator: (final value) => (value?.isNotEmpty ?? false)
+            //       ? null
+            //       : 'this field is required',
+            //   hintText: 'Note Title',
+            //   onChanged: (final p0) {},
+            // ),
             AppTextField(
               controller: contentController,
               keyboardType: TextInputType.multiline,
@@ -64,7 +64,7 @@ Future<dynamic> setNoteDialog(
               formKey.currentState!.save();
               final updatedNote = NoteEntity(
                 id: note?.id ?? 127,
-                title: titleController.text,
+                // title: titleController.text,
                 note: contentController.text,
                 patientId: note?.patientId ?? patientId,
                 // rayId: note?.rayId ?? '2',

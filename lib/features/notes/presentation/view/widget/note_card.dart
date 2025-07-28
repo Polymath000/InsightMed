@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
@@ -8,8 +8,9 @@ import 'set_note_dialog.dart';
 import 'show_dialog_for_delete_note.dart';
 
 class NoteCard extends StatelessWidget {
-  const NoteCard({required this.note, super.key});
+  const NoteCard({required this.note, required this.index, super.key});
   final NoteEntity note;
+  final int index;
 
   @override
   Widget build(final BuildContext context) => Card.filled(
@@ -17,10 +18,11 @@ class NoteCard extends StatelessWidget {
     child: Padding(
       padding: EdgeInsets.zero,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
             leading: const Icon(Icons.note_rounded),
-            title: IText(note.title!),
+            title: IText('Note ${index + 1}'),
             subtitle: Text(DateFormat.yMMMd().format(note.createdAt!)),
             trailing: IconButton.filledTonal(
               onPressed: () => setNoteDialog(
