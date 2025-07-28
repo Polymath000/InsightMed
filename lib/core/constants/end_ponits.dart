@@ -26,9 +26,10 @@ sealed class EndPoint {
   static const String addPatientsStatus = '/doctor/patients/status';
 
   static const String addNotes = '/doctor/notes';
-  static String updateNotes(final int id) => '/doctor/notes/$id';
-  static String deleteNotes(final int id) => '/doctor/notes/$id';
-  static String getNotes(final int id) => '/doctor/patients/$id/notes';
+  static String updateNotes(final int noteId) => '/doctor/notes/$noteId';
+  static String deleteNotes(final int noteId) => '/doctor/notes/$noteId';
+  static String getNotes(final int patientId) =>
+      '/doctor/patients/$patientId/notes';
 
   static String getAIRays(final String id) => '/doctor/rays/{$id}/ai';
 }
