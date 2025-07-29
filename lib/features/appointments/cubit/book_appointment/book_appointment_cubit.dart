@@ -72,7 +72,6 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       if (statusCode == 409) {
         await SharedPreferencesSingleton.setBool(
           isBookedKey,
-          true,
           value: true,
         );
 

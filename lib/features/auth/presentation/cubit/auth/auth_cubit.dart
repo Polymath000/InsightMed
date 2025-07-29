@@ -107,7 +107,6 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await SharedPreferencesSingleton.setBool(
         isBookedKey,
-        false,
         value: false,
       );
       cleanUp();

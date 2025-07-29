@@ -38,7 +38,6 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                       isBooked = true;
                       await SharedPreferencesSingleton.setBool(
                         isBookedKey,
-                        true,
                         value: true,
                       );
                     });
@@ -52,7 +51,6 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                       isBooked = true;
                       await SharedPreferencesSingleton.setBool(
                         isBookedKey,
-                        true,
                         value: true,
                       );
                     });
@@ -66,7 +64,6 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                       isBooked = false;
                       await SharedPreferencesSingleton.setBool(
                         isBookedKey,
-                        false,
                         value: false,
                       );
                     });
