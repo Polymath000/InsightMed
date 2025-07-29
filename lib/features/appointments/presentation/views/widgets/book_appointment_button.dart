@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
 
 import '../../../../../core/widgets/custbutton.dart';
@@ -33,37 +34,58 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
               BlocListener<BookAppointmentCubit, BookAppointmentState>(
                 listener: (final context, final state) {
                   if (state is BookAppointmentSuccess) {
-                    setState(() {
+                    setState(() async {
                       isBooked = true;
+                      await SharedPreferencesSingleton.setBool(
+                        isBookedKey,
+                        value: true,
+                      );
                     });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Appointment booked successfully!'),
-                      ),
+                    customShowSnackBar(
+                      context: context,
+                      message: 'Appointment booked successfully!',
+                    );
+                    widget.onBook?.call(false);
+                  } else if (state is AppointmentAlreadyBooked) {
+                    setState(() async {
+                      isBooked = true;
+                      await SharedPreferencesSingleton.setBool(
+                        isBookedKey,
+                        value: true,
+                      );
+                    });
+                    customShowSnackBar(
+                      context: context,
+                      message: 'You already book appointment',
                     );
                     widget.onBook?.call(false);
                   } else if (state is DeleteAppointmentSuccess) {
-                    setState(() {
+                    setState(() async {
                       isBooked = false;
+                      await SharedPreferencesSingleton.setBool(
+                        isBookedKey,
+                        value: false,
+                      );
                     });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Appointment cancelled!')),
+                    customShowSnackBar(
+                      context: context,
+                      message: 'Appointment cancelled!',
                     );
                     widget.onBook?.call(false);
                   } else if (state is BookAppointmentFailure) {
-                    setState(() {
-                      isBooked = false;
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Failed to book appointment: ${state.message}',
-                        ),
-                      ),
+                    customShowSnackBar(
+                      context: context,
+                      message: 'Failed to book appointment',
                     );
                     widget.onBook?.call(false);
                   } else if (state is BookAppointmentLoading) {
                     widget.onBook?.call(true);
+                  } else if (state is DeleteAppointmentFailure) {
+                    widget.onBook?.call(false);
+                    customShowSnackBar(
+                      context: context,
+                      message: 'Failed to delete appointment',
+                    );
                   }
                 },
                 child: Column(
@@ -73,10 +95,9 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                       child: CustomButton(
                         onTap: () async {
                           if (widget.selectedTime.isEmpty && !isBooked) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Please choose a slot'),
-                              ),
+                            customShowSnackBar(
+                              context: context,
+                              message: 'Please choose a slot',
                             );
                             return;
                           }

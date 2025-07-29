@@ -21,6 +21,7 @@ class _FormBodyState extends State<FormBody> {
   final AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   String name = '';
   String age = '';
+  String age = '';
   String phoneNumber = '';
   String gender = 'male';
 
@@ -42,6 +43,7 @@ class _FormBodyState extends State<FormBody> {
             },
             validator: (final value) {
               if (value!.isEmpty) {
+              if (value!.isEmpty) {
                 return 'this field is required';
               }
               return null;
@@ -55,6 +57,7 @@ class _FormBodyState extends State<FormBody> {
               age = p0;
             },
             validator: (final value) {
+              if (value!.isEmpty) {
               if (value!.isEmpty) {
                 return 'this field is required';
               }
@@ -70,6 +73,8 @@ class _FormBodyState extends State<FormBody> {
             },
             validator: (final value) {
               if (value!.isEmpty) {
+            validator: (final value) {
+              if (value!.isEmpty) {
                 return 'this field is required';
               }
               return null;
@@ -78,6 +83,7 @@ class _FormBodyState extends State<FormBody> {
           const PatientTextOfTextField(text: 'Gender *'),
           RadioBtn(
             onChanged: (final p0) {
+              gender = p0 ?? 'male';
               gender = p0 ?? 'male';
             },
           ),
@@ -89,6 +95,7 @@ class _FormBodyState extends State<FormBody> {
                 gender: gender,
                 name: name,
                 phoneNumber: phoneNumber,
+                role: 'patient',
                 role: 'patient',
               );
               if (_formKey.currentState!.validate()) {

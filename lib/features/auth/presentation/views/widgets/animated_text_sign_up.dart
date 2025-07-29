@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/constants/constants.dart';
 
 class AnimatedTextSignUp extends StatelessWidget {
@@ -14,17 +14,17 @@ class AnimatedTextSignUp extends StatelessWidget {
       ColorizeAnimatedText(
         'Sign up to get started with our service',
         colors: animatedTextColors,
-        textStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.sp),
+        textStyle: const TextStyle(fontSize: 18),
       ),
       ColorizeAnimatedText(
         'Sign up to get started with our service',
         colors: animatedTextColors,
-        textStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.sp),
+        textStyle: const TextStyle(fontSize: 18),
       ),
       ColorizeAnimatedText(
         'Sign up to get started with our service',
         colors: animatedTextColors,
-        textStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.sp),
+        textStyle: const TextStyle(fontSize: 18),
       ),
     ],
   );

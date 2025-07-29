@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 import 'package:flutter/material.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../pofile/presentation/views/widgets/label_text.dart';
@@ -10,6 +11,7 @@ import 'vaildated_confirm_password.dart';
 import 'validated_password_formfield.dart';
 
 class SignupForm extends StatefulWidget {
+  const SignupForm({super.key, this.onLoadingChanged});
   const SignupForm({super.key, this.onLoadingChanged});
   final void Function(bool)? onLoadingChanged;
   @override
@@ -61,8 +63,9 @@ class _SignupFormState extends State<SignupForm> {
                 isLoading = false;
                 widget.onLoadingChanged!(isLoading);
               });
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Passwords do not match')),
+              customShowSnackBar(
+                context: context,
+                message: 'Passwords do not match',
               );
             } else {
               setState(() {
@@ -75,7 +78,6 @@ class _SignupFormState extends State<SignupForm> {
             }
           },
           btnText: 'Create Account',
-          colorText: kBasicColor,
         ),
       ],
     ),

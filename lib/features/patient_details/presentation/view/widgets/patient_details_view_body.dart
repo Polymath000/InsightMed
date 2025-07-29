@@ -33,20 +33,6 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
                 onSelected: (_) => setState(() => _index = labelIndex),
               );
             }),
-
-            // ...labels.map((final label) {
-            //   final labelIndex = labels.indexOf(label);
-            //   return GestureContainer(
-            //     index: index,
-            //     bIndex: labelIndex,
-            //     title: label,
-            //     onSelected: (final value) {
-            //       setState(() {
-            //         index = value;
-            //       });
-            //     },
-            //   );
-            // }),
           ],
         ),
         const Divider(),

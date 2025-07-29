@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utls/themes/app_colors.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
@@ -111,18 +111,15 @@ class _CreateNewPasswordViewBodyState extends State<CreateNewPasswordViewBody> {
                   passwordConfirmation: confirmPassword,
                 );
               } else if (password == confirmPassword) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('The passwords not match'),
-                    backgroundColor: Colors.red,
-                  ),
+                customShowSnackBar(
+                  context: context,
+                  message: 'The passwords not match',
                 );
               } else {
                 autovalidateMode = AutovalidateMode.always;
               }
             },
             btnText: 'Change New Password',
-            colorText: AppColors.primary,
           ),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/helpers/on_generate_routes.dart';
-import 'constans.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
 
 class AleardyHaveAnAccount extends StatelessWidget {
   const AleardyHaveAnAccount({super.key});
@@ -10,14 +10,7 @@ class AleardyHaveAnAccount extends StatelessWidget {
   Widget build(final BuildContext context) => Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text(
-        'Aleardy have an account? ',
-        style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 16.sp,
-          color: kAccount,
-        ),
-      ),
+      const Text('Aleardy have an account? ', style: TextStyle(fontSize: 16)),
       GestureDetector(
         onTap: () {
           AppRoutes.pop(context);
@@ -26,8 +19,8 @@ class AleardyHaveAnAccount extends StatelessWidget {
           'Sign in',
           style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 16.sp,
-            color: kMainColor,
+            fontSize: 16,
+            color: AppColors.primaryContainer,
           ),
         ),
       ),

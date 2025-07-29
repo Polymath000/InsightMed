@@ -1,3 +1,4 @@
+import '../../features/appointments/cubit/book_appointment/book_appointment_cubit.dart';
 import '../constants/end_ponits.dart';
 import '../entities/user_entity.dart';
 import '../models/user_model.dart';
@@ -43,5 +44,6 @@ class AuthServiceImpl implements AuthService {
     await client.post(path: EndPoint.addLogout);
     await SharedPreferencesSingleton.remove('access_token');
     await getIt<UserRepo>().deleteFromLocal();
+    await SharedPreferencesSingleton.setBool(isBookedKey, value: false);
   }
 }

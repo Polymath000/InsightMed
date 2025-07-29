@@ -39,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             const DonnotHaveAnAccount(),
+            const SizedBox(height: 12),
           ],
         ),
       ),

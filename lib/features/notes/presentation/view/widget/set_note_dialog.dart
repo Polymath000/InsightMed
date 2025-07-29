@@ -12,45 +12,29 @@ Future<dynamic> setNoteDialog(
   final BuildContext context, {
   required final int patientId,
   final NoteEntity? note,
-}) => showDialog(
+}) => showAdaptiveDialog(
   context: context,
   barrierDismissible: false,
   builder: (_) {
     final formKey = GlobalKey<FormState>();
     // final titleController = TextEditingController(text: note?.title);
     final contentController = TextEditingController(text: note?.note);
-    return AlertDialog(
+    return AlertDialog.adaptive(
+      scrollable: true,
       title: Text('${note == null ? 'Add' : 'Edit'} Note'),
       content: Form(
         key: formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // AppTextField(
-            //   controller: titleController,
-            //   keyboardType: TextInputType.text,
-            //   textInputAction: TextInputAction.next,
-            //   labelText: 'Title',
-            //   validator: (final value) => (value?.isNotEmpty ?? false)
-            //       ? null
-            //       : 'this field is required',
-            //   hintText: 'Note Title',
-            //   onChanged: (final p0) {},
-            // ),
-            AppTextField(
-              controller: contentController,
-              keyboardType: TextInputType.multiline,
-              textInputAction: TextInputAction.newline,
-              labelText: 'Content',
-              hintText: 'Note Content',
-              validator: (final value) => (value?.isNotEmpty ?? false)
-                  ? null
-                  : 'this field is required',
-              onChanged: (final p0) {},
-              maxLines: 8,
-              minLines: 4,
-            ),
-          ],
+        child: AppTextField(
+          controller: contentController,
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          labelText: 'Content',
+          hintText: 'Note Content',
+          validator: (final value) =>
+              (value?.isNotEmpty ?? false) ? null : 'this field is required',
+          onChanged: (final p0) {},
+          maxLines: 8,
+          minLines: 4,
         ),
       ),
       actions: [

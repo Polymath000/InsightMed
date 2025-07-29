@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/entities/user_entity.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../cubit/auth/auth_cubit.dart';
 import 'patient_information_form_body.dart';
@@ -31,15 +32,12 @@ class _PatientFormState extends State<PatientForm> {
           await AppRoutes.main(context);
         } else if (state is AuthFailure) {
           widget.onLoadingChanged?.call(isLoading: false);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          customShowSnackBar(context: context, message: state.message);
         } else {
           widget.onLoadingChanged?.call(isLoading: false);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('There was an error , please try again later'),
-            ),
+          customShowSnackBar(
+            context: context,
+            message: 'There was an error , please try again later',
           );
         }
       },

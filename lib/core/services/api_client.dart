@@ -29,7 +29,7 @@ final class DioClient extends ApiClient {
   factory DioClient() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: EndPoint.baseUrl,
+        baseUrl: EndPoint.apiUrl,
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart'
         FilledButton,
         FilledButtonThemeData,
         FloatingActionButtonThemeData,
+        FontWeight,
         IconButton,
         IconButtonThemeData,
         InputDecorationTheme,
@@ -109,7 +110,7 @@ sealed class AppThemeData {
 
   static final FilledButtonThemeData filledButton = FilledButtonThemeData(
     style: FilledButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 16),
+      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       minimumSize: const Size.fromHeight(56),
       shape: const RoundedSuperellipseBorder(borderRadius: AppBorders.xs),
     ),
@@ -135,7 +136,7 @@ sealed class AppThemeData {
 
   static final OutlinedButtonThemeData outlinedButton = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 16),
+      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       minimumSize: const Size.fromHeight(56),
       shape: const RoundedSuperellipseBorder(borderRadius: AppBorders.xs),
     ),

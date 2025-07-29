@@ -11,11 +11,8 @@ sealed class SharedPreferencesSingleton {
       _instance = await SharedPreferences.getInstance();
 
   /// Setters
-  static Future<bool> setBool(
-    final String key,
-    final bool bool, {
-    required final bool value,
-  }) => _instance.setBool(key, value);
+  static Future<bool> setBool(final String key, {required final bool value}) =>
+      _instance.setBool(key, value);
   static Future<bool> setString(final String key, final String value) =>
       _instance.setString(key, value);
 

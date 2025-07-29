@@ -22,17 +22,17 @@ Future<void> deleteNoteDialog(
       ),
       TextButton(
         onPressed: () async {
+          if (context.mounted) {
+            AppRoutes.pop(context);
+          }
           await context.read<SetNoteCubit>().deleteNote(note);
           if (context.mounted) {
             await context.read<GetNotesCubit>().getNotes();
           }
-          if (context.mounted) {
-            AppRoutes.pop(context);
-          }
         },
         style: TextButton.styleFrom(foregroundColor: AppColors.red),
         child: const Text('Delete'),
-      ),
+      ), 
     ],
   ),
 );

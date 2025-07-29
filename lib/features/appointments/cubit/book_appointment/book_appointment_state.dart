@@ -14,9 +14,15 @@ final class BookAppointmentSuccess extends BookAppointmentState {}
 
 final class DeleteAppointmentSuccess extends BookAppointmentState {}
 
+final class  DeleteAppointmentFailure extends BookAppointmentState {
+  DeleteAppointmentFailure({required this.message});
+  String message;
+}
 final class BookAppointmentLoading extends BookAppointmentState {}
 
 final class BookAppointmentFailure extends BookAppointmentState {
   BookAppointmentFailure({required this.message});
   String message;
 }
+
+class AppointmentAlreadyBooked extends BookAppointmentState {}

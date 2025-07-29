@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/entities/ray_entity.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../cubit/upload_ray/upload_ray_cubit.dart';
 import 'numeric_vitals.dart';
@@ -129,8 +130,9 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
                   });
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Please Upload the ray')),
+                  customShowSnackBar(
+                    context: context,
+                    message: 'Cannot fetch the Rays.',
                   );
                 } else {
                   widget.onChanged!(false);

@@ -20,7 +20,8 @@ class OnBoardingPageView extends StatelessWidget {
         title: 'Bridging Care with AI',
         description:
             'Introduces the app as a modern solution for healthcare management.'
-            ' It highlights the blend of human care and AI efficiency.',
+            '\n'
+            'It highlights the blend of human care and AI efficiency.',
         image: Assets.assetsImagesOnboarding2,
       ),
       PageViewItem(

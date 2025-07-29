@@ -18,8 +18,6 @@ class GetNotesCubit extends Cubit<GetNotesState> {
   Future<void> getNotes() async {
     emit(const GetNotesLoading());
     final notes = await getIt<NoteRepo>().get(patientId);
-    if (!isClosed) {
-      emit(GetNotesSuccess(notes: notes));
-    }
+    emit(GetNotesSuccess(notes: notes));
   }
 }

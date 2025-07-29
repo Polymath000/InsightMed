@@ -45,7 +45,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             ),
             const Divider(),
             const ListTile(
-              title: IText('Contact Information', style: TextStyle(fontSize: 20)),
+              title: IText(
+                'Contact Information',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

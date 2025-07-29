@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/patient_info_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
+import '../../features/home/presentation/views/widgets/doctor_notes_patient_dasboard_view_body.dart';
+import '../../features/home/presentation/views/widgets/ray_results_patient_dashboard.dart.dart';
 import '../../features/main/presentation/views/main_view.dart';
+import '../../features/notes/domain/entities/note_entity.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/patient_details/presentation/view/patient_details_view.dart';
 import '../../features/patient_rays_submission/presentation/views/upload_medical_ray_view.dart';
@@ -11,6 +14,7 @@ import '../../features/reset_password/presntation/view/create_new_password.dart'
 import '../../features/reset_password/presntation/view/loading_view.dart';
 import '../../features/reset_password/presntation/view/reset_password_view.dart';
 import '../../features/reset_password/presntation/view/verify_code.dart';
+import '../entities/ray_entity.dart';
 import '../entities/user_entity.dart';
 import '../utls/i_text.dart';
 
@@ -73,6 +77,23 @@ sealed class AppRoutes {
     CreateNewPasswordView.routeName,
     arguments: CreateNewPasswordViewArgs(email: email, code: code),
   );
+
+  static Future<Object?> rayResultsPatientDashboard(
+    final BuildContext context, {
+    required final List<RayEntity> rays,
+  }) => _pushNamed(
+    context,
+    RayResultsPatientDashboard.routeName,
+    arguments: rays,
+  );
+  static Future<Object?> doctorNotesPatientDasboard(
+    final BuildContext context, {
+    required final List<NoteEntity> notes,
+  }) => _pushNamed(
+    context,
+    DoctorNotesPatientDasboardViewBody.routeName,
+    arguments: notes,
+  );
   // Routes without arguments
   static Future<Object?> main(final BuildContext context) =>
       _pushNamedAndRemoveAll(context, MainView.routeName);
@@ -91,7 +112,6 @@ sealed class AppRoutes {
 }
 
 class CreateNewPasswordViewArgs {
-
   const CreateNewPasswordViewArgs({required this.email, required this.code});
   final String email;
   final String code;
@@ -108,6 +128,8 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientDetailsView.routeName: (_, final args) =>
       PatientDetailsView(patient: args! as UserEntity),
   ResetPasswordView.routeName: (_, _) => ResetPasswordView(),
+  RayResultsPatientDashboard.routeName: (_, final args) =>
+      RayResultsPatientDashboard(rays: args! as List<RayEntity>),
   VerifyCodeView.routeName: (_, final args) =>
       VerifyCodeView(email: args! as String),
   CreateNewPasswordView.routeName: (_, final args) {
@@ -118,6 +140,8 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
     final data = args! as LoadingViewArgs;
     return LoadingView(email: data.email, password: data.password);
   },
+  DoctorNotesPatientDasboardViewBody.routeName: (_, final args) =>
+      DoctorNotesPatientDasboardViewBody(notes: args! as List<NoteEntity>),
 };
 
 Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (final settings) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/utls/app_images.dart';
@@ -8,15 +7,9 @@ import '../../../../../core/utls/themes/app_colors.dart';
 import '../../cubit/auth/auth_cubit.dart';
 import 'constans.dart';
 
-class SocialAuth extends StatefulWidget {
+class SocialAuth extends StatelessWidget {
   const SocialAuth({super.key});
 
-  @override
-  State<SocialAuth> createState() => _SocialAuthState();
-}
-
-class _SocialAuthState extends State<SocialAuth> {
-  bool isLoading = false;
   @override
   Widget build(final BuildContext context) => BlocProvider(
     create: (final context) => AuthCubit(),
@@ -41,11 +34,11 @@ class _SocialAuthState extends State<SocialAuth> {
                   padding: const EdgeInsets.only(right: 16),
                   child: SvgPicture.asset(Assets.assetsImagesGoogleLogo),
                 ),
-                Text(
+                const Text(
                   'Login with gmail',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 16.sp,
+                    fontSize: 18,
                     color: AppColors.black,
                   ),
                 ),

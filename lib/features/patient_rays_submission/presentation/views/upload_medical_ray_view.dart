@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../core/utls/themes/app_colors.dart';
 import '../../../../core/utls/themes/app_text_style.dart';
 import '../../cubit/upload_ray/upload_ray_cubit.dart';
@@ -49,17 +50,14 @@ class _UploadMedicalRayViewState extends State<UploadMedicalRayView> {
                 isLoading = true;
               });
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('The Data is Upload')),
+              customShowSnackBar(
+                context: context,
+                message: 'The Data is Upload',
               );
             } else if (state is UploadRayFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    state.message ??
-                        'There Was an error please try again later',
-                  ),
-                ),
+              customShowSnackBar(
+                context: context,
+                message: 'There Was an error please try again later.',
               );
             }
           },

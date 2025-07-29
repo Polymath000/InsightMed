@@ -30,9 +30,9 @@ final class HomeSticker extends StatelessWidget {
     required this.headerIcon,
     required this.headerTitle,
     required this.headerColor,
-    required this.bodyLeading,
-    required this.bodyTitle,
-    required this.bodySubTitle,
+    this.bodyLeading,
+    this.bodyTitle,
+    this.bodySubTitle,
     this.bodyTrailing,
     this.bodyOnTap,
     this.paragraph,
@@ -43,9 +43,9 @@ final class HomeSticker extends StatelessWidget {
   final IconData headerIcon;
   final String headerTitle;
   final Color headerColor;
-  final Widget bodyLeading;
-  final String bodyTitle;
-  final Widget bodySubTitle;
+  final Widget? bodyLeading;
+  final String? bodyTitle;
+  final Widget? bodySubTitle;
   final Widget? bodyTrailing;
   final VoidCallback? bodyOnTap;
   final Widget? paragraph;
@@ -71,7 +71,7 @@ final class HomeSticker extends StatelessWidget {
             ),
             ListTile(
               leading: bodyLeading,
-              title: IText(bodyTitle),
+              title: IText(bodyTitle ?? ''),
               subtitle: bodySubTitle,
               trailing: bodyTrailing,
               onTap: bodyOnTap,

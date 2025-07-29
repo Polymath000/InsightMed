@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../pofile/presentation/views/widgets/label_text.dart';
 import '../../cubit/auth/auth_cubit.dart';
-import 'constans.dart';
 
 class LoginFormBody extends StatefulWidget {
   const LoginFormBody({super.key});
@@ -61,7 +62,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
                 ),
               ),
             ),
-          ],
+          ),
         ),
         CustomButton(
           onTap: () async {
@@ -73,11 +74,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
               await BlocProvider.of<AuthCubit>(
                 context,
               ).login(email: email!, password: password!);
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('Login pressed')));
-              }
             } else {
               setState(() {
                 autovalidateMode = AutovalidateMode.always;
@@ -85,7 +81,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
             }
           },
           btnText: 'Login with Email',
-          colorText: kBasicColor,
         ),
       ],
     ),
