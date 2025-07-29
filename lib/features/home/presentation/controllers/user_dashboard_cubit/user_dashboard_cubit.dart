@@ -20,6 +20,8 @@ class UserDashboardCubit extends Cubit<UserDashboardState> {
     final rays = await getIt<RayRepo>().getRays();
     final notes = await getIt<NoteRepo>().get(0);
     final dashboard = DashboardEntity(rays: rays, notes: notes);
-    emit(UserDashboardSuccess(dashboard));
+    if (!isClosed) {
+      emit(UserDashboardSuccess(dashboard));
+    }
   }
 }
