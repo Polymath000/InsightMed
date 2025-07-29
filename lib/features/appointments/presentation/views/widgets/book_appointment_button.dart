@@ -30,40 +30,30 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
             BlocListener<BookAppointmentCubit, BookAppointmentState>(
               listener: (final context, final state) {
                 if (state is BookAppointmentSuccess) {
-                  setState(()  {
+                  setState(() {
                     isBooked = true;
-
-                  });                     SharedPreferencesSingleton.setBool(
-                      isBookedKey,
-                      value: true,
-                    );
+                  });
+                  SharedPreferencesSingleton.setBool(isBookedKey, value: true);
                   customShowSnackBar(
                     context: context,
                     message: 'Appointment booked successfully!',
                   );
                   widget.onBook?.call(false);
                 } else if (state is AppointmentAlreadyBooked) {
-                  setState(()  {
+                  setState(() {
                     isBooked = true;
-
                   });
-                     SharedPreferencesSingleton.setBool(
-                      isBookedKey,
-                      value: true,
-                    );
+                  SharedPreferencesSingleton.setBool(isBookedKey, value: true);
                   customShowSnackBar(
                     context: context,
                     message: 'You already book appointment',
                   );
                   widget.onBook?.call(false);
                 } else if (state is DeleteAppointmentSuccess) {
-                  setState(()  {
-isBooked = false;
-                  });                    
-                     SharedPreferencesSingleton.setBool(
-                      isBookedKey,
-                      value: false,
-                    );
+                  setState(() {
+                    isBooked = false;
+                  });
+                  SharedPreferencesSingleton.setBool(isBookedKey, value: false);
                   customShowSnackBar(
                     context: context,
                     message: 'Appointment cancelled!',
@@ -100,6 +90,9 @@ isBooked = false;
                           return;
                         }
                         if (isBooked) {
+                          await BlocProvider.of<BookAppointmentCubit>(
+                            context,
+                          ).getPatientAppiontment();
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,
                           ).deleteAppointment();

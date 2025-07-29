@@ -70,10 +70,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       final statusCode = e.response?.statusCode;
       final errorMessage = e.response?.data['message'] ?? e.message;
       if (statusCode == 409) {
-        await SharedPreferencesSingleton.setBool(
-          isBookedKey,
-          value: true,
-        );
+        await SharedPreferencesSingleton.setBool(isBookedKey, value: true);
 
         if (!isClosed) {
           emit(AppointmentAlreadyBooked());
@@ -119,6 +116,35 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       }
     } on Exception catch (e) {
       emit(DeleteAppointmentFailure(message: e.toString()));
+    }
+  }
+
+  Future<void> getPatientAppiontment() async {
+    emit(BookAppointmentLoading());
+    try {
+      final dioInstance = dio();
+      final response = await dioInstance.get(
+        '/appointments/my',
+        options: Options(
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ${getUser!.token}',
+          },
+        ),
+      );
+      var jsonData = response.data;
+      int id = jsonData['data']['id'];
+      await SharedPreferencesSingleton.setString(appointmentIdKey, id.toString());
+      var finalData = [];
+      if (!isClosed) {
+          List<String> finalData = [];
+
+        emit(GetAppointmentSuccess(finalData: finalData));
+      }
+    } on Exception catch (e) {
+      emit(BookAppointmentFailure(message: e.toString()));
+      log(e.toString());
     }
   }
 }
