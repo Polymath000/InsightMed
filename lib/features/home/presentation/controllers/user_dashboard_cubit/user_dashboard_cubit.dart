@@ -28,7 +28,9 @@ class UserDashboardCubit extends Cubit<UserDashboardState> {
         notes: notes,
         appointment: appointment,
       );
-      emit(UserDashboardSuccess(dashboard));
+      if (!isClosed) {
+        emit(UserDashboardSuccess(dashboard));
+      }
     } on Exception catch (e) {
       emit(UserDashboardFailure(e.toString()));
     }

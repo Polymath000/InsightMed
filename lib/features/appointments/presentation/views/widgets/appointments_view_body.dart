@@ -38,6 +38,7 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
                 onDateChanged: (final date) {
                   setState(() {
                     selectedDate = date;
+                    isLoading =false;
                   });
                   context.read<BookAppointmentCubit>().getAppiontments(
                     date: date.toString().substring(0, 10),
@@ -55,9 +56,7 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
                 },
                 selectedDateTime: selectedDate,
                 onSelectDate: (final value) {
-                  setState(() {
                     isLoading = value;
-                  });
                 },
               ),
               BookAppointmentButton(

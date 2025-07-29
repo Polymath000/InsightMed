@@ -45,11 +45,11 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
           builder: (final context, final state) {
             if (state is BookAppointmentLoading) {
               widget.onSelectDate!(true);
-              return SizedBox(height: 50);
+              return const SizedBox(height: 50);
             }
             if (state is GetAppointmentSuccess) {
-              if (state.finalData.isEmpty) {
                 widget.onSelectDate!(false);
+              if (state.finalData.isEmpty) {
                 return const Center(
                   child: IText('No available slots for this day.'),
                 );
