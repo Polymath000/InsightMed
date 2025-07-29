@@ -12,8 +12,9 @@ final class GetRaysFailure extends GetRaysState {
   String message;
 }
 
-final class GetRaysSuccess extends GetRaysState {
+final class GetRaysSuccess extends GetRaysState {  
+  GetRaysSuccess({required this.rays});
+
   final List<RayEntity> rays;
 
-  GetRaysSuccess({required this.rays});
 }

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
 import '../../../../../core/helpers/get_auth_message.dart';
+import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/models/user_model.dart';
 import '../../../../../core/repos/auth_repo.dart';
 import '../../../../../core/services/dio/auth_dio.dart';
@@ -23,16 +24,12 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> tryToken({required final String token}) async {
     try {
       final dioInstance = dio();
-      log('I am in tryToken');
       var response = await dioInstance.get<Map<String, dynamic>>(
         '/dashboard',
         options: dio_package.Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
       );
-      log('Token : $token');
-      log('Dashboard Response Data: ${response.data}');
-
       final userData = response.data?['role'] == 'patient'
           ? (response.data?['patient_data'])
           : response.data?['doctor_data'];
@@ -49,17 +46,6 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await getIt<AuthRepository>().register(user: user);
       emit(AuthSuccess());
-      // final dioInstance = dio();
-      // var response = await dioInstance.post(
-      //   '/register',
-      //   data: UserModel.fromEntity(user).toJson(),
-      //   options: dio_package.Options(
-      //     contentType: dio_package.Headers.jsonContentType,
-      //   ),
-      // );
-      // var token = response.data.toString();
-      // await tryToken(token: token);
-      // checkCodeStatus(response: response);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
       log('Registration failed with status code: ${e.response?.statusCode}');
@@ -102,6 +88,7 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
       );
       await tryToken(token: token);
+      log(getUser!.id.toString());
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
       final userMessage = mapDioErrorToMessage(e);

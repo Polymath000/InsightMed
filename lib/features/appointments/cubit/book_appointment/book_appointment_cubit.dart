@@ -31,17 +31,14 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       );
       final Map<String, dynamic> jsonData = response.data;
       final data = List<String>.from(jsonData['data']);
-      var finalData = List<String>.filled(
-        data.length,
-        '',
-      );
+      var finalData = List<String>.filled(data.length, '');
       for (var i = 0; i < data.length; i++) {
         finalData[i] = data[i].substring(11, 16);
       }
       if (!isClosed) {
         emit(GetAppointmentSuccess(finalData: finalData));
       }
-    } catch (e) {
+    } on Exception catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
       log(e.toString());
     }
@@ -63,13 +60,13 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       Map<String, dynamic> jsonData = response.data;
-      String id = jsonData['data']['id'].toString();
+      final id = jsonData['data']['id'].toString();
       await SharedPreferencesSingleton.setString(appointmentIdKey, id);
       await SharedPreferencesSingleton.setBool(isBookedKey, true, value: true);
       if (!isClosed) {
         emit(BookAppointmentSuccess());
       }
-    } catch (e) {
+    } on Exception catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
     }
   }
@@ -89,17 +86,21 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       await SharedPreferencesSingleton.remove(appointmentIdKey);
-      await SharedPreferencesSingleton.setBool(isBookedKey, false, value: false);
+      await SharedPreferencesSingleton.setBool(
+        isBookedKey,
+        false,
+        value: false,
+      );
       if (!isClosed) {
         emit(DeleteAppointmentSuccess());
       }
-    } catch (e) {
+    }on Exception catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
     }
   }
 }
 
 Map<String, String> _setHeaders() => {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-    };
+  'Content-type': 'application/json',
+  'Accept': 'application/json',
+};

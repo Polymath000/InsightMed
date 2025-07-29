@@ -21,7 +21,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> register({required final UserEntity user}) =>
-      _authService.register(user).then(_userRepo.addToLocal);
+      _authService.register(user).then((final user) => _userRepo.addToLocal(user));
 
   @override
   Future<String> login({

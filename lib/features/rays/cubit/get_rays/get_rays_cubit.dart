@@ -16,7 +16,6 @@ class GetRaysCubit extends Cubit<GetRaysState> {
   Future<List<RayEntity>> getRays() async {
     emit(GetRaysLoadding());
     try {
-      var token = getUser!.token;
       final dioInstance = dio();
       final response = await dioInstance.get(
         EndPoint.getRays,
@@ -34,7 +33,7 @@ class GetRaysCubit extends Cubit<GetRaysState> {
         emit(GetRaysSuccess(rays: rayEntity));
       }
       return rayEntity;
-    } catch (e) {
+    }on Exception catch (e) {
       emit(GetRaysFailure(message: e.toString()));
       return [];
     }

@@ -1,31 +1,45 @@
-import 'package:flutter/material.dart' show Card, Column, CrossAxisAlignment, Icon, IconAlignment, Icons, ListTile, MainAxisSize, ScaffoldMessenger, SizedBox, SnackBar, StatelessWidget, TextButton;
+import 'package:flutter/material.dart'
+    show
+        Card,
+        Column,
+        CrossAxisAlignment,
+        Icon,
+        IconAlignment,
+        Icons,
+        ListTile,
+        MainAxisSize,
+        ScaffoldMessenger,
+        SizedBox,
+        SnackBar,
+        StatelessWidget,
+        TextButton;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, BlocProvider;
 import '../../../../../core/constants/borders.dart';
-import '../../../../../core/entities/ray_entity.dart';
+import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
-import '../../../../rays/cubit/get_rays/get_rays_cubit.dart';
-import '../../../../rays/presentation/view/widget/ray_card.dart';
+import '../../../../notes/domain/entities/note_entity.dart';
+import '../../../../notes/presentation/controllers/get_notes_cubit/get_notes_cubit.dart';
+import 'notes_card_patient_dashboard.dart';
 
-class RayResultsAndAiSummary extends StatelessWidget {
-  RayResultsAndAiSummary({super.key});
-  List<RayEntity>? rays;
+class DoctorNotesPatientDasboardView extends StatelessWidget {
+  DoctorNotesPatientDasboardView({super.key});
+  List<NoteEntity>? notes;
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (final context) => GetRaysCubit()..getRays(),
-    child: BlocConsumer<GetRaysCubit, GetRaysState>(
-      listener: (final context, final state) {
-        if (state is GetRaysFailure) {
+    create: (_) => GetNotesCubit(getUser!.id ?? 0)..getNotes(),
+    child: BlocConsumer<GetNotesCubit, GetNotesState>(
+      listener: (final context, final GetNotesState state) {
+        if (state is GetNotesLoading) {
+        } else if (state is GetNotesSuccess) {
+          notes = state.notes;
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Cannot fetch the Rays.'),
-            ),
+            const SnackBar(content: Text('Cannot fetch the Rays.')),
           );
-        } else if (state is GetRaysSuccess) {
-          rays = state.rays;
-        } else if (state is GetRaysLoadding) {}
+        }
       },
       builder: (final context, final state) => SliverPadding(
         padding: const EdgeInsets.all(16),
@@ -40,35 +54,35 @@ class RayResultsAndAiSummary extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const ListTile(
-                  leading: Icon(
-                    Icons.medical_services_rounded,
-                    color: AppColors.white,
-                  ),
-                  title: Text('Ray Results & AI Summary'),
-                  tileColor: AppColors.topaz,
+                  leading: Icon(Icons.notes_rounded, color: AppColors.white),
+                  title: IText('Doctor Notes'),
+                  tileColor: AppColors.waterBlue,
                   textColor: AppColors.white,
                 ),
-                if (rays == null||rays!.isEmpty)
+                if (notes == null|| notes!.isEmpty)
                   const SizedBox(
                     height: 100,
-                    child: Center(child: Text('No Rays Found')),
+                    child: Center(child: Text('No Notes  found')),
                   )
                 else
-                  RayCard(ray: rays![0], index: 0 + 1),
+                  NoteCardPatientDashboard(
+                    note: notes![0],
+                    index: 1,
+                  ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: TextButton.icon(
                     onPressed: () async {
-                      await AppRoutes.rayResultsPatientDashboard(
+                      await AppRoutes.doctorNotesPatientDasboardViewBody(
                         context,
-                        rays: rays ?? [],
+                        notes: notes ?? [],
                       );
                     },
                     icon: const Icon(Icons.arrow_forward_ios_rounded),
-                    label: const IText('View all results'),
+                    label: const IText('Read More!'),
                     iconAlignment: IconAlignment.end,
                     style: TextButton.styleFrom(
-                      foregroundColor: AppColors.topaz,
+                      foregroundColor: AppColors.waterBlue,
                     ),
                   ),
                 ),
