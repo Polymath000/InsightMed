@@ -4,8 +4,8 @@ import '../../../../../core/entities/ray_entity.dart';
 import '../../../../rays/presentation/view/widget/ray_card.dart';
 
 class RayResultsPatientDashboard extends StatelessWidget {
-  RayResultsPatientDashboard({required this.rays, super.key});
-  List<RayEntity> rays;
+  const RayResultsPatientDashboard({required this.rays, super.key});
+  final List<RayEntity> rays;
   static const String routeName = 'rayResultsPatientDashboard';
   @override
   Widget build(final BuildContext context) => Scaffold(
