@@ -1,11 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs
 import 'package:flutter/material.dart';
-
-import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
-import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../pofile/presentation/views/widgets/label_text.dart';
+import 'user_entities.dart';
+import 'vaildated_confirm_password.dart';
+import 'validated_password_formfield.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key, this.onLoadingChanged});
@@ -17,95 +19,29 @@ class SignupForm extends StatefulWidget {
 class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
-
-  UserEntity user = const UserEntity(
-    age: '',
-    gender: '',
-    phoneNumber: '',
-    name: '',
-    email: '',
-    passwordConfirmation: '',
-    role: '',
-  );
-
-  String? confirmPassword;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(final BuildContext context) => Form(
     key: _formKey,
     autovalidateMode: autovalidateMode,
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 12,
       children: [
-        const Text(
-          'Email',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(height: 4),
-        AppTextField(
-          hintText: 'Email',
-          keyboardType: TextInputType.emailAddress,
-          validator: (final value) {
-            if (value?.isNotEmpty ?? false) {
-              return null;
-            } else {
-              return 'Email is required';
-            }
-          },
-          onChanged: (final p0) =>
-              setState(() => user = user.copyWith(email: p0)),
-        ),
-        const Text(
-          'Password',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(height: 4),
-        AppTextField(
-          hintText: 'Password',
-          obscureText: true,
+        const LabelText(labelText: 'Email'),
+        CustomTextField(
+          hint: 'Email',
+          choose: false,
+          type: TextInputType.emailAddress,
           onChanged: (final p0) {
             setState(() {
-              user = user.copyWith(password: p0);
-            });
-          },
-          validator: (final value) {
-            final isValid =
-                value != null &&
-                value.length >= 6 &&
-                RegExp('[A-Z]').hasMatch(value) &&
-                RegExp('[a-z]').hasMatch(value) &&
-                RegExp('[0-9]').hasMatch(value) &&
-                RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
-
-            return isValid
-                ? null
-                : 'Password must be 6+ chars and include '
-                      'uppercase, lowercase, number, and special character';
-          },
-        ),
-        const Text(
-          'Confirm Password',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(height: 4),
-        AppTextField(
-          hintText: 'Confirm Password',
-          obscureText: true,
-          validator: (final value) {
-            if (value == null || value.isEmpty) {
-              return 'Confirm Password is required';
-            } else {
-              return null;
-            }
-          },
-          onChanged: (final p0) {
-            setState(() {
-              confirmPassword = p0;
-              user = user.copyWith(passwordConfirmation: p0);
+              user = user.copyWith(email: p0);
             });
           },
         ),
-        const SizedBox(height: 16),
+        const LabelText(labelText: 'Password'),
+        const ValidatePasswordFormField(),
+        const LabelText(labelText: 'Confirm Password'),
+        const ConfirmPasswordValidate(),
         CustomButton(
           onTap: () async {
             setState(() {

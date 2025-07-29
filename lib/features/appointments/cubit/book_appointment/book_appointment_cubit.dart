@@ -11,7 +11,7 @@ import '../../../../core/services/shared_preferences_singleton.dart';
 
 part 'book_appointment_state.dart';
 
-const String appointmentIdKey = 'appointmentId';
+const String appointmentIdKey = '';
 const String isBookedKey = 'isBooked';
 
 class BookAppointmentCubit extends Cubit<BookAppointmentState> {
@@ -60,7 +60,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       Map<String, dynamic> jsonData = response.data;
-      final id = jsonData['data']['id'].toString();
+      var id = jsonData['data']['id'].toString();
       await SharedPreferencesSingleton.setString(appointmentIdKey, id);
       await SharedPreferencesSingleton.setBool(isBookedKey, value: true);
       if (!isClosed) {
@@ -97,10 +97,11 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     }
   }
 
-  Future<void> deleteAppointment({required final String id}) async {
+  Future<void> deleteAppointment() async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
+      String? id = SharedPreferencesSingleton.getString(appointmentIdKey);
       var response = await dioInstance.delete(
         '/appointments/$id',
         options: Options(

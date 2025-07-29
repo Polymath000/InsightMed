@@ -5,7 +5,7 @@ import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../cubit/auth/auth_cubit.dart';
-import 'form_body.dart';
+import 'patient_information_form_body.dart';
 
 class PatientForm extends StatefulWidget {
   const PatientForm({

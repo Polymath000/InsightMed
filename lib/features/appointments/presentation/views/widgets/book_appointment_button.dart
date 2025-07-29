@@ -22,105 +22,102 @@ class BookAppointmentButton extends StatefulWidget {
 class _BookAppointmentButtonState extends State<BookAppointmentButton> {
   bool isBooked = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
   @override
-  Widget build(final BuildContext context) {
-    final appointmentId = SharedPreferencesSingleton.getString(
-      appointmentIdKey,
-    );
-    return SliverToBoxAdapter(
-      child: BlocProvider(
-        create: (final context) => BookAppointmentCubit(),
-        child: Builder(
-          builder: (final context) =>
-              BlocListener<BookAppointmentCubit, BookAppointmentState>(
-                listener: (final context, final state) {
-                  if (state is BookAppointmentSuccess) {
-                    setState(() async {
-                      isBooked = true;
-                      await SharedPreferencesSingleton.setBool(
-                        isBookedKey,
-                        value: true,
-                      );
-                    });
-                    customShowSnackBar(
-                      context: context,
-                      message: 'Appointment booked successfully!',
+  Widget build(final BuildContext context) => SliverToBoxAdapter(
+    child: BlocProvider(
+      create: (final context) => BookAppointmentCubit(),
+      child: Builder(
+        builder: (final context) =>
+            BlocListener<BookAppointmentCubit, BookAppointmentState>(
+              listener: (final context, final state) {
+                if (state is BookAppointmentSuccess) {
+                  setState(()  {
+                    isBooked = true;
+
+                  });                     SharedPreferencesSingleton.setBool(
+                      isBookedKey,
+                      value: true,
                     );
-                    widget.onBook?.call(false);
-                  } else if (state is AppointmentAlreadyBooked) {
-                    setState(() async {
-                      isBooked = true;
-                      await SharedPreferencesSingleton.setBool(
-                        isBookedKey,
-                        value: true,
-                      );
-                    });
-                    customShowSnackBar(
-                      context: context,
-                      message: 'You already book appointment',
+                  customShowSnackBar(
+                    context: context,
+                    message: 'Appointment booked successfully!',
+                  );
+                  widget.onBook?.call(false);
+                } else if (state is AppointmentAlreadyBooked) {
+                  setState(()  {
+                    isBooked = true;
+
+                  });
+                     SharedPreferencesSingleton.setBool(
+                      isBookedKey,
+                      value: true,
                     );
-                    widget.onBook?.call(false);
-                  } else if (state is DeleteAppointmentSuccess) {
-                    setState(() async {
-                      isBooked = false;
-                      await SharedPreferencesSingleton.setBool(
-                        isBookedKey,
-                        value: false,
-                      );
-                    });
-                    customShowSnackBar(
-                      context: context,
-                      message: 'Appointment cancelled!',
+                  customShowSnackBar(
+                    context: context,
+                    message: 'You already book appointment',
+                  );
+                  widget.onBook?.call(false);
+                } else if (state is DeleteAppointmentSuccess) {
+                  setState(()  {
+isBooked = false;
+                  });                    
+                     SharedPreferencesSingleton.setBool(
+                      isBookedKey,
+                      value: false,
                     );
-                    widget.onBook?.call(false);
-                  } else if (state is BookAppointmentFailure) {
-                    customShowSnackBar(
-                      context: context,
-                      message: 'Failed to book appointment',
-                    );
-                    widget.onBook?.call(false);
-                  } else if (state is BookAppointmentLoading) {
-                    widget.onBook?.call(true);
-                  } else if (state is DeleteAppointmentFailure) {
-                    widget.onBook?.call(false);
-                    customShowSnackBar(
-                      context: context,
-                      message: 'Failed to delete appointment',
-                    );
-                  }
-                },
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: CustomButton(
-                        onTap: () async {
-                          if (widget.selectedTime.isEmpty && !isBooked) {
-                            customShowSnackBar(
-                              context: context,
-                              message: 'Please choose a slot',
-                            );
-                            return;
-                          }
-                          if (isBooked) {
-                            await BlocProvider.of<BookAppointmentCubit>(
-                              context,
-                            ).deleteAppointment(id: appointmentId ?? '');
-                          } else {
-                            await BlocProvider.of<BookAppointmentCubit>(
-                              context,
-                            ).bookAppointment(appointment: widget.selectedTime);
-                          }
-                        },
-                        btnText: isBooked
-                            ? 'Change Appointment'
-                            : 'Book Appointment',
-                      ),
+                  customShowSnackBar(
+                    context: context,
+                    message: 'Appointment cancelled!',
+                  );
+                  widget.onBook?.call(false);
+                } else if (state is BookAppointmentFailure) {
+                  customShowSnackBar(
+                    context: context,
+                    message: 'Failed to book appointment',
+                  );
+                  widget.onBook?.call(false);
+                } else if (state is BookAppointmentLoading) {
+                  widget.onBook?.call(true);
+                } else if (state is DeleteAppointmentFailure) {
+                  widget.onBook?.call(false);
+                  customShowSnackBar(
+                    context: context,
+                    message: 'Failed to delete appointment',
+                  );
+                  widget.onBook?.call(false);
+                }
+              },
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: CustomButton(
+                      onTap: () async {
+                        if (widget.selectedTime.isEmpty && !isBooked) {
+                          customShowSnackBar(
+                            context: context,
+                            message: 'Please choose a slot',
+                          );
+                          return;
+                        }
+                        if (isBooked) {
+                          await BlocProvider.of<BookAppointmentCubit>(
+                            context,
+                          ).deleteAppointment();
+                        } else {
+                          await BlocProvider.of<BookAppointmentCubit>(
+                            context,
+                          ).bookAppointment(appointment: widget.selectedTime);
+                        }
+                      },
+                      btnText: isBooked
+                          ? 'Cancel The Appointment'
+                          : 'Book Appointment',
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-        ),
+            ),
       ),
-    );
-  }
+    ),
+  );
 }

@@ -9,7 +9,8 @@ import '../../cubit/profile_of_patient_/profile_of_patient_cubit.dart';
 Future<dynamic> showDialogForEditPatientProfile(
   final BuildContext context, {
   required final UserEntity user,
-  required final void Function(bool?)? onChanged,
+  required final void Function(bool?)? onChanged
+
 }) => showDialog(
   context: context,
   builder: (_) => AlertDialog(

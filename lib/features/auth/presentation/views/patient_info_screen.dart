@@ -28,10 +28,11 @@ class _PatientInformationState extends State<PatientInformation> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView(
+        child: Column(
+          spacing: 10,
           children: [
             const TopPartPatientInfo(),
-            const SizedBox(height: 16),
+            // const SizedBox(height: 16),
             PatientForm(
               user: widget.user.copyWith(gender: 'male'),
               onLoadingChanged: ({final isLoading = false}) =>

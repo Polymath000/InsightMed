@@ -73,7 +73,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                     context,
                     user: _user,
                     onChanged: (final p0) {
-                      isLoading = p0!;
+                      isLoading  = p0!;
                     },
                   );
                 },
