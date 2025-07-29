@@ -12,6 +12,7 @@ import '../../features/reset_password/presntation/view/create_new_password.dart'
 import '../../features/reset_password/presntation/view/loading_view.dart';
 import '../../features/reset_password/presntation/view/reset_password_view.dart';
 import '../../features/reset_password/presntation/view/verify_code.dart';
+import '../entities/ray_entity.dart';
 import '../entities/user_entity.dart';
 import '../utls/i_text.dart';
 
@@ -74,6 +75,12 @@ sealed class AppRoutes {
     CreateNewPasswordView.routeName,
     arguments: CreateNewPasswordViewArgs(email: email, code: code),
   );
+
+    static Future<Object?> rayResultsPatientDashboard(
+    final BuildContext context, {
+    required final List<RayEntity> rays,
+  }) => _pushNamed(context, RayResultsPatientDashboard.routeName, arguments: rays);
+
   // Routes without arguments
   static Future<Object?> main(final BuildContext context) =>
       _pushNamedAndRemoveAll(context, MainView.routeName);
@@ -89,9 +96,7 @@ sealed class AppRoutes {
 
   static Future<Object?> uploadMedicalRay(final BuildContext context) =>
       _pushNamed(context, UploadMedicalRayView.routeName);
-  static Future<Object?> rayResultsPatientDashboard(
-    final BuildContext context,
-  ) => _pushNamed(context, RayResultsPatientDashboard.routeName);
+
 }
 
 class CreateNewPasswordViewArgs {
@@ -111,8 +116,8 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientDetailsView.routeName: (_, final args) =>
       PatientDetailsView(patient: args! as UserEntity),
   ResetPasswordView.routeName: (_, _) => ResetPasswordView(),
-  RayResultsPatientDashboard.routeName: (_, _) =>
-      const RayResultsPatientDashboard(),
+  RayResultsPatientDashboard.routeName: (_, final args) =>
+       RayResultsPatientDashboard(rays: args! as List<RayEntity>),
   VerifyCodeView.routeName: (_, final args) =>
       VerifyCodeView(email: args! as String),
   CreateNewPasswordView.routeName: (_, final args) {

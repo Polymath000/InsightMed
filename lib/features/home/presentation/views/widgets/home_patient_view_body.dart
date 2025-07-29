@@ -34,6 +34,7 @@ import '../../../../rays/presentation/view/widget/ray_card.dart';
 import 'decorated_icon.dart';
 import 'home_app_bar.dart' show HomeAppBar;
 import 'home_sticker.dart';
+import 'ray_results_and_ai_summary.dart';
 
 final class HomePatientViewBody extends StatelessWidget {
   const HomePatientViewBody({super.key});
@@ -105,71 +106,5 @@ final class HomePatientViewBody extends StatelessWidget {
         ),
       ),
     ],
-  );
-}
-
-class RayResultsAndAiSummary extends StatelessWidget {
-  RayResultsAndAiSummary({super.key});
-  List<RayEntity>? rays;
-  @override
-  Widget build(final BuildContext context) => BlocProvider(
-    create: (final context) => GetRaysCubit()..getRays(),
-    child: BlocConsumer<GetRaysCubit, GetRaysState>(
-      listener: (context, state) {
-        if (state is GetRaysFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('There was an error , please try again later'),
-            ),
-          );
-        }else if (state is GetRaysSuccess){
-          rays = state.rays;
-        }
-      },
-      builder: (final context, final state) => SliverPadding(
-        padding: const EdgeInsets.all(16),
-        sliver: SliverToBoxAdapter(
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            shape: const RoundedSuperellipseBorder(
-              borderRadius: AppBorders.xxs,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const ListTile(
-                  leading: Icon(
-                    Icons.medical_services_rounded,
-                    color: AppColors.white,
-                  ),
-                  title: Text('Ray Results & AI Summary'),
-                  tileColor: AppColors.topaz,
-                  textColor: AppColors.white,
-                ),
-                if (rays == null)
-                  const Center(child: Text('No Rays Found'))
-                else
-                  RayCard(ray: rays!.first, index: 0 + 1),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: TextButton.icon(
-                    onPressed: () async {
-                      await AppRoutes.rayResultsPatientDashboard(context);
-                    },
-                    icon: const Icon(Icons.arrow_forward_ios_rounded),
-                    label: const IText('View all results'),
-                    iconAlignment: IconAlignment.end,
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.topaz,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ),
   );
 }

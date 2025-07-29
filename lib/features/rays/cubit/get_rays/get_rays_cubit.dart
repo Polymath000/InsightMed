@@ -30,7 +30,9 @@ class GetRaysCubit extends Cubit<GetRaysState> {
         rayModel.add(RayModel.fromJson(element));
         rayEntity.add(const RayModel().toEntity());
       }
-      emit(GetRaysSuccess(rays: rayEntity));
+      if (!isClosed) {
+        emit(GetRaysSuccess(rays: rayEntity));
+      }
       return rayEntity;
     } catch (e) {
       emit(GetRaysFailure(message: e.toString()));
