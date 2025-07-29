@@ -4,7 +4,7 @@ import '../../../../../../core/widgets/custbutton.dart';
 import '../../../../../pofile/presentation/views/widgets/contact_info_container.dart';
 import '../../../../../pofile/presentation/views/widgets/heading_text_profil.dart';
 import '../../../../../pofile/presentation/views/widgets/personal_info.dart';
-import '../../../../../pofile/presentation/views/widgets/profile_main_cuntainer_decoration.dart';
+import '../../../../../pofile/presentation/views/widgets/profile_main_countainer_decoration.dart';
 import '../../../../../pofile/presentation/views/widgets/security_container.dart';
 import '../../../../../pofile/presentation/views/widgets/shadow_container.dart';
 class ProfileViewBody extends StatelessWidget {

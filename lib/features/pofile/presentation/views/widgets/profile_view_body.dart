@@ -69,7 +69,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   await showDialogForEditPatientProfile(
                     context,
                     user: _user,
-                    onChanged: (p0) {
+                    onChanged: (final p0) {
                       isLoading  = p0!;
                     },
                   );

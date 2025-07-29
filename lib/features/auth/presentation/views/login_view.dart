@@ -22,10 +22,11 @@ class _LoginScreenState extends State<LoginScreen> {
     child: Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(14, 22, 14, 15),
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 12,
           children: [
             const TopLoginView(),
-            SizedBox(height: MediaQuery.of(context).size.height / 37),
             LoginForm(
               onLoadingChanged: ({final isLoading = false}) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -37,8 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
             const DonnotHaveAnAccount(),
           ],
         ),

@@ -52,7 +52,7 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
     try {
       log('token ${getUser!.token}');
       final dioInstance = dio();
-      UserModel userModel = UserModel.fromEntity(user);
+      var userModel = UserModel.fromEntity(user);
       final jsonData = userModel.toJson();
       var response = await dioInstance.put(
         '/me',

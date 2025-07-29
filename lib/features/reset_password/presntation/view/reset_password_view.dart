@@ -6,7 +6,7 @@ import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/reset_password_view_body.dart';
 
 class ResetPasswordView extends StatefulWidget {
-  ResetPasswordView({super.key});
+  const ResetPasswordView({super.key});
   static const routeName = 'ResetPasswordView';
 
   @override

@@ -28,17 +28,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
-        child: ListView(
+        child: Column(
+          spacing: 15,
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height / 45),
-            Text(
-              'Welcome!',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24.sp),
+            Row(
+              children: [
+                Text(
+                  'Welcome!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24.sp,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 85),
-            const AnimatedTextSignUp(),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-
+            const Row(children: [AnimatedTextSignUp()]),
             SignupForm(
               onLoadingChanged: (final isLoading) {
                 setState(() {
@@ -46,7 +50,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 });
               },
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
             const AleardyHaveAnAccount(),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../pofile/presentation/views/widgets/label_text.dart';
 import '../../cubit/auth/auth_cubit.dart';
 import 'constans.dart';
 
@@ -25,16 +26,9 @@ class _LoginFormBodyState extends State<LoginFormBody> {
     key: _formKey,
     autovalidateMode: autovalidateMode,
     child: Column(
+      spacing: 15,
       children: [
-        Row(
-          children: [
-            Text(
-              'Email',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.height / 87),
+        const LabelText(labelText: 'Email'),
         CustomTextField(
           hint: 'Enter your email',
           choose: false,
@@ -43,16 +37,7 @@ class _LoginFormBodyState extends State<LoginFormBody> {
             email = p0;
           },
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 89),
-        Row(
-          children: [
-            Text(
-              'Password',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-        SizedBox(height: MediaQuery.of(context).size.height / 87),
+        const LabelText(labelText: 'Password'),
         CustomTextField(
           hint: 'Enter your password',
           choose: true,
@@ -60,8 +45,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
             password = p0;
           },
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 50),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -80,7 +63,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
             ),
           ],
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 50),
         CustomButton(
           onTap: () async {
             if (_formKey.currentState!.validate()) {

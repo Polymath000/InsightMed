@@ -13,7 +13,7 @@ sealed class SharedPreferencesSingleton {
   /// Setters
   static Future<bool> setBool(
     final String key,
-    bool bool, {
+    final bool bool, {
     required final bool value,
   }) => _instance.setBool(key, value);
   static Future<bool> setString(final String key, final String value) =>
