@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/helpers/app_media_query.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
 import '../../../../../core/utls/i_text.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
@@ -10,7 +11,8 @@ class AppointmentsTimePicker extends StatefulWidget {
   final void Function(String selectedTime)? onTimeSelected;
 
   AppointmentsTimePicker({
-    required this.selectedDateTime, super.key,
+    required this.selectedDateTime,
+    super.key,
     this.onTimeSelected,
   });
   DateTime selectedDateTime;
@@ -29,31 +31,27 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverToBoxAdapter(
         child: BlocConsumer<BookAppointmentCubit, BookAppointmentState>(
-          listener: (final context,final state) {
+          listener: (final context, final state) {
             if (state is BookAppointmentFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.red,
-                ),
+              customShowSnackBar(
+                context: context,
+                message: 'There was an error ,please try again later',
               );
             }
           },
-          builder: (final context,final state) {
+          builder: (final context, final state) {
             if (state is BookAppointmentLoading) {
               return const Center(
                 heightFactor: 5,
                 child: CircularProgressIndicator(),
               );
             }
-
             if (state is GetAppointmentSuccess) {
               if (state.finalData.isEmpty) {
                 return const Center(
                   child: IText('No available slots for this day.'),
                 );
               }
-
               return Wrap(
                 spacing: 5,
                 runSpacing: 2,

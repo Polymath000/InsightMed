@@ -12,6 +12,8 @@ import '../../../../../core/models/user_model.dart';
 import '../../../../../core/repos/auth_repo.dart';
 import '../../../../../core/services/dio/auth_dio.dart';
 import '../../../../../core/services/get_it_service.dart';
+import '../../../../../core/services/shared_preferences_singleton.dart';
+import '../../../../appointments/cubit/book_appointment/book_appointment_cubit.dart';
 
 part 'auth_state.dart';
 
@@ -103,6 +105,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     try {
+      await SharedPreferencesSingleton.setBool(
+        isBookedKey,
+        false,
+        value: false,
+      );
       cleanUp();
     } on Exception catch (e) {
       log(e.toString());

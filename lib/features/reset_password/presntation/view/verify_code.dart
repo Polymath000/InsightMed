@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import '../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../core/helpers/on_generate_routes.dart';
 import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/verify_code_view_body.dart';
@@ -32,17 +33,15 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
       body: BlocProvider(
         create: (final context) => ResetPasswordCubit(),
         child: BlocListener<ResetPasswordCubit, ResetPasswordState>(
-          listener: (final context,final state) async {
+          listener: (final context, final state) async {
             if (state is ResetPasswordFailure) {
               setState(() {
                 isLoading = false;
               });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.red,
-                ),
-              );
+          customShowSnackBar(
+            context: context,
+            message: state.message,
+          );
             } else if (state is VerifyCodeSuccess) {
               setState(() {
                 isLoading = false;
@@ -57,11 +56,9 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
                 isLoading = true;
               });
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('There was an error please try again later'),
-                  backgroundColor: Colors.red,
-                ),
+              customShowSnackBar(
+                context: context,
+                message: 'There was an error please try again later',
               );
             }
           },

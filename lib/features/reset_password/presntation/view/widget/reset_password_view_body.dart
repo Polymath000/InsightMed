@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'custom_animated_text_kit.dart';
 

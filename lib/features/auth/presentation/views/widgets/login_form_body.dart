@@ -90,11 +90,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
               await BlocProvider.of<AuthCubit>(
                 context,
               ).login(email: email!, password: password!);
-              if (context.mounted) {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('Welcom Back!')));
-              }
             } else {
               setState(() {
                 autovalidateMode = AutovalidateMode.always;

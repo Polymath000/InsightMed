@@ -45,7 +45,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             ),
             const Divider(),
             const ListTile(
-              title: IText('Contact Information', style: TextStyle(fontSize: 20)),
+              title: IText(
+                'Contact Information',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -69,8 +72,8 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   await showDialogForEditPatientProfile(
                     context,
                     user: _user,
-                    onChanged: (p0) {
-                      isLoading  = p0!;
+                    onChanged: (final p0) {
+                      isLoading = p0!;
                     },
                   );
                 },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../core/helpers/on_generate_routes.dart';
 import '../../../auth/presentation/cubit/auth/auth_cubit.dart';
 
@@ -32,9 +33,7 @@ class _LoadingViewState extends State<LoadingView> {
             if (state is AuthSuccess) {
               await AppRoutes.main(context);
             } else if (state is AuthFailure) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
+              customShowSnackBar(context: context, message: state.message);
             }
           },
           builder: (final context, final state) =>

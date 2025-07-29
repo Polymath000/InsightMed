@@ -8,7 +8,6 @@ import 'package:flutter/material.dart'
         Icons,
         ListTile,
         MainAxisSize,
-        ScaffoldMessenger,
         SizedBox,
         SnackBar,
         StatelessWidget,
@@ -16,6 +15,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, BlocProvider;
 import '../../../../../core/constants/borders.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
@@ -36,8 +36,9 @@ class DoctorNotesPatientDasboardView extends StatelessWidget {
         } else if (state is GetNotesSuccess) {
           notes = state.notes;
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Cannot fetch the Rays.')),
+          customShowSnackBar(
+            context: context,
+            message: 'Cannot fetch the notes.',
           );
         }
       },
@@ -59,16 +60,13 @@ class DoctorNotesPatientDasboardView extends StatelessWidget {
                   tileColor: AppColors.waterBlue,
                   textColor: AppColors.white,
                 ),
-                if (notes == null|| notes!.isEmpty)
+                if (notes == null || notes!.isEmpty)
                   const SizedBox(
                     height: 100,
                     child: Center(child: Text('No Notes  found')),
                   )
                 else
-                  NoteCardPatientDashboard(
-                    note: notes![0],
-                    index: 1,
-                  ),
+                  NoteCardPatientDashboard(note: notes![0], index: 1),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: TextButton.icon(

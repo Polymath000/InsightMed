@@ -66,8 +66,35 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       if (!isClosed) {
         emit(BookAppointmentSuccess());
       }
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      final errorMessage = e.response?.data['message'] ?? e.message;
+      if (statusCode == 409) {
+        await SharedPreferencesSingleton.setBool(
+          isBookedKey,
+          true,
+          value: true,
+        );
+
+        if (!isClosed) {
+          emit(AppointmentAlreadyBooked());
+        }
+      } else {
+        if (!isClosed) {
+          emit(
+            BookAppointmentFailure(
+              message:
+                  'Error $statusCode: ${statusCode != 409 ? '' : errorMessage}',
+            ),
+          );
+        }
+      }
     } on Exception catch (e) {
-      emit(BookAppointmentFailure(message: e.toString()));
+      emit(
+        BookAppointmentFailure(
+          message: 'There was an error , please try again later',
+        ),
+      );
     }
   }
 
@@ -94,8 +121,8 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       if (!isClosed) {
         emit(DeleteAppointmentSuccess());
       }
-    }on Exception catch (e) {
-      emit(BookAppointmentFailure(message: e.toString()));
+    } on Exception catch (e) {
+      emit(DeleteAppointmentFailure(message: e.toString()));
     }
   }
 }

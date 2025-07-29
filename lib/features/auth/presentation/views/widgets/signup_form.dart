@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/entities/user_entity.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
@@ -124,8 +125,9 @@ class _SignupFormState extends State<SignupForm> {
                 isLoading = false;
                 widget.onLoadingChanged!(isLoading);
               });
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Passwords do not match')),
+              customShowSnackBar(
+                context: context,
+                message: 'Passwords do not match',
               );
             } else {
               setState(() {

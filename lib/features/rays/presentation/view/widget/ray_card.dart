@@ -42,7 +42,8 @@ class RayCard extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                'Uploaded: ${DateFormat.yMMMd().format(ray.createdAt ?? DateTime.now())}',
+                'Uploaded: ${DateFormat.yMMMd().
+                format(ray.createdAt ?? DateTime.now())}',
               ),
               trailing: DecoratedBox(
                 decoration: ShapeDecoration(

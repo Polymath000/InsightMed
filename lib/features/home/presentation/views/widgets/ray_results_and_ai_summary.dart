@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart' show Card, Column, CrossAxisAlignment, Icon, IconAlignment, Icons, ListTile, MainAxisSize, ScaffoldMessenger, SizedBox, SnackBar, StatelessWidget, TextButton;
+import 'package:flutter/material.dart' show Card, Column, CrossAxisAlignment, Icon, IconAlignment, Icons, ListTile, MainAxisSize, SizedBox, SnackBar, StatelessWidget, TextButton;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, BlocProvider;
 import '../../../../../core/constants/borders.dart';
 import '../../../../../core/entities/ray_entity.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/i_text.dart' show IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
@@ -18,10 +19,9 @@ class RayResultsAndAiSummary extends StatelessWidget {
     child: BlocConsumer<GetRaysCubit, GetRaysState>(
       listener: (final context, final state) {
         if (state is GetRaysFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Cannot fetch the Rays.'),
-            ),
+          customShowSnackBar(
+            context: context,
+            message: 'Cannot fetch the Rays.',
           );
         } else if (state is GetRaysSuccess) {
           rays = state.rays;
