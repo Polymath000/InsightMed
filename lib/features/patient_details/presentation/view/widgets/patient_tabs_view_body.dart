@@ -18,7 +18,7 @@ class PatientTabsViewBody extends StatelessWidget {
     final pages = <Widget>[
       NotesView(patientId: patient.id!),
       RaysView(patient: patient),
-      const ApptsView(),
+       ApptsView(token: patient.token??'',),
     ];
 
     return AnimatedSwitcher(

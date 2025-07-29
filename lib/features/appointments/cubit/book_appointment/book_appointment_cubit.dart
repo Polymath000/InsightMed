@@ -119,7 +119,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     }
   }
 
-  Future<String> getPatientAppiontment() async {
+  Future<void> getPatientAppiontment({String? token}) async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
@@ -129,29 +129,31 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer ${getUser!.token}',
+            'Authorization':
+                'Bearer ${token == null || token.isEmpty ? getUser!.token : token}',
           },
         ),
       );
-      var jsonData = response.data;
-      int id = jsonData['data']['id'];
+      final jsonData = response.data;
+      final id = jsonData['data']['id'];
       await SharedPreferencesSingleton.setString(
         appointmentIdKey,
         id.toString(),
       );
-      var finalData = [];
-      String appointmentTime = jsonData['appointment_time'];
+      final String appointmentTime = jsonData['data']['appointment_time'];
       if (!isClosed) {
-        List<String> finalData = [];
-
-        emit(GetAppointmentSuccess(finalData: finalData));
-        return appointmentTime;
+        emit(GetAppointmentSuccess(finalData: [appointmentTime]));
       }
-      return appointmentTime;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        emit(GetAppointmentSuccess(finalData: const []));
+      } else {
+        emit(BookAppointmentFailure(message: e.toString()));
+        log(e.toString());
+      }
     } on Exception catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
       log(e.toString());
-      return '';
     }
   }
 }
