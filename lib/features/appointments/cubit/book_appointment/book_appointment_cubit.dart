@@ -119,7 +119,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     }
   }
 
-  Future<void> getPatientAppiontment() async {
+  Future<String> getPatientAppiontment() async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
@@ -135,16 +135,23 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       );
       var jsonData = response.data;
       int id = jsonData['data']['id'];
-      await SharedPreferencesSingleton.setString(appointmentIdKey, id.toString());
+      await SharedPreferencesSingleton.setString(
+        appointmentIdKey,
+        id.toString(),
+      );
       var finalData = [];
+      String appointmentTime = jsonData['appointment_time'];
       if (!isClosed) {
-          List<String> finalData = [];
+        List<String> finalData = [];
 
         emit(GetAppointmentSuccess(finalData: finalData));
+        return appointmentTime;
       }
+      return appointmentTime;
     } on Exception catch (e) {
       emit(BookAppointmentFailure(message: e.toString()));
       log(e.toString());
+      return '';
     }
   }
 }
