@@ -101,19 +101,6 @@ class AuthCubit extends Cubit<AuthState> {
         email: email,
         password: password,
       );
-
-      // final dioInstance = dio();
-      // var response = await dioInstance.post(
-      //   '/login',
-      //   data: {'email': email, 'password': password},
-      //   options: dio_package.Options(
-      //     validateStatus: (_) => true,
-      //     contentType: dio_package.Headers.jsonContentType,
-      //     responseType: dio_package.ResponseType.json,
-      //   ),
-      // );
-      // String token = response.data['token'];
-
       await tryToken(token: token);
     } on dio_package.DioException catch (e) {
       isAuthenticated = false;
@@ -129,14 +116,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     try {
-      // final dioInstance = dio();
-      // var response = await dioInstance.get(
-      //   '/logout',
-      //   options: dio_package.Options(
-      //     headers: {'Authorization': 'Bearer $mainToken'},
-      //   ),
-      // );
-
       cleanUp();
     } on Exception catch (e) {
       log(e.toString());

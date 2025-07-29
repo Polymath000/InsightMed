@@ -20,7 +20,7 @@ class RayCard extends StatelessWidget {
   Widget build(final BuildContext context) {
     log('${EndPoint.baseUrl}/${ray.imagePath}');
     return Card.filled(
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -42,7 +42,7 @@ class RayCard extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                'Uploaded: ${DateFormat.yMMMd().format(ray.createdAt!)}',
+                'Uploaded: ${DateFormat.yMMMd().format(ray.createdAt ?? DateTime.now())}',
               ),
               trailing: DecoratedBox(
                 decoration: ShapeDecoration(

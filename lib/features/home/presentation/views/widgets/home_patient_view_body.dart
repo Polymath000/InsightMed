@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart'
     show
         Card,
+        CircularProgressIndicator,
         Column,
         CrossAxisAlignment,
         CustomScrollView,
         FontWeight,
         Icon,
+        IconAlignment,
         Icons,
         ListTile,
         MainAxisAlignment,
         MainAxisSize,
         PlaceholderAlignment,
+        ScaffoldMessenger,
         SizedBox,
+        SnackBar,
         StatelessWidget,
+        TextButton,
         TextSpan,
         TextStyle,
         WidgetSpan;
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, BlocProvider;
 
+import '../../../../../core/constants/borders.dart';
+import '../../../../../core/entities/ray_entity.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/i_text.dart' show IRichText, IText;
 import '../../../../../core/utls/themes/app_colors.dart' show AppColors;
+import '../../../../rays/cubit/get_rays/get_rays_cubit.dart';
+import '../../../../rays/presentation/view/widget/ray_card.dart';
 import 'decorated_icon.dart';
 import 'home_app_bar.dart' show HomeAppBar;
 import 'home_sticker.dart';
@@ -27,7 +39,7 @@ final class HomePatientViewBody extends StatelessWidget {
   const HomePatientViewBody({super.key});
 
   @override
-  CustomScrollView build(_) => CustomScrollView(
+  CustomScrollView build(final BuildContext context) => CustomScrollView(
     slivers: [
       const HomeAppBar(),
       HomeSticker(
@@ -49,32 +61,7 @@ final class HomePatientViewBody extends StatelessWidget {
         footerOnPressed: () {},
         footerTitle: 'Read More',
       ),
-      HomeSticker(
-        headerIcon: Icons.medical_services_rounded,
-        headerTitle: 'Ray Results & AI Summary',
-        headerColor: AppColors.topaz,
-        bodyLeading: const DecoratedIcon(
-          icon: Icons.image_rounded,
-          color: AppColors.topaz,
-        ),
-        bodyTitle: 'Brain MRI Scan',
-        bodySubTitle: const IText('Uploaded: June 10, 2023'),
-        bodyTrailing: const Icon(Icons.arrow_forward_ios_rounded),
-        bodyOnTap: () {},
-        paragraph: const Card.filled(
-          child: ListTile(
-            title: IText('AI Summary'),
-            subtitle: IText(
-              'No significant abnormalities detected. '
-              'Minor inflammation in the temporal region has '
-              'reduced by 30% compared to previous scan.',
-              softWrap: true,
-            ),
-          ),
-        ),
-        footerOnPressed: () {},
-        footerTitle: 'View all results',
-      ),
+      RayResultsAndAiSummary(),
       const HomeSticker(
         headerIcon: Icons.calendar_month_rounded,
         headerTitle: 'Next Appointment',
@@ -118,5 +105,71 @@ final class HomePatientViewBody extends StatelessWidget {
         ),
       ),
     ],
+  );
+}
+
+class RayResultsAndAiSummary extends StatelessWidget {
+  RayResultsAndAiSummary({super.key});
+  List<RayEntity>? rays;
+  @override
+  Widget build(final BuildContext context) => BlocProvider(
+    create: (final context) => GetRaysCubit()..getRays(),
+    child: BlocConsumer<GetRaysCubit, GetRaysState>(
+      listener: (context, state) {
+        if (state is GetRaysFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('There was an error , please try again later'),
+            ),
+          );
+        }else if (state is GetRaysSuccess){
+          rays = state.rays;
+        }
+      },
+      builder: (final context, final state) => SliverPadding(
+        padding: const EdgeInsets.all(16),
+        sliver: SliverToBoxAdapter(
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            shape: const RoundedSuperellipseBorder(
+              borderRadius: AppBorders.xxs,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ListTile(
+                  leading: Icon(
+                    Icons.medical_services_rounded,
+                    color: AppColors.white,
+                  ),
+                  title: Text('Ray Results & AI Summary'),
+                  tileColor: AppColors.topaz,
+                  textColor: AppColors.white,
+                ),
+                if (rays == null)
+                  const Center(child: Text('No Rays Found'))
+                else
+                  RayCard(ray: rays!.first, index: 0 + 1),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: TextButton.icon(
+                    onPressed: () async {
+                      await AppRoutes.rayResultsPatientDashboard(context);
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios_rounded),
+                    label: const IText('View all results'),
+                    iconAlignment: IconAlignment.end,
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.topaz,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 }

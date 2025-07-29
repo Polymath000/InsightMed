@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/patient_info_screen.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
+import '../../features/home/presentation/views/widgets/ray_results_patient_dashboard.dart.dart';
 import '../../features/main/presentation/views/main_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/patient_details/presentation/view/patient_details_view.dart';
@@ -88,10 +89,12 @@ sealed class AppRoutes {
 
   static Future<Object?> uploadMedicalRay(final BuildContext context) =>
       _pushNamed(context, UploadMedicalRayView.routeName);
+  static Future<Object?> rayResultsPatientDashboard(
+    final BuildContext context,
+  ) => _pushNamed(context, RayResultsPatientDashboard.routeName);
 }
 
 class CreateNewPasswordViewArgs {
-
   const CreateNewPasswordViewArgs({required this.email, required this.code});
   final String email;
   final String code;
@@ -108,6 +111,8 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   PatientDetailsView.routeName: (_, final args) =>
       PatientDetailsView(patient: args! as UserEntity),
   ResetPasswordView.routeName: (_, _) => ResetPasswordView(),
+  RayResultsPatientDashboard.routeName: (_, _) =>
+      const RayResultsPatientDashboard(),
   VerifyCodeView.routeName: (_, final args) =>
       VerifyCodeView(email: args! as String),
   CreateNewPasswordView.routeName: (_, final args) {
