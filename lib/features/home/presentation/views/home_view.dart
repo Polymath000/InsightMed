@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/get_user.dart';
 import '../controllers/get_patients_cubit/get_patients_cubit.dart';
+import '../controllers/user_dashboard_cubit/user_dashboard_cubit.dart';
 import 'widgets/home_doctor_view_body.dart' show HomeDoctorViewBody;
-import 'widgets/home_patient_view_body.dart' show HomePatientViewBody;
+import 'widgets/home_patient_view_body.dart' show HomePatientViewBlocBuilder;
 
 final class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -15,5 +16,8 @@ final class HomeView extends StatelessWidget {
           create: (_) => GetPatientsCubit(),
           child: const HomeDoctorViewBody(),
         )
-      : const HomePatientViewBody();
+      : BlocProvider(
+          create: (_) => UserDashboardCubit(),
+          child: const HomePatientViewBlocBuilder(),
+        );
 }

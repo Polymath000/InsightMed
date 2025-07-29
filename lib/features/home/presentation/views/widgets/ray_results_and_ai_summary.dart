@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' show Card, Column, CrossAxisAlignment, Icon, IconAlignment, Icons, ListTile, MainAxisSize, SizedBox, SnackBar, StatelessWidget, TextButton;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, BlocProvider;
+
 import '../../../../../core/constants/borders.dart';
 import '../../../../../core/entities/ray_entity.dart';
 import '../../../../../core/helpers/custom_show_snackBar.dart';
@@ -15,7 +16,7 @@ class RayResultsAndAiSummary extends StatelessWidget {
   List<RayEntity>? rays;
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (final context) => GetRaysCubit()..getRays(),
+    create: (final context) => GetRaysCubit(),
     child: BlocConsumer<GetRaysCubit, GetRaysState>(
       listener: (final context, final state) {
         if (state is GetRaysFailure) {
@@ -48,7 +49,7 @@ class RayResultsAndAiSummary extends StatelessWidget {
                   tileColor: AppColors.topaz,
                   textColor: AppColors.white,
                 ),
-                if (rays == null||rays!.isEmpty)
+                if (rays == null || rays!.isEmpty)
                   const SizedBox(
                     height: 100,
                     child: Center(child: Text('No Rays Found')),

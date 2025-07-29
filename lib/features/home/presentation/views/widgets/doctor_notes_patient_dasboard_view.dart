@@ -29,9 +29,9 @@ class DoctorNotesPatientDasboardView extends StatelessWidget {
   List<NoteEntity>? notes;
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (_) => GetNotesCubit(getUser!.id ?? 0)..getNotes(),
+    create: (_) => GetNotesCubit(getUser?.id ?? 0),
     child: BlocConsumer<GetNotesCubit, GetNotesState>(
-      listener: (final context, final GetNotesState state) {
+      listener: (final context, final state) {
         if (state is GetNotesLoading) {
         } else if (state is GetNotesSuccess) {
           notes = state.notes;
@@ -71,7 +71,7 @@ class DoctorNotesPatientDasboardView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: TextButton.icon(
                     onPressed: () async {
-                      await AppRoutes.doctorNotesPatientDasboardViewBody(
+                      await AppRoutes.doctorNotesPatientDasboard(
                         context,
                         notes: notes ?? [],
                       );

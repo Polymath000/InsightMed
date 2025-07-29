@@ -86,7 +86,7 @@ sealed class AppRoutes {
     RayResultsPatientDashboard.routeName,
     arguments: rays,
   );
-  static Future<Object?> doctorNotesPatientDasboardViewBody(
+  static Future<Object?> doctorNotesPatientDasboard(
     final BuildContext context, {
     required final List<NoteEntity> notes,
   }) => _pushNamed(

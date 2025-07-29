@@ -1,47 +1,26 @@
-import 'package:dio/dio.dart';
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
 import 'package:meta/meta.dart';
 
-import '../../../../core/constants/end_ponits.dart';
 import '../../../../core/entities/ray_entity.dart';
-import '../../../../core/helpers/get_user.dart';
-import '../../../../core/models/ray_model.dart';
-import '../../../../core/services/dio/auth_dio.dart';
+import '../../../../core/repos/ray_repo.dart';
+import '../../../../core/services/get_it_service.dart';
 
 part 'get_rays_state.dart';
 
 class GetRaysCubit extends Cubit<GetRaysState> {
-  GetRaysCubit() : super(GetRaysInitial());
+  GetRaysCubit() : super(GetRaysInitial()) {
+    unawaited(getRays());
+  }
 
-  Future<List<RayEntity>> getRays() async {
+  Future<void> getRays() async {
     emit(GetRaysLoadding());
     try {
-      final dioInstance = dio();
-      final response = await dioInstance.get(
-        EndPoint.getRays,
-        options: Options(headers: _setHeaders()),
-      );
-      var jsonData = response.data['data'];
-
-      var rayModel = <RayModel>[];
-      var rayEntity = <RayEntity>[];
-      for (final element in jsonData) {
-        rayModel.add(RayModel.fromJson(element));
-        rayEntity.add(const RayModel().toEntity());
-      }
-      if (!isClosed) {
-        emit(GetRaysSuccess(rays: rayEntity));
-      }
-      return rayEntity;
-    }on Exception catch (e) {
+      final rays = await getIt<RayRepo>().getRays();
+      emit(GetRaysSuccess(rays: rays));
+    } on Exception catch (e) {
       emit(GetRaysFailure(message: e.toString()));
-      return [];
     }
   }
 }
-
-Map<String, String> _setHeaders() => {
-  'Content-type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': 'Bearer ${getUser!.token}',
-};
