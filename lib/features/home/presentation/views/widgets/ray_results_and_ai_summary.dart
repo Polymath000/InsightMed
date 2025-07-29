@@ -1,6 +1,30 @@
-import 'package:flutter/material.dart' show Card, Column, CrossAxisAlignment, Icon, IconAlignment, Icons, ListTile, MainAxisSize, ScaffoldMessenger, SizedBox, SnackBar, StatelessWidget, TextButton;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        Card,
+        Center,
+        Clip,
+        Column,
+        CrossAxisAlignment,
+        EdgeInsets,
+        Icon,
+        IconAlignment,
+        Icons,
+        ListTile,
+        MainAxisSize,
+        Padding,
+        RoundedSuperellipseBorder,
+        ScaffoldMessenger,
+        SizedBox,
+        SliverPadding,
+        SliverToBoxAdapter,
+        SnackBar,
+        StatelessWidget,
+        Text,
+        TextButton,
+        Widget;
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocConsumer, BlocProvider;
+
 import '../../../../../core/constants/borders.dart';
 import '../../../../../core/entities/ray_entity.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
@@ -14,14 +38,12 @@ class RayResultsAndAiSummary extends StatelessWidget {
   List<RayEntity>? rays;
   @override
   Widget build(final BuildContext context) => BlocProvider(
-    create: (final context) => GetRaysCubit()..getRays(),
+    create: (final context) => GetRaysCubit(),
     child: BlocConsumer<GetRaysCubit, GetRaysState>(
       listener: (final context, final state) {
         if (state is GetRaysFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Cannot fetch the Rays.'),
-            ),
+            const SnackBar(content: Text('Cannot fetch the Rays.')),
           );
         } else if (state is GetRaysSuccess) {
           rays = state.rays;
@@ -48,7 +70,7 @@ class RayResultsAndAiSummary extends StatelessWidget {
                   tileColor: AppColors.topaz,
                   textColor: AppColors.white,
                 ),
-                if (rays == null||rays!.isEmpty)
+                if (rays == null || rays!.isEmpty)
                   const SizedBox(
                     height: 100,
                     child: Center(child: Text('No Rays Found')),

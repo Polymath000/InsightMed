@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -19,9 +18,6 @@ class GetNotesCubit extends Cubit<GetNotesState> {
   Future<void> getNotes() async {
     emit(const GetNotesLoading());
     final notes = await getIt<NoteRepo>().get(patientId);
-    log(notes.length.toString());
-    if (!isClosed) {
-      emit(GetNotesSuccess(notes: notes));
-    }
+    emit(GetNotesSuccess(notes: notes));
   }
 }

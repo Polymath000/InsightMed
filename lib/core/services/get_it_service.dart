@@ -4,6 +4,7 @@ import '../../features/notes/data/repos/note_repo_impl.dart';
 import '../../features/notes/domain/repos/note_repo.dart';
 import '../repos/auth_repo.dart';
 import '../repos/dashboard_repo.dart';
+import '../repos/ray_repo.dart';
 import '../repos/user_repo.dart';
 import 'api_client.dart';
 import 'auth_service.dart';
@@ -30,4 +31,5 @@ GetIt setupGetIt() => getIt
   )
   ..registerLazySingleton<NoteRepo>(
     () => NoteRepoImpl(getIt<DatabaseService>()),
-  );
+  )
+  ..registerLazySingleton<RayRepo>(() => RayRepoImpl(getIt<DatabaseService>()));
