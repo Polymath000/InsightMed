@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/repos/appointment_repo.dart';
 import '../../../../../core/repos/ray_repo.dart';
 import '../../../../../core/services/get_it_service.dart';
@@ -18,14 +19,18 @@ class UserDashboardCubit extends Cubit<UserDashboardState> {
 
   Future<void> _dashboard() async {
     emit(const UserDashboardLoading());
-    final rays = await getIt<RayRepo>().getRays();
-    final notes = await getIt<NoteRepo>().get(0);
-    final appointment = await getIt<AppointmentRepo>().get();
-    final dashboard = DashboardEntity(
-      rays: rays,
-      notes: notes,
-      appointment: appointment,
-    );
-    emit(UserDashboardSuccess(dashboard));
+    try {
+      final rays = await getIt<RayRepo>().getRays();
+      final notes = await getIt<NoteRepo>().get(getUser?.id ?? 0);
+      final appointment = await getIt<AppointmentRepo>().get();
+      final dashboard = DashboardEntity(
+        rays: rays,
+        notes: notes,
+        appointment: appointment,
+      );
+      emit(UserDashboardSuccess(dashboard));
+    } on Exception catch (e) {
+      emit(UserDashboardFailure(e.toString()));
+    }
   }
 }

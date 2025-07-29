@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '../constants/end_ponits.dart';
 import '../entities/appointment_entity.dart';
 import '../helpers/list_handler.dart';
@@ -29,7 +31,13 @@ class AppointmentRepoImpl implements AppointmentRepo {
   @override
   Future<AppointmentEntity> get() => _database
       .getDocument(path: EndPoint.getUserAppointments, documentId: '')
-      .then((final json) => AppointmentModel.fromJson(json['data']).toEntity());
+      .then((final json) => AppointmentModel.fromJson(json['data']).toEntity())
+      .onError<DioException>((final error, _) {
+        if (error.message?.contains('404') ?? false) {
+          return const AppointmentEntity();
+        }
+        throw error;
+      });
 
   @override
   Future<List<AppointmentEntity>> getAvailableAppointments() => _database

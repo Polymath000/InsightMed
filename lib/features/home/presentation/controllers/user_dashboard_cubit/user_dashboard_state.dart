@@ -19,5 +19,6 @@ final class UserDashboardSuccess extends UserDashboardState {
 }
 
 final class UserDashboardFailure extends UserDashboardState {
-  const UserDashboardFailure();
+  const UserDashboardFailure(this.message);
+  final String message;
 }
