@@ -17,10 +17,12 @@ final class HomeAppBar extends StatelessWidget {
 
   @override
   SliverAppBar build(final BuildContext context) {
-    final hour = DateTime.now().hour;
-    final dayTime = hour < 12
-        ? 'Good morning,'
-        : (hour < 18 ? 'Good afternoon,' : 'Good evening,');
+    final dayTime = switch (DateTime.now().hour) {
+      < 12 => 'Good morning,',
+      < 18 => 'Good afternoon,',
+      _ => 'Good evening,',
+    };
+
     return SliverAppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

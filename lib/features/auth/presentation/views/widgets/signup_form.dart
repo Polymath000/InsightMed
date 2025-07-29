@@ -1,18 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
-import 'constans.dart';
 
 class SignupForm extends StatefulWidget {
-  const SignupForm({
-    super.key,
-    this.onLoadingChanged,
-  });
+  const SignupForm({super.key, this.onLoadingChanged});
   final void Function(bool)? onLoadingChanged;
   @override
   State<SignupForm> createState() => _SignupFormState();
@@ -39,39 +34,34 @@ class _SignupFormState extends State<SignupForm> {
     key: _formKey,
     autovalidateMode: autovalidateMode,
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              'Email',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
+        const Text(
+          'Email',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(height: 7),
-        CustomTextField(
-          hint: 'Email',
-          choose: false,
-          type: TextInputType.emailAddress,
-          onChanged: (final p0) {
-            setState(() {
-              user = user.copyWith(email: p0);
-            });
+        const SizedBox(height: 4),
+        AppTextField(
+          hintText: 'Email',
+          keyboardType: TextInputType.emailAddress,
+          validator: (final value) {
+            if (value?.isNotEmpty ?? false) {
+              return null;
+            } else {
+              return 'Email is required';
+            }
           },
+          onChanged: (final p0) =>
+              setState(() => user = user.copyWith(email: p0)),
         ),
-        const SizedBox(height: 15),
-        Row(
-          children: [
-            Text(
-              'Password',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
+        const Text(
+          'Password',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(height: 7),
-        CustomTextField(
-          hint: 'Password',
-          choose: true,
+        const SizedBox(height: 4),
+        AppTextField(
+          hintText: 'Password',
+          obscureText: true,
           onChanged: (final p0) {
             setState(() {
               user = user.copyWith(password: p0);
@@ -92,19 +82,21 @@ class _SignupFormState extends State<SignupForm> {
                       'uppercase, lowercase, number, and special character';
           },
         ),
-        const SizedBox(height: 15),
-        Row(
-          children: [
-            Text(
-              'Confirm Password',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
+        const Text(
+          'Confirm Password',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        const SizedBox(height: 7),
-        CustomTextField(
-          hint: 'Confirm Password',
-          choose: true,
+        const SizedBox(height: 4),
+        AppTextField(
+          hintText: 'Confirm Password',
+          obscureText: true,
+          validator: (final value) {
+            if (value == null || value.isEmpty) {
+              return 'Confirm Password is required';
+            } else {
+              return null;
+            }
+          },
           onChanged: (final p0) {
             setState(() {
               confirmPassword = p0;
@@ -112,7 +104,7 @@ class _SignupFormState extends State<SignupForm> {
             });
           },
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 16),
         CustomButton(
           onTap: () async {
             setState(() {
@@ -146,7 +138,6 @@ class _SignupFormState extends State<SignupForm> {
             }
           },
           btnText: 'Create Account',
-          colorText: kBasicColor,
         ),
       ],
     ),

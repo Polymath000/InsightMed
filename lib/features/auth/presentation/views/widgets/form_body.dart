@@ -21,7 +21,7 @@ class _FormBodyState extends State<FormBody> {
   final _formKey = GlobalKey<FormState>();
   final AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
   String name = '';
-    String age = '';
+  String age = '';
   String phoneNumber = '';
   String gender = 'male';
 
@@ -33,6 +33,7 @@ class _FormBodyState extends State<FormBody> {
       key: _formKey,
       autovalidateMode: _autovalidateMode,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextField(
             labelText: 'Full Name *',
@@ -41,7 +42,7 @@ class _FormBodyState extends State<FormBody> {
               name = p0;
             },
             validator: (final value) {
-              if (value!.isEmpty ) {
+              if (value!.isEmpty) {
                 return 'this field is required';
               }
               return null;
@@ -55,7 +56,7 @@ class _FormBodyState extends State<FormBody> {
               age = p0;
             },
             validator: (final value) {
-              if (value!.isEmpty ) {
+              if (value!.isEmpty) {
                 return 'this field is required';
               }
               return null;
@@ -68,8 +69,8 @@ class _FormBodyState extends State<FormBody> {
             onChanged: (final p0) {
               phoneNumber = p0;
             },
-            validator: (value) {
-              if (value!.isEmpty ) {
+            validator: (final value) {
+              if (value!.isEmpty) {
                 return 'this field is required';
               }
               return null;
@@ -78,7 +79,7 @@ class _FormBodyState extends State<FormBody> {
           const PatientTextOfTextField(text: 'Gender *'),
           RadioBtn(
             onChanged: (final p0) {
-              gender = p0??'male';
+              gender = p0 ?? 'male';
             },
           ),
           const Divider(),
@@ -89,7 +90,7 @@ class _FormBodyState extends State<FormBody> {
                 gender: gender,
                 name: name,
                 phoneNumber: phoneNumber,
-                role: 'patient'
+                role: 'patient',
               );
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();

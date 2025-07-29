@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/helpers/on_generate_routes.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
 import '../../cubit/auth/auth_cubit.dart';
-import 'constans.dart';
 
 class LoginFormBody extends StatefulWidget {
   const LoginFormBody({super.key});
@@ -25,62 +25,61 @@ class _LoginFormBodyState extends State<LoginFormBody> {
     key: _formKey,
     autovalidateMode: autovalidateMode,
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              'Email',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
+        const Text(
+          'Email',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 87),
-        CustomTextField(
-          hint: 'Enter your email',
-          choose: false,
-          type: TextInputType.emailAddress,
-          onChanged: (final p0) {
-            email = p0;
+        const SizedBox(height: 4),
+        AppTextField(
+          hintText: 'Enter your email',
+          keyboardType: TextInputType.emailAddress,
+          validator: (final value) {
+            if (value?.isNotEmpty ?? false) {
+              return null;
+            } else {
+              return 'Email is required';
+            }
           },
+          onChanged: (final p0) => email = p0,
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 89),
-        Row(
-          children: [
-            Text(
-              'Password',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-            ),
-          ],
+        const Text(
+          'Password',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 87),
-        CustomTextField(
-          hint: 'Enter your password',
-          choose: true,
+        const SizedBox(height: 4),
+        AppTextField(
+          hintText: 'Enter your password',
+          obscureText: true,
+          validator: (final value) {
+            if (value?.isNotEmpty ?? false) {
+              return null;
+            } else {
+              return 'Password is required';
+            }
+          },
           onChanged: (final p0) {
             password = p0;
           },
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 50),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            GestureDetector(
-              onTap: () async {
-                await AppRoutes.resetPasswordView(context);
-              },
-              child: Text(
-                'Forget Password?',
-                style: TextStyle(
-                  color: kMainColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14.sp,
-                ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: GestureDetector(
+            onTap: () async {
+              await AppRoutes.resetPasswordView(context);
+            },
+            child: Text(
+              'Forget Password?',
+              style: TextStyle(
+                color: AppColors.primaryContainer,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
               ),
             ),
-          ],
+          ),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 50),
+        const SizedBox(height: 20),
         CustomButton(
           onTap: () async {
             if (_formKey.currentState!.validate()) {
@@ -103,7 +102,6 @@ class _LoginFormBodyState extends State<LoginFormBody> {
             }
           },
           btnText: 'Login with Email',
-          colorText: kBasicColor,
         ),
       ],
     ),

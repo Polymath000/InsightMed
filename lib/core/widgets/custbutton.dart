@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatefulWidget {
-  const CustomButton({
-    required this.btnText,
-    required this.onTap,
-    super.key,
-    this.colorText,
-    this.image,
-    this.backgroundColor
-  });
+  const CustomButton({required this.btnText, required this.onTap, super.key});
   final String? btnText;
-  final Color? colorText;
   final void Function()? onTap;
-  final String? image;
-  final Color? backgroundColor;
   @override
   State<CustomButton> createState() => _CustomButtonState();
 }
@@ -42,7 +31,6 @@ class _CustomButtonState extends State<CustomButton> {
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
-    
     onTap: widget.onTap,
     onTapDown: _onTapDown,
     onTapUp: _onTapUp,
@@ -52,13 +40,6 @@ class _CustomButtonState extends State<CustomButton> {
       duration: const Duration(milliseconds: 100),
       child: FilledButton(
         onPressed: widget.onTap,
-
-        style: FilledButton.styleFrom(
-
-          backgroundColor: widget.backgroundColor,
-          textStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 16.sp),
-          elevation: 0,
-        ),
         child: Text(widget.btnText ?? ''),
       ),
     ),

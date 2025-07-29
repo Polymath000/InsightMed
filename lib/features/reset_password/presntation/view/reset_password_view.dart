@@ -6,7 +6,7 @@ import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/reset_password_view_body.dart';
 
 class ResetPasswordView extends StatefulWidget {
-  ResetPasswordView({super.key});
+  const ResetPasswordView({super.key});
   static const routeName = 'ResetPasswordView';
 
   @override
@@ -21,18 +21,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
     inAsyncCall: isLoading,
 
     child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Back'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        actions: const [],
-      ),
       body: BlocProvider(
         create: (final context) => ResetPasswordCubit(),
         child: BlocListener<ResetPasswordCubit, ResetPasswordState>(
-          listener: (final context,final state) async {
+          listener: (final context, final state) async {
             if (state is ResetPasswordFailure) {
               setState(() {
                 isLoading = false;

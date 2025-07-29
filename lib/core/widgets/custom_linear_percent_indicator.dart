@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../helpers/app_media_query.dart';
+
 class CustomLinearPercentIndicator extends StatelessWidget {
   const CustomLinearPercentIndicator({
-    required this.percent, required this.color, super.key,
+    required this.percent,
+    required this.color,
+    super.key,
   });
   final double percent;
   final Color color;
@@ -14,7 +18,7 @@ class CustomLinearPercentIndicator extends StatelessWidget {
     lineHeight: 8,
     barRadius: const Radius.circular(16),
     percent: percent,
-    width: MediaQuery.of(context).size.width - 150,
+    width: AppMediaQuery.width - 150,
     padding: EdgeInsets.zero,
     animateFromLastPercent: true,
   );

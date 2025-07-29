@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LabelText extends StatelessWidget {
   const LabelText({required this.labelText, super.key});
@@ -7,6 +6,6 @@ class LabelText extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Text(
     labelText!,
-    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
   );
 }

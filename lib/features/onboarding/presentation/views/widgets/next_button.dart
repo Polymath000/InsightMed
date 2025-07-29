@@ -5,7 +5,7 @@ import 'nextbutton_shape_decoration.dart';
 
 class NextButton extends StatefulWidget {
   const NextButton({required this.pageController, super.key});
-  final PageController pageController;
+  final PageController? pageController;
 
   @override
   State<NextButton> createState() => _NextButtonState();
@@ -34,15 +34,15 @@ class _NextButtonState extends State<NextButton> {
 
   @override
   Widget build(final BuildContext context) {
-    final currentPage = widget.pageController.hasClients
-        ? (widget.pageController.page ?? 0)
+    final currentPage = (widget.pageController?.hasClients ?? false)
+        ? (widget.pageController?.page ?? 0)
         : 0;
     final isLastPage = currentPage == 2;
 
     return GestureDetector(
       onTap: () async {
-        if (widget.pageController.hasClients && currentPage < 2) {
-          await widget.pageController.nextPage(
+        if ((widget.pageController?.hasClients ?? false) && currentPage < 2) {
+          await widget.pageController?.nextPage(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
           );
@@ -59,24 +59,22 @@ class _NextButtonState extends State<NextButton> {
         scale: _scale,
         duration: const Duration(milliseconds: 100),
         child: Align(
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.centerRight,
           child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              width: 105.05,
-              height: 60,
+            padding: const EdgeInsets.only(right: 20, bottom: 20),
+            child: DecoratedBox(
               decoration: nextbuttonShapeDecoration,
-              child: SizedBox(
-                width: 42,
-                height: 28,
-                child: Align(
-                  child: Text(
-                    isLastPage ? "Let's Go" : 'Next',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 16,
+                ),
+                child: Text(
+                  isLastPage ? "Let's Go" : 'Next',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

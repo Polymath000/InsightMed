@@ -18,9 +18,9 @@ class RayCard extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    log('${EndPoint.baseUrl}/${ray.imagePath}');
+    log('${EndPoint.storageUrl}/${ray.imagePath}');
     return Card.filled(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -29,7 +29,7 @@ class RayCard extends StatelessWidget {
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: CachedNetworkImage(
-                imageUrl: '${EndPoint.baseUrl}/${ray.imagePath}',
+                imageUrl: '${EndPoint.storageUrl}/${ray.imagePath}',
                 placeholder: (_, final url) =>
                     const Center(child: CircularProgressIndicator()),
                 errorWidget: (final context, final url, final error) =>
@@ -42,8 +42,7 @@ class RayCard extends StatelessWidget {
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                'Uploaded: ${DateFormat.yMMMd().format(
-                ray.createdAt ?? DateTime.now())}',
+                'Uploaded: ${DateFormat.yMMMd().format(ray.createdAt ?? DateTime.now())}',
               ),
               trailing: DecoratedBox(
                 decoration: ShapeDecoration(

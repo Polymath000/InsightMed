@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utls/themes/app_colors.dart';
+
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
@@ -77,7 +77,6 @@ class _VerifyCodeViewBodyState extends State<VerifyCodeViewBody> {
               }
             },
             btnText: 'Verify Code',
-            colorText: AppColors.primary,
           ),
         ],
       ),

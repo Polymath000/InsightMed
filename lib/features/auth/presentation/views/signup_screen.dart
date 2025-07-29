@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
 import 'widgets/aleardy_have_an_account.dart';
 import 'widgets/animated_text_sign_up.dart';
 import 'widgets/signup_form.dart';
@@ -19,35 +19,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(final BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoad,
     child: Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Create Account',
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp),
-        ),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Create Account'), centerTitle: true),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height / 45),
-            Text(
+            const SizedBox(height: 12),
+            const Text(
               'Welcome!',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24.sp),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 85),
+            const SizedBox(height: 12),
             const AnimatedTextSignUp(),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-
+            const SizedBox(height: 12),
             SignupForm(
-              onLoadingChanged: (final isLoading) {
-                setState(() {
-                  isLoad = isLoading;
-                });
-              },
+              onLoadingChanged: (final isLoading) =>
+                  setState(() => isLoad = isLoading),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
+            const SizedBox(height: 12),
             const AleardyHaveAnAccount(),
+            const SizedBox(height: 12),
           ],
         ),
       ),
