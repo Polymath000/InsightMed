@@ -16,7 +16,12 @@ class StickerRay extends StatelessWidget {
   Widget build(final BuildContext context) {
     final lastRay = (rays?.isNotEmpty ?? false) ? rays!.last : null;
     final isNotEmpty = rays?.isNotEmpty ?? false;
-    final color = isNotEmpty ? AppColors.topaz : AppColors.grey;
+    final color = isNotEmpty
+        ? (lastRay?.aiStatus?.color ?? AppColors.topaz)
+        : AppColors.grey;
+    final dateFormat = DateFormat.yMMMd().format(
+      lastRay?.createdAt ?? DateTime.now(),
+    );
     return HomeSticker(
       headerIcon: Icons.medical_services_rounded,
       headerTitle: 'Ray Results & AI Summary',
@@ -24,10 +29,10 @@ class StickerRay extends StatelessWidget {
       bodyLeading: DecoratedIcon(icon: Icons.image_rounded, color: color),
       bodyTitle: 'Latest Chest X-Ray Scan',
       bodySubTitle: IText(
-        'Uploaded: ${DateFormat.yMMMd().format(lastRay?.createdAt ?? DateTime.now())}',
+        isNotEmpty ? 'Uploaded: $dateFormat' : 'No scans yet',
       ),
       bodyTrailing: const Icon(Icons.arrow_forward_ios_rounded),
-      bodyOnTap: () {},
+      bodyOnTap: isNotEmpty ? () {} : null,
       paragraph: Card.filled(
         child: ListTile(
           title: const IText('AI Summary'),

@@ -4,7 +4,7 @@ import '../extensions/string_extension.dart';
 import '../utls/themes/app_colors.dart';
 
 enum XRayStatusEnum {
-  noraml,
+  normal,
   nodule,
   infiltration,
   cardiomegaly,
@@ -18,11 +18,11 @@ enum XRayStatusEnum {
   @override
   String toString() => name.capitalize;
 
-  Color get color => xRayStatusEnumMapColor[this]!;
+  Color get color => _xRayStatusEnumMapColor[this]!;
 }
 
-Map<XRayStatusEnum, Color> xRayStatusEnumMapColor = {
-  XRayStatusEnum.noraml: AppColors.green,
+const Map<XRayStatusEnum, Color> _xRayStatusEnumMapColor = {
+  XRayStatusEnum.normal: AppColors.green,
   XRayStatusEnum.nodule: AppColors.grey,
   XRayStatusEnum.infiltration: AppColors.amber,
   XRayStatusEnum.cardiomegaly: AppColors.purple,
