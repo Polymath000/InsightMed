@@ -1,17 +1,15 @@
 // ignore_for_file: public_member_api_docs
 import 'package:flutter/material.dart';
+import '../../../../../core/helpers/custom_show_snackBar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
-import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../pofile/presentation/views/widgets/label_text.dart';
-import 'constans.dart';
 import 'user_entities.dart';
 import 'vaildated_confirm_password.dart';
 import 'validated_password_formfield.dart';
 
 class SignupForm extends StatefulWidget {
-  const SignupForm({super.key, this.onLoadingChanged});
   const SignupForm({super.key, this.onLoadingChanged});
   final void Function(bool)? onLoadingChanged;
   @override

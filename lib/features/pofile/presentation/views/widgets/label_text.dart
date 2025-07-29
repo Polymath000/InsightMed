@@ -8,7 +8,7 @@ class LabelText extends StatelessWidget {
     children: [
       Text(
         labelText!,
-        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
+        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
       ),
     ],
   );

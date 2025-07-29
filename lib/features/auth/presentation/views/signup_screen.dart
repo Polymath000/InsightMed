@@ -25,13 +25,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Column(
           spacing: 15,
           children: [
-            Row(
+            const Row(
               children: [
-                Text(
+                const Text(
                   'Welcome!',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 24.sp,
+                    fontSize: 24,
                   ),
                 ),
               ],
