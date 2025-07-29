@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart'
-    show
-        CustomScrollView,
-        ListTile,
-        SliverAppBar,
-        SliverToBoxAdapter;
+    show CustomScrollView, ListTile, SliverAppBar, SliverToBoxAdapter;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -33,7 +29,6 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
         context.read<BookAppointmentCubit>().getAppiontments(
           date: selectedDate.toString().substring(0, 10),
         );
-
         return ModalProgressHUD(
           inAsyncCall: isLoading,
           child: CustomScrollView(
@@ -59,6 +54,11 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
                   });
                 },
                 selectedDateTime: selectedDate,
+                onSelectDate: (final value) {
+                  setState(() {
+                    isLoading = value;
+                  });
+                },
               ),
               BookAppointmentButton(
                 selectedTime: selectedAppointmentTime,

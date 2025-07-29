@@ -8,7 +8,6 @@ import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
 import '../../../../../core/helpers/get_auth_message.dart';
 import '../../../../../core/helpers/get_user.dart';
-import '../../../../../core/models/user_model.dart';
 import '../../../../../core/repos/auth_repo.dart';
 import '../../../../../core/services/dio/auth_dio.dart';
 import '../../../../../core/services/get_it_service.dart';
@@ -19,8 +18,6 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(const AuthInitial());
-  bool isAuthenticated = false;
-  UserModel? user;
   final Map<String, String> _messages = getAuthMessages;
 
   Future<void> tryToken({required final String token}) async {
@@ -32,14 +29,14 @@ class AuthCubit extends Cubit<AuthState> {
           headers: {'Authorization': 'Bearer $token'},
         ),
       );
-      final userData = response.data?['role'] == 'patient'
-          ? (response.data?['patient_data'])
-          : response.data?['doctor_data'];
-      user = UserModel.fromJson(userData);
       emit(AuthSuccess());
     } on Exception catch (e) {
       log(e.toString());
-      emit(AuthFailure(e.toString()));
+      emit(
+        const AuthFailure(
+          'There was an error , contact us to solve the problem or try later',
+        ),
+      );
     }
   }
 
@@ -49,10 +46,6 @@ class AuthCubit extends Cubit<AuthState> {
       await getIt<AuthRepository>().register(user: user);
       emit(AuthSuccess());
     } on dio_package.DioException catch (e) {
-      isAuthenticated = false;
-      log('Registration failed with status code: ${e.response?.statusCode}');
-      log('Error response: ${e.response?.data}');
-
       var errorMessage = 'An unknown error occurred.';
       if (e.response?.data is Map<String, dynamic>) {
         final responseData = e.response!.data as Map<String, dynamic>;
@@ -74,7 +67,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFailure(errorMessage));
     } on Exception catch (e) {
       log(e.toString());
-      isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
     }
   }
@@ -92,80 +84,22 @@ class AuthCubit extends Cubit<AuthState> {
       await tryToken(token: token);
       log(getUser!.id.toString());
     } on dio_package.DioException catch (e) {
-      isAuthenticated = false;
       final userMessage = mapDioErrorToMessage(e);
       emit(AuthFailure(userMessage));
     } on Exception catch (e) {
       log(e.toString());
-
-      isAuthenticated = false;
       emit(AuthFailure(_messages['msgUnknown']!));
     }
   }
 
   Future<void> logout() async {
+    emit(const AuthLoading());
     try {
-      await SharedPreferencesSingleton.setBool(
-        isBookedKey,
-        value: false,
-      );
-      cleanUp();
+      await SharedPreferencesSingleton.setBool(isBookedKey, value: false);
+      emit(AuthSuccess());
     } on Exception catch (e) {
       log(e.toString());
-    }
-  }
-
-  void cleanUp() {
-    user = null;
-    isAuthenticated = false;
-  }
-
-  void checkCodeStatus({required final dio_package.Response response}) {
-    switch (response.statusCode) {
-      case 200:
-        isAuthenticated = true;
-        emit(AuthSuccess());
-        log(_messages['msgOk']!);
-      case 201:
-        isAuthenticated = true;
-        emit(AuthSuccess());
-        log(_messages['msgCreated']!);
-      case 400:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgBadRequest']!));
-        log(_messages['msgBadRequest']!);
-      case 401:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgUnauthorized']!));
-        log(_messages['msgUnauthorized']!);
-      case 403:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgForbidden']!));
-        log(_messages['msgForbidden']!);
-      case 404:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgNotFound']!));
-        log(_messages['msgNotFound']!);
-      case 409:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgConflict']!));
-        log(_messages['msgConflict']!);
-      case 422:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgUnprocessable']!));
-        log(_messages['msgUnprocessable']!);
-      case 500:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgInternal']!));
-        log(_messages['msgInternal']!);
-      case 503:
-        isAuthenticated = false;
-        emit(AuthFailure(_messages['msgUnavailable']!));
-        log(_messages['msgUnavailable']!);
-      default:
-        isAuthenticated = false;
-        emit(AuthFailure('Error: ${response.statusCode}'));
-        log('Error: ${response.statusCode}');
+      emit(const AuthFailure('There was an error in logout'));
     }
   }
 }

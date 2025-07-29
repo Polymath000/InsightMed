@@ -8,14 +8,16 @@ import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../cubit/book_appointment/book_appointment_cubit.dart';
 
 class AppointmentsTimePicker extends StatefulWidget {
-
   AppointmentsTimePicker({
     required this.selectedDateTime,
     super.key,
     this.onTimeSelected,
+    this.onSelectDate,
   });
   final void Function(String selectedTime)? onTimeSelected;
   DateTime selectedDateTime;
+  final ValueChanged<bool>? onSelectDate;
+
   @override
   State<AppointmentsTimePicker> createState() => _AppointmentsTimePickerState();
 }
@@ -33,6 +35,7 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
         child: BlocConsumer<BookAppointmentCubit, BookAppointmentState>(
           listener: (final context, final state) {
             if (state is BookAppointmentFailure) {
+              widget.onSelectDate!(false);
               customShowSnackBar(
                 context: context,
                 message: 'There was an error ,please try again later',
@@ -41,13 +44,12 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
           },
           builder: (final context, final state) {
             if (state is BookAppointmentLoading) {
-              return const Center(
-                heightFactor: 5,
-                child: CircularProgressIndicator(),
-              );
+              widget.onSelectDate!(true);
+              return SizedBox(height: 50);
             }
             if (state is GetAppointmentSuccess) {
               if (state.finalData.isEmpty) {
+                widget.onSelectDate!(false);
                 return const Center(
                   child: IText('No available slots for this day.'),
                 );

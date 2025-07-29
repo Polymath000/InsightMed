@@ -9,7 +9,7 @@ String mapDioErrorToMessage(final DioException e) {
           'Please check your internet and try again.';
     case DioExceptionType.badResponse:
       return 'Sorry, we had trouble processing your request. '
-          'Please try again in a moment.';
+          'Maybe your password not correct';
     case DioExceptionType.cancel:
       return 'No worries, your request was cancelled.';
     case DioExceptionType.unknown:

@@ -47,5 +47,6 @@ class AuthServiceImpl implements AuthService {
     await SharedPreferencesSingleton.remove('access_token');
     await getIt<UserRepo>().deleteFromLocal();
     await SharedPreferencesSingleton.setBool(isBookedKey, value: false);
+    await SharedPreferencesSingleton.remove(appointmentIdKey);
   }
 }
