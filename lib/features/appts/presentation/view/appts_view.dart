@@ -17,7 +17,6 @@ class _ApptsViewState extends State<ApptsView> {
   @override
   void initState() {
     super.initState();
-    // It's assumed that BookAppointmentCubit is provided above this widget in the tree
     _appointmentFuture =
         context.read<BookAppointmentCubit>().getPatientAppiontment();
   }
@@ -29,7 +28,6 @@ class _ApptsViewState extends State<ApptsView> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator.adaptive());
           } else if (snapshot.hasError) {
-            // The cubit handles errors and returns '', but we can handle future errors.
             return Center(child: Text('An error occurred: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No appointment found.'));
