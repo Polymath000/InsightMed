@@ -21,22 +21,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
     child: Scaffold(
       appBar: AppBar(title: const Text('Create Account'), centerTitle: true),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView(
+        padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
+        child: Column(
+          spacing: 15,
           children: [
-            const SizedBox(height: 12),
-            const Text(
-              'Welcome!',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+            Row(
+              children: [
+                Text(
+                  'Welcome!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24.sp,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 12),
-            const AnimatedTextSignUp(),
-            const SizedBox(height: 12),
+            const Row(children: [AnimatedTextSignUp()]),
             SignupForm(
               onLoadingChanged: (final isLoading) =>
                   setState(() => isLoad = isLoading),
             ),
-            const SizedBox(height: 12),
             const AleardyHaveAnAccount(),
             const SizedBox(height: 12),
           ],

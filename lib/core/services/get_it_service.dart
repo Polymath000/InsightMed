@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/notes/data/repos/note_repo_impl.dart';
 import '../../features/notes/domain/repos/note_repo.dart';
+import '../repos/appointment_repo.dart';
 import '../repos/auth_repo.dart';
 import '../repos/dashboard_repo.dart';
 import '../repos/ray_repo.dart';
@@ -32,4 +33,7 @@ GetIt setupGetIt() => getIt
   ..registerLazySingleton<NoteRepo>(
     () => NoteRepoImpl(getIt<DatabaseService>()),
   )
-  ..registerLazySingleton<RayRepo>(() => RayRepoImpl(getIt<DatabaseService>()));
+  ..registerLazySingleton<RayRepo>(() => RayRepoImpl(getIt<DatabaseService>()))
+  ..registerLazySingleton<AppointmentRepo>(
+    () => AppointmentRepoImpl(getIt<DatabaseService>()),
+  );

@@ -127,7 +127,7 @@ Map<String, Widget Function(BuildContext, Object?)> _routes = {
   UploadMedicalRayView.routeName: (_, _) => const UploadMedicalRayView(),
   PatientDetailsView.routeName: (_, final args) =>
       PatientDetailsView(patient: args! as UserEntity),
-  ResetPasswordView.routeName: (_, _) => ResetPasswordView(),
+  ResetPasswordView.routeName: (_, _) => const ResetPasswordView(),
   RayResultsPatientDashboard.routeName: (_, final args) =>
       RayResultsPatientDashboard(rays: args! as List<RayEntity>),
   VerifyCodeView.routeName: (_, final args) =>

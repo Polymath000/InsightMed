@@ -8,6 +8,7 @@ class TopPartPatientInfo extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Column(
+    // spacing: 8,
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

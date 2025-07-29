@@ -60,7 +60,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       Map<String, dynamic> jsonData = response.data;
-      final id = jsonData['data']['id'].toString();
+      var id = jsonData['data']['id'].toString();
       await SharedPreferencesSingleton.setString(appointmentIdKey, id);
       await SharedPreferencesSingleton.setBool(isBookedKey, value: true);
       if (!isClosed) {

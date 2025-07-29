@@ -21,11 +21,13 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<UserEntity> register(final UserEntity user) async {
-    await client.post(
+    final data = await client.post(
       path: EndPoint.addRegister,
       data: UserModel.fromEntity(user).toJson(),
     );
-    return user;
+    final token = data['token'] as String;
+    await SharedPreferencesSingleton.setString('access_token', token);
+    return user.copyWith(token: token);
   }
 
   @override

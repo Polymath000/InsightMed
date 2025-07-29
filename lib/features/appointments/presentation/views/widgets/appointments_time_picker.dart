@@ -8,13 +8,13 @@ import '../../../../../core/utls/themes/app_colors.dart';
 import '../../../cubit/book_appointment/book_appointment_cubit.dart';
 
 class AppointmentsTimePicker extends StatefulWidget {
-  final void Function(String selectedTime)? onTimeSelected;
 
   AppointmentsTimePicker({
     required this.selectedDateTime,
     super.key,
     this.onTimeSelected,
   });
+  final void Function(String selectedTime)? onTimeSelected;
   DateTime selectedDateTime;
   @override
   State<AppointmentsTimePicker> createState() => _AppointmentsTimePickerState();
