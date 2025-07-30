@@ -144,6 +144,10 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
       }
       appointments.sort((a, b) => (b['id'] as int).compareTo(a['id'] as int));
       final latestAppointment = appointments.first;
+      await SharedPreferencesSingleton.setString(
+        appointmentIdKey,
+        latestAppointment['id'].toString(),
+      );
 
       final String appointmentTime = latestAppointment['appointment_time'];
       if (!isClosed) {
