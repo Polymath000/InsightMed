@@ -49,7 +49,7 @@ final class UserRepoImpl implements UserRepo {
   Future<void> updateApi(final UserEntity user) => _database.updateDocument(
     path: EndPoint.updateUser,
     data: UserModel.fromEntity(user).toJson(),
-    documentId: user.token!,
+    documentId: '',
   );
 
   @override
