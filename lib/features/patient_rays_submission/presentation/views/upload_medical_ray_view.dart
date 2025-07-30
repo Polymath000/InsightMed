@@ -42,7 +42,7 @@ class _UploadMedicalRayViewState extends State<UploadMedicalRayView> {
             } else if (state is UploadRayFailure) {
               customShowSnackBar(
                 context: context,
-                message: 'There Was an error please try again later.',
+                message: state.message ?? 'There was an error',
               );
             }
           },

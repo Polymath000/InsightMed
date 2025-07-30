@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../core/helpers/dio_error_message.dart';
 import '../../../../core/services/dio/auth_dio.dart';
 part 'reset_password_state.dart';
 
@@ -17,9 +18,24 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         data: {'email': email},
         options: Options(headers: _setHeaders()),
       );
-      emit(ResetPasswordSuccess());
+      if (!isClosed) {
+        emit(ResetPasswordSuccess());
+      }
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      var message = e.response?.data['message'];
+      if (statusCode == 500) {
+        message = 'This email maybe not correct';
+      } else {
+        message = mapDioErrorToMessage(e);
+      }
+      emit(ResetPasswordFailure(message: 'Error : $message'));
     } on Exception catch (e) {
-      emit(ResetPasswordFailure(message: e.toString()));
+      emit(
+        ResetPasswordFailure(
+          message: 'There was an error, please try again later',
+        ),
+      );
     }
   }
 
@@ -35,9 +51,24 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         data: {'email': email, 'code': code},
         options: Options(headers: _setHeaders()),
       );
-      emit(VerifyCodeSuccess());
-    }  on Exception catch (e) {
-      emit(ResetPasswordFailure(message: e.toString()));
+      if (!isClosed) {
+        emit(VerifyCodeSuccess());
+      }
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      var message = e.response?.data['message'];
+      if (statusCode != 400) {
+        message = 'There was an error, please try again later';
+      } else {
+        message = mapDioErrorToMessage(e);
+      }
+      emit(ResetPasswordFailure(message: 'Error : $message'));
+    } on Exception catch (e) {
+      emit(
+        ResetPasswordFailure(
+          message: 'There was an error, please try again later',
+        ),
+      );
     }
   }
 
@@ -59,11 +90,19 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
           'password_confirmation': passwordConfirmation,
         },
         options: Options(headers: _setHeaders()),
-
       );
-      emit(CreateNewPasswordSuccess());
+      if (!isClosed) {
+        emit(CreateNewPasswordSuccess());
+      }
+    } on DioException catch (e) {
+      var message = mapDioErrorToMessage(e);
+      emit(ResetPasswordFailure(message: 'Error : $message'));
     } on Exception catch (e) {
-      emit(ResetPasswordFailure(message: e.toString()));
+      emit(
+        ResetPasswordFailure(
+          message: 'There was an error please try again later',
+        ),
+      );
     }
   }
 }

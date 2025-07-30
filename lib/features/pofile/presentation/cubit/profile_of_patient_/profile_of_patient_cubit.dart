@@ -18,28 +18,6 @@ part 'profile_of_patient_state.dart';
 
 class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
   ProfileOfPatientCubit() : super(ProfileOfPatientInitial());
-  final Map<String, String> messages = getAuthMessages;
-
-  Future<UserEntity> getPatientDetails() async {
-    emit(ProfileOfPatientLoading());
-    try {
-      final dioInstance = dio();
-      final response = await dioInstance.get(
-        '/me',
-        options: Options(headers: _setHeaders()),
-      );
-      Map<String, dynamic> jsonData = response.data;
-      UserModel user;
-      final userData = jsonData['data'];
-      user = UserModel.fromJson(userData);
-      var userEntity = user.toEntity();
-      emit(ProfileOfPatientSuccess(user: user));
-      return userEntity;
-    } on Exception catch (e) {
-      emit(ProfileOfPatientFailure(message: e.toString()));
-      return const UserEntity();
-    }
-  }
 
   Map<String, String> _setHeaders() => {
     'Content-type': 'application/json',
@@ -60,12 +38,18 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
         options: Options(headers: _setHeaders()),
       );
       await getIt<UserRepo>().updateLocal(user);
-      emit(ProfileOfPatientSuccess(user: user));
+      if (!isClosed) {
+        emit(ProfileOfPatientSuccess(user: user));
+      }
     } on dio_package.DioException catch (e) {
       final userMessage = mapDioErrorToMessage(e);
       emit(ProfileOfPatientFailure(message: userMessage));
     } on Exception {
-      emit(ProfileOfPatientFailure(message: messages['msgUnknown']!));
+      emit(
+        ProfileOfPatientFailure(
+          message: 'There was an error , please try again later',
+        ),
+      );
     }
   }
 }
