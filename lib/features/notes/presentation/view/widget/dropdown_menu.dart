@@ -28,28 +28,33 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
   }
 
   @override
-  Widget build(final BuildContext context) => TextButton(
-    style: TextButton.styleFrom(foregroundColor: _selectedItem?.color),
-    onPressed: () => DropDownState<PatientStatusEnum>(
-      dropDown: DropDown<PatientStatusEnum>(
-        data: PatientStatusEnum.values
-            .map((final e) => SelectedListItem<PatientStatusEnum>(data: e))
-            .toList(),
-        onSelected: (final selectedItems) async {
-          if (selectedItems.isNotEmpty) {
-            setState(() => _selectedItem = selectedItems.first.data);
-            await getIt<UserRepo>().addPatientsStatusToApi(
-              widget.patient.copyWith(status: _selectedItem),
-            );
-            if (context.mounted) {
-              await context.read<GetPatientsCubit>().getPatients();
-            }
-          }
-        },
-      ),
-    ).showModal(context),
-    child: PatiendStatusText(
-      status: _selectedItem ?? PatientStatusEnum.newPatient,
+  Widget build(final BuildContext context) => BlocProvider(
+    create: (context) => GetPatientsCubit(),
+    child: Builder(
+      builder: (context) => TextButton(
+          style: TextButton.styleFrom(foregroundColor: _selectedItem?.color),
+          onPressed: () => DropDownState<PatientStatusEnum>(
+            dropDown: DropDown<PatientStatusEnum>(
+              data: PatientStatusEnum.values
+                  .map((final e) => SelectedListItem<PatientStatusEnum>(data: e))
+                  .toList(),
+              onSelected: (final selectedItems) async {
+                if (selectedItems.isNotEmpty) {
+                  setState(() => _selectedItem = selectedItems.first.data);
+                  await getIt<UserRepo>().addPatientsStatusToApi(
+                    widget.patient.copyWith(status: _selectedItem),
+                  );
+                  if (context.mounted) {
+                    await context.read<GetPatientsCubit>().getPatients();
+                  }
+                }
+              },
+            ),
+          ).showModal(context),
+          child: PatiendStatusText(
+            status: _selectedItem ?? PatientStatusEnum.newPatient,
+          ),
+        ),
     ),
   );
 }

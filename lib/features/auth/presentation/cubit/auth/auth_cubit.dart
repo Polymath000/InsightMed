@@ -29,7 +29,9 @@ class AuthCubit extends Cubit<AuthState> {
           headers: {'Authorization': 'Bearer $token'},
         ),
       );
-      emit(AuthSuccess());
+      if (!isClosed) {
+        emit(AuthSuccess());
+      }
     } on Exception catch (e) {
       log(e.toString());
       emit(
