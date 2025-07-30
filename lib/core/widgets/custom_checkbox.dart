@@ -19,27 +19,34 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
     onTap: () {
       setState(() {
         isChecked = !isChecked;
-
         widget.onChanged(isChecked);
       });
     },
     child: AnimatedContainer(
-      width: 22,
-      height: 22,
-      duration: const Duration(milliseconds: 100),
+      width: 20,
+      height: 20,
+      duration: const Duration(milliseconds: 300),
       decoration: ShapeDecoration(
-        color: isChecked ? AppColors.green : Colors.white,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1.50, color: AppColors.grey),
-          borderRadius: BorderRadius.circular(6),
+        color: isChecked ? AppColors.primary : null,
+        shape: RoundedSuperellipseBorder(
+          side: isChecked
+              ? BorderSide.none
+              : const BorderSide(width: 2, color: AppColors.grey),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
         ),
       ),
       child: isChecked
           ? Padding(
-              padding: const EdgeInsets.all(3),
-              child: SvgPicture.asset(Assets.assetsImagesCheckMark),
+              padding: const EdgeInsets.all(2),
+              child: SvgPicture.asset(
+                Assets.assetsImagesCheckMark,
+                colorFilter: ColorFilter.mode(
+                  AppColors.onPrimary,
+                  BlendMode.srcIn,
+                ),
+              ),
             )
-          : const SizedBox(width: 24, height: 24, child: SizedBox.shrink()),
+          : null,
     ),
   );
 }

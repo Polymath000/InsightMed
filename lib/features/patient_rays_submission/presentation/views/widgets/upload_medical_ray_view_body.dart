@@ -18,9 +18,9 @@ class UploadMedicalRayViewBody extends StatefulWidget {
 }
 
 class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
-  RayEntity ray = const RayEntity();
+  RayEntity _ray = const RayEntity();
 
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -34,10 +34,10 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
 
   @override
   Widget build(final BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 20, left: 32, right: 32),
+    padding: const EdgeInsets.symmetric(horizontal: 32),
     child: Form(
       key: _formKey,
-      autovalidateMode: autovalidateMode,
+      autovalidateMode: _autovalidateMode,
       child: Stack(
         children: [
           Padding(
@@ -48,7 +48,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                   child: UploadRayImage(
                     onChangedImagePath: (final p0) {
                       setState(() {
-                        ray = ray.copyWith(imagePath: p0);
+                        _ray = _ray.copyWith(imagePath: p0);
                       });
                     },
                   ),
@@ -110,9 +110,9 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
               onTap: () async {
                 widget.onChanged!(true);
                 if (_formKey.currentState!.validate() &&
-                    !(ray.imagePath == null || ray.imagePath!.isEmpty)) {
+                    !(_ray.imagePath == null || _ray.imagePath!.isEmpty)) {
                   _formKey.currentState!.save();
-                  final composedRay = ray.copyWith(
+                  final composedRay = _ray.copyWith(
                     temperature: _temperature,
                     systolicBP: _systolicBP,
                     diastolicBP: _diastolicBP,
@@ -125,10 +125,10 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                     context,
                   ).uploadRay(rayEntity: composedRay);
                   widget.onChanged!(false);
-                } else if (ray.imagePath == null || ray.imagePath!.isEmpty) {
+                } else if (_ray.imagePath == null || _ray.imagePath!.isEmpty) {
                   widget.onChanged!(false);
                   setState(() {
-                    autovalidateMode = AutovalidateMode.always;
+                    _autovalidateMode = AutovalidateMode.always;
                   });
                   customShowSnackBar(
                     context: context,
@@ -137,7 +137,7 @@ class _UploadMedicalRayViewBodyState extends State<UploadMedicalRayViewBody> {
                 } else {
                   widget.onChanged!(false);
                   setState(() {
-                    autovalidateMode = AutovalidateMode.always;
+                    _autovalidateMode = AutovalidateMode.always;
                   });
                 }
               },

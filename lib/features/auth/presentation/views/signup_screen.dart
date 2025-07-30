@@ -19,32 +19,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(final BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoad,
     child: Scaffold(
-      appBar: AppBar(title: const Text('Create Account'), centerTitle: true),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
-        child: Column(
-          spacing: 15,
-          children: [
-            const Row(
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(title: Text('Create Account'), centerTitle: true),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            sliver: SliverList.list(
               children: [
-                const Text(
-                  'Welcome!',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
-                  ),
+                const SizedBox(height: 12),
+                const Row(
+                  children: [
+                    Text(
+                      'Welcome!',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 12),
+                const AnimatedTextSignUp(),
+                const SizedBox(height: 12),
+                SignupForm(
+                  onLoadingChanged: ({final isLoading = false}) =>
+                      setState(() => isLoad = isLoading),
+                ),
+                const SizedBox(height: 12),
+                const AleardyHaveAnAccount(),
+                const SizedBox(height: 12),
               ],
             ),
-            const Row(children: [AnimatedTextSignUp()]),
-            SignupForm(
-              onLoadingChanged: (final isLoading) =>
-                  setState(() => isLoad = isLoading),
-            ),
-            const AleardyHaveAnAccount(),
-            const SizedBox(height: 12),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );

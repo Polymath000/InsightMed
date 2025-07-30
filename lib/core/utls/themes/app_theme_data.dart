@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart'
     show
+        BorderRadius,
         BoxConstraints,
         CardThemeData,
+        CheckboxThemeData,
         ChipThemeData,
         Colors,
         DialogThemeData,
@@ -22,6 +24,7 @@ import 'package:flutter/material.dart'
         OutlinedButton,
         OutlinedButtonThemeData,
         ProgressIndicatorThemeData,
+        Radius,
         RoundedSuperellipseBorder,
         SearchBarThemeData,
         Size,
@@ -77,6 +80,12 @@ sealed class AppThemeData {
     elevation: 0,
     margin: EdgeInsets.zero,
     shape: RoundedSuperellipseBorder(borderRadius: AppBorders.xxxs),
+  );
+
+  static const checkbox = CheckboxThemeData(
+    shape: RoundedSuperellipseBorder(
+      borderRadius: BorderRadius.all(Radius.circular(6)),
+    ),
   );
 
   static const chip = ChipThemeData(

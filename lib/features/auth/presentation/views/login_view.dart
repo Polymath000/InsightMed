@@ -20,28 +20,32 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(final BuildContext context) => ModalProgressHUD(
     inAsyncCall: isLoading,
     child: Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 22, 14, 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 12,
-          children: [
-            const TopLoginView(),
-            LoginForm(
-              onLoadingChanged: ({final isLoading = false}) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  if (mounted) {
-                    setState(() {
-                      this.isLoading = isLoading;
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            sliver: SliverList.list(
+              children: [
+                const TopLoginView(),
+                const SizedBox(height: 12),
+                LoginForm(
+                  onLoadingChanged: ({final isLoading = false}) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (mounted) {
+                        setState(() {
+                          this.isLoading = isLoading;
+                        });
+                      }
                     });
-                  }
-                });
-              },
+                  },
+                ),
+                const SizedBox(height: 12),
+                const DonnotHaveAnAccount(),
+                const SizedBox(height: 12),
+              ],
             ),
-            const DonnotHaveAnAccount(),
-            const SizedBox(height: 12),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
