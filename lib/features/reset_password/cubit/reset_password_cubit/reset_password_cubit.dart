@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../core/helpers/dio_error_message.dart';
 import '../../../../core/services/dio/auth_dio.dart';
+
 part 'reset_password_state.dart';
 
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
@@ -21,8 +21,8 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       if (!isClosed) {
         emit(ResetPasswordSuccess());
       }
-    } on DioException catch (e) {
-      String message = 'This email maybe not correct';
+    } on DioException {
+      const message = 'This email maybe not correct';
       emit(ResetPasswordFailure(message: 'Error : $message'));
     } on Exception {
       emit(

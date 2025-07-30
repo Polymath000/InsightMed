@@ -8,6 +8,7 @@ import '../../../../../core/constants/borders.dart';
 import '../../../../../core/constants/end_ponits.dart';
 import '../../../../../core/entities/ray_entity.dart';
 import '../../../../../core/extensions/string_extension.dart';
+import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/utls/themes/app_colors.dart';
 
 class RayCard extends StatelessWidget {
@@ -28,22 +29,42 @@ class RayCard extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: CachedNetworkImage(
-                imageUrl: '${EndPoint.storageUrl}/${ray.imagePath}',
-                placeholder: (_, final url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (final context, final url, final error) =>
-                    const Icon(Icons.error),
-                height: 48,
-                width: 48,
+              leading: InkWell(
+                borderRadius: AppBorders.xxxs,
+                onTap: () => showDialog(
+                  context: context,
+                  builder: (final context) => Dismissible(
+                    key: UniqueKey(),
+                    onDismissed: (_) => AppRoutes.pop(context),
+                    direction: DismissDirection.vertical,
+                    behavior: HitTestBehavior.deferToChild,
+                    child: Dialog(
+                      child: CachedNetworkImage(
+                        imageUrl: '${EndPoint.storageUrl}/${ray.imagePath}',
+                        placeholder: (_, final url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (final context, final url, final error) =>
+                            const Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl: '${EndPoint.storageUrl}/${ray.imagePath}',
+                  placeholder: (_, final url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (final context, final url, final error) =>
+                      const Icon(Icons.error),
+                  height: 48,
+                  width: 48,
+                ),
               ),
               title: Text(
                 'Chest X-Ray $index',
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               subtitle: Text(
-                'Uploaded: ${DateFormat.yMMMd().
-                format(ray.createdAt ?? DateTime.now())}',
+                'Uploaded: ${DateFormat.yMMMd().format(ray.createdAt ?? DateTime.now())}',
               ),
               trailing: DecoratedBox(
                 decoration: ShapeDecoration(

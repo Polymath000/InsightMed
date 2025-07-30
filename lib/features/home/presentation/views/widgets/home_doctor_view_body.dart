@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/enums/patient_enum.dart';
+import '../../controllers/get_patients_cubit/get_patients_cubit.dart';
 import 'home_app_bar.dart';
 import 'patient_card.dart';
 
@@ -42,63 +44,66 @@ class _HomeDoctorViewBodyState extends State<HomeDoctorViewBody> {
       setState(() {});
     }
 
-    return CustomScrollView(
-      slivers: [
-        const HomeAppBar(),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: SearchAnchor.bar(
-              barHintText: 'Search for a patient',
-              suggestionsBuilder: (final context, final controller) {
-                final filteredPatients = widget.patients.where(
-                  (final patient) =>
-                      patient.name?.toLowerCase().contains(
-                        controller.text.toLowerCase(),
-                      ) ??
-                      false,
-                );
-                return filteredPatients
-                    .map((final patient) => PatientCard(patient: patient))
-                    .toList();
-              },
+    return RefreshIndicator(
+      onRefresh: context.read<GetPatientsCubit>().getPatients,
+      child: CustomScrollView(
+        slivers: [
+          const HomeAppBar(),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: SearchAnchor.bar(
+                barHintText: 'Search for a patient',
+                suggestionsBuilder: (final context, final controller) {
+                  final filteredPatients = widget.patients.where(
+                    (final patient) =>
+                        patient.name?.toLowerCase().contains(
+                          controller.text.toLowerCase(),
+                        ) ??
+                        false,
+                  );
+                  return filteredPatients
+                      .map((final patient) => PatientCard(patient: patient))
+                      .toList();
+                },
+              ),
             ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              spacing: 8,
-              children: [
-                ChoiceChip(
-                  label: const Text('All'),
-                  selected: _selectedStatus == null,
-                  onSelected: (_) {
-                    _selectedStatus = null;
-                    filterPatients();
-                  },
-                ),
-                ...PatientStatusEnum.values.map(
-                  (final e) => ChoiceChip(
-                    label: Text(e.toString()),
-                    selected: _selectedStatus == e,
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                spacing: 8,
+                children: [
+                  ChoiceChip(
+                    label: const Text('All'),
+                    selected: _selectedStatus == null,
                     onSelected: (_) {
-                      _selectedStatus = e;
+                      _selectedStatus = null;
                       filterPatients();
                     },
                   ),
-                ),
-              ],
+                  ...PatientStatusEnum.values.map(
+                    (final e) => ChoiceChip(
+                      label: Text(e.toString()),
+                      selected: _selectedStatus == e,
+                      onSelected: (_) {
+                        _selectedStatus = e;
+                        filterPatients();
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        SliverList.builder(
-          itemCount: _patients.length,
-          itemBuilder: (_, final index) =>
-              PatientCard(patient: _patients[index]),
-        ),
-      ],
+          SliverList.builder(
+            itemCount: _patients.length,
+            itemBuilder: (_, final index) =>
+                PatientCard(patient: _patients[index]),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../controllers/get_notes_cubit/get_notes_cubit.dart';
 import '../controllers/set_note_cubit/set_note_cubit.dart';
-import 'widget/notes_view_body.dart';
+import 'widget/notes_view_bloc_builder.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({required this.patientId, super.key});
@@ -14,6 +14,6 @@ class NotesView extends StatelessWidget {
       BlocProvider(create: (_) => SetNoteCubit()),
       BlocProvider(create: (_) => GetNotesCubit(patientId)),
     ],
-    child: NotesViewBody(patientId: patientId),
+    child: NotesViewBlocBuilder(patientId: patientId),
   );
 }

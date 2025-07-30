@@ -13,6 +13,7 @@ sealed class AppointmentRepo {
   Future<void> delete(final AppointmentEntity appointment);
   Future<AppointmentEntity> get();
   Future<List<AppointmentEntity>> getAvailableAppointments();
+  Future<List<AppointmentEntity>> getPatientAppiontment(final String email);
 }
 
 class AppointmentRepoImpl implements AppointmentRepo {
@@ -47,6 +48,20 @@ class AppointmentRepoImpl implements AppointmentRepo {
           (final e) => AppointmentModel.fromJson(e).toEntity(),
         )!,
       );
+
+  @override
+  Future<List<AppointmentEntity>> getPatientAppiontment(final String email) =>
+      _database
+          .getDocument(
+            path: EndPoint.getPatientAppiontment(email),
+            documentId: '',
+          )
+          .then(
+            (final json) => ListHandler.parseComplex<AppointmentEntity>(
+              json['appointments'],
+              (final e) => AppointmentModel.fromJson(e).toEntity(),
+            )!,
+          );
 
   @override
   Future<void> update(final AppointmentEntity appointment) {

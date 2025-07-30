@@ -19,6 +19,8 @@ sealed class EndPoint {
   static const String addAppointments = '/appointments';
   static const String getAvailableAppointments = '/appointments/available';
   static const String getUserAppointments = '/appointments/my';
+  static String getPatientAppiontment(final String email) =>
+      '/appointments/by-email?email=$email';
 
   static const String updateUser = '/me';
   static const String getUser = '/me';
