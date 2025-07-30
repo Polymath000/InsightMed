@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../../../core/helpers/on_generate_routes.dart';
 import '../../cubit/reset_password_cubit/reset_password_cubit.dart';
 import 'widget/verify_code_view_body.dart';
@@ -38,10 +38,7 @@ class _VerifyCodeViewState extends State<VerifyCodeView> {
               setState(() {
                 isLoading = false;
               });
-          customShowSnackBar(
-            context: context,
-            message: state.message,
-          );
+              customShowSnackBar(context: context, message: state.message);
             } else if (state is VerifyCodeSuccess) {
               setState(() {
                 isLoading = false;

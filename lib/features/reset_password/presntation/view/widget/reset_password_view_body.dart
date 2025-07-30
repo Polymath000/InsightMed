@@ -29,7 +29,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () => Navigator.pop(context),
         ),
-        title: CustomAnimatedTextKit(title: 'Reset Password'),
+        title: const CustomAnimatedTextKit(title: 'Reset Password'),
       ),
       Form(
         key: _formKey,

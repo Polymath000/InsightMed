@@ -33,7 +33,7 @@ class UploadRayCubit extends Cubit<UploadRayState> {
         MapEntry('has_headaches', data['has_headaches'].toString()),
       ]);
       final dioInstance = dio();
-      var response = await dioInstance.post(
+      await dioInstance.post(
         '/rays',
         data: formData,
         options: Options(headers: _setHeaders()),
@@ -45,11 +45,7 @@ class UploadRayCubit extends Cubit<UploadRayState> {
       var message = mapDioErrorToMessage(e);
       emit(UploadRayFailure(message: message));
     } on Exception catch (e) {
-      emit(
-        UploadRayFailure(
-          message: 'There was an error , please try again later',
-        ),
-      );
+      emit(UploadRayFailure(message: e.toString()));
     }
   }
 

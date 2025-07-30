@@ -37,7 +37,7 @@ class _VerifyCodeViewBodyState extends State<VerifyCodeViewBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 50),
-          CustomAnimatedTextKit(title: 'Check your mail'),
+          const CustomAnimatedTextKit(title: 'Check your mail'),
           const SizedBox(height: 16),
           Text(
             'We have sent a password recover '

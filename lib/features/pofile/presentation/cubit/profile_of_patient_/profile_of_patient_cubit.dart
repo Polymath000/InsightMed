@@ -31,7 +31,7 @@ class ProfileOfPatientCubit extends Cubit<ProfileOfPatientState> {
       final dioInstance = dio();
       var userModel = UserModel.fromEntity(user);
       final jsonData = userModel.toJson();
-      var response = await dioInstance.put(
+      await dioInstance.put(
         '/me',
         data: jsonData,
         options: Options(headers: _setHeaders()),

@@ -12,7 +12,7 @@ final class ResetPasswordSuccess extends ResetPasswordState {}
 
 final class ResetPasswordFailure extends ResetPasswordState {
   ResetPasswordFailure({required this.message});
-  String message;
+  final String message;
 }
 
 // States for verifying the code

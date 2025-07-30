@@ -23,7 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> tryToken({required final String token}) async {
     try {
       final dioInstance = dio();
-      var response = await dioInstance.get<Map<String, dynamic>>(
+      await dioInstance.get<Map<String, dynamic>>(
         '/dashboard',
         options: dio_package.Options(
           headers: {'Authorization': 'Bearer $token'},

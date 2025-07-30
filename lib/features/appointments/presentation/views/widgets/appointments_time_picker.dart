@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/helpers/app_media_query.dart';
-import '../../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
 import '../../../../../core/utls/i_text.dart';
 import '../../../cubit/book_appointment/book_appointment_cubit.dart';

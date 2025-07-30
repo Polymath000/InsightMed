@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../../../core/helpers/on_generate_routes.dart';
 import '../../../auth/presentation/cubit/auth/auth_cubit.dart';
 
