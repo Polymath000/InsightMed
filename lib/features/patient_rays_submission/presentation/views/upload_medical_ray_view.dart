@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-import '../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../cubit/upload_ray/upload_ray_cubit.dart';
 import 'widgets/upload_medical_ray_view_body.dart';
 

@@ -24,49 +24,47 @@ class _AppointmentsViewBodyState extends State<AppointmentsViewBody> {
   Widget build(final BuildContext context) => BlocProvider(
     create: (final context) => BookAppointmentCubit(),
     child: Builder(
-      builder: (final context) {
-        context.read<BookAppointmentCubit>().getAppiontments(
-          date: selectedDate.toString().substring(0, 10),
-        );
-        return CustomScrollView(
-          slivers: [
-            const SliverAppBar(title: IText('Appointments')),
-            AppointmentsDatePicker(
-              onDateChanged: (final date) {
-                setState(() {
-                  selectedDate = date;
-                  isLoading = false;
-                });
-                context.read<BookAppointmentCubit>().getAppiontments(
-                  date: date.toString().substring(0, 10),
-                );
-              },
-            ),
-            const SliverToBoxAdapter(
-              child: ListTile(title: IText('Available Slots')),
-            ),
-            AppointmentsTimePicker(
-              onTimeSelected: (final selectedTime) {
-                setState(() {
-                  selectedAppointmentTime = selectedTime;
-                });
-              },
-              selectedDateTime: selectedDate,
-              onSelectDate: (final value) {
+      builder: (final context) => CustomScrollView(
+        slivers: [
+          const SliverAppBar(title: IText('Appointments')),
+          AppointmentsDatePicker(
+            onDateChanged: (final date) async {
+              setState(() {
+                selectedDate = date;
+                isLoading = false;
+              });
+              await context.read<BookAppointmentCubit>().getAppiontments(
+                date: date.toString(),
+              );
+              setState(() {
+                isLoading = false;
+              });
+            },
+          ),
+          const SliverToBoxAdapter(
+            child: ListTile(title: IText('Available Slots')),
+          ),
+          AppointmentsTimePicker(
+            onTimeSelected: (final selectedTime) {
+              setState(() {
+                selectedAppointmentTime = selectedTime;
+              });
+            },
+            selectedDateTime: selectedDate,
+            onSelectDate: (final value) {
+              isLoading = value;
+            },
+          ),
+          BookAppointmentButton(
+            selectedTime: selectedAppointmentTime,
+            onBook: (final value) {
+              setState(() {
                 isLoading = value;
-              },
-            ),
-            BookAppointmentButton(
-              selectedTime: selectedAppointmentTime,
-              onBook: (final value) {
-                setState(() {
-                  isLoading = value;
-                });
-              },
-            ),
-          ],
-        );
-      },
+              });
+            },
+          ),
+        ],
+      ),
     ),
   );
 }

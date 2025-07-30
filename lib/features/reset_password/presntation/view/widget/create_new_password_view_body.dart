@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../../../../core/utls/themes/app_text_style.dart';
 import '../../../../../core/widgets/custbutton.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
@@ -43,7 +43,7 @@ class _CreateNewPasswordViewBodyState extends State<CreateNewPasswordViewBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 50),
-          CustomAnimatedTextKit(title: 'Create new password'),
+          const CustomAnimatedTextKit(title: 'Create new password'),
           const SizedBox(height: 16),
           Text(
             'Your new password must be different '

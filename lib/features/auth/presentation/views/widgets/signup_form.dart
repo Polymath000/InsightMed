@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../../../../core/helpers/on_generate_routes.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/custbutton.dart';

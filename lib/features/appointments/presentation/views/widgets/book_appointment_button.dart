@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/helpers/custom_show_snackBar.dart';
+import '../../../../../core/helpers/custom_show_snack_bar.dart';
 import '../../../../../core/services/shared_preferences_singleton.dart';
 
 import '../../../../../core/widgets/custbutton.dart';
@@ -28,36 +28,53 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
       child: Builder(
         builder: (final context) =>
             BlocListener<BookAppointmentCubit, BookAppointmentState>(
-              listener: (final context, final state) {
+              listener: (final context, final state) async {
                 if (state is BookAppointmentSuccess) {
                   setState(() {
                     isBooked = true;
                   });
-                  SharedPreferencesSingleton.setBool(isBookedKey, value: true);
-                  customShowSnackBar(
-                    context: context,
-                    message: 'Appointment booked successfully!',
+                  await SharedPreferencesSingleton.setBool(
+                    isBookedKey,
+                    value: true,
                   );
+                  if (context.mounted) {
+                    customShowSnackBar(
+                      context: context,
+                      message: 'Appointment booked successfully!',
+                    );
+                  }
+
                   widget.onBook?.call(false);
                 } else if (state is AppointmentAlreadyBooked) {
                   setState(() {
                     isBooked = true;
                   });
-                  SharedPreferencesSingleton.setBool(isBookedKey, value: true);
-                  customShowSnackBar(
-                    context: context,
-                    message: 'You already book appointment',
+                  await SharedPreferencesSingleton.setBool(
+                    isBookedKey,
+                    value: true,
                   );
+
+                  if (context.mounted) {
+                    customShowSnackBar(
+                      context: context,
+                      message: 'You already book appointment',
+                    );
+                  }
                   widget.onBook?.call(false);
                 } else if (state is DeleteAppointmentSuccess) {
                   setState(() {
                     isBooked = false;
                   });
-                  SharedPreferencesSingleton.setBool(isBookedKey, value: false);
-                  customShowSnackBar(
-                    context: context,
-                    message: 'Appointment cancelled!',
+                  await SharedPreferencesSingleton.setBool(
+                    isBookedKey,
+                    value: false,
                   );
+                  if (context.mounted) {
+                    customShowSnackBar(
+                      context: context,
+                      message: 'Appointment cancelled!',
+                    );
+                  }
                   widget.onBook?.call(false);
                 } else if (state is BookAppointmentFailure) {
                   customShowSnackBar(
@@ -93,10 +110,11 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,
                           ).getPatientAppiontment();
-                          await BlocProvider.of<BookAppointmentCubit>(
-                            context,
-                          ).deleteAppointment();
-                          
+                          if (context.mounted) {
+                            await BlocProvider.of<BookAppointmentCubit>(
+                              context,
+                            ).deleteAppointment();
+                          }
                         } else {
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,

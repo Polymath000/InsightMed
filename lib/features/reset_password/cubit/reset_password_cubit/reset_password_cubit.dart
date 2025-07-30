@@ -13,7 +13,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
 
     try {
       final dioInstance = dio();
-      var response = await dioInstance.post(
+      await dioInstance.post(
         '/forgot-password',
         data: {'email': email},
         options: Options(headers: _setHeaders()),
@@ -40,7 +40,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     emit(VerifyCodeLoading());
     try {
       final dioInstance = dio();
-      var response = await dioInstance.post(
+      await dioInstance.post(
         '/verify-reset-code',
         data: {'email': email, 'code': code},
         options: Options(headers: _setHeaders()),
@@ -73,7 +73,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     emit(CreateNewPasswordLoading());
     try {
       final dioInstance = dio();
-      var response = await dioInstance.post(
+      await dioInstance.post(
         '/reset-password',
         data: {
           'email': email,

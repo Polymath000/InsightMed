@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -15,15 +16,17 @@ const String appointmentIdKey = '';
 const String isBookedKey = 'isBooked';
 
 class BookAppointmentCubit extends Cubit<BookAppointmentState> {
-  BookAppointmentCubit() : super(BookAppointmentInitial());
-  late String message;
+  BookAppointmentCubit() : super(BookAppointmentInitial()) {
+    unawaited(getAppiontments(date: DateTime.now().toString()));
+  }
+
   Future<void> getAppiontments({required final String date}) async {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
       final formattedDate = DateFormat(
         'yyyy-MM-dd',
-      ).format(DateTime.parse(date));
+      ).format(DateTime.parse(date.substring(0, 10)));
       final response = await dioInstance.get(
         '/appointments/available',
         queryParameters: {'doctor_id': 5, 'date': formattedDate},
@@ -102,7 +105,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     try {
       final dioInstance = dio();
       var id = SharedPreferencesSingleton.getString(appointmentIdKey);
-      var response = await dioInstance.delete(
+      await dioInstance.delete(
         '/appointments/$id',
         options: Options(
           headers: {
@@ -144,7 +147,9 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         emit(GetAppointmentSuccess(finalData: const []));
         return;
       }
-      appointments.sort((final a, final b) => (b['id'] as int).compareTo(a['id'] as int));
+      appointments.sort(
+        (final a, final b) => (b['id'] as int).compareTo(a['id'] as int),
+      );
       final latestAppointment = appointments.first;
       await SharedPreferencesSingleton.setString(
         appointmentIdKey,

@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 import '../../../appointments/cubit/book_appointment/book_appointment_cubit.dart';
 
 class ApptsView extends StatelessWidget {
-  ApptsView({required this.email, super.key});
-  String email;
+  const ApptsView({required this.email, super.key});
+  final String email;
   @override
   Widget build(
     final BuildContext context,
@@ -59,7 +59,7 @@ class ApptsView extends StatelessWidget {
                 title: Text('$startTime - $endTime'),
               ),
             );
-          } on Exception{
+          } on Exception {
             return Center(
               child: Text('Could not parse appointment time: $appointmentTime'),
             );
