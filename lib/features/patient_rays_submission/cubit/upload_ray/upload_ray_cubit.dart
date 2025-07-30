@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../../../../core/entities/ray_entity.dart';
@@ -39,12 +38,18 @@ class UploadRayCubit extends Cubit<UploadRayState> {
         data: formData,
         options: Options(headers: _setHeaders()),
       );
-      emit(UploadRaySuccess());
-    } on dio_package.DioException catch (e) {
-      final userMessage = mapDioErrorToMessage(e);
-      emit(UploadRayFailure(message: userMessage));
+      if (!isClosed) {
+        emit(UploadRaySuccess());
+      }
+    } on DioException catch (e) {
+      var message = mapDioErrorToMessage(e);
+      emit(UploadRayFailure(message: message));
     } on Exception catch (e) {
-      emit(UploadRayFailure(message: e.toString()));
+      emit(
+        UploadRayFailure(
+          message: 'There was an error , please try again later',
+        ),
+      );
     }
   }
 

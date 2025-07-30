@@ -13,11 +13,7 @@ String mapDioErrorToMessage(final DioException e) {
     case DioExceptionType.cancel:
       return 'No worries, your request was cancelled.';
     case DioExceptionType.unknown:
-      return 'Something went wrong with the network. '
-          'Please check your connection and try again.';
     case DioExceptionType.connectionError:
-      return 'Oops! Something went wrong with the network. '
-          'Please check your connection and try again.';
     case DioExceptionType.badCertificate:
       return 'Oops! Something went wrong with the network. '
           'Please check your connection and try again.';

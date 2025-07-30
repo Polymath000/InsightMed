@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
 import 'package:meta/meta.dart';
 
 import '../../../../core/entities/ray_entity.dart';
+import '../../../../core/helpers/dio_error_message.dart';
 import '../../../../core/repos/ray_repo.dart';
 import '../../../../core/services/get_it_service.dart';
 
@@ -18,9 +20,19 @@ class GetRaysCubit extends Cubit<GetRaysState> {
     emit(GetRaysLoadding());
     try {
       final rays = await getIt<RayRepo>().getRays();
-      emit(GetRaysSuccess(rays: rays));
+      if (!isClosed) {
+        emit(GetRaysSuccess(rays: rays));
+      }
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      var message = mapDioErrorToMessage(e);
+      emit(GetRaysFailure(message: 'Error : $message'));
     } on Exception catch (e) {
-      emit(GetRaysFailure(message: e.toString()));
+      emit(
+        GetRaysFailure(
+          message: 'There was an error in retrieve rays, try again later',
+        ),
+      );
     }
   }
 }
