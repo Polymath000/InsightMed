@@ -9,8 +9,11 @@ class TopLoginView extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => Column(
     children: [
-      const SizedBox(height: 24),
-      const Image(image: AssetImage(Assets.assetsImagesLogo)),
+      const SizedBox(height: 96),
+      const CircleAvatar(
+        radius: 96,
+        backgroundImage: AssetImage(Assets.assetsImagesLogo),
+      ),
       const SizedBox(height: 12),
       const Text(
         'Welcome Back!',

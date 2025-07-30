@@ -83,6 +83,7 @@ final class ThemeConfig {
       textTheme: textTheme,
       appBarTheme: appBarTheme,
       cardTheme: AppThemeData.card,
+      checkboxTheme: AppThemeData.checkbox,
       chipTheme: AppThemeData.chip,
       dialogTheme: AppThemeData.dialog,
       dropdownMenuTheme: AppThemeData.dropdownMenu,

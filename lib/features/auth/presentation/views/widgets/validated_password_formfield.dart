@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 import 'user_entities.dart';
 
 class ValidatePasswordFormField extends StatefulWidget {
@@ -13,9 +13,9 @@ class ValidatePasswordFormField extends StatefulWidget {
 
 class _ValidatePasswordFormFieldState extends State<ValidatePasswordFormField> {
   @override
-  Widget build(final BuildContext context) => CustomTextField(
-    hint: 'Password',
-    choose: true,
+  Widget build(final BuildContext context) => AppTextField(
+    hintText: 'Password',
+    obscureText: true,
     onChanged: (final p0) {
       setState(() {
         user = user.copyWith(password: p0);

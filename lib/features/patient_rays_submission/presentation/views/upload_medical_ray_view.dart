@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../../core/helpers/custom_show_snackBar.dart';
-import '../../../../core/utls/themes/app_colors.dart';
-import '../../../../core/utls/themes/app_text_style.dart';
 import '../../cubit/upload_ray/upload_ray_cubit.dart';
 import 'widgets/upload_medical_ray_view_body.dart';
 
@@ -23,20 +21,7 @@ class _UploadMedicalRayViewState extends State<UploadMedicalRayView> {
     inAsyncCall: isLoading,
 
     child: Scaffold(
-      appBar: AppBar(
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(color: Color(0xFFE5E7EB)),
-        ),
-        backgroundColor: AppColors.white,
-        shadowColor: AppColors.black,
-        surfaceTintColor: AppColors.grey,
-        title: Text(
-          'Upload Medical Ray',
-          style: AppTextStyles.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
+      appBar: AppBar(title: const Text('Upload Medical Ray')),
       body: BlocProvider(
         create: (final context) => UploadRayCubit(),
         child: BlocConsumer<UploadRayCubit, UploadRayState>(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/extensions/string_extension.dart';
 import '../../../../../core/helpers/decoration_widget.dart';
-import '../../../../../core/utls/themes/app_text_style.dart';
-import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/utls/themes/app_colors.dart';
+import '../../../../../core/widgets/app_text_field.dart';
 
 class NumericVitals extends StatefulWidget {
   const NumericVitals({
@@ -59,12 +60,9 @@ class _NumericVitalsState extends State<NumericVitals> {
   @override
   Widget build(final BuildContext context) => decorationWidget(
     children: [
-      Text(
+      const Text(
         'Numeric Vitals',
-        style: AppTextStyles.titleLarge?.copyWith(
-          fontWeight: FontWeight.w600,
-          color: const Color(0xFF1F2937),
-        ),
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
       ),
       const SizedBox(height: 8),
       ...fields.map(
@@ -73,15 +71,15 @@ class _NumericVitalsState extends State<NumericVitals> {
           children: [
             Text(
               field.label,
-              style: AppTextStyles.bodyLarge?.copyWith(
-                color: const Color(0xFF6B7280),
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                color: AppColors.grey,
               ),
             ),
-            const SizedBox(height: 5),
-            CustomTextField(
-              choose: false,
-              hint: 'Write ${field.label}',
-              type: TextInputType.number,
+            const SizedBox(height: 4),
+            AppTextField(
+              hintText: 'Write ${field.label}',
+              keyboardType: TextInputType.number,
               validator: (final value) {
                 final val = value?.toInt();
                 if (val == null) {
@@ -94,7 +92,6 @@ class _NumericVitalsState extends State<NumericVitals> {
               },
               onChanged: (final value) => field.onChanged?.call(value),
             ),
-            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -103,7 +100,6 @@ class _NumericVitalsState extends State<NumericVitals> {
 }
 
 class _VitalFieldData {
-
   _VitalFieldData({
     required this.label,
     required this.min,
