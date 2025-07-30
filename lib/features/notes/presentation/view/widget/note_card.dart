@@ -16,7 +16,7 @@ class NoteCard extends StatelessWidget {
   Widget build(final BuildContext context) => Card.filled(
     margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
     child: Padding(
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.only(bottom: 16, top: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

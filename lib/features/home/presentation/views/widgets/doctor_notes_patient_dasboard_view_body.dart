@@ -10,20 +10,19 @@ class DoctorNotesPatientDasboardViewBody extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Back'),
-    ),
+    appBar: AppBar(title: const Text('All Notes')),
     body: Column(
-    children: [
-      const ListTile(title: Text('All Notes')),
-      if (notes.isEmpty)
-        const Text('No notes found')
-      else
-        ...notes.map(
-          (final note) =>
-              NoteCardPatientDashboard(note: note, index: notes.indexOf(note)),
-        ),
-    ],
-  ),
+      children: [
+        if (notes.isEmpty)
+          const Text('No notes found')
+        else
+          ...notes.map(
+            (final note) => NoteCardPatientDashboard(
+              note: note,
+              index: notes.indexOf(note),
+            ),
+          ),
+      ],
+    ),
   );
 }
