@@ -39,19 +39,16 @@ final class RayRepoImpl implements RayRepo {
 
   @override
   Future<void> add(final RayEntity ray) {
-    // TODO: implement add
     throw UnimplementedError();
   }
 
   @override
   Future<void> delete(final RayEntity ray) {
-    // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
   Future<void> update(final RayEntity ray) {
-    // TODO: implement update
     throw UnimplementedError();
   }
 }

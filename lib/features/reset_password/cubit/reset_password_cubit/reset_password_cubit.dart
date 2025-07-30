@@ -30,7 +30,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         message = mapDioErrorToMessage(e);
       }
       emit(ResetPasswordFailure(message: 'Error : $message'));
-    } on Exception catch (e) {
+    } on Exception {
       emit(
         ResetPasswordFailure(
           message: 'There was an error, please try again later',
@@ -63,7 +63,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         message = mapDioErrorToMessage(e);
       }
       emit(ResetPasswordFailure(message: 'Error : $message'));
-    } on Exception catch (e) {
+    } on Exception {
       emit(
         ResetPasswordFailure(
           message: 'There was an error, please try again later',
@@ -97,7 +97,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     } on DioException catch (e) {
       var message = mapDioErrorToMessage(e);
       emit(ResetPasswordFailure(message: 'Error : $message'));
-    } on Exception catch (e) {
+    } on Exception {
       emit(
         ResetPasswordFailure(
           message: 'There was an error please try again later',

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart'
     show CustomScrollView, ListTile, SliverAppBar, SliverToBoxAdapter;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/utls/i_text.dart' show IText;
 import '../../../cubit/book_appointment/book_appointment_cubit.dart';

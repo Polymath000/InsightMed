@@ -24,10 +24,9 @@ class GetRaysCubit extends Cubit<GetRaysState> {
         emit(GetRaysSuccess(rays: rays));
       }
     } on DioException catch (e) {
-      final statusCode = e.response?.statusCode;
       var message = mapDioErrorToMessage(e);
       emit(GetRaysFailure(message: 'Error : $message'));
-    } on Exception catch (e) {
+    } on Exception {
       emit(
         GetRaysFailure(
           message: 'There was an error in retrieve rays, try again later',

@@ -24,7 +24,6 @@ class AppointmentRepoImpl implements AppointmentRepo {
 
   @override
   Future<void> delete(final AppointmentEntity appointment) {
-    // TODO: implement delete
     throw UnimplementedError();
   }
 
@@ -51,7 +50,6 @@ class AppointmentRepoImpl implements AppointmentRepo {
 
   @override
   Future<void> update(final AppointmentEntity appointment) {
-    // TODO: implement update
     throw UnimplementedError();
   }
 }

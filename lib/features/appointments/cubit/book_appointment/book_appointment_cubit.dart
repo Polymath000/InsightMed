@@ -60,8 +60,11 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       Map<String, dynamic> jsonData = response.data;
-      var id = jsonData['data']['id'].toString();
-      await SharedPreferencesSingleton.setString(appointmentIdKey, id);
+      final id = jsonData['data']['id'];
+      await SharedPreferencesSingleton.setString(
+        appointmentIdKey,
+        id.toString(),
+      );
       await SharedPreferencesSingleton.setBool(isBookedKey, value: true);
       if (!isClosed) {
         emit(BookAppointmentSuccess());
@@ -85,7 +88,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
           );
         }
       }
-    } on Exception catch (e) {
+    } on Exception {
       emit(
         BookAppointmentFailure(
           message: 'There was an error , please try again later',
@@ -98,7 +101,7 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     emit(BookAppointmentLoading());
     try {
       final dioInstance = dio();
-      String? id = SharedPreferencesSingleton.getString(appointmentIdKey);
+      var id = SharedPreferencesSingleton.getString(appointmentIdKey);
       var response = await dioInstance.delete(
         '/appointments/$id',
         options: Options(
@@ -137,12 +140,11 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         ),
       );
       final List appointments = response.data['appointments'];
-
       if (appointments.isEmpty) {
-        emit(GetAppointmentSuccess(finalData: []));
+        emit(GetAppointmentSuccess(finalData: const []));
         return;
       }
-      appointments.sort((a, b) => (b['id'] as int).compareTo(a['id'] as int));
+      appointments.sort((final a, final b) => (b['id'] as int).compareTo(a['id'] as int));
       final latestAppointment = appointments.first;
       await SharedPreferencesSingleton.setString(
         appointmentIdKey,

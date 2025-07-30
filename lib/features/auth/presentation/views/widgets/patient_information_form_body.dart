@@ -26,7 +26,6 @@ class _FormBodyState extends State<FormBody> {
 
   @override
   Widget build(final BuildContext context) {
-    // TODO(Anyone): Replace this to use textEditingController
     var user = widget.user;
     return Form(
       key: _formKey,

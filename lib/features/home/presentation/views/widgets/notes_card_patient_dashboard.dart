@@ -5,7 +5,11 @@ import '../../../../../core/utls/i_text.dart';
 import '../../../../notes/domain/entities/note_entity.dart';
 
 class NoteCardPatientDashboard extends StatelessWidget {
-  const NoteCardPatientDashboard({required this.note, required this.index, super.key});
+  const NoteCardPatientDashboard({
+    required this.note,
+    required this.index,
+    super.key,
+  });
   final NoteEntity note;
   final int index;
 

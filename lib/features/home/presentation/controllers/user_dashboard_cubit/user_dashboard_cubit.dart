@@ -31,8 +31,10 @@ class UserDashboardCubit extends Cubit<UserDashboardState> {
       if (!isClosed) {
         emit(UserDashboardSuccess(dashboard));
       }
-    } on Exception catch (e) {
-      emit(const UserDashboardFailure('There was an error please try again later'));
+    } on Exception {
+      emit(
+        const UserDashboardFailure('There was an error please try again later'),
+      );
     }
   }
 }

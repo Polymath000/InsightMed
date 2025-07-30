@@ -26,7 +26,7 @@ class AppointmentsTimePicker extends StatefulWidget {
 
 class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
   int? selectedIndex;
-  bool isBook = SharedPreferencesSingleton.getBool(isBookedKey)??false;
+  bool isBook = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
   @override
   Widget build(final BuildContext context) {
     var isBooked = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
@@ -50,18 +50,23 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
               return Skeletonizer(
                 child: Wrap(
                   spacing: 5,
-                  children: List.generate(12, (final index) => SizedBox(
+                  children: List.generate(
+                    12,
+                    (final index) => SizedBox(
                       width: (AppMediaQuery.width - 42) / 3,
                       child: ChoiceChip(
                         label: SizedBox(
                           width: (AppMediaQuery.width - 42) / 3,
-                          child:
-                              const  IText('00:00 AM', textAlign: TextAlign.center),
+                          child: const IText(
+                            '00:00 AM',
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                         selected: false,
                         onSelected: (final selected) {},
                       ),
-                    )),
+                    ),
+                  ),
                 ),
               );
             }

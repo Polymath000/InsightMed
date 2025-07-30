@@ -20,7 +20,7 @@ Future<dynamic> showDialogForEditPatientProfile(
       child: Builder(
         builder: (final context) =>
             BlocBuilder<ProfileOfPatientCubit, ProfileOfPatientState>(
-              builder: (context, state) {
+              builder: (final context, final state) {
                 if (state is ProfileOfPatientFailure) {
                   onChanged!(false);
                   customShowSnackBar(message: state.message, context: context);
