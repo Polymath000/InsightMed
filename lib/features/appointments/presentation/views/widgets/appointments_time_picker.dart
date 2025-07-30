@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/helpers/app_media_query.dart';
 import '../../../../../core/helpers/custom_show_snackBar.dart';
@@ -25,7 +26,7 @@ class AppointmentsTimePicker extends StatefulWidget {
 
 class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
   int? selectedIndex;
-
+  bool isBook = SharedPreferencesSingleton.getBool(isBookedKey)??false;
   @override
   Widget build(final BuildContext context) {
     var isBooked = SharedPreferencesSingleton.getBool(isBookedKey) ?? false;
@@ -46,7 +47,23 @@ class _AppointmentsTimePickerState extends State<AppointmentsTimePicker> {
           builder: (final context, final state) {
             if (state is BookAppointmentLoading) {
               widget.onSelectDate!(true);
-              return const SizedBox(height: 50);
+              return Skeletonizer(
+                child: Wrap(
+                  spacing: 5,
+                  children: List.generate(12, (final index) => SizedBox(
+                      width: (AppMediaQuery.width - 42) / 3,
+                      child: ChoiceChip(
+                        label: SizedBox(
+                          width: (AppMediaQuery.width - 42) / 3,
+                          child:
+                              const  IText('00:00 AM', textAlign: TextAlign.center),
+                        ),
+                        selected: false,
+                        onSelected: (final selected) {},
+                      ),
+                    )),
+                ),
+              );
             }
             if (state is GetAppointmentSuccess) {
               widget.onSelectDate!(false);

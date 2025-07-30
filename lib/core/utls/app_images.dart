@@ -30,4 +30,3 @@ class Assets {
   /// assets/images/X-rays_chest_icon.svg
   static const String assetsImagesXRaysChestIcon = "assets/images/X-rays_chest_icon.svg";
 }
-
