@@ -96,6 +96,7 @@ class _BookAppointmentButtonState extends State<BookAppointmentButton> {
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,
                           ).deleteAppointment();
+                          
                         } else {
                           await BlocProvider.of<BookAppointmentCubit>(
                             context,

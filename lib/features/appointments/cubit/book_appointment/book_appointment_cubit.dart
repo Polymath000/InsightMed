@@ -119,28 +119,33 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
     }
   }
 
-  Future<void> getPatientAppiontment({String? token}) async {
+  Future<void> getPatientAppiontment({String? email}) async {
     emit(BookAppointmentLoading());
     try {
+      if (email == null || email.isEmpty) {
+        email = getUser!.email;
+      }
+
       final dioInstance = dio();
       final response = await dioInstance.get(
-        '/appointments/my',
+        '/appointments/by-email?email=$email',
         options: Options(
           headers: {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization':
-                'Bearer ${token == null || token.isEmpty ? getUser!.token : token}',
           },
         ),
       );
-      final jsonData = response.data;
-      final id = jsonData['data']['id'];
-      await SharedPreferencesSingleton.setString(
-        appointmentIdKey,
-        id.toString(),
-      );
-      final String appointmentTime = jsonData['data']['appointment_time'];
+      final List appointments = response.data['appointments'];
+
+      if (appointments.isEmpty) {
+        emit(GetAppointmentSuccess(finalData: []));
+        return;
+      }
+      appointments.sort((a, b) => (b['id'] as int).compareTo(a['id'] as int));
+      final latestAppointment = appointments.first;
+
+      final String appointmentTime = latestAppointment['appointment_time'];
       if (!isClosed) {
         emit(GetAppointmentSuccess(finalData: [appointmentTime]));
       }

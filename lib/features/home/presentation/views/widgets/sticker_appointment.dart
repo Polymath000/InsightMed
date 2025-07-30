@@ -27,7 +27,7 @@ class StickerAppointment extends StatelessWidget {
         .toUpperCase();
     final time = DateFormat.jm().format(appointmentTime ?? DateTime.now());
     final timeAfter45Min = DateFormat.jm().format(
-      appointmentTime?.add(const Duration(minutes: 45)) ?? DateTime.now(),
+      appointmentTime?.add(const Duration(minutes: 30)) ?? DateTime.now(),
     );
     return HomeSticker(
       headerIcon: Icons.calendar_month_rounded,
