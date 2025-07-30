@@ -14,13 +14,13 @@ class StickerRay extends StatelessWidget {
   final List<RayEntity>? rays;
   @override
   Widget build(final BuildContext context) {
-    final lastRay = (rays?.isNotEmpty ?? false) ? rays!.last : null;
+    final firstRay = (rays?.isNotEmpty ?? false) ? rays!.first : null;
     final isNotEmpty = rays?.isNotEmpty ?? false;
     final color = isNotEmpty
-        ? (lastRay?.aiStatus?.color ?? AppColors.topaz)
+        ? (firstRay?.aiStatus?.color ?? AppColors.topaz)
         : AppColors.grey;
     final dateFormat = DateFormat.yMMMd().format(
-      lastRay?.createdAt ?? DateTime.now(),
+      firstRay?.createdAt ?? DateTime.now(),
     );
     return HomeSticker(
       headerIcon: Icons.medical_services_rounded,
@@ -37,7 +37,7 @@ class StickerRay extends StatelessWidget {
         child: ListTile(
           title: const IText('AI Summary'),
           subtitle: IText(
-            lastRay?.aiSummary ?? 'The AI summary is currently unavailable',
+            firstRay?.aiSummary ?? 'The AI summary is currently unavailable',
             softWrap: true,
           ),
         ),
