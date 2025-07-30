@@ -22,13 +22,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         emit(ResetPasswordSuccess());
       }
     } on DioException catch (e) {
-      final statusCode = e.response?.statusCode;
-      var message = e.response?.data['message'];
-      if (statusCode == 500) {
-        message = 'This email maybe not correct';
-      } else {
-        message = mapDioErrorToMessage(e);
-      }
+      String message = 'This email maybe not correct';
       emit(ResetPasswordFailure(message: 'Error : $message'));
     } on Exception {
       emit(
@@ -51,17 +45,15 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         data: {'email': email, 'code': code},
         options: Options(headers: _setHeaders()),
       );
+
       if (!isClosed) {
         emit(VerifyCodeSuccess());
       }
     } on DioException catch (e) {
-      final statusCode = e.response?.statusCode;
       var message = e.response?.data['message'];
-      if (statusCode != 400) {
-        message = 'There was an error, please try again later';
-      } else {
-        message = mapDioErrorToMessage(e);
-      }
+      message == null || message == ''
+          ? message = 'There was an error, please try again later'
+          : message = message;
       emit(ResetPasswordFailure(message: 'Error : $message'));
     } on Exception {
       emit(
@@ -94,9 +86,6 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
       if (!isClosed) {
         emit(CreateNewPasswordSuccess());
       }
-    } on DioException catch (e) {
-      var message = mapDioErrorToMessage(e);
-      emit(ResetPasswordFailure(message: 'Error : $message'));
     } on Exception {
       emit(
         ResetPasswordFailure(
