@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 
 import '../../../../../core/entities/user_entity.dart';
 import '../../../../../core/helpers/dio_error_message.dart';
-import '../../../../../core/helpers/get_auth_message.dart';
 import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/models/user_model.dart';
 import '../../../../../core/repos/user_repo.dart';
