@@ -8,8 +8,7 @@ String mapDioErrorToMessage(final DioException e) {
       return 'Oops! The connection took too long. '
           'Please check your internet and try again.';
     case DioExceptionType.badResponse:
-      return 'Sorry, we had trouble processing your request. '
-          'Maybe your password not correct';
+      return 'Maybe your password or your email is not correct ';
     case DioExceptionType.cancel:
       return 'No worries, your request was cancelled.';
     case DioExceptionType.unknown:
