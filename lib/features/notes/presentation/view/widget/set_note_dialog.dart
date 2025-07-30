@@ -63,9 +63,7 @@ Future<dynamic> setNoteDialog(
               if (context.mounted) {
                 await context.read<GetNotesCubit>().getNotes();
               }
-              if (context.mounted) {
-                AppRoutes.pop(context);
-              }
+              AppRoutes.pop(context);
             }
           },
           style: TextButton.styleFrom(foregroundColor: AppColors.blue),

@@ -56,9 +56,7 @@ Future<dynamic> showDialogForEditPatientProfile(
                               )
                               ..copyWith(id: getUser?.id)
                               ..copyWith(specialty: getUser?.specialty);
-                            if (context.mounted) {
                               AppRoutes.pop(context);
-                            }
                           },
                         ),
                       ),
