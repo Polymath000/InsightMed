@@ -15,7 +15,7 @@ Future<dynamic> setNoteDialog(
 }) => showAdaptiveDialog(
   context: context,
   barrierDismissible: false,
-  builder: (_) {
+  builder: (dialogContext) {
     final formKey = GlobalKey<FormState>();
     // final titleController = TextEditingController(text: note?.title);
     final contentController = TextEditingController(text: note?.note);
@@ -39,7 +39,7 @@ Future<dynamic> setNoteDialog(
       ),
       actions: [
         TextButton(
-          onPressed: () => AppRoutes.pop(context),
+          onPressed: () => AppRoutes.pop(dialogContext),
           child: const Text('Cancel'),
         ),
         TextButton(
@@ -48,10 +48,8 @@ Future<dynamic> setNoteDialog(
               formKey.currentState!.save();
               final updatedNote = NoteEntity(
                 id: note?.id ?? 127,
-                // title: titleController.text,
                 note: contentController.text,
                 patientId: note?.patientId ?? patientId,
-                // rayId: note?.rayId ?? '2',
                 createdAt: note?.createdAt ?? DateTime.now(),
               );
               final cubit = context.read<SetNoteCubit>();
@@ -63,7 +61,9 @@ Future<dynamic> setNoteDialog(
               if (context.mounted) {
                 await context.read<GetNotesCubit>().getNotes();
               }
-              AppRoutes.pop(context);
+              if (dialogContext.mounted) {
+                AppRoutes.pop(dialogContext);
+              }
             }
           },
           style: TextButton.styleFrom(foregroundColor: AppColors.blue),

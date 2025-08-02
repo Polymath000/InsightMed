@@ -63,7 +63,13 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             const ListTile(
               title: IText('Security', style: TextStyle(fontSize: 20)),
             ),
-            const SecurityContainer(),
+            SecurityContainer(
+              onChangePassword: (final value) {
+                setState(() {
+                  isLoading = value;
+                });
+              },
+            ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.all(16),
@@ -73,7 +79,9 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                     context,
                     user: _user,
                     onChanged: ({final isLoading = false}) {
-                      this.isLoading = isLoading!;
+                      setState(() {
+                        this.isLoading = isLoading!;
+                      });
                     },
                   );
                 },

@@ -69,6 +69,8 @@ class _FormBodyState extends State<FormBody> {
             validator: (final value) {
               if (value!.isEmpty) {
                 return 'this field is required';
+              } else if (!isPhoneNoValid(phoneNo: value)) {
+                return 'this number is not valid';
               }
               return null;
             },
@@ -80,6 +82,7 @@ class _FormBodyState extends State<FormBody> {
             },
           ),
           const Divider(),
+
           FilledButton(
             onPressed: () async {
               user = user.copyWith(
@@ -100,4 +103,12 @@ class _FormBodyState extends State<FormBody> {
       ),
     );
   }
+}
+
+bool isPhoneNoValid({required String? phoneNo}) {
+  if (phoneNo == null) {
+    return false;
+  }
+  final regExp = RegExp(r'^(?:[+0]9)?[0-9]{10,12}$');
+  return regExp.hasMatch(phoneNo);
 }

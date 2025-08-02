@@ -18,13 +18,9 @@ class PatientCard extends StatelessWidget {
     shape: const RoundedSuperellipseBorder(borderRadius: AppBorders.xxs),
     child: ListTile(
       onTap: () => AppRoutes.patientDetails(context, patient: patient),
-      // leading: const CircleAvatar(),
       title: Text(patient.name!),
       subtitle: Text(
         '${patient.age} years | ${patient.gender}',
-        // '\nLast visit: '
-        // '${DateTime.now().difference(patient.lastVisit!).inDays} '
-        // 'days ago',
       ),
       trailing: PatiendStatusText(
         status: patient.status ?? PatientStatusEnum.newPatient,

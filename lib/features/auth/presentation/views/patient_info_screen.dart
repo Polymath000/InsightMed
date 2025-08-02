@@ -32,7 +32,6 @@ class _PatientInformationState extends State<PatientInformation> {
           spacing: 10,
           children: [
             const TopPartPatientInfo(),
-            // const SizedBox(height: 16),
             PatientForm(
               user: widget.user.copyWith(gender: 'male'),
               onLoadingChanged: ({final isLoading = false}) =>

@@ -102,6 +102,22 @@ class RayCard extends StatelessWidget {
                       'pneumonia.'
                       ' Recommend clinical correlation.',
             ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Temperature: ${ray.temperature}'),
+                Text('Diastolic BP: ${ray.diastolicBP}'),
+                Text('Systolic BP: ${ray.systolicBP}'),
+                Text('Heart Rate: ${ray.heartRate}'),
+                if (ray.hasCough!) const Text('Has Cough'),
+                if (ray.hasHeadache!) const Text('Has Headache'),
+                Text(
+                  ray.canSmellTasteFood!
+                      ? 'Can Smell And Taste Food'
+                      : 'Cannot Smell And Taste Food',
+                ),
+              ],
+            ),
           ],
         ),
       ),

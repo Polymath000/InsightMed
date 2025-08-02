@@ -12,6 +12,7 @@ class PatientDetailsViewBody extends StatefulWidget {
   @override
   State<PatientDetailsViewBody> createState() => _PatientDetailsViewBodyState();
 }
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
   int _index = 0;
@@ -38,17 +39,20 @@ class _PatientDetailsViewBodyState extends State<PatientDetailsViewBody> {
         const Divider(),
       ],
     );
-    return CustomScrollView(
-      slivers: [
-        const PatientDetailsAppBar(),
-        SliverToBoxAdapter(
-          child: PersonalPatientDetails(patient: widget.patient),
-        ),
-        SliverToBoxAdapter(child: middleAppBar),
-        SliverToBoxAdapter(
-          child: PatientTabsViewBody(index: _index, patient: widget.patient),
-        ),
-      ],
+    return Scaffold(
+      key: scaffoldKey,
+      body: CustomScrollView(
+        slivers: [
+          const PatientDetailsAppBar(),
+          SliverToBoxAdapter(
+            child: PersonalPatientDetails(patient: widget.patient),
+          ),
+          SliverToBoxAdapter(child: middleAppBar),
+          SliverToBoxAdapter(
+            child: PatientTabsViewBody(index: _index, patient: widget.patient),
+          ),
+        ],
+      ),
     );
   }
 }
